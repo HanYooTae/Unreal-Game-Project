@@ -14,5 +14,11 @@ public:
 	UCParkourSystem();
 
 	void Vault();
+
+private:
+	class ACPlayer* player;
 		
+private:
+	FVector WallLocation;
+	FVector WallNormal;
 };

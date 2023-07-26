@@ -11,6 +11,8 @@
 
 ACPlayer::ACPlayer()
 {
+	CHelpers::CreateActorComponent(this, &parkour, "ACParkour");
+
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>("SpringArm");
 	Camera = CreateDefaultSubobject<UCameraComponent>("Camera");
 
@@ -72,13 +74,13 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAxis("HorizontalLook", this, &ACPlayer::OnHorizontalLook);
 	PlayerInputComponent->BindAxis("VerticalLook", this, &ACPlayer::OnVerticalLook);
 	
-	PlayerInputComponent->BindAxis("Vaulting", Actorcomp, &UCParkourSystem::Vault);
-
+	
 	//Action Event
 	PlayerInputComponent->BindAction("Sprint", EInputEvent::IE_Pressed, this, &ACPlayer::OnSprint);
 	PlayerInputComponent->BindAction("Sprint", EInputEvent::IE_Released, this, &ACPlayer::OffSprint);
 	PlayerInputComponent->BindAction("Jump", EInputEvent::IE_Pressed, this, &ACPlayer::StartJump);
 	PlayerInputComponent->BindAction("Jump", EInputEvent::IE_Released, this, &ACPlayer::StopJump);
+	PlayerInputComponent->BindAction("Vaulting", EInputEvent::IE_Pressed, parkour, &UCParkourSystem::Vault);
 
 }
 

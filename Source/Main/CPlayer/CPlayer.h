@@ -40,9 +40,9 @@ protected:
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly)
 		class UCameraComponent* Camera;
 
-	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly)
-		class UActorComponent* Actorcomp;
-
+	UPROPERTY(VisibleDefaultsOnly)
+		class UCParkourSystem* parkour;
+		
 private:
 
 	class UMaterialInstanceDynamic* BodyMaterial;
