@@ -6,6 +6,7 @@
 #include "Components/CapsuleComponent.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "Materials/MaterialInstanceConstant.h"
+#include "../ActorComponent/CParkourSystem.h"
 #include "CAnimInstance.h"
 
 ACPlayer::ACPlayer()
@@ -70,6 +71,8 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 	PlayerInputComponent->BindAxis("HorizontalLook", this, &ACPlayer::OnHorizontalLook);
 	PlayerInputComponent->BindAxis("VerticalLook", this, &ACPlayer::OnVerticalLook);
+	
+	PlayerInputComponent->BindAxis("Vaulting", Actorcomp, &UCParkourSystem::Vault);
 
 	//Action Event
 	PlayerInputComponent->BindAction("Sprint", EInputEvent::IE_Pressed, this, &ACPlayer::OnSprint);
