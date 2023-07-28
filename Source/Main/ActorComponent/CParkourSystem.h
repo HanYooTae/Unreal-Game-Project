@@ -14,5 +14,17 @@ public:
 	UCParkourSystem();
 
 	void Vault();
+
+private:
+	class ACPlayer* player;
 		
+private:
+	FVector WallLocation;
+	FVector WallNormal;
+	FVector WallHeight;
+	FVector WallHeight2;
+
+private:
+		bool ShouldPlayerClimb;	
+		bool IsWallThick;
 };
