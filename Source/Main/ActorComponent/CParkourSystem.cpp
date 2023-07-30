@@ -43,87 +43,90 @@ void UCParkourSystem::Vault()
 		WallLocation = hitResult.Location;
 		WallNormal = hitResult.Normal;
 		CLog::Print("Result Good");
-	}
-	
+		FVector SAndE = ((GetOwner()->GetActorForwardVector() * 10.0f) + WallLocation);
+		FVector Start1 = SAndE + FVector(0, 0, 200);
+		FVector End1 = Start1 - FVector(0, 0, 200);
+		FHitResult hitResult1;
 
-	FVector SAndE = ((UKismetMathLibrary::MakeRotFromX(WallNormal).Vector().ForwardVector * -10.0f) + WallLocation);
-	FVector Start1 = SAndE + FVector(0, 0, 200);
-	FVector End1 = Start1 - FVector(0, 0, 200);
-	
-	bool Result1 = UKismetSystemLibrary::LineTraceSingleForObjects
-	(
-		GetWorld(),
-		Start1,
-		End1,
-		ObjectTypes,
-		true,
-		ignoreActor,
-		EDrawDebugTrace::ForDuration,
-		hitResult,
-		true,
-		TraceColor.Red,
-		TraceHitColor.Green,
-		5.0f
-	);
-	
-	if (Result1 == true)
-	{
-		WallHeight = hitResult.Location;
-		CLog::Print("Result1 Good");
-	}
-	
-	FVector HminusL = WallHeight - WallLocation;
-	
-	if (HminusL.Z > 60)
-	{
-		ShouldPlayerClimb = true;
-	}
-	else
-	{
-		ShouldPlayerClimb = false;
-	}
+		
+		bool Result1 = UKismetSystemLibrary::LineTraceSingleForObjects
+		(
+			GetWorld(),
+			Start1,
+			End1,
+			ObjectTypes,
+			true,
+			ignoreActor,
+			EDrawDebugTrace::ForDuration,
+			hitResult1,
+			true,
+			TraceColor.Red,
+			TraceHitColor.Green,
+			5.0f
+		);
+		
+		if (Result1 == true)
+		{
+			WallHeight = hitResult1.Location;
+			CLog::Print("Result1 Good");
+			FVector SAndE2 = ((GetOwner()->GetActorForwardVector()  * 50.0f) + WallLocation);
+			FVector Start2 = SAndE2 + FVector(0, 0, 250);
+			FVector End2 = Start2 - FVector(0, 0, 300);
+			FHitResult hitResult2;
 
-	FVector SAndE2 = ((UKismetMathLibrary::MakeRotFromX(WallNormal).Vector().ForwardVector * -50.0f) + WallLocation);
-	FVector Start2 = SAndE2 + FVector(0, 0, 250);
-	FVector End2 = Start2 - FVector(0, 0, 300);
+			bool Result2 = UKismetSystemLibrary::LineTraceSingleForObjects
+			(
+				GetWorld(),
+				Start2,
+				End2,
+				ObjectTypes,
+				true,
+				ignoreActor,
+				EDrawDebugTrace::ForDuration,
+				hitResult2,
+				true,
+				TraceColor.Red,
+				TraceHitColor.Green,
+				5.0f
+			);
+			
+			if (Result2 == true)
+			{
+				WallHeight2 = hitResult2.Location;
+				CLog::Print("Result2 Good");
+			}
+			else
+			{
+				IsWallThick = false;
+			}
+			
 
-	bool Result2 = UKismetSystemLibrary::LineTraceSingleForObjects
-	(
-		GetWorld(),
-		Start2,
-		End2,
-		ObjectTypes,
-		true,
-		ignoreActor,
-		EDrawDebugTrace::ForDuration,
-		hitResult,
-		true,
-		TraceColor.Red,
-		TraceHitColor.Green,
-		5.0f
-	);
-	
-	if (Result2 == true)
-	{
-		WallHeight2 = hitResult.Location;
-		CLog::Print("Result2 Good");
-	}
-	else
-	{
-		IsWallThick = false;
-	}
-	
+			FVector HminusH2 = WallHeight - WallHeight2;
+			if (HminusH2.Z > 30)
+			{
+				IsWallThick = false;
+			}
+			else
+			{
+				IsWallThick = true;
+			}
+		}
+		
+		FVector HminusL = WallHeight - WallLocation;
+		
+		if (HminusL.Z > 60)
+		{
+			ShouldPlayerClimb = true;
+		}
+		else
+		{
+			ShouldPlayerClimb = false;
+		}
 
-	FVector HminusH2 = WallHeight - WallHeight2;
-	if (HminusH2.Z > 30)
-	{
-		IsWallThick = false;
-	}
-	else
-	{
-		IsWallThick = true;
 	}
 }
+	
+
 
 
 
