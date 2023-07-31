@@ -8,6 +8,8 @@
 #include "Materials/MaterialInstanceConstant.h"
 #include "../ActorComponent/CParkourSystem.h"
 #include "CAnimInstance.h"
+#include "Widget/CMainWidget.h"
+
 
 ACPlayer::ACPlayer()
 {
@@ -41,6 +43,9 @@ ACPlayer::ACPlayer()
 	bUseControllerRotationYaw = false;
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 	GetCharacterMovement()->MaxWalkSpeed = 400.f;
+
+	// MainWidget
+	CHelpers::GetClass(&MainWidgetClass, "WidgetBlueprint'/Game/Widget/WB_MainWidget.WB_MainWidget_C'");
 }
 
 void ACPlayer::BeginPlay()
@@ -61,6 +66,9 @@ void ACPlayer::BeginPlay()
 	GetMesh()->SetMaterial(0, BodyMaterial);
 	GetMesh()->SetMaterial(1, LogoMaterial);
 
+	MainWidget = CreateWidget<UCMainWidget>(GetWorld(), MainWidgetClass);
+	CheckNull(MainWidget);
+	MainWidget->AddToViewport();
 }
 
 void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -128,6 +136,11 @@ void ACPlayer::StartJump()
 void ACPlayer::StopJump()
 {
 	bPressedJump = false;
+}
+
+void ACPlayer::SetMainWidget()
+{
+
 }
 
 

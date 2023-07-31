@@ -48,4 +48,12 @@ private:
 	class UMaterialInstanceDynamic* BodyMaterial;
 	class UMaterialInstanceDynamic* LogoMaterial;
 
+// Main Widget
+public:
+	void SetMainWidget();
+
+private:
+	TSubclassOf<class UCMainWidget> MainWidgetClass;
+
+	class UCMainWidget* MainWidget;
 };
