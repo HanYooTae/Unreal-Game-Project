@@ -30,3 +30,9 @@ void UCAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	Pitch = OwnerCharacter->GetBaseAimRotation().Pitch;
 	Falling = OwnerCharacter->GetCharacterMovement()->IsFalling();
 }
+
+void UCAnimInstance::PlayClimbMontage()
+{
+	if (!Montage_IsPlaying(ClimbMontage))
+		Montage_Play(ClimbMontage, 1.0f);
+}

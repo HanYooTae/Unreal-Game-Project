@@ -15,6 +15,7 @@ UCParkourSystem::UCParkourSystem()
 void UCParkourSystem::Vault()
 {
 	Owner = Cast<ACPlayer>(GetOwner());
+	CheckNull(Owner);
 
 	FVector PlayerLocation = Owner->GetActorLocation();
 	FVector Start = PlayerLocation + FVector(0, 0, -44.0f);
@@ -168,6 +169,8 @@ void UCParkourSystem::JumpAndUp()
 void UCParkourSystem::Jump()
 {
 	Owner = Cast<ACPlayer>(GetOwner());
+	CheckNull(Owner);
+
 	CLog::Print("JUMPIN!!!!!!!!!!!!!!!!!!!!!!!!");
 	FVector JStart = Owner->GetActorLocation() + FVector(0);
 	FVector JEnd = JStart + (Owner->GetActorForwardVector() * 70);
@@ -251,8 +254,8 @@ void UCParkourSystem::Jump()
 		Owner->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		Owner->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Flying);
 
-		FRotator yaw = UKismetMathLibrary::MakeRotFromX(WallNormal) + FRotator(0, 0, 180);
-		FRotator Rotation = FRotator(Owner->GetActorRotation().Roll, Owner->GetActorRotation().Pitch, yaw.Yaw);
+		float yaw = WallNormal.Z;
+		FRotator Rotation = FRotator(Owner->GetActorRotation().Roll, Owner->GetActorRotation().Pitch, yaw);
 		Owner->SetActorRotation(Rotation);
 
 		FVector Location = (Owner->GetActorForwardVector() * 50.0f) + Owner->GetActorLocation();
@@ -263,7 +266,11 @@ void UCParkourSystem::Jump()
 		Owner->SetActorLocation(Location2);
 		CLog::Print("Good");
 
-		//Owner->GetMesh()->GetAnimInstance()->Montage_Play(Anim->ClimbMontage, 1.0f); //error
+		auto AnimInstance = Cast<UCAnimInstance>(Owner->GetMesh()->GetAnimInstance());
+		CheckNull(AnimInstance);
+
+		AnimInstance->PlayClimbMontage();
+		//->Montage_Play(Anim->ClimbMontage, 1.0f); //error
 	}
 
 }
