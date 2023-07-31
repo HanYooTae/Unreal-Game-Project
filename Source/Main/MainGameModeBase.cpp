@@ -3,7 +3,7 @@
 
 AMainGameModeBase::AMainGameModeBase()
 {
-	ConstructorHelpers::FClassFinder<APawn> pawnAsset(TEXT("Blueprint'/Game/Character/BP_CPlayer.BP_CPlayer_C'"));
+	ConstructorHelpers::FClassFinder<APawn> pawnAsset(TEXT("Blueprint'/Game/Character/MyCPlayer.MyCPlayer_C'"));
 
 	if (pawnAsset.Succeeded())
 		DefaultPawnClass = pawnAsset.Class;

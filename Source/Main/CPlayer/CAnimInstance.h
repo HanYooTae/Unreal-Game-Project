@@ -29,6 +29,10 @@ protected:
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Animation")
 		bool Falling;
 
+public:
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = Attack, Meta = (AllowPrivateAccess = true))
+		UAnimMontage* ClimbMontage;
+
 private:
 	class ACharacter* OwnerCharacter;
 

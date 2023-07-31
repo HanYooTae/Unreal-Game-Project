@@ -6,6 +6,10 @@
 UCAnimInstance::UCAnimInstance()
 {
 	Falling = false;
+
+	static ConstructorHelpers::FObjectFinder<UAnimMontage> CLIMB(TEXT("AnimMontage'/Game/Character/Animations/Parkour/ParkourAnimation/MQ_Climb_RM_Montage.MQ_Climb_RM_Montage'"));
+	if (CLIMB.Succeeded())
+		ClimbMontage = CLIMB.Object;
 }
 
 void UCAnimInstance::NativeBeginPlay()
