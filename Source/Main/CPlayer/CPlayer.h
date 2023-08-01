@@ -18,6 +18,9 @@ protected:
 public:	
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Animation")
+		UAnimMontage* Climb;
+
 private: // Axis
 	void OnMoveForward(float Axis);
 	void OnMoveRight(float Axis);
