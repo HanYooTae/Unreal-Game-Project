@@ -14,7 +14,7 @@
 ACPlayer::ACPlayer()
 {
 	CHelpers::CreateActorComponent(this, &parkour, "ACParkour");
-
+	
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>("SpringArm");
 	Camera = CreateDefaultSubobject<UCameraComponent>("Camera");
 

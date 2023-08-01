@@ -6,6 +6,10 @@
 UCAnimInstance::UCAnimInstance()
 {
 	Falling = false;
+
+	static ConstructorHelpers::FObjectFinder<UAnimMontage> CLIMB(TEXT("AnimMontage'/Game/Character/Animations/Parkour/ParkourAnimation/MQ_Climb_RM_Montage.MQ_Climb_RM_Montage'"));
+	if (CLIMB.Succeeded())
+		ClimbMontage = CLIMB.Object;
 }
 
 void UCAnimInstance::NativeBeginPlay()
@@ -25,4 +29,10 @@ void UCAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	Direction = CalculateDirection(OwnerCharacter->GetVelocity(), OwnerCharacter->GetControlRotation());
 	Pitch = OwnerCharacter->GetBaseAimRotation().Pitch;
 	Falling = OwnerCharacter->GetCharacterMovement()->IsFalling();
+}
+
+void UCAnimInstance::PlayClimbMontage()
+{
+	if (!Montage_IsPlaying(ClimbMontage))
+		Montage_Play(ClimbMontage, 1.0f);
 }

@@ -16,6 +16,7 @@ public:
 	virtual void NativeBeginPlay() override;
 	virtual void NativeUpdateAnimation(float DeltaSeconds) override;
 
+	void PlayClimbMontage();
 protected:
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Animation")
 		float Speed;
@@ -28,6 +29,11 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Animation")
 		bool Falling;
+
+
+public:
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = Attack, Meta = (AllowPrivateAccess = true))
+		UAnimMontage* ClimbMontage;
 
 private:
 	class ACharacter* OwnerCharacter;
