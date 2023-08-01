@@ -2,9 +2,10 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Components/PrimitiveComponent.h"
 #include "Components/CapsuleComponent.h"
-#include "GameFramework/Character.h"
-#include "../CPlayer/CPlayer.h"
 #include "../CPlayer/CAnimInstance.h"
+#include "GameFramework/Character.h"
+#include "GameFramework/Actor.h"
+#include "../CPlayer/CPlayer.h"
 #include "Engine/World.h"
 #include "Global.h"
 
@@ -33,10 +34,10 @@ void UCParkourSystem::Vault()
 	bool Result = UKismetSystemLibrary::LineTraceSingleForObjects // player 전방 물체 인식trace
 	(
 		GetWorld(),
-		Start, 
-		End, 
+		Start,
+		End,
 		ObjectTypes,					// 비워둘수 없어서 기본값 셋팅
-		true, 
+		true,
 		ignoreActor,					// 비워둘수 없어서 기본값 셋팅
 		EDrawDebugTrace::ForDuration,
 		hitResult,
@@ -57,7 +58,7 @@ void UCParkourSystem::Vault()
 		FVector End1 = Start1 - FVector(0, 0, 200);
 		FHitResult hitResult1;
 
-		
+
 		bool Result1 = UKismetSystemLibrary::LineTraceSingleForObjects
 		(
 			GetWorld(),
@@ -73,13 +74,13 @@ void UCParkourSystem::Vault()
 			TraceHitColor.Green,
 			5.0f
 		);
-		
+
 		if (Result1 == true)
 		{
 			WallHeight = hitResult1.Location;	// 물체의 높이 저장
 			CLog::Print("Result1 Good");
 			CLog::Print("WallHeight : " + FString::FromInt(WallHeight.Z));
-			FVector SAndE2 = ((Owner->GetActorForwardVector()  * 50.0f) + WallLocation);	// 물체의 두께를 알기위한 두번째 수직trace
+			FVector SAndE2 = ((Owner->GetActorForwardVector() * 50.0f) + WallLocation);	// 물체의 두께를 알기위한 두번째 수직trace
 			FVector Start2 = SAndE2 + FVector(0, 0, 250);
 			FVector End2 = Start2 - FVector(0, 0, 300);
 			FHitResult hitResult2;
@@ -99,7 +100,7 @@ void UCParkourSystem::Vault()
 				TraceHitColor.Green,
 				5.0f
 			);
-			
+
 			if (Result2 == true)
 			{
 				WallHeight2 = hitResult2.Location; // 두번째 수직trace 위치저장
@@ -109,7 +110,7 @@ void UCParkourSystem::Vault()
 				FVector HminusH2 = WallHeight - WallHeight2;
 				CLog::Print("HminusH2.x : " + FString::FromInt(HminusH2.X));
 				CLog::Print("HminusH2.y" + FString::FromInt(HminusH2.Y));
-				if (HminusH2.Z > 30 )
+				if (HminusH2.Z > 30)
 				{
 					IsWallThick = false;
 				}
@@ -130,7 +131,7 @@ void UCParkourSystem::Vault()
 					ShouldPlayerClimb = false;
 				}
 
-				JumpAndUp();	
+				JumpAndUp();
 			}
 			else
 			{
@@ -150,7 +151,7 @@ void UCParkourSystem::Vault()
 
 				JumpAndUp();
 			}
-		}	
+		}
 	}
 }
 
@@ -247,18 +248,18 @@ void UCParkourSystem::Jump()
 
 		CLog::Print("CanClimb = false");
 	}
-	
+
 	if (Canclimb == true)
 	{
 		IsClimbing = true;
 		Owner->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		Owner->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Flying);
 
-		float yaw = WallNormal.Z;
-		FRotator Rotation = FRotator(Owner->GetActorRotation().Roll, Owner->GetActorRotation().Pitch, yaw);
-		Owner->SetActorRotation(Rotation);
+		//float yaw = Owner->GetActorForwardVector().Z;
+		//FRotator Rotation = FRotator(Owner->GetActorRotation().Roll, Owner->GetActorRotation().Pitch, yaw);
+		//Owner->SetActorRotation(Rotation);
 
-		FVector Location = (Owner->GetActorForwardVector() * 50.0f) + Owner->GetActorLocation();
+		FVector Location = (Owner->GetActorForwardVector() * 5.0f) + Owner->GetActorLocation();
 		Owner->SetActorLocation(Location);
 
 		FVector Z = WallHeight - FVector(0, 0, 44);
@@ -271,6 +272,10 @@ void UCParkourSystem::Jump()
 
 		AnimInstance->PlayClimbMontage();
 		//->Montage_Play(Anim->ClimbMontage, 1.0f); //error
+
+		FTimerHandle timerHandle;
+		GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UCParkourSystem::NextMontageYorN, 1.13f);
+			
 	}
 
 }
@@ -279,7 +284,29 @@ void UCParkourSystem::Up()
 {
 	CLog::Print("Not yet");
 }
-	
+
+void UCParkourSystem::NextMontageYorN()
+{
+	auto AnimInstance = Cast<UCAnimInstance>(Owner->GetMesh()->GetAnimInstance());
+	CheckNull(AnimInstance);
+
+	if (IsWallThick == true)
+	{
+		Owner->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+		Owner->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
+		IsClimbing = false;		
+	}
+	else
+	{
+		AnimInstance->PlayJumpingDownMontage();
+		FTimerHandle timerHandle;
+		GetWorld()->GetTimerManager().SetTimer(timerHandle, 1.0f, false);
+		Owner->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+		Owner->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
+		IsClimbing = false;
+	}
+}
+
 
 
 
