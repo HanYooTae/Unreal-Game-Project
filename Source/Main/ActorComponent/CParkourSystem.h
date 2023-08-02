@@ -20,6 +20,7 @@ public:
 	void Up();			// 점프를 하지않았을때 실행하는 함수
 
 	void NextMontageYorN(); // Climb Montage다음에 나올 JumpingDownFromWall을 실행 할지에대한 if문
+	void LastCollision();
 
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Animation")
 		UAnimMontage* Climb;
