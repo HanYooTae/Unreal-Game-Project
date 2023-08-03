@@ -18,6 +18,8 @@ public:
 
 	void PlayClimbMontage();
 	void PlayJumpingDownMontage();
+	void PlayGettingUpMontage();
+	void PlayVaultMontage();
 protected:
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Animation")
 		float Speed;
@@ -38,6 +40,12 @@ public:
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = Attack, Meta = (AllowPrivateAccess = true))
 		UAnimMontage* JumpingDownMontage;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = Attack, Meta = (AllowPrivateAccess = true))
+		UAnimMontage* GettingUpMontage;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = Attack, Meta = (AllowPrivateAccess = true))
+		UAnimMontage* VaultMontage;
 
 	EMontagePlayReturnType duration;
 
