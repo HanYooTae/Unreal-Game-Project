@@ -4,7 +4,7 @@ Parkour System 설명
 
 <헤더>
 함수
-  void Vault();		// 플레이어 V키를 누르면 실행되는 함수
+  	void Vault();		// 플레이어 V키를 누르면 실행되는 함수
 	void JumpAndUp();	// 점프를 확인하는 함수
 	void Jump();		// 점프를 했을때 실행하는 함수
 	void Up();			// 점프를 하지않았을때 실행하는 함수
