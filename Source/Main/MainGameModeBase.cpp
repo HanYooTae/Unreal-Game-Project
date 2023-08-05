@@ -7,6 +7,7 @@ AMainGameModeBase::AMainGameModeBase()
 
 	if (pawnAsset.Succeeded())
 		DefaultPawnClass = pawnAsset.Class;
+
 }
 
 
