@@ -22,9 +22,6 @@ public:
 	void NextMontageYorN(); // Climb Montage다음에 나올 JumpingDownFromWall을 실행 할지에대한 if문
 	void LastCollision();
 
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Animation")
-		UAnimMontage* Climb;
-
 public:
 	class ACPlayer* player;
 	class ACharacter* Owner;
@@ -41,5 +38,4 @@ private:
 	bool ShouldPlayerClimb;	// 점프를 통한 parkour 실행 bool변수
 	bool IsWallThick;		// 물체의 두께를 학인하고 올라갈지 넘어갈지에 대한 bool번수
 	bool IsClimbing;		// parkour를 하고 있는가에 대한 bool변수
-	float Delay;
 };
