@@ -20,7 +20,7 @@
 
 ## Minimap 구현
 
-1) Create Minimap
+1. Create Minimap
    - Player에 Z축 방향으로 SpringArm을 붙인 후, USceneCaptureComponent2D로 랜더링하여 Top View 시점으로 랜더링하였음
    - PaperSprite를 추가하여 Sprite Image로 화살표를 사용하여, Player가 움직이는 방향이 어딘지 확인할 수 있게 구현하였음 
    - CPlayer.h
@@ -37,10 +37,16 @@
 
 
 
-
-
-2) 
+2. Attach minimap to main widget
    
 
-   ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/8a668b71-88f7-44e3-a041-59ed21fdb327)
+     ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/8a668b71-88f7-44e3-a041-59ed21fdb327)
 
+
+3. PaperSprite
+   - C++로 구현하려고 하였지만, 헤더파일을 찾지 못하여 어쩔 수 없이 Blueprint로 구현...
+   - Minimap에서 Player의 방향을 표시하기 위하여 사용
+   - Mesh의 자식으로 PaperSprite를 붙여주었으며 Sprite image를 붙인 후, Owner no see를 통하여 Player는 Sprite image를 볼 수 없게 구현하였음
+  
+     ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/c5afcc3e-95ee-44ee-8486-c910e91bc7ef)
+     ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/56104fa9-930d-4777-b045-7465a0922e32)
