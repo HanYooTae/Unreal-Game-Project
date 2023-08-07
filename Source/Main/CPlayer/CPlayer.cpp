@@ -10,8 +10,6 @@
 #include "CAnimInstance.h"
 #include "Widget/CMainWidget.h"
 #include "Components/SceneCaptureComponent2D.h"
-#include "PaperSpriteComponent.h"
-
 
 ACPlayer::ACPlayer()
 {
@@ -38,7 +36,7 @@ ACPlayer::ACPlayer()
 	SpringArm->bUsePawnControlRotation = true;
 	SpringArm->SetRelativeLocation(FVector(0, 0, 60));
 
-	//Cameera
+	//Camera
 	Camera->SetupAttachment(SpringArm);
 
 	//Movement
@@ -63,9 +61,6 @@ ACPlayer::ACPlayer()
 	MinimapSpringArm->bInheritPitch = false;
 	MinimapSpringArm->bInheritYaw = false;
 	MinimapSpringArm->bInheritRoll = false;
-
-	// Create Arrow
-
 
 	// MainWidget
 	CHelpers::GetClass(&MainWidgetClass, "WidgetBlueprint'/Game/Widget/WB_MainWidget.WB_MainWidget_C'");

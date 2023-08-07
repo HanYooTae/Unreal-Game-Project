@@ -51,9 +51,6 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly)
 		class USceneCaptureComponent2D* RenderMinimap;
-		
-	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly)
-		class UPaperSpriteComponent* Arrow;
 
 private:
 	class UMaterialInstanceDynamic* BodyMaterial;
@@ -64,7 +61,6 @@ public:
 	void SetMainWidget();
 
 private:
-	TSubclassOf<class UCMainWidget> MainWidgetClass;
-
 	class UCMainWidget* MainWidget;
+	TSubclassOf<class UCMainWidget> MainWidgetClass;
 };
