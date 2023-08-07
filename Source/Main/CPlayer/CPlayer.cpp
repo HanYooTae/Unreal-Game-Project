@@ -48,7 +48,6 @@ ACPlayer::ACPlayer()
 	MinimapSpringArm = CreateDefaultSubobject<USpringArmComponent>("MinimapSpringArm");
 	RenderMinimap = CreateDefaultSubobject<USceneCaptureComponent2D>("RenderMinimap");
 	RenderMinimap->SetupAttachment(MinimapSpringArm);
-	//Arrow->SetupAttachment(RenderMinimap);
 
 	// Render Minimap
 	MinimapSpringArm->SetupAttachment(GetCapsuleComponent());
