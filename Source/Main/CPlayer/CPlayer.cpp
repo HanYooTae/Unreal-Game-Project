@@ -9,7 +9,7 @@
 #include "../ActorComponent/CParkourSystem.h"
 #include "CAnimInstance.h"
 #include "Widget/CMainWidget.h"
-
+#include "Components/SceneCaptureComponent2D.h"
 
 ACPlayer::ACPlayer()
 {
@@ -36,13 +36,31 @@ ACPlayer::ACPlayer()
 	SpringArm->bUsePawnControlRotation = true;
 	SpringArm->SetRelativeLocation(FVector(0, 0, 60));
 
-	//Cameera
+	//Camera
 	Camera->SetupAttachment(SpringArm);
 
 	//Movement
 	bUseControllerRotationYaw = false;
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 	GetCharacterMovement()->MaxWalkSpeed = 400.f;
+
+	// Minimap Setting
+	MinimapSpringArm = CreateDefaultSubobject<USpringArmComponent>("MinimapSpringArm");
+	RenderMinimap = CreateDefaultSubobject<USceneCaptureComponent2D>("RenderMinimap");
+	RenderMinimap->SetupAttachment(MinimapSpringArm);
+	//Arrow->SetupAttachment(RenderMinimap);
+
+	// Render Minimap
+	MinimapSpringArm->SetupAttachment(GetCapsuleComponent());
+	MinimapSpringArm->TargetArmLength = 900.f;
+	MinimapSpringArm->bUsePawnControlRotation = true;
+	MinimapSpringArm->SetRelativeRotation(FRotator(-90, 0, 0));
+
+	// Change Camera Settings
+	MinimapSpringArm->bUsePawnControlRotation = false;
+	MinimapSpringArm->bInheritPitch = false;
+	MinimapSpringArm->bInheritYaw = false;
+	MinimapSpringArm->bInheritRoll = false;
 
 	// MainWidget
 	CHelpers::GetClass(&MainWidgetClass, "WidgetBlueprint'/Game/Widget/WB_MainWidget.WB_MainWidget_C'");

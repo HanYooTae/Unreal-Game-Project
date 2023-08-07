@@ -45,9 +45,14 @@ protected:
 
 	UPROPERTY(VisibleDefaultsOnly)
 		class UCParkourSystem* parkour;
-		
-private:
 
+	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly)
+		class USpringArmComponent* MinimapSpringArm;
+
+	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly)
+		class USceneCaptureComponent2D* RenderMinimap;
+
+private:
 	class UMaterialInstanceDynamic* BodyMaterial;
 	class UMaterialInstanceDynamic* LogoMaterial;
 
@@ -56,7 +61,6 @@ public:
 	void SetMainWidget();
 
 private:
-	TSubclassOf<class UCMainWidget> MainWidgetClass;
-
 	class UCMainWidget* MainWidget;
+	TSubclassOf<class UCMainWidget> MainWidgetClass;
 };
