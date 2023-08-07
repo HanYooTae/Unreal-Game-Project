@@ -17,11 +17,10 @@
 2. Montage
    CAnimInstance.h
   - 레퍼런스 저장 변수
-    ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/ccc55a32-4e7d-4269-80e5-578421576993)
+    * ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/ccc55a32-4e7d-4269-80e5-578421576993)
   - 레퍼런스 가져오기
     ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/e80bbc79-bec5-45ec-ac34-a3c2266eac22)
-  - Play Montage
-    
+  - Play Montage    
     ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/d434a9d7-e5b3-46bf-af2c-dc61425599ec)
 
 3. Play
