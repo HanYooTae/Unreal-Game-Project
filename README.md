@@ -94,7 +94,9 @@ Start와 End의 값
 
    ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/5f7e6b4b-03b4-4839-9df3-74bea54e9879)
 
+   * 위 자료는 아래 글에 자주 등장할 collision, Movement셋팅의 예시입니다. (위자료는 여러셋팅의 일부입니다.)
 
+  
 ## bool변수를 사용한 Montage_Play
 ### NextMontageYorN()
 - SetTimer함수의 NextMontageYorN()
