@@ -65,7 +65,7 @@ Start와 End의 값
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/ef804cb4-127a-4830-9300-c3d6a1f1cd77)
 
-* 위그림의 player 모리위로 쏘는 Linetrace는 바로위에 막혀있는지에 대한 검사를 하며 현제 사용여부에 따라 result값 셋팅후 필요 여부에 따라 사용합니다.
+* 위그림의 player 머리위로 쏘는 Linetrace는 위에 막혀있는지에 대한 검사를 하며 현제 사용여부에 따라 result값을 셋팅합니다.
 
 ## Linetrace의 Result값을 사용한 bool변수 셋팅
 1. IsWallThick(물체의 두께를 학인하고 올라갈지 넘어갈지에 대한 bool변수)
