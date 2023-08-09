@@ -90,7 +90,7 @@ Start와 End의 값
    ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/24888e72-1d3f-418d-b5e9-a8ed1c9625c3)
 
    
-- 몽타주가 플레이중일때는 bool변 IsClimbing = true로 저장 그후 Collision, Movement, ActorLocation 셋팅
+- 몽타주가 플레이중일때는 bool변수 IsClimbing을 true로 저장 그후 Collision, Movement, ActorLocation 셋팅
 
    ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/5f7e6b4b-03b4-4839-9df3-74bea54e9879)
 
