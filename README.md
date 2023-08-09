@@ -37,6 +37,14 @@ Start와 End의 값
 ### 2번 Linetrace
 * 2번 linetrace는 1번 linetrace가 정상작동후 실행되어야 하기 때문에 1번 linetrace의 result if문에 들어가있습니다.
   - 이어질 모든 Linetrace는 앞번호의 Linetrace result값이 true일때만 작동해야하므로 2번linetrace와 동일하게 윗번의 result if문 안에 작성되었습니다.
+
+
+
+
+
+
+
+
     
 Start와 End의 값
 
