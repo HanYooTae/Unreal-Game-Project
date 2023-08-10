@@ -10,6 +10,7 @@
 #include "CAnimInstance.h"
 #include "Widget/CMainWidget.h"
 #include "Components/SceneCaptureComponent2D.h"
+//#include "PaperSpriteComponent.h"
 
 ACPlayer::ACPlayer()
 {
@@ -48,12 +49,14 @@ ACPlayer::ACPlayer()
 	MinimapSpringArm = CreateDefaultSubobject<USpringArmComponent>("MinimapSpringArm");
 	RenderMinimap = CreateDefaultSubobject<USceneCaptureComponent2D>("RenderMinimap");
 	RenderMinimap->SetupAttachment(MinimapSpringArm);
+	//Arrow->SetupAttachment(RenderMinimap);		// PaperSpriteComponent Error!!
 
 	// Render Minimap
 	MinimapSpringArm->SetupAttachment(GetCapsuleComponent());
 	MinimapSpringArm->TargetArmLength = 900.f;
 	MinimapSpringArm->bUsePawnControlRotation = true;
 	MinimapSpringArm->SetRelativeRotation(FRotator(-90, 0, 0));
+
 
 	// Change Camera Settings
 	MinimapSpringArm->bUsePawnControlRotation = false;
@@ -83,9 +86,14 @@ void ACPlayer::BeginPlay()
 	GetMesh()->SetMaterial(0, BodyMaterial);
 	GetMesh()->SetMaterial(1, LogoMaterial);
 
+	// Create & Attach MainWidget
 	MainWidget = CreateWidget<UCMainWidget>(GetWorld(), MainWidgetClass);
 	CheckNull(MainWidget);
 	MainWidget->AddToViewport();
+
+	// Hidden Players in Minimap
+	CheckNull(RenderMinimap);
+	RenderMinimap->ShowFlags.SkeletalMeshes = false;
 }
 
 void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
