@@ -52,6 +52,9 @@ protected:
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly)
 		class USceneCaptureComponent2D* RenderMinimap;
 
+	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly)
+		class UPaperSpriteComponent* Arrow;
+
 private:
 	class UMaterialInstanceDynamic* BodyMaterial;
 	class UMaterialInstanceDynamic* LogoMaterial;

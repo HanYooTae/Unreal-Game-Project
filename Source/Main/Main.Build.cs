@@ -10,7 +10,7 @@ public class Main : ModuleRules
 	
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "Paper2D" });
 
-		//PrivateDependencyModuleNames.AddRange(new string[] {  });
+		PrivateDependencyModuleNames.AddRange(new string[] { "Paper2D" });
 
 		PublicIncludePaths.Add(ModuleDirectory);
 
