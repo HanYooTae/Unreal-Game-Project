@@ -3,7 +3,8 @@
 ## ParkourSystem 구현
 
 	- 총 4개의 LineTrace사용
-	![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/fcab60c9-f30c-42cb-8b42-650304082a0b)
+	![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/c6bcc657-8483-45ee-b789-b3d07dcdebf9)
+
 
 	* S는 Linetrace가 시작하는 곳이면 E는 Linetrace끝점(Parkour를 할수 있는 최소한의 사정거리)입니다.
 
@@ -18,19 +19,20 @@
 	- 몽타주를 실행하기전 작업
 		1. 몽타주 레퍼런스 가져오기(AnimInstance.h)
 		
-		![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/a9f0d4c4-8626-4bd3-a3de-2e96fbee9cc4)
+		![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/69595733-851d-475d-a508-d28e7801fe6a)
 
 		2. Action Event 불러오기(CPlayer.h)
 
-		![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/ba01eda7-79c7-4b7a-a713-7f7574dc5c70)
-		
+		![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/c41d5ac6-2afc-4b08-b28d-40a415458f59)
+	
 		3. Linetrace의 Result값을 사용한 bool변수 셋팅
 			- IsWallThick(물체의 두께를 학인하고 올라갈지 넘어갈지에 대한 bool변수)
-			![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/c1a8a021-caf6-4fe6-a79f-0fc37f6d5b3e)
+			![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/293637d2-a93a-4cf6-9832-9be63c658097)
 
 			- ShouldPlayerClimb(점프를 통한 parkour 실행 bool변수)
 
-			![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/491a4799-bb65-4742-bd4e-067e09250a38)
+			![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/67fc4031-faaf-4248-b688-ee6ec01cba82)
+
 			*Jump와 Up은 아래에 설명되어있음
 			
 			- 4번 Linetrace의 Result값이 true라면 Canclimb = true
@@ -39,11 +41,13 @@
 	
 	- 재생하기위한 함수를 셋팅
 
-		![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/c222ba21-6355-46f9-81cc-744eba852930)
+		![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/8155ae47-4aa3-4ec3-9441-0b527749991c)
+
 
 	- 재생 및 delay
 
-		![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/481fc9e7-e593-4dfc-ab8b-4eb5482a0968)
+		![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/ccf52393-f81d-47f2-b3e7-5e598d0a6030)
+
 
 ## 기타 함수 소개
 NextMontageYorN(), LastCollision()
@@ -51,9 +55,10 @@ NextMontageYorN(), LastCollision()
 	- NextMontageYorN()
 		*벽의 두깨의 정도를 저장한 변수 IsWallThick을 사용하여 각 다른 몽타주 재생
 
-		![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/bf8046f1-05d7-453d-90b7-e73d68fb47b8)
+		![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/92402bb5-9619-464d-84ad-cae32fbb4729)
 
 	- LastCollision()
 		*Delay를 대신할 Settimer함수를 좀더 부드러운 몽타주 재생을 위한 콜리전 셋팅 함수
 	
-		![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/328e9ef3-a175-4eed-b7a4-1c05a58d3759)
+		![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/ce55623c-f10a-4d1f-8be9-c488bc1ab6f0)
+
