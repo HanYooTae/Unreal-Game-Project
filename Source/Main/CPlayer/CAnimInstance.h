@@ -47,8 +47,6 @@ public:
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = Attack, Meta = (AllowPrivateAccess = true))
 		UAnimMontage* VaultMontage;
 
-	EMontagePlayReturnType duration;
-
 private:
 	class ACharacter* OwnerCharacter;
 

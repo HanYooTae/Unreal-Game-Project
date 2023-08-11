@@ -12,18 +12,15 @@ class MAIN_API UCParkourSystem : public UActorComponent
 	GENERATED_BODY()
 
 public:
-	UCParkourSystem();
+	void Vault();				// 플레이어 V키를 누르면 실행되는 함수
+	void HighOrNormal();		// 점프를 확인하는 함수
+	void High_Parkour();		// 점프를 했을때 실행하는 함수
+	void Normal_Parkour();		// 점프를 하지않았을때 실행하는 함수
 
-	void Vault();		// 플레이어 V키를 누르면 실행되는 함수
-	void JumpAndUp();	// 점프를 확인하는 함수
-	void Jump();		// 점프를 했을때 실행하는 함수
-	void Up();			// 점프를 하지않았을때 실행하는 함수
-
-	void NextMontageYorN(); // Climb Montage다음에 나올 JumpingDownFromWall을 실행 할지에대한 if문
+	void NextMontageYorN();		// Climb Montage다음에 나올 JumpingDownFromWall을 실행 할지에대한 if문
 	void LastCollision();
 
 public:
-	class ACPlayer* player;
 	class ACharacter* Owner;
 	class UCAnimInstance* Anim;
 

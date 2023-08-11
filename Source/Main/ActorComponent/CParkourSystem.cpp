@@ -9,10 +9,6 @@
 #include "Engine/World.h"
 #include "Global.h"
 
-UCParkourSystem::UCParkourSystem()
-{
-}
-
 void UCParkourSystem::Vault()
 {
 	if (IsClimbing == false)
@@ -124,7 +120,7 @@ void UCParkourSystem::Vault()
 						ShouldPlayerClimb = false;
 					}
 
-					JumpAndUp();
+					HighOrNormal();
 				}
 				else
 				{
@@ -141,26 +137,26 @@ void UCParkourSystem::Vault()
 						ShouldPlayerClimb = false;
 					}
 
-					JumpAndUp();
+					HighOrNormal();
 				}
 			}
 		}
 	}
 }
 
-void UCParkourSystem::JumpAndUp()
+void UCParkourSystem::HighOrNormal()
 {
 	if (ShouldPlayerClimb == true)
 	{
-		Jump();
+		High_Parkour();
 	}
 	else
 	{
-		Up();
+		Normal_Parkour();
 	}
 }
 
-void UCParkourSystem::Jump()
+void UCParkourSystem::High_Parkour()
 {
 	Owner = Cast<ACPlayer>(GetOwner());
 	CheckNull(Owner);
@@ -244,19 +240,18 @@ void UCParkourSystem::Jump()
 		IsClimbing = true;
 		Owner->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		Owner->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Flying);
-
+	
 		FVector Location = (Owner->GetActorForwardVector() * 5.0f) + Owner->GetActorLocation();
 		Owner->SetActorLocation(Location);
-
+	
 		FVector Z = WallHeight - FVector(0, 0, 44);
 		FVector Location2 = FVector(Owner->GetActorLocation().X, Owner->GetActorLocation().Y, Z.Z);
 		Owner->SetActorLocation(Location2);
-
+	
 		auto AnimInstance = Cast<UCAnimInstance>(Owner->GetMesh()->GetAnimInstance());
 		CheckNull(AnimInstance);
-
 		AnimInstance->PlayClimbMontage();
-
+	
 		FTimerHandle timerHandle;
 		GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UCParkourSystem::NextMontageYorN, 1.13f);
 			
@@ -273,7 +268,7 @@ void UCParkourSystem::NextMontageYorN()
 	{
 		Owner->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 		Owner->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
-		IsClimbing = false;		
+		IsClimbing = false;
 	}
 	else
 	{
@@ -286,7 +281,7 @@ void UCParkourSystem::NextMontageYorN()
 	}
 }
 
-void UCParkourSystem::Up()
+void UCParkourSystem::Normal_Parkour()
 {
 	IsClimbing = true;
 	auto AnimInstance = Cast<UCAnimInstance>(Owner->GetMesh()->GetAnimInstance());
@@ -320,6 +315,9 @@ void UCParkourSystem::LastCollision()
 	Owner->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	Owner->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
 }
+
+
+
 
 
 
