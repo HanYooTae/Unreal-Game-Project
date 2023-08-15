@@ -1,5 +1,10 @@
 # Unreal-Game-Project
 
+## 게임 진행 예상도
+
+![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/41014e76-4468-465f-8c34-2235336e5fde)
+
+
 ## Main Widget 구현
 
 1. Create Main Widget
