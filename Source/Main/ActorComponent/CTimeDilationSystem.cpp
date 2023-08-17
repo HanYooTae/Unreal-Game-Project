@@ -14,6 +14,6 @@ void UCTimeDilationSystem::BeginPlay()
 	
 	UWorld* world = GetWorld();
 	CheckNull(world);
-
+	// Change speed what you want
 	UGameplayStatics::SetGlobalTimeDilation(world, Adjust_Time);
 }
