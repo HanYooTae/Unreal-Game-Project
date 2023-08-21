@@ -55,6 +55,12 @@ protected:
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly)
 		class UPaperSpriteComponent* Arrow;
 
+	UPROPERTY(BlueprintReadOnly)
+		class UCMainWidget* MainWidget;
+
+private:
+	TSubclassOf<class UCMainWidget> MainWidgetClass;
+
 private:
 	class UMaterialInstanceDynamic* BodyMaterial;
 	class UMaterialInstanceDynamic* LogoMaterial;
@@ -63,7 +69,5 @@ private:
 public:
 	void SetMainWidget();
 
-private:
-	class UCMainWidget* MainWidget;
-	TSubclassOf<class UCMainWidget> MainWidgetClass;
+
 };
