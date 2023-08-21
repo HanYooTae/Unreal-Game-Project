@@ -9,5 +9,3 @@ AMainGameModeBase::AMainGameModeBase()
 		DefaultPawnClass = pawnAsset.Class;
 
 }
-
-
