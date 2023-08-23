@@ -90,7 +90,6 @@ void ACPlayer::BeginPlay()
 	MainWidget = CreateWidget<UCMainWidget>(GetWorld(), MainWidgetClass);
 	CheckNull(MainWidget);
 	MainWidget->AddToViewport();
-	//MainWidget->RemoveFromParent();
 
 	// Hidden Players in Minimap
 	CheckNull(RenderMinimap);
