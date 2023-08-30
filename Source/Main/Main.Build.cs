@@ -8,11 +8,11 @@ public class Main : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "Paper2D" });
-
-		PrivateDependencyModuleNames.AddRange(new string[] { "Paper2D" });
-
 		PublicIncludePaths.Add(ModuleDirectory);
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "Paper2D", "UMG", "OnlineSubsystem" });
+
+		//PrivateDependencyModuleNames.AddRange(new string[] { "Paper2D" });
+
 
 	}
 }

@@ -3,6 +3,11 @@
 #include "Components/WidgetSwitcher.h"
 #include "Global.h"
 
+UCMainMenu::UCMainMenu(const FObjectInitializer& ObjectInitializer)
+{
+
+}
+
 bool UCMainMenu::Initialize()
 {
 	bool bSuccess = Super::Initialize();
