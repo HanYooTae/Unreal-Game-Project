@@ -2,15 +2,16 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Menu/CMenuBase.h"
 #include "CMainMenu.generated.h"
 
 UCLASS()
-class MAIN_API UCMainMenu : public UUserWidget
+class MAIN_API UCMainMenu : public UCMenuBase
 {
 	GENERATED_BODY()
 	
 public:
-	//UCMainMenu(const FObjectInitializer& ObjectInitializer);
+	UCMainMenu(const FObjectInitializer& ObjectInitializer);
 
 protected:
 	virtual bool Initialize() override;
