@@ -1,18 +1,24 @@
 #include "CPlayer/CPlayer.h"
 #include "Global.h"
-#include "GameFramework/SpringArmComponent.h"
-#include "GameFramework/CharacterMovementComponent.h"
+#include "CAnimInstance.h"
+#include "../Items/CItem.h"
+#include "Widget/CMainWidget.h"
+#include "Blueprint/UserWidget.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "../Items/CInventoryComponent.h"
+#include "../ActorComponent/CParkourSystem.h"
+#include "GameFramework/SpringArmComponent.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "Materials/MaterialInstanceConstant.h"
-#include "../ActorComponent/CParkourSystem.h"
-#include "CAnimInstance.h"
-#include "Widget/CMainWidget.h"
+#include "ActorComponent/CInteractionComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 
 ACPlayer::ACPlayer()
 {
+	PrimaryActorTick.bCanEverTick = true;
+
 	CHelpers::CreateActorComponent(this, &parkour, "ACParkour");
 	
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>("SpringArm");
@@ -39,6 +45,9 @@ ACPlayer::ACPlayer()
 	//Cameera
 	Camera->SetupAttachment(SpringArm);
 
+	Inventory = CreateDefaultSubobject<UCInventoryComponent>("Inventory");
+	Inventory->Capacity = 20.f;
+
 	//Movement
 	bUseControllerRotationYaw = false;
 	GetCharacterMovement()->bOrientRotationToMovement = true;
@@ -46,6 +55,11 @@ ACPlayer::ACPlayer()
 
 	// MainWidget
 	CHelpers::GetClass(&MainWidgetClass, "WidgetBlueprint'/Game/Widget/WB_MainWidget.WB_MainWidget_C'");
+
+	Health = 100.0f; //test용 체력
+
+	InteractionCheckFrequency = 0.f;
+	InteractionCheckDistance = 1000.f;
 }
 
 void ACPlayer::BeginPlay()
@@ -69,6 +83,80 @@ void ACPlayer::BeginPlay()
 	MainWidget = CreateWidget<UCMainWidget>(GetWorld(), MainWidgetClass);
 	CheckNull(MainWidget);
 	MainWidget->AddToViewport();
+}
+
+void ACPlayer::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	PerformInteractionCheck();
+
+}
+
+void ACPlayer::PerformInteractionCheck()
+{
+	CheckNull(GetController());
+
+	InteractionData.LastInteractionCheckTime = GetWorld()->GetTimeSeconds();
+
+	FVector EyesLoc;
+	FRotator EyesRot;
+
+	GetController()->GetPlayerViewPoint(EyesLoc, EyesRot);
+
+	FVector TraceStart = EyesLoc;
+	FVector TraceEnd = (EyesRot.Vector() * InteractionCheckDistance) + TraceStart;
+	FHitResult TraceHit;
+
+	FCollisionQueryParams QueryParams;
+	QueryParams.AddIgnoredActor(this);
+
+	if (GetWorld()->LineTraceSingleByChannel(TraceHit, TraceStart, TraceEnd, ECC_Visibility, QueryParams))
+	{
+		// 상호작용가능한 object를 Check
+		if (TraceHit.GetActor())
+		{
+			if (UCInteractionComponent* InteractionComponent = Cast<UCInteractionComponent>(TraceHit.GetActor()->GetComponentByClass(UCInteractionComponent::StaticClass())))
+			{
+				float Distance = (TraceStart - TraceHit.ImpactPoint).Size();
+
+				if (InteractionComponent != GetInteractable() && Distance <= InteractionComponent->InteractionDistance)
+				{
+					FoundNewInteractable(InteractionComponent);
+				}
+				else if (Distance > InteractionComponent->InteractionDistance && GetInteractable())
+				{
+					CouldnotFindInteractable();
+				}
+
+				return;
+			}
+		}
+	}
+
+	CouldnotFindInteractable();
+
+}
+
+void ACPlayer::CouldnotFindInteractable()
+{
+}
+
+void ACPlayer::FoundNewInteractable(UCInteractionComponent* Interactable)
+{
+	UE_LOG(LogTemp, Warning, TEXT("found interactable"));
+}
+
+void ACPlayer::BeginInteract()
+{
+}
+
+void ACPlayer::EndInteract()
+{
+}
+
+void ACPlayer::Interact()
+{
 }
 
 void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -141,6 +229,15 @@ void ACPlayer::StopJump()
 void ACPlayer::SetMainWidget()
 {
 
+}
+
+void ACPlayer::UseItem(UCItem* Item)
+{
+	if (Item)
+	{
+		Item->Use(this);
+		Item->OnUse(this);
+	}
 }
 
 

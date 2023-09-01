@@ -1,6 +1,6 @@
 #include "ActorComponent/CParkourSystem.h"
 #include "GameFramework/CharacterMovementComponent.h"
-#include "Components/PrimitiveComponent.h"
+//#include "Components/PrimitiveComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "../CPlayer/CAnimInstance.h"
 #include "GameFramework/Character.h"
