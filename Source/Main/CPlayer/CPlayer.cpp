@@ -140,23 +140,91 @@ void ACPlayer::PerformInteractionCheck()
 
 void ACPlayer::CouldnotFindInteractable()
 {
+	if (InteractionData.ViewedInteractionComponent)
+	{
+		InteractionData.ViewedInteractionComponent->SetHiddenInGame(true);
+	}
 }
 
 void ACPlayer::FoundNewInteractable(UCInteractionComponent* Interactable)
 {
-	UE_LOG(LogTemp, Warning, TEXT("found interactable"));
+	if (Interactable)
+	{
+		Interactable->SetHiddenInGame(false);
+		InteractionData.ViewedInteractionComponent = Interactable;
+	}
 }
 
 void ACPlayer::BeginInteract()
 {
+	if (!HasAuthority())
+	{
+		SeverBeginInteract();
+	}
+
+	InteractionData.bInteractHeld = true;
+
+	if (UCInteractionComponent* Interactable = GetInteractable())
+	{
+		Interactable->BeginInteract(this);
+
+		if (FMath::IsNearlyZero(Interactable->InteractionTime))
+		{
+			Interact();
+		}
+		else
+		{
+			GetWorldTimerManager().SetTimer(TimerHandle_Interact, this, &ACPlayer::Interact, Interactable->InteractionTime, false);
+		}
+	}
 }
 
 void ACPlayer::EndInteract()
 {
+	if (!HasAuthority())
+	{
+		SeverEndInteract();
+	}
+
+	InteractionData.bInteractHeld = false;
+
+	GetWorldTimerManager().ClearTimer(TimerHandle_Interact);
+
+	if (UCInteractionComponent* Interactable = GetInteractable())
+	{
+		Interactable->EndInteract(this);
+	}
+
+}
+
+void ACPlayer::SeverBeginInteract_Implementation()
+{
+	BeginInteract();
+}
+
+bool ACPlayer::SeverBeginInteract_Validate()
+{
+	return true;
+}
+
+void ACPlayer::SeverEndInteract_Implementation()
+{
+	EndInteract();
+}
+
+bool ACPlayer::SeverEndInteract_Validate()
+{
+	return true;
 }
 
 void ACPlayer::Interact()
 {
+	GetWorldTimerManager().ClearTimer(TimerHandle_Interact);
+
+	if(UCInteractionComponent* Interactable = GetInteractable())
+	{
+		Interactable->Interact(this);
+	}
 }
 
 void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -177,6 +245,8 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAction("Jump", EInputEvent::IE_Pressed, this, &ACPlayer::StartJump);
 	PlayerInputComponent->BindAction("Jump", EInputEvent::IE_Released, this, &ACPlayer::StopJump);
 	PlayerInputComponent->BindAction("Vaulting", EInputEvent::IE_Pressed, parkour, &UCParkourSystem::Vault);
+	PlayerInputComponent->BindAction("Interact", EInputEvent::IE_Pressed, this, &ACPlayer::BeginInteract);
+	PlayerInputComponent->BindAction("Interact", EInputEvent::IE_Released, this, &ACPlayer::EndInteract);
 
 }
 

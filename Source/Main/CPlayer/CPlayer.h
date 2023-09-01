@@ -57,12 +57,25 @@ protected: //interact
 	void BeginInteract();
 	void EndInteract();
 
+	UFUNCTION(Reliable, Server, WithValidation)
+		void SeverBeginInteract();
+	void SeverBeginInteract_Implementation();
+	bool SeverBeginInteract_Validate();
+
+	UFUNCTION(Reliable, Server, WithValidation)
+		void SeverEndInteract();
+	void SeverEndInteract_Implementation();
+	bool SeverEndInteract_Validate();
+
 	void Interact();
 
 	UPROPERTY()
 		FInteractionData InteractionData;
 
 	FORCEINLINE class UCInteractionComponent* GetInteractable() const { return InteractionData.ViewedInteractionComponent; }
+
+protected:
+	FTimerHandle TimerHandle_Interact;
 
 public:	
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
