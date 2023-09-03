@@ -1,7 +1,9 @@
 #include "Menu/CMainMenu.h"
 #include "Components/Button.h"
 #include "Components/WidgetSwitcher.h"
+#include "Components/EditableTextBox.h"
 #include "Global.h"
+#include "Instance_and_GameMode/CGameInstance.h"
 
 UCMainMenu::UCMainMenu(const FObjectInitializer& ObjectInitializer)
 {
@@ -28,6 +30,9 @@ bool UCMainMenu::Initialize()
 	// HostSessionMenu
 	CheckNullResult(HostSessionBackButton, false);
 	HostSessionBackButton->OnClicked.AddDynamic(this, &UCMainMenu::OpenMainMenu);
+	CheckNullResult(HostSessionCreateButton, false);
+	HostSessionCreateButton->OnClicked.AddDynamic(this, &UCMainMenu::HostServer);
+	
 
 	return true;
 }
@@ -61,4 +66,14 @@ void UCMainMenu::QuitGame()
 	APlayerController* controller = world->GetFirstPlayerController();
 
 	controller->ConsoleCommand("Quit");
+}
+
+void UCMainMenu::HostServer()
+{
+	FString sessionName = SessionNameText->GetText().ToString();
+
+	UCGameInstance* gameInstance = Cast<UCGameInstance>(GetGameInstance());
+	gameInstance->Host(sessionName);
+
+	CLog::Log("HostButton Pressed");
 }
