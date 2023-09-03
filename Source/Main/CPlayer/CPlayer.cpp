@@ -1,19 +1,18 @@
 #include "CPlayer/CPlayer.h"
 #include "Global.h"
 #include "CAnimInstance.h"
-#include "../Items/CItem.h"
 #include "Widget/CMainWidget.h"
 #include "Blueprint/UserWidget.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
-#include "../Items/CInventoryComponent.h"
 #include "../ActorComponent/CParkourSystem.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "Materials/MaterialInstanceConstant.h"
-#include "ActorComponent/CInteractionComponent.h"
+#include "Components/SceneCaptureComponent2D.h"
 #include "GameFramework/CharacterMovementComponent.h"
-
+#include "ActorComponent/CInteractionComponent.h"
+//#include "PaperSpriteComponent.h"
 
 ACPlayer::ACPlayer()
 {
@@ -42,24 +41,39 @@ ACPlayer::ACPlayer()
 	SpringArm->bUsePawnControlRotation = true;
 	SpringArm->SetRelativeLocation(FVector(0, 0, 60));
 
-	//Cameera
+	//Camera
 	Camera->SetupAttachment(SpringArm);
-
-	Inventory = CreateDefaultSubobject<UCInventoryComponent>("Inventory");
-	Inventory->Capacity = 20.f;
 
 	//Movement
 	bUseControllerRotationYaw = false;
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 	GetCharacterMovement()->MaxWalkSpeed = 400.f;
 
+	// Minimap Setting
+	MinimapSpringArm = CreateDefaultSubobject<USpringArmComponent>("MinimapSpringArm");
+	RenderMinimap = CreateDefaultSubobject<USceneCaptureComponent2D>("RenderMinimap");
+	RenderMinimap->SetupAttachment(MinimapSpringArm);
+	//Arrow->SetupAttachment(RenderMinimap);		// PaperSpriteComponent Error!!
+
+	// Render Minimap
+	MinimapSpringArm->SetupAttachment(GetCapsuleComponent());
+	MinimapSpringArm->TargetArmLength = 900.f;
+	MinimapSpringArm->bUsePawnControlRotation = true;
+	MinimapSpringArm->SetRelativeRotation(FRotator(-90, 0, 0));
+
+
+	// Change Camera Settings
+	MinimapSpringArm->bUsePawnControlRotation = false;
+	MinimapSpringArm->bInheritPitch = false;
+	MinimapSpringArm->bInheritYaw = false;
+	MinimapSpringArm->bInheritRoll = false;
+
 	// MainWidget
 	CHelpers::GetClass(&MainWidgetClass, "WidgetBlueprint'/Game/Widget/WB_MainWidget.WB_MainWidget_C'");
 
-	Health = 100.0f; //test용 체력
-
+	// Interaction
 	InteractionCheckFrequency = 0.f;
-	InteractionCheckDistance = 1000.f;
+	InteractionCheckDistance = 3000.f;
 }
 
 void ACPlayer::BeginPlay()
@@ -80,17 +94,28 @@ void ACPlayer::BeginPlay()
 	GetMesh()->SetMaterial(0, BodyMaterial);
 	GetMesh()->SetMaterial(1, LogoMaterial);
 
+	// Create & Attach MainWidget
 	MainWidget = CreateWidget<UCMainWidget>(GetWorld(), MainWidgetClass);
 	CheckNull(MainWidget);
 	MainWidget->AddToViewport();
+
+	// Hidden Players in Minimap
+	CheckNull(RenderMinimap);
+	RenderMinimap->ShowFlags.SkeletalMeshes = false;
 }
 
 void ACPlayer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	PerformInteractionCheck();
+	const bool bIsInteractionOnServer = (HasAuthority() && IsInteracting());
 
+	// Check
+	if ((HasAuthority() || bIsInteractionOnServer) && GetWorld()->TimeSince(InteractionData.LastInteractionCheckTime) > InteractionCheckFrequency)
+	{
+		CLog::Print("In");
+		PerformInteractionCheck();
+	}
 }
 
 void ACPlayer::PerformInteractionCheck()
@@ -110,7 +135,7 @@ void ACPlayer::PerformInteractionCheck()
 
 	FCollisionQueryParams QueryParams;
 	QueryParams.AddIgnoredActor(this);
-
+	
 	if (GetWorld()->LineTraceSingleByChannel(TraceHit, TraceStart, TraceEnd, ECC_Visibility, QueryParams))
 	{
 		// 상호작용가능한 object를 Check
@@ -123,10 +148,12 @@ void ACPlayer::PerformInteractionCheck()
 				if (InteractionComponent != GetInteractable() && Distance <= InteractionComponent->InteractionDistance)
 				{
 					FoundNewInteractable(InteractionComponent);
+					CLog::Print("Found");
 				}
 				else if (Distance > InteractionComponent->InteractionDistance && GetInteractable())
 				{
 					CouldnotFindInteractable();
+					CLog::Print("Not Found");
 				}
 
 				return;
@@ -140,19 +167,37 @@ void ACPlayer::PerformInteractionCheck()
 
 void ACPlayer::CouldnotFindInteractable()
 {
-	if (InteractionData.ViewedInteractionComponent)
+	if (GetWorldTimerManager().IsTimerActive(TimerHandle_Interact))
 	{
-		InteractionData.ViewedInteractionComponent->SetHiddenInGame(true);
+		GetWorldTimerManager().ClearTimer(TimerHandle_Interact);
 	}
+
+	if (UCInteractionComponent* Interactable = GetInteractable())
+	{
+		Interactable->EndFocus(this);
+
+		if (InteractionData.bInteractHeld)
+		{
+			EndInteract();
+		}
+	}
+
+	InteractionData.ViewedInteractionComponent = nullptr;
 }
 
 void ACPlayer::FoundNewInteractable(UCInteractionComponent* Interactable)
 {
-	if (Interactable)
+	CLog::Log("Found");
+	EndInteract();
+	
+	if (UCInteractionComponent* oldInteractable = GetInteractable())
 	{
-		Interactable->SetHiddenInGame(false);
-		InteractionData.ViewedInteractionComponent = Interactable;
+		oldInteractable->EndFocus(this);
 	}
+	
+	InteractionData.ViewedInteractionComponent = Interactable;
+	Interactable->BeginFocus(this);
+
 }
 
 void ACPlayer::BeginInteract()
@@ -221,10 +266,20 @@ void ACPlayer::Interact()
 {
 	GetWorldTimerManager().ClearTimer(TimerHandle_Interact);
 
-	if(UCInteractionComponent* Interactable = GetInteractable())
+	if (UCInteractionComponent* Interactable = GetInteractable())
 	{
 		Interactable->Interact(this);
 	}
+}
+
+bool ACPlayer::IsInteracting() const
+{
+	return GetWorldTimerManager().IsTimerActive(TimerHandle_Interact);
+}
+
+float ACPlayer::GetRemainingInteractime() const
+{
+	return GetWorldTimerManager().GetTimerRemaining(TimerHandle_Interact);
 }
 
 void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -299,15 +354,6 @@ void ACPlayer::StopJump()
 void ACPlayer::SetMainWidget()
 {
 
-}
-
-void ACPlayer::UseItem(UCItem* Item)
-{
-	if (Item)
-	{
-		Item->Use(this);
-		Item->OnUse(this);
-	}
 }
 
 

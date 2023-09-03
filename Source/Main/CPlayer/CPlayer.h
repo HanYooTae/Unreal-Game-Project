@@ -33,9 +33,6 @@ class MAIN_API ACPlayer : public ACharacter
 {
 	GENERATED_BODY()
 
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Camera", meta = (AllowPrivateAccess = true))
-		class UCInventoryComponent* Inventory;
-
 public:
 	ACPlayer();
 
@@ -77,6 +74,12 @@ protected: //interact
 protected:
 	FTimerHandle TimerHandle_Interact;
 
+public:
+	bool IsInteracting() const;
+
+	float GetRemainingInteractime() const;
+
+
 public:	
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
@@ -107,27 +110,29 @@ protected:
 
 	UPROPERTY(VisibleDefaultsOnly)
 		class UCParkourSystem* parkour;
-		
-private:
 
+	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly)
+		class USpringArmComponent* MinimapSpringArm;
+
+	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly)
+		class USceneCaptureComponent2D* RenderMinimap;
+
+	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly)
+		class UPaperSpriteComponent* Arrow;
+
+	UPROPERTY(BlueprintReadOnly)
+		class UCMainWidget* MainWidget;
+
+private:
+	TSubclassOf<class UCMainWidget> MainWidgetClass;
+
+private:
 	class UMaterialInstanceDynamic* BodyMaterial;
 	class UMaterialInstanceDynamic* LogoMaterial;
 
 // Main Widget
 public:
 	void SetMainWidget();
-
-private:
-	TSubclassOf<class UCMainWidget> MainWidgetClass;
-
-	class UCMainWidget* MainWidget;
-
-public: //inventory system
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Health")
-		float Health;
-
-	UFUNCTION(BlueprintCallable, Category = "Items")
-		void UseItem(class UCItem* Item);
 
 
 };

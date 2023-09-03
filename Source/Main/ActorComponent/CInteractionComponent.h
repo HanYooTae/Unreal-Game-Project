@@ -34,6 +34,15 @@ public:
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Interaction")
 		bool bAllowMultipleInteractors;
 
+public:
+	// Interactable의 이름을 바꾸기 위한 함수, 또한 다시 불러오기 기능
+	UFUNCTION(BlueprintCallable, Category = "Interaction")
+		void SetInteractableNameText(const FText& NewNameText);
+	
+	UFUNCTION(BlueprintCallable, Category = "Interaction")
+		void SetInteractableActionText(const FText& NewActionText);
+
+public:
 	//Delegates
 	//[Local + server] 플레이어가 이 상호작용 가능한 액터에 초점을 맞추는 동안 상호작용 키를 누를 때 호출됩니다.
 	UPROPERTY(BlueprintAssignable, EditDefaultsOnly)
@@ -55,7 +64,20 @@ public:
 	UPROPERTY(BlueprintAssignable, EditDefaultsOnly)
 		FOnBeginInteract OnInteract;
 
-public:
+protected:
+	// 언제 게임이 시작될지 불러온다.
+	virtual void Deactivate() override;
+	
+	bool CanInteract(class ACPlayer* Character) const;
+	
+	// 모든 interactor들을 가져온다 local player에서는 local player만 가져온다.
+	UPROPERTY()
+		TArray<class ACPlayer*> Interactors;
+
+public: 
+	// 아이템의 갯수 등 현 아이템의 상태를 알기위한 함수
+	void RefreshWidget();
+
 	// 플레이어 상호 작용 확인 추적이 이 Client에 대한 타격을 시작/종료할 때 클라이언트에서 호출됩니다.
 	void BeginFocus(class ACPlayer* Character);
 	void EndFocus(class ACPlayer* Character);
@@ -65,5 +87,8 @@ public:
 	void EndInteract(class ACPlayer* Character);
 
 	void Interact(class ACPlayer* Character);
-			
+
+public:
+	UFUNCTION(BlueprintPure, Category = "Interaction")
+		float GetInteractPercentage();
 };
