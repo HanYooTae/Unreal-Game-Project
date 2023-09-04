@@ -22,6 +22,9 @@ private:
 	UFUNCTION() void OpenHostSessionMenu();
 	UFUNCTION() void QuitGame();
 
+private:
+	UFUNCTION()	void HostServer();
+
 
 private:
 	// Menu
@@ -56,4 +59,7 @@ private:
 		class UButton* HostSessionBackButton;
 	UPROPERTY(meta = (BindWidget))
 		class UButton* HostSessionCreateButton;
+
+	UPROPERTY(meta = (BindWidget))
+		class UEditableTextBox* SessionNameText;
 };
