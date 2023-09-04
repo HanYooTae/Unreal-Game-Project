@@ -25,6 +25,7 @@ public:	// OSS
 
 public:	// OSS_Delegate
 	void OnCreateSessionComplete(FName SessionName, bool bSuccess);
+	void OnDestroySessionComplete(FName SessionName, bool bSuccess);
 
 public:	// Menu Init
 	UFUNCTION(BlueprintCallable)

@@ -23,6 +23,7 @@ void UCGameInstance::Init()
 	if (!!oss)
 	{
 		SessionInterface->OnCreateSessionCompleteDelegates.AddUObject(this, &UCGameInstance::OnCreateSessionComplete);
+		SessionInterface->OnDestroySessionCompleteDelegates.AddUObject(this, &UCGameInstance::OnDestroySessionComplete);
 	}
 	else
 	{
@@ -39,8 +40,7 @@ void UCGameInstance::Host(const FString& InSessionName)
 		auto session = SessionInterface->GetNamedSession(SESSION_NAME);
 
 		if (!!session)
-			//SessionInterface->DestroySession(SESSION_NAME);
-			;
+			SessionInterface->DestroySession(SESSION_NAME);
 		else
 			CreateSession();
 	}
@@ -94,6 +94,16 @@ void UCGameInstance::OnCreateSessionComplete(FName InSessionName, bool bSuccess)
 	CheckNull(world);
 	
 	world->ServerTravel("/Game/Map/Main?listen'");
+}
+
+void UCGameInstance::OnDestroySessionComplete(FName SessionName, bool bSuccess)
+{
+	UE_LOG(LogTemp, Error, L"DestroySessionComplete");
+
+	if (bSuccess == true)
+	{
+		CreateSession();
+	}
 }
 
 void UCGameInstance::LoadMenu()
