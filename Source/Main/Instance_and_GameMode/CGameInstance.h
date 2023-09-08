@@ -5,6 +5,7 @@
 #include "Interfaces/OnlineSessionInterface.h"
 #include "OnlineSubsystem.h"
 #include "Menu/CMainMenu.h"
+#include "Menu/CBackQuitMenu.h"
 #include "CGameInstance.generated.h"
 
 UCLASS()
@@ -29,13 +30,23 @@ public:	// OSS_Delegate
 
 public:	// Menu Init
 	UFUNCTION(BlueprintCallable)
-		void LoadMenu();
+		void LoadMainMenu();
+
+	UFUNCTION(BlueprintCallable)
+		void LoadBackQuitMenu();
+
+public:	// Menu Function
+	// LoadBackQuitMenu -> QuitButton
+	void ReturnToMainMenu();
+
 
 	FString Current_SessionName;
 private:
 	TSubclassOf<UCMainMenu> MainMenuClass;
+	TSubclassOf<UCBackQuitMenu> BackQuitMenuClass;
 
 	UCMainMenu* MainMenu;
+	UCBackQuitMenu* BackQuitMenu;
 
 	IOnlineSessionPtr SessionInterface;
 
