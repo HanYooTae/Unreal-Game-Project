@@ -8,6 +8,7 @@ const static FName KEY = L"SessionKey";
 UCGameInstance::UCGameInstance(const FObjectInitializer& ObjectInitializer)
 {
 	CHelpers::GetClass(&MainMenuClass, "WidgetBlueprint'/Game/Widget/Menu/WB_MainMenu.WB_MainMenu_C'");
+	CHelpers::GetClass(&BackQuitMenuClass, "WidgetBlueprint'/Game/Widget/Menu/WB_BackQuitMenu.WB_BackQuitMenu_C'");
 }
 
 void UCGameInstance::Init()
@@ -50,7 +51,7 @@ void UCGameInstance::CreateSession()
 {
 	IOnlineSubsystem* oss = IOnlineSubsystem::Get();
 
-	UE_LOG(LogTemp, Error, L"ING");
+	//UE_LOG(LogTemp, Error, L"ING");
 
 	if (!!SessionInterface)
 	{
@@ -106,11 +107,29 @@ void UCGameInstance::OnDestroySessionComplete(FName SessionName, bool bSuccess)
 	}
 }
 
-void UCGameInstance::LoadMenu()
+void UCGameInstance::LoadMainMenu()
 {
 	CheckNull(MainMenuClass);
 	MainMenu = CreateWidget<UCMainMenu>(this, MainMenuClass);
 	CheckNull(MainMenu);
 
 	MainMenu->Attach();
+}
+
+void UCGameInstance::LoadBackQuitMenu()
+{
+	MainMenu = CreateWidget<UCMainMenu>(this, MainMenuClass);
+	CheckNull(BackQuitMenuClass);
+	BackQuitMenu = CreateWidget<UCBackQuitMenu>(this, BackQuitMenuClass);
+	CheckNull(BackQuitMenu);
+
+	BackQuitMenu->Attach();
+}
+
+void UCGameInstance::ReturnToMainMenu()
+{
+	APlayerController* controller = GetFirstLocalPlayerController();
+	CheckNull(controller);
+	
+	controller->ClientTravel("/Game/Map/MainMenu", ETravelType::TRAVEL_Absolute);
 }

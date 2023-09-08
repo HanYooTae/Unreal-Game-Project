@@ -75,5 +75,5 @@ void UCMainMenu::HostServer()
 	UCGameInstance* gameInstance = Cast<UCGameInstance>(GetGameInstance());
 	gameInstance->Host(sessionName);
 
-	CLog::Log("HostButton Pressed");
+	//CLog::Log("HostButton Pressed");
 }

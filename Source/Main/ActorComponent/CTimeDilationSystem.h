@@ -18,5 +18,5 @@ protected:
 
 public:
 	UPROPERTY(EditAnywhere)
-		float Adjust_Time = 1;
+		float Adjust_Time = 1.f;
 };
