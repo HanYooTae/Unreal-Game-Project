@@ -67,7 +67,7 @@
       3. WallHeight2의 값을 저장
       4. Canclimb인 bool변에 값을 true로 저장(player 머리위로 쏘는 Linetrace는 위에 막혀있는지에 대한 검사를 하며 현제 사용여부에 따라 result값을 셋팅)
 
-## Montage_Play
+1. Montage_Play
 
    - 몽타주를 실행하기전 작업
       1. 몽타주 레퍼런스 가져오기(AnimInstance.h)
