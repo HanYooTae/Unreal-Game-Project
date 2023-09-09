@@ -104,7 +104,7 @@
 
 
 2. 기타 함수 소개
-NextMontageYorN(), LastCollision()
+- NextMontageYorN(), LastCollision()
       
    - NextMontageYorN()
       *벽의 두깨의 정도를 저장한 변수 IsWallThick을 사용하여 각 다른 몽타주 재생
