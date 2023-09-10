@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Engine/EngineTypes.h"
 #include "CPlayer.generated.h"
 
 USTRUCT()
@@ -79,6 +80,30 @@ public:
 
 	float GetRemainingInteractime() const;
 
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Components")
+		class UCInventoryComponent* PlayerInventory;
+
+	// inventory에서 아이템을 사용할때
+	UFUNCTION(BlueprintCallable, Category = "Items")
+		void UseItem(class UCItem* Item);
+
+	UFUNCTION(Reliable, Server, WithValidation)
+		void ServerUseItem(class UCItem* Item);
+	void ServerUseItem_Implementation(class UCItem* Item);
+	bool ServerUseItem_Validate(class UCItem* Item);
+
+	// 아이템을 버릴때
+	UFUNCTION(BlueprintCallable, Category = "Items")
+		void DropItem(class UCItem* Item, const int32 Quantity);
+
+	UFUNCTION(Reliable, Server, WithValidation)
+		void ServerDropItem(class UCItem* Item, const int32 Quantity);
+	void ServerDropItem_Implementation(class UCItem* Item, const int32 Quantity);
+	bool ServerDropItem_Validate(class UCItem* Item, const int32 Quantity);
+
+	// 블루프린트에서 사용
+	UPROPERTY(EditDefaultsOnly, Category = "Item")
+		TSubclassOf<class ACPickup> PickupClass;
 
 public:	
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
@@ -125,6 +150,8 @@ protected:
 
 private:
 	TSubclassOf<class UCMainWidget> MainWidgetClass;
+	//액터에 대한 오소리티 소유자, 액터의 리플리케이션 여부, 리플리케이션 모드 등의 enum
+	TEnumAsByte< enum ENetRole > Role;
 
 private:
 	class UMaterialInstanceDynamic* BodyMaterial;
@@ -133,6 +160,5 @@ private:
 // Main Widget
 public:
 	void SetMainWidget();
-
 
 };

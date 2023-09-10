@@ -12,6 +12,8 @@
 #include "Components/SceneCaptureComponent2D.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "ActorComponent/CInteractionComponent.h"
+#include "ActorComponent/CInventoryComponent.h"
+#include "../Inventory/CPickup.h"
 //#include "PaperSpriteComponent.h"
 
 ACPlayer::ACPlayer()
@@ -74,6 +76,11 @@ ACPlayer::ACPlayer()
 	// Interaction
 	InteractionCheckFrequency = 0.f;
 	InteractionCheckDistance = 3000.f;
+
+	// player에게 20개의 슬롯을 가지며 80kg정도의 무게를 가진 이벤을 설정 
+	PlayerInventory = CreateDefaultSubobject<UCInventoryComponent>("PlayerInventory");
+	PlayerInventory->SetCapacity(20);
+	PlayerInventory->SetWeightCapcity(80.f);
 }
 
 void ACPlayer::BeginPlay()
@@ -113,7 +120,6 @@ void ACPlayer::Tick(float DeltaTime)
 	// Check
 	if ((HasAuthority() || bIsInteractionOnServer) && GetWorld()->TimeSince(InteractionData.LastInteractionCheckTime) > InteractionCheckFrequency)
 	{
-		CLog::Print("In");
 		PerformInteractionCheck();
 	}
 }
@@ -148,12 +154,10 @@ void ACPlayer::PerformInteractionCheck()
 				if (InteractionComponent != GetInteractable() && Distance <= InteractionComponent->InteractionDistance)
 				{
 					FoundNewInteractable(InteractionComponent);
-					CLog::Print("Found");
 				}
 				else if (Distance > InteractionComponent->InteractionDistance && GetInteractable())
 				{
 					CouldnotFindInteractable();
-					CLog::Print("Not Found");
 				}
 
 				return;
@@ -187,7 +191,6 @@ void ACPlayer::CouldnotFindInteractable()
 
 void ACPlayer::FoundNewInteractable(UCInteractionComponent* Interactable)
 {
-	CLog::Log("Found");
 	EndInteract();
 	
 	if (UCInteractionComponent* oldInteractable = GetInteractable())
@@ -205,6 +208,15 @@ void ACPlayer::BeginInteract()
 	if (!HasAuthority())
 	{
 		SeverBeginInteract();
+	}
+
+	/** 최적화로서 서버는 우리가 항목과 상호작용을 시작한 후에 항목을 보고 있는지만 확인합니다.
+    이렇게 하면 상호작용 가능한 항목에 대해 매 틱마다 확인하는 서버를 절약할 수 있습니다.
+    예외는 인스턴트가 아닌 상호작용입니다.
+    이 경우 서버는 상호 작용 기간 동안 모든 틱을 확인합니다.*/
+	if (HasAuthority())
+	{
+		PerformInteractionCheck();
 	}
 
 	InteractionData.bInteractHeld = true;
@@ -280,6 +292,82 @@ bool ACPlayer::IsInteracting() const
 float ACPlayer::GetRemainingInteractime() const
 {
 	return GetWorldTimerManager().GetTimerRemaining(TimerHandle_Interact);
+}
+
+void ACPlayer::UseItem(class UCItem* Item)
+{
+	//if (Role < ROLE_Authority && Item)
+	//{
+	//	ServerUseItem(Item);
+	//}
+
+	if (HasAuthority())
+	{
+		if (PlayerInventory && !PlayerInventory->FindItem(Item))
+		{
+			return;
+		}
+	}
+
+	if (Item)
+	{
+		Item->Use(this);
+	}
+}
+
+void ACPlayer::ServerUseItem_Implementation(class UCItem* Item)
+{
+	UseItem(Item);
+}
+
+bool ACPlayer::ServerUseItem_Validate(class UCItem* Item)
+{
+	return true;
+}
+
+void ACPlayer::DropItem(class UCItem* Item, const int32 Quantity)
+{
+	if (PlayerInventory && Item && PlayerInventory->FindItem(Item))
+	{
+		//if (Role < ROLE_Authority)
+		//{
+		//	ServerDropItem(Item, Quantity);
+		//	return;
+		//}
+
+		if (HasAuthority())
+		{
+			const int32 ItemQuantity = Item->GetQuantity();
+			const int32 DroppedQuantity = PlayerInventory->ConsumeItem(Item, Quantity);
+
+			FActorSpawnParameters SpawnParams;
+			SpawnParams.Owner = this;
+			SpawnParams.bNoFail = true;
+			// ESpawnActorCollisionHandlingMethod : 액터가 차단 충돌을 통과하는 방식으로 생성되는 경우를 처리하기 위해 사용 가능한 전략을 정의
+			SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+
+			// 버린 아이템 스폰위치
+			FVector SpawnLocation = GetActorLocation();
+			SpawnLocation.Z -= GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
+
+			FTransform SpawnTransform(GetActorRotation(), SpawnLocation);
+
+			ensure(PickupClass);
+
+			ACPickup* Pickup = GetWorld()->SpawnActor<ACPickup>(PickupClass, SpawnTransform, SpawnParams);
+			Pickup->InitializePickup(Item->GetClass(), DroppedQuantity);
+		}
+	}
+}
+
+void ACPlayer::ServerDropItem_Implementation(class UCItem* Item, const int32 Quantity)
+{
+	DropItem(Item, Quantity);
+}
+
+bool ACPlayer::ServerDropItem_Validate(class UCItem* Item, const int32 Quantity)
+{
+	return true;
 }
 
 void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
