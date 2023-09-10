@@ -5,7 +5,6 @@
 #include "Interfaces/OnlineSessionInterface.h"
 #include "OnlineSubsystem.h"
 #include "Menu/CMainMenu.h"
-#include "Menu/CBackQuitMenu.h"
 #include "CGameInstance.generated.h"
 
 UCLASS()
@@ -18,36 +17,28 @@ public:
 
 	virtual void Init() override;
 
-public:	// Button Pressed
-	void Host(const FString& InSessionName);
-
-public:	// OSS
-	void CreateSession();
-
-public:	// OSS_Delegate
-	void OnCreateSessionComplete(FName SessionName, bool bSuccess);
-	void OnDestroySessionComplete(FName SessionName, bool bSuccess);
-
 public:	// Menu Init
 	UFUNCTION(BlueprintCallable)
-		void LoadMainMenu();
+		void LoadMenu();
 
-	UFUNCTION(BlueprintCallable)
-		void LoadBackQuitMenu();
+	UFUNCTION()
+		void Host(const FString& InSessionName);
 
-public:	// Menu Function
-	// LoadBackQuitMenu -> QuitButton
-	void ReturnToMainMenu();
+	virtual void ReturnToMainMenu() override;
 
+private:
+	void CreateSession();
 
-	FString Current_SessionName;
+private:	// Session Delegate
+	void OnCreateSessionComplete(FName InSessionName, bool InSuccess);
+	void OnDestroySessionComplete(FName InSessionName, bool InSuccess);
+
 private:
 	TSubclassOf<UCMainMenu> MainMenuClass;
-	TSubclassOf<UCBackQuitMenu> BackQuitMenuClass;
-
 	UCMainMenu* MainMenu;
-	UCBackQuitMenu* BackQuitMenu;
 
 	IOnlineSessionPtr SessionInterface;
+	TSharedPtr<class FOnlineSessionSearch> SessionSearch;
 
+	FString DesiredSessionName;
 };

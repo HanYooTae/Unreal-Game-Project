@@ -22,9 +22,8 @@ private:
 	UFUNCTION() void OpenHostSessionMenu();
 	UFUNCTION() void QuitGame();
 
-private:
+private:	// Create & Join Session
 	UFUNCTION()	void HostServer();
-
 
 private:
 	// Menu
@@ -53,13 +52,14 @@ private:
 		class UButton* JoinGameBackButton;
 	UPROPERTY(meta = (BindWidget))
 		class UButton* JoinGameJoinButton;
+	UPROPERTY(meta = (BindWidget))
+		class UScrollBox* SessionList;
 
 	// HostSessionMenu
 	UPROPERTY(meta = (BindWidget))
 		class UButton* HostSessionBackButton;
 	UPROPERTY(meta = (BindWidget))
 		class UButton* HostSessionCreateButton;
-
 	UPROPERTY(meta = (BindWidget))
 		class UEditableTextBox* SessionNameText;
 };
