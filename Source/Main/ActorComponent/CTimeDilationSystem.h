@@ -5,12 +5,12 @@
 #include "CTimeDilationSystem.generated.h"
 
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class MAIN_API UCTimeDilationSystem : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
+public:
 	UCTimeDilationSystem();
 
 protected:
@@ -18,5 +18,5 @@ protected:
 
 public:
 	UPROPERTY(EditAnywhere)
-		float Adjust_Time = 1.f;
+		float Adjust_Time = 1;
 };

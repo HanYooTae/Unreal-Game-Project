@@ -11,7 +11,7 @@ UCTimeDilationSystem::UCTimeDilationSystem()
 void UCTimeDilationSystem::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 	UWorld* world = GetWorld();
 	CheckNull(world);
 	// Change speed what you want

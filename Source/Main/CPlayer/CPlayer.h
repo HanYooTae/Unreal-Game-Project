@@ -2,7 +2,32 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Engine/EngineTypes.h"
 #include "CPlayer.generated.h"
+
+USTRUCT()
+struct FInteractionData
+{
+	GENERATED_BODY()
+
+public:
+
+	FInteractionData()
+	{
+		ViewedInteractionComponent = nullptr;
+		LastInteractionCheckTime = 0.f;
+		bInteractHeld = false;
+	}
+
+	UPROPERTY()
+		class UCInteractionComponent* ViewedInteractionComponent;
+
+	UPROPERTY()
+		float LastInteractionCheckTime;
+
+	UPROPERTY()
+		bool bInteractHeld;
+};
 
 UCLASS()
 class MAIN_API ACPlayer : public ACharacter
@@ -14,6 +39,71 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaTime) override;
+
+protected: //interact
+	UPROPERTY(EditDefaultsOnly, Category = "Interaction")
+		float InteractionCheckFrequency;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Interaction")
+		float InteractionCheckDistance;
+
+	void PerformInteractionCheck(); // 아래 두 함수 를 실행하는 함수
+	void CouldnotFindInteractable();	// 상호작용 하는 물체를 찾지못할경우
+	void FoundNewInteractable(UCInteractionComponent* Interactable); // 상호작용하는 물체를 찾았을 경우
+
+	void BeginInteract();
+	void EndInteract();
+
+	UFUNCTION(Reliable, Server, WithValidation)
+		void SeverBeginInteract();
+	void SeverBeginInteract_Implementation();
+	bool SeverBeginInteract_Validate();
+
+	UFUNCTION(Reliable, Server, WithValidation)
+		void SeverEndInteract();
+	void SeverEndInteract_Implementation();
+	bool SeverEndInteract_Validate();
+
+	void Interact();
+
+	UPROPERTY()
+		FInteractionData InteractionData;
+
+	FORCEINLINE class UCInteractionComponent* GetInteractable() const { return InteractionData.ViewedInteractionComponent; }
+
+protected:
+	FTimerHandle TimerHandle_Interact;
+
+public:
+	bool IsInteracting() const;
+
+	float GetRemainingInteractime() const;
+
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Components")
+		class UCInventoryComponent* PlayerInventory;
+
+	// inventory에서 아이템을 사용할때
+	UFUNCTION(BlueprintCallable, Category = "Items")
+		void UseItem(class UCItem* Item);
+
+	UFUNCTION(Reliable, Server, WithValidation)
+		void ServerUseItem(class UCItem* Item);
+	void ServerUseItem_Implementation(class UCItem* Item);
+	bool ServerUseItem_Validate(class UCItem* Item);
+
+	// 아이템을 버릴때
+	UFUNCTION(BlueprintCallable, Category = "Items")
+		void DropItem(class UCItem* Item, const int32 Quantity);
+
+	UFUNCTION(Reliable, Server, WithValidation)
+		void ServerDropItem(class UCItem* Item, const int32 Quantity);
+	void ServerDropItem_Implementation(class UCItem* Item, const int32 Quantity);
+	bool ServerDropItem_Validate(class UCItem* Item, const int32 Quantity);
+
+	// 블루프린트에서 사용
+	UPROPERTY(EditDefaultsOnly, Category = "Item")
+		TSubclassOf<class ACPickup> PickupClass;
 
 public:	
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
@@ -60,6 +150,8 @@ protected:
 
 private:
 	TSubclassOf<class UCMainWidget> MainWidgetClass;
+	//액터에 대한 오소리티 소유자, 액터의 리플리케이션 여부, 리플리케이션 모드 등의 enum
+	TEnumAsByte< enum ENetRole > Role;
 
 private:
 	class UMaterialInstanceDynamic* BodyMaterial;
@@ -68,6 +160,5 @@ private:
 // Main Widget
 public:
 	void SetMainWidget();
-
 
 };
