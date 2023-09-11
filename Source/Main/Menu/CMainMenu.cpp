@@ -6,10 +6,11 @@
 #include "Components/EditableTextBox.h"
 #include "Global.h"
 #include "Instance_and_GameMode/CGameInstance.h"
+#include "CSessionRow.h"
 
 UCMainMenu::UCMainMenu(const FObjectInitializer& ObjectInitializer)
 {
-
+	CHelpers::GetClass(&SessionRowClass, "WidgetBlueprint'/Game/Widget/Menu/WB_SessionRow.WB_SessionRow_C'");
 }
 
 bool UCMainMenu::Initialize()
@@ -36,6 +37,11 @@ bool UCMainMenu::Initialize()
 	HostSessionCreateButton->OnClicked.AddDynamic(this, &UCMainMenu::HostServer);
 
 	return true;
+}
+
+void UCMainMenu::SetSessionList(TArray<FSessionData> InSessionData)
+{
+
 }
 
 void UCMainMenu::OpenMainMenu()
