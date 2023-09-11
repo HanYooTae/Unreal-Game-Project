@@ -22,4 +22,17 @@ void UCMenuBase::Attach()
 
 void UCMenuBase::Detach()
 {
+	RemoveFromParent();
+
+	bIsFocusable = false;
+
+	FInputModeGameOnly inputMode;
+
+	UWorld* world = GetWorld();
+	CheckNull(world);
+	APlayerController* controller = world->GetFirstPlayerController();
+	CheckNull(controller);
+
+	controller->SetInputMode(inputMode);
+	controller->bShowMouseCursor = false;
 }

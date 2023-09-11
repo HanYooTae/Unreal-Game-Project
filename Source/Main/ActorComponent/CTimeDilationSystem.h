@@ -5,12 +5,12 @@
 #include "CTimeDilationSystem.generated.h"
 
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class MAIN_API UCTimeDilationSystem : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
+public:
 	UCTimeDilationSystem();
 
 protected:

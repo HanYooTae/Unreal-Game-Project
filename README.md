@@ -69,29 +69,29 @@
 
 1. Montage_Play
 
-   - 몽타주를 실행하기전 작업
-      1. 몽타주 레퍼런스 가져오기(AnimInstance.h)
+    몽타주를 실행하기전 작업
+      - 몽타주 레퍼런스 가져오기(AnimInstance.h)
       
       ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/69595733-851d-475d-a508-d28e7801fe6a)
 
-      2. Action Event 불러오기(CPlayer.h)
+      - Action Event 불러오기(CPlayer.h)
 
       ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/c41d5ac6-2afc-4b08-b28d-40a415458f59)
    
-      3. Linetrace의 Result값을 사용한 bool변수 셋팅
-         - IsWallThick(물체의 두께를 학인하고 올라갈지 넘어갈지에 대한 bool변수)
+      - Linetrace의 Result값을 사용한 bool변수 셋팅
+          IsWallThick(물체의 두께를 학인하고 올라갈지 넘어갈지에 대한 bool변수)
            
          ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/293637d2-a93a-4cf6-9832-9be63c658097)
 
-         - ShouldPlayerClimb(점프를 통한 parkour 실행 bool변수)
+          ShouldPlayerClimb(점프를 통한 parkour 실행 bool변수)
 
          ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/67fc4031-faaf-4248-b688-ee6ec01cba82)
 
          *Jump와 Up은 아래에 설명되어있음
          
-         - 4번 Linetrace의 Result값이 true라면 Canclimb = true
+          4번 Linetrace의 Result값이 true라면 Canclimb = true
 
-   ### Montage_Play
+    Montage_Play
    
    - 재생하기위한 함수를 셋팅
 
@@ -103,8 +103,8 @@
       ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/ccf52393-f81d-47f2-b3e7-5e598d0a6030)
 
 
-## 기타 함수 소개
-NextMontageYorN(), LastCollision()
+2. 기타 함수 소개
+- NextMontageYorN(), LastCollision()
       
    - NextMontageYorN()
       *벽의 두깨의 정도를 저장한 변수 IsWallThick을 사용하여 각 다른 몽타주 재생

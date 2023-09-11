@@ -7,7 +7,7 @@
 
 UCInventoryComponent::UCInventoryComponent()
 {	
-	SetIsReplicated(true);	
+	SetIsReplicatedByDefault(true);
 }
 
 FItemAddResult UCInventoryComponent::TryAddItem(UCItem* Item)

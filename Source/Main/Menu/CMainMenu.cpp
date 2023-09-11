@@ -1,11 +1,16 @@
 #include "Menu/CMainMenu.h"
 #include "Components/Button.h"
 #include "Components/WidgetSwitcher.h"
+#include "Components/ScrollBox.h"
+#include "Components/TextBlock.h"
+#include "Components/EditableTextBox.h"
 #include "Global.h"
+#include "Instance_and_GameMode/CGameInstance.h"
+#include "CSessionRow.h"
 
 UCMainMenu::UCMainMenu(const FObjectInitializer& ObjectInitializer)
 {
-
+	CHelpers::GetClass(&SessionRowClass, "WidgetBlueprint'/Game/Widget/Menu/WB_SessionRow.WB_SessionRow_C'");
 }
 
 bool UCMainMenu::Initialize()
@@ -28,8 +33,15 @@ bool UCMainMenu::Initialize()
 	// HostSessionMenu
 	CheckNullResult(HostSessionBackButton, false);
 	HostSessionBackButton->OnClicked.AddDynamic(this, &UCMainMenu::OpenMainMenu);
+	CheckNullResult(HostSessionCreateButton, false);
+	HostSessionCreateButton->OnClicked.AddDynamic(this, &UCMainMenu::HostServer);
 
 	return true;
+}
+
+void UCMainMenu::SetSessionList(TArray<FSessionData> InSessionData)
+{
+
 }
 
 void UCMainMenu::OpenMainMenu()
@@ -61,4 +73,16 @@ void UCMainMenu::QuitGame()
 	APlayerController* controller = world->GetFirstPlayerController();
 
 	controller->ConsoleCommand("Quit");
+}
+
+void UCMainMenu::HostServer()
+{
+	FString sessionName = SessionNameText->GetText().ToString();
+
+	UCGameInstance* gameInstance = Cast<UCGameInstance>(GetGameInstance());
+	CheckNull(gameInstance);
+
+	gameInstance->Host(sessionName);
+
+	CLog::Log("Host Button Pressed");
 }

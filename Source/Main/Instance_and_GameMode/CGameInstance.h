@@ -17,12 +17,28 @@ public:
 
 	virtual void Init() override;
 
-public:	// Menu Init
+public:
 	UFUNCTION(BlueprintCallable)
-		void LoadMenu();
+		void LoadMenu();		// Menu Init
+	
+	UFUNCTION()
+		void Host(const FString& InSessionName);		// Enter to Server(Create Session & Destroy Session)
+
+	virtual void ReturnToMainMenu() override;
+
+private:	// Session Event
+	void CreateSession();
+
+private:	// Session Delegate
+	void OnCreateSessionComplete(FName InSessionName, bool InSuccess);
+	void OnDestroySessionComplete(FName InSessionName, bool InSuccess);
 
 private:
 	TSubclassOf<UCMainMenu> MainMenuClass;
-
 	UCMainMenu* MainMenu;
+
+	IOnlineSessionPtr SessionInterface;
+	TSharedPtr<class FOnlineSessionSearch> SessionSearch;
+
+	FString SessionName;
 };
