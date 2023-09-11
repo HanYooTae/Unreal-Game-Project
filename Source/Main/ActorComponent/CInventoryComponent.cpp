@@ -7,8 +7,12 @@
 
 UCInventoryComponent::UCInventoryComponent()
 {	
+<<<<<<< HEAD
 	// object를 복제 하기위한 함수 SetIsReplicated가 callstack이 일어나 SetIsReplicatedByDefault를 사용함
 	SetIsReplicatedByDefault(true);
+=======
+	SetIsReplicated(true);	
+>>>>>>> 4b74e0c22e320003ab4739f4436d707f540ac681
 }
 
 FItemAddResult UCInventoryComponent::TryAddItem(UCItem* Item)
