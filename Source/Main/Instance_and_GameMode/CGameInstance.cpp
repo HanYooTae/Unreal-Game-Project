@@ -37,7 +37,7 @@ void UCGameInstance::LoadMenu()
 
 void UCGameInstance::Host(const FString& InSessionName)
 {
-	DesiredSessionName = InSessionName;
+	SessionName = InSessionName;
 
 	if (SessionInterface.IsValid())
 	{
@@ -80,7 +80,7 @@ void UCGameInstance::CreateSession()
 
 		sessionSettings.NumPublicConnections = 4;
 		sessionSettings.bShouldAdvertise = true;
-		sessionSettings.Set(SESSION_SETTINGS_KEY, DesiredSessionName, EOnlineDataAdvertisementType::ViaOnlineServiceAndPing);
+		sessionSettings.Set(SESSION_SETTINGS_KEY, SessionName, EOnlineDataAdvertisementType::ViaOnlineServiceAndPing);
 
 		SessionInterface->CreateSession(0, SESSION_NAME, sessionSettings);
 	}

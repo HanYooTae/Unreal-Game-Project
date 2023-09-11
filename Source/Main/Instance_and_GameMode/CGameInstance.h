@@ -17,16 +17,16 @@ public:
 
 	virtual void Init() override;
 
-public:	// Menu Init
+public:
 	UFUNCTION(BlueprintCallable)
-		void LoadMenu();
-
+		void LoadMenu();		// Menu Init
+	
 	UFUNCTION()
-		void Host(const FString& InSessionName);
+		void Host(const FString& InSessionName);		// Enter to Server(Create Session & Destroy Session)
 
 	virtual void ReturnToMainMenu() override;
 
-private:
+private:	// Session Event
 	void CreateSession();
 
 private:	// Session Delegate
@@ -40,5 +40,5 @@ private:
 	IOnlineSessionPtr SessionInterface;
 	TSharedPtr<class FOnlineSessionSearch> SessionSearch;
 
-	FString DesiredSessionName;
+	FString SessionName;
 };
