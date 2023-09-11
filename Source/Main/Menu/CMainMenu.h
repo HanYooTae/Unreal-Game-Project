@@ -5,6 +5,18 @@
 #include "Menu/CMenuBase.h"
 #include "CMainMenu.generated.h"
 
+USTRUCT()
+struct FSessionData
+{
+	GENERATED_BODY()
+
+public:
+	FString SessionName;
+	uint16 CurrentPlayers;
+	uint16 MaxPlayers;
+	FString HostUserName;
+};
+
 UCLASS()
 class MAIN_API UCMainMenu : public UCMenuBase
 {
@@ -15,6 +27,9 @@ public:
 
 protected:
 	virtual bool Initialize() override;
+
+public:
+	void SetSessionList(TArray<FSessionData> InSessionData);
 
 private:
 	UFUNCTION() void OpenMainMenu();
@@ -62,4 +77,8 @@ private:
 		class UButton* HostSessionCreateButton;
 	UPROPERTY(meta = (BindWidget))
 		class UEditableTextBox* SessionNameText;
+
+private:
+	// Session List Composition
+	TSubclassOf<class UCSessionRow> SessionRowClass;
 };
