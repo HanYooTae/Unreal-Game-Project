@@ -11,7 +11,6 @@ LineTrace에서 찾은 오브젝트가 InteractComponent를 가졌다면 해당 
   게임중 이름, 설명, 무게, 중복소유가능여부, 총 소유갯수 포함
 - Interact하여 Item일경우 Data를 가져와 InventoryWidget으로 data를 전달(미구현)
 
-inventory Item Mesh 및 Thumbnail추가 + (Drop, use System)
 3. Gun(Item Mesh)
 Item Mesh, Thumbnail 사진첨부
 
