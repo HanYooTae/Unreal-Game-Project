@@ -15,7 +15,11 @@ inventory Item Mesh 및 Thumbnail추가 + (Drop, use System)
 3. Gun(Item Mesh)
 Item Mesh, Thumbnail 사진첨부
 
+![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/b44a4bd7-6be2-47c8-8adf-9a6adf4a2ff5)
+
 4. Drop, use System구현
 구현에앞서 Object를 멀티 플레이중 복제 하기위한 함수 SetIsReplicated가 4.27버전으로 올라오면서 SetIsReplicatedByDefault으로 바뀜
 - Drop : Item을 버리는 작업을 수행하는 함수. Inventory내부 Item Slot 옆으로 Item Thumbnail을 드레그하여 마우스 키를 때면 World상에 Spawn
 - Use : 각 아이템내부 클레스의 Use함수호출하여 각 아이템의 역활 수행 ex) FoodItem::Use (){CLog::Print("we ate some posion. ><");}
+
+참고영상 https://www.youtube.com/watch?v=JiAZ2-J3T0A
