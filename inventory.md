@@ -9,7 +9,10 @@ LineTrace에서 찾은 오브젝트가 InteractComponent를 가졌다면 해당 
 2. InventoryComponent 생성
 - Item, FoodItem(Item을 상속받은) C++ 클래스 생성
   게임중 이름, 설명, 무게, 중복소유가능여부, 총 소유갯수 포함
-- Interact하여 Item일경우 Data를 가져와 InventoryWidget으로 data를 전달(미구현)
+- Interact하여 Item일경우 Data를 가져와 InventoryWidget으로 data를 전달
+
+  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/fc879561-9053-4963-a84f-561c3bc04492)
+
 
 3. Gun(Item Mesh)
 - Item Mesh, Thumbnail 사진첨부
