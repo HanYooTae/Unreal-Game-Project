@@ -12,7 +12,7 @@ LineTrace에서 찾은 오브젝트가 InteractComponent를 가졌다면 해당 
 - Interact하여 Item일경우 Data를 가져와 InventoryWidget으로 data를 전달(미구현)
 
 3. Gun(Item Mesh)
-Item Mesh, Thumbnail 사진첨부
+- Item Mesh, Thumbnail 사진첨부
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/b44a4bd7-6be2-47c8-8adf-9a6adf4a2ff5)
 
