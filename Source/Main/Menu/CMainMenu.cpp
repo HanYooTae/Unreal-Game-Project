@@ -39,9 +39,45 @@ bool UCMainMenu::Initialize()
 	return true;
 }
 
-void UCMainMenu::SetSessionList(TArray<FSessionData> InSessionData)
+void UCMainMenu::SetSessionList(TArray<FSessionData> InSessionDatas)
 {
+	UWorld* world = GetWorld();
+	CheckNull(world);
 
+	SessionList->ClearChildren();
+
+	uint32 i = 0;
+	for (const auto& data : InSessionDatas)
+	{
+		UCSessionRow* sessionRow = CreateWidget<UCSessionRow>(world, SessionRowClass);
+		CheckNull(sessionRow);
+
+		sessionRow->SessionName->SetText(FText::FromString(data.SessionName));
+		sessionRow->HostUserName->SetText(FText::FromString(data.HostUserName));
+
+		FString fractionStr = FString::Printf(L"%d/%d", data.CurrentPlayers, data.MaxPlayers);
+		sessionRow->ConnectionFractions->SetText(FText::FromString(fractionStr));
+
+		sessionRow->SetSelfIndex(this, i++);
+
+		SessionList->AddChild(sessionRow);
+	}
+}
+
+void UCMainMenu::SetSelectedRowIndex(uint32 InIndex)
+{
+	SelectedRowIndex = InIndex;
+}
+
+void UCMainMenu::SelectedSessionRow()
+{
+	for (int32 i = 0; i < SessionList->GetChildrenCount(); i++)
+	{
+		UCSessionRow* sessionRow = Cast<UCSessionRow>(SessionList->GetChildAt(i));
+
+		if (!!sessionRow)	// If Clicked, IsSet change false to true && Only Clicked Index change color itself.
+			sessionRow->bSelfClicked = (SelectedRowIndex.IsSet() && i == SelectedRowIndex);
+	}
 }
 
 void UCMainMenu::OpenMainMenu()
