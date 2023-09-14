@@ -10,11 +10,11 @@ class MAIN_API UCSessionRow : public UUserWidget
 	GENERATED_BODY()
 	
 public:
-	void SetSelfIndex(class UCMenu* InParent, uint32 InIndex);
+	void SetSelfIndex(class UCMainMenu* InParent, uint32 InIndex);
 
 	UFUNCTION() void OnClick();
 
-private:
+public:
 	// SessionList Button
 	UPROPERTY(meta = (BindWidget))
 		class UButton* RowButton;
@@ -27,6 +27,11 @@ private:
 	UPROPERTY(meta = (BindWidget))
 		class UTextBlock* ConnectionFractions;
 
-	class UCMenu* Parent;
-	uint32 Index;
+public:	// If MainMenu's SessionList's index Clicked or not
+	UPROPERTY(BlueprintReadOnly)
+		bool bSelfClicked;
+
+private:
+	class UCMainMenu* Parent;
+	uint32 SelfClickedIndex;
 };
