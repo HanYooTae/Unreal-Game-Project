@@ -296,10 +296,10 @@ float ACPlayer::GetRemainingInteractime() const
 
 void ACPlayer::UseItem(class UCItem* Item)
 {
-	//if (Role < ROLE_Authority && Item)
-	//{
-	//	ServerUseItem(Item);
-	//}
+	if (!HasAuthority() && Item)
+	{
+		ServerUseItem(Item);
+	}
 
 	if (HasAuthority())
 	{
@@ -329,11 +329,11 @@ void ACPlayer::DropItem(class UCItem* Item, const int32 Quantity)
 {
 	if (PlayerInventory && Item && PlayerInventory->FindItem(Item))
 	{
-		//if (Role < ROLE_Authority)
-		//{
-		//	ServerDropItem(Item, Quantity);
-		//	return;
-		//}
+		if (!HasAuthority())
+		{
+			ServerDropItem(Item, Quantity);
+			return;
+		}
 
 		if (HasAuthority())
 		{
@@ -354,8 +354,10 @@ void ACPlayer::DropItem(class UCItem* Item, const int32 Quantity)
 
 			ensure(PickupClass);
 
-			ACPickup* Pickup = GetWorld()->SpawnActor<ACPickup>(PickupClass, SpawnTransform, SpawnParams);
-			Pickup->InitializePickup(Item->GetClass(), DroppedQuantity);
+			if (ACPickup* Pickup = GetWorld()->SpawnActor<ACPickup>(PickupClass, SpawnTransform, SpawnParams))
+			{
+				Pickup->InitializePickup(Item->GetClass(), DroppedQuantity);
+			}
 		}
 	}
 }
