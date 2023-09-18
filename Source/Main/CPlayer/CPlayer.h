@@ -150,8 +150,6 @@ protected:
 
 private:
 	TSubclassOf<class UCMainWidget> MainWidgetClass;
-	//액터에 대한 오소리티 소유자, 액터의 리플리케이션 여부, 리플리케이션 모드 등의 enum
-	TEnumAsByte< enum ENetRole > Role;
 
 private:
 	class UMaterialInstanceDynamic* BodyMaterial;
