@@ -92,6 +92,11 @@ void UCMainMenu::OpenJoinGameMenu()
 	CheckNull(MenuSwitcher);
 	CheckNull(JoinGameMenu);
 	MenuSwitcher->SetActiveWidget(JoinGameMenu);
+
+	UCGameInstance* gameInstance = Cast<UCGameInstance>(GetGameInstance());
+	CheckNull(gameInstance);
+
+	gameInstance->FindSession();
 }
 
 void UCMainMenu::OpenHostSessionMenu()

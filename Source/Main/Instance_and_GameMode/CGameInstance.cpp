@@ -23,6 +23,7 @@ void UCGameInstance::Init()
 	{
 		SessionInterface->OnCreateSessionCompleteDelegates.AddUObject(this, &UCGameInstance::OnCreateSessionComplete);
 		SessionInterface->OnDestroySessionCompleteDelegates.AddUObject(this, &UCGameInstance::OnDestroySessionComplete);
+		SessionInterface->OnFindSessionsCompleteDelegates.AddUObject(this, &UCGameInstance::OnFindSessionsComplete);
 	}
 }
 
@@ -86,6 +87,22 @@ void UCGameInstance::CreateSession()
 	}
 }
 
+void UCGameInstance::FindSession()
+{
+	SearchSettings = MakeShareable(new FOnlineSessionSearch());
+	
+	if (SearchSettings.IsValid())
+	{
+		CLog::Log("Starting Find Session");
+
+		SearchSettings->bIsLanQuery = true;
+		SearchSettings->MaxSearchResults = 100;
+		SearchSettings->QuerySettings.Set(SEARCH_PRESENCE, true, EOnlineComparisonOp::Equals);
+
+		SessionInterface->FindSessions(0, SearchSettings.ToSharedRef());
+	}
+}
+
 void UCGameInstance::OnCreateSessionComplete(FName InSessionName, bool InSuccess)
 {
 	UE_LOG(LogTemp, Error, L"CreateSessionComplete");
@@ -118,4 +135,42 @@ void UCGameInstance::OnDestroySessionComplete(FName InSessionName, bool InSucces
 
 	if (InSuccess == true)
 		CreateSession();
+}
+
+void UCGameInstance::OnFindSessionsComplete(bool InSuccess)
+{
+	if (InSuccess == true && SearchSettings.IsValid() && !!MainMenu)
+	{
+		TArray<FSessionData> foundSession;
+
+		CLog::Log("Finished Find Session");
+
+		CLog::Log("========<Find Session Results>========");
+		for (const auto& sessionsearch : SearchSettings->SearchResults)
+		{
+			FSessionData data;
+
+			data.MaxPlayers = sessionsearch.Session.SessionSettings.NumPublicConnections;
+			data.CurrentPlayers = data.MaxPlayers - sessionsearch.Session.NumOpenPublicConnections;
+			data.HostUserName = sessionsearch.Session.OwningUserName;
+
+			FString sessionName;
+			if (sessionsearch.Session.SessionSettings.Get(SESSION_SETTINGS_KEY, sessionName))
+			{
+				data.SessionName = sessionName;
+				CLog::Log("SessionID : " + sessionName);
+				CLog::Log("Ping : " + FString::FromInt(sessionsearch.PingInMs));
+			}
+			else
+			{
+				CLog::Log("Cannot found Session Setting Key");
+			}
+
+			foundSession.Add(data);
+
+			MainMenu->SetSessionList(foundSession);
+		}
+
+	}
+
 }
