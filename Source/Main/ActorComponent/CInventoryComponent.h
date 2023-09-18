@@ -76,8 +76,10 @@ class MAIN_API UCInventoryComponent : public UActorComponent
 	GENERATED_BODY()
 
 		friend class UCItem;
-public:	
+public:
 	UCInventoryComponent();
+
+	virtual void TickComponent(float DeltaTime,	enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 public:
 	// Inventory에 아이템 추가

@@ -23,11 +23,12 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced)
 		class UCItem* ItemTemplate;
 
+	// 아이템을 주웠을때 인벤에 추가되도록 하는 변수
+UPROPERTY(BlueprintReadWrite, VisibleAnywhere, ReplicatedUsing = "OnRep_Item")
+		class UCItem* Item;
+
 protected:
 
-	// 아이템을 주웠을때 인벤에 추가되도록 하는 변수
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, ReplicatedUsing = "OnRep_Item")
-		class UCItem* Item;
 
 	UFUNCTION()
 		void OnRep_Item();

@@ -2,15 +2,23 @@
 #include "Net/UnrealNetwork.h"
 #include "UObject/UObjectBase.h"
 #include "Engine/ActorChannel.h"
+#include "../Inventory/CPickup.h"
+#include "Global.h"
 
 #define LOCTEXT_NAMESPACE "Inventory"
 
 UCInventoryComponent::UCInventoryComponent()
 {	
-
+	PrimaryComponentTick.bCanEverTick = true;
 
 	// object를 복제 하기위한 함수 SetIsReplicated가 callstack이 일어나 SetIsReplicatedByDefault를 사용함
 	SetIsReplicatedByDefault(true);
+}
+
+void UCInventoryComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+{
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	
 }
 
 FItemAddResult UCInventoryComponent::TryAddItem(UCItem* Item)
@@ -41,7 +49,7 @@ int32 UCInventoryComponent::ConsumeItem(class UCItem* Item, const int32 Quantity
 	{
 		const int32 RemoveQuantity = FMath::Min(Quantity, Item->GetQuantity());
 
-		//아이템을 떨어뜨린 후에는 마이너스 금액이 나와야 함.
+		//아이템을 떨어뜨린 후에는 마이너스가 나와야 함.
 		ensure(!(Item->GetQuantity() - RemoveQuantity < 0)); // 표현식을 검증하여 실패하면 그 지점까지 이르는 콜스택을 생성합니다.
 
 		//이제 이 항목이 없습니다.인벤토리에서 제거하세요.
@@ -50,6 +58,7 @@ int32 UCInventoryComponent::ConsumeItem(class UCItem* Item, const int32 Quantity
 		if (Item->GetQuantity() <= 0)
 		{
 			RemoveItem(Item);
+			ClientRefreshInventory();
 		}
 		else
 		{
@@ -69,7 +78,7 @@ bool UCInventoryComponent::RemoveItem(UCItem* Item)
 		if (Item)
 		{
 			Items.RemoveSingle(Item);
-
+			
 			ReplicatedItemsKey++;
 
 			return true;
