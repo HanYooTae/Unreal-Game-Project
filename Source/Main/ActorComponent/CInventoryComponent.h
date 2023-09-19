@@ -4,7 +4,6 @@
 #include "../Inventory/CItem.h"
 #include "Components/ActorComponent.h"
 #include "CInventoryComponent.generated.h"
-
 // 인벤토리내부가 바뀌거나 UI가 업데이트가 될때 실행
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryUpdated);
 
