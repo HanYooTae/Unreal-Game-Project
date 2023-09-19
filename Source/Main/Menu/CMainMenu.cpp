@@ -29,6 +29,8 @@ bool UCMainMenu::Initialize()
 	// JoinGameMenu Button
 	CheckNullResult(JoinGameBackButton, false);
 	JoinGameBackButton->OnClicked.AddDynamic(this, &UCMainMenu::OpenMainMenu);
+	CheckNullResult(JoinGameJoinButton, false);
+	JoinGameJoinButton->OnClicked.AddDynamic(this, &UCMainMenu::JoinServer);
 
 	// HostSessionMenu
 	CheckNullResult(HostSessionBackButton, false);

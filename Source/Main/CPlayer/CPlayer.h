@@ -8,157 +8,155 @@
 USTRUCT()
 struct FInteractionData
 {
-	GENERATED_BODY()
+    GENERATED_BODY()
 
 public:
 
-	FInteractionData()
-	{
-		ViewedInteractionComponent = nullptr;
-		LastInteractionCheckTime = 0.f;
-		bInteractHeld = false;
-	}
+    FInteractionData()
+    {
+        ViewedInteractionComponent = nullptr;
+        LastInteractionCheckTime = 0.f;
+        bInteractHeld = false;
+    }
 
-	UPROPERTY()
-		class UCInteractionComponent* ViewedInteractionComponent;
+    UPROPERTY()
+        class UCInteractionComponent* ViewedInteractionComponent;
 
-	UPROPERTY()
-		float LastInteractionCheckTime;
+    UPROPERTY()
+        float LastInteractionCheckTime;
 
-	UPROPERTY()
-		bool bInteractHeld;
+    UPROPERTY()
+        bool bInteractHeld;
 };
 
 UCLASS()
 class MAIN_API ACPlayer : public ACharacter
 {
-	GENERATED_BODY()
+    GENERATED_BODY()
 
 public:
-	ACPlayer();
+    ACPlayer();
 
 protected:
-	virtual void BeginPlay() override;
-	virtual void Tick(float DeltaTime) override;
+    virtual void BeginPlay() override;
+    virtual void Tick(float DeltaTime) override;
 
 protected: //interact
-	UPROPERTY(EditDefaultsOnly, Category = "Interaction")
-		float InteractionCheckFrequency;
+    UPROPERTY(EditDefaultsOnly, Category = "Interaction")
+        float InteractionCheckFrequency;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Interaction")
-		float InteractionCheckDistance;
+    UPROPERTY(EditDefaultsOnly, Category = "Interaction")
+        float InteractionCheckDistance;
 
-	void PerformInteractionCheck(); // 아래 두 함수 를 실행하는 함수
-	void CouldnotFindInteractable();	// 상호작용 하는 물체를 찾지못할경우
-	void FoundNewInteractable(UCInteractionComponent* Interactable); // 상호작용하는 물체를 찾았을 경우
+    void PerformInteractionCheck(); // 아래 두 함수 를 실행하는 함수
+    void CouldnotFindInteractable();   // 상호작용 하는 물체를 찾지못할경우
+    void FoundNewInteractable(UCInteractionComponent* Interactable); // 상호작용하는 물체를 찾았을 경우
 
-	void BeginInteract();
-	void EndInteract();
+    void BeginInteract();
+    void EndInteract();
 
-	UFUNCTION(Reliable, Server, WithValidation)
-		void SeverBeginInteract();
-	void SeverBeginInteract_Implementation();
-	bool SeverBeginInteract_Validate();
+    UFUNCTION(Reliable, Server, WithValidation)
+        void SeverBeginInteract();
+    void SeverBeginInteract_Implementation();
+    bool SeverBeginInteract_Validate();
 
-	UFUNCTION(Reliable, Server, WithValidation)
-		void SeverEndInteract();
-	void SeverEndInteract_Implementation();
-	bool SeverEndInteract_Validate();
+    UFUNCTION(Reliable, Server, WithValidation)
+        void SeverEndInteract();
+    void SeverEndInteract_Implementation();
+    bool SeverEndInteract_Validate();
 
-	void Interact();
+    void Interact();
 
-	UPROPERTY()
-		FInteractionData InteractionData;
+    UPROPERTY()
+        FInteractionData InteractionData;
 
-	FORCEINLINE class UCInteractionComponent* GetInteractable() const { return InteractionData.ViewedInteractionComponent; }
+    FORCEINLINE class UCInteractionComponent* GetInteractable() const { return InteractionData.ViewedInteractionComponent; }
 
 protected:
-	FTimerHandle TimerHandle_Interact;
+    FTimerHandle TimerHandle_Interact;
 
 public:
-	bool IsInteracting() const;
+    bool IsInteracting() const;
 
-	float GetRemainingInteractime() const;
+    float GetRemainingInteractime() const;
 
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Components")
-		class UCInventoryComponent* PlayerInventory;
+    UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Components")
+        class UCInventoryComponent* PlayerInventory;
 
-	// inventory에서 아이템을 사용할때
-	UFUNCTION(BlueprintCallable, Category = "Items")
-		void UseItem(class UCItem* Item);
+    // inventory에서 아이템을 사용할때
+    UFUNCTION(BlueprintCallable, Category = "Items")
+        void UseItem(class UCItem* Item);
 
-	UFUNCTION(Reliable, Server, WithValidation)
-		void ServerUseItem(class UCItem* Item);
-	void ServerUseItem_Implementation(class UCItem* Item);
-	bool ServerUseItem_Validate(class UCItem* Item);
+    UFUNCTION(Reliable, Server, WithValidation)
+        void ServerUseItem(class UCItem* Item);
+    void ServerUseItem_Implementation(class UCItem* Item);
+    bool ServerUseItem_Validate(class UCItem* Item);
 
-	// 아이템을 버릴때
-	UFUNCTION(BlueprintCallable, Category = "Items")
-		void DropItem(class UCItem* Item, const int32 Quantity);
+    // 아이템을 버릴때
+    UFUNCTION(BlueprintCallable, Category = "Items")
+        void DropItem(class UCItem* Item, const int32 Quantity);
 
-	UFUNCTION(Reliable, Server, WithValidation)
-		void ServerDropItem(class UCItem* Item, const int32 Quantity);
-	void ServerDropItem_Implementation(class UCItem* Item, const int32 Quantity);
-	bool ServerDropItem_Validate(class UCItem* Item, const int32 Quantity);
+    UFUNCTION(Reliable, Server, WithValidation)
+        void ServerDropItem(class UCItem* Item, const int32 Quantity);
+    void ServerDropItem_Implementation(class UCItem* Item, const int32 Quantity);
+    bool ServerDropItem_Validate(class UCItem* Item, const int32 Quantity);
 
-	// 블루프린트에서 사용
-	UPROPERTY(EditDefaultsOnly, Category = "Item")
-		TSubclassOf<class ACPickup> PickupClass;
+    // 블루프린트에서 사용
+    UPROPERTY(EditDefaultsOnly, Category = "Item")
+        TSubclassOf<class ACPickup> PickupClass;
 
-public:	
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+public:
+    virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Animation")
-		UAnimMontage* Climb;
+    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Animation")
+        UAnimMontage* Climb;
 
 private: // Axis
-	void OnMoveForward(float Axis);
-	void OnMoveRight(float Axis);
+    void OnMoveForward(float Axis);
+    void OnMoveRight(float Axis);
 
-	void OnHorizontalLook(float Axis);
-	void OnVerticalLook(float Axis);
+    void OnHorizontalLook(float Axis);
+    void OnVerticalLook(float Axis);
 
 private: // Action
-	void OnSprint();
-	void OffSprint();
+    void OnSprint();
+    void OffSprint();
 
-	void StartJump();
-	void StopJump();
+    void StartJump();
+    void StopJump();
 
-private: 
-	UPROPERTY(VisibleDefaultsOnly)
-		class USpringArmComponent* SpringArm;
+private:
+    UPROPERTY(VisibleDefaultsOnly)
+        class USpringArmComponent* SpringArm;
 
 protected:
-	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly)
-		class UCameraComponent* Camera;
+    UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly)
+        class UCameraComponent* Camera;
 
-	UPROPERTY(VisibleDefaultsOnly)
-		class UCParkourSystem* parkour;
+    UPROPERTY(VisibleDefaultsOnly)
+        class UCParkourSystem* parkour;
 
-	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly)
-		class USpringArmComponent* MinimapSpringArm;
+    UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly)
+        class USpringArmComponent* MinimapSpringArm;
 
-	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly)
-		class USceneCaptureComponent2D* RenderMinimap;
+    UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly)
+        class USceneCaptureComponent2D* RenderMinimap;
 
-	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly)
-		class UPaperSpriteComponent* Arrow;
+    UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly)
+        class UPaperSpriteComponent* Arrow;
 
-	UPROPERTY(BlueprintReadOnly)
-		class UCMainWidget* MainWidget;
-
-private:
-	TSubclassOf<class UCMainWidget> MainWidgetClass;
-	//액터에 대한 오소리티 소유자, 액터의 리플리케이션 여부, 리플리케이션 모드 등의 enum
-	TEnumAsByte< enum ENetRole > Role;
+    UPROPERTY(BlueprintReadOnly)
+        class UCMainWidget* MainWidget;
 
 private:
-	class UMaterialInstanceDynamic* BodyMaterial;
-	class UMaterialInstanceDynamic* LogoMaterial;
+    TSubclassOf<class UCMainWidget> MainWidgetClass;
 
-// Main Widget
+private:
+    class UMaterialInstanceDynamic* BodyMaterial;
+    class UMaterialInstanceDynamic* LogoMaterial;
+
+    // Main Widget
 public:
-	void SetMainWidget();
+    void SetMainWidget();
 
 };
