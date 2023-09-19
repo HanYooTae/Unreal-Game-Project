@@ -25,3 +25,8 @@ LineTrace에서 찾은 오브젝트가 InteractComponent를 가졌다면 해당 
 - Use : 각 아이템내부 클레스의 Use함수호출하여 각 아이템의 역활 수행 ex) FoodItem::Use (){CLog::Print("we ate some posion. ><");}
 
 참고영상 https://www.youtube.com/watch?v=JiAZ2-J3T0A
+
+5. 원하는 수량을 버리는 기능
+- Drop Widget를 추가하여 원하는 수량을 입력
+
+  참조영상 : https://youtu.be/5jAUMOePUg0
