@@ -26,19 +26,21 @@ public:
 
 	virtual void ReturnToMainMenu() override;
 
-private:	// Session Event
+public:	// Session Event
 	void CreateSession();
+	void FindSession();
 
 private:	// Session Delegate
 	void OnCreateSessionComplete(FName InSessionName, bool InSuccess);
 	void OnDestroySessionComplete(FName InSessionName, bool InSuccess);
+	void OnFindSessionsComplete(bool InSccess);
 
 private:
 	TSubclassOf<UCMainMenu> MainMenuClass;
 	UCMainMenu* MainMenu;
 
 	IOnlineSessionPtr SessionInterface;
-	TSharedPtr<class FOnlineSessionSearch> SessionSearch;
+	TSharedPtr<class FOnlineSessionSearch> SearchSettings;
 
 	FString SessionName;
 };

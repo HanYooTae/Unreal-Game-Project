@@ -70,7 +70,7 @@ public:
 	}
 };
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class MAIN_API UCInventoryComponent : public UActorComponent
 {
 	GENERATED_BODY()
@@ -78,8 +78,6 @@ class MAIN_API UCInventoryComponent : public UActorComponent
 		friend class UCItem;
 public:
 	UCInventoryComponent();
-
-	virtual void TickComponent(float DeltaTime,	enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 public:
 	// Inventory에 아이템 추가
@@ -134,7 +132,7 @@ private:
 	// Items.Add()를 대신할 함수
 	UCItem* AddItem(class UCItem* Item);
 
-public:	
+public:
 	UFUNCTION(BlueprintPure, Category = "Inventory")
 		FORCEINLINE float GetWeightCapacity() const { return WeightCapacity; }
 

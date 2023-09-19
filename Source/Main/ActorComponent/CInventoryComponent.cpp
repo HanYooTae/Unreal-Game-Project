@@ -8,17 +8,10 @@
 #define LOCTEXT_NAMESPACE "Inventory"
 
 UCInventoryComponent::UCInventoryComponent()
-{	
-	PrimaryComponentTick.bCanEverTick = true;
+{
 
 	// object를 복제 하기위한 함수 SetIsReplicated가 callstack이 일어나 SetIsReplicatedByDefault를 사용함
 	SetIsReplicatedByDefault(true);
-}
-
-void UCInventoryComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
-{
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-	
 }
 
 FItemAddResult UCInventoryComponent::TryAddItem(UCItem* Item)
@@ -78,7 +71,7 @@ bool UCInventoryComponent::RemoveItem(UCItem* Item)
 		if (Item)
 		{
 			Items.RemoveSingle(Item);
-			
+
 			ReplicatedItemsKey++;
 
 			return true;
@@ -103,7 +96,7 @@ UCItem* UCInventoryComponent::FindItem(UCItem* Item) const
 	{
 		for (auto& InvItem : Items)
 		{
-			if(InvItem && InvItem->GetClass() == Item->GetClass())
+			if (InvItem && InvItem->GetClass() == Item->GetClass())
 			{
 				return InvItem;
 			}

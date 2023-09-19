@@ -29,7 +29,9 @@ protected:
 	virtual bool Initialize() override;
 
 public:
-	void SetSessionList(TArray<FSessionData> InSessionData);
+	void SetSessionList(TArray<FSessionData> InSessionDatas);	// SessionList(UScrollbar Settings)
+	void SetSelectedRowIndex(uint32 InIndex);
+	void SelectedSessionRow();
 
 private:
 	UFUNCTION() void OpenMainMenu();
@@ -39,6 +41,8 @@ private:
 
 private:	// Create & Join Session
 	UFUNCTION()	void HostServer();
+	//UFUNCTION()
+	//	void JoinServer();
 
 private:
 	// Menu
@@ -81,4 +85,7 @@ private:
 private:
 	// Session List Composition
 	TSubclassOf<class UCSessionRow> SessionRowClass;
+
+	// If you hover or click a rowIndex, it'll Change color itself.
+	TOptional<uint32> SelectedRowIndex;
 };

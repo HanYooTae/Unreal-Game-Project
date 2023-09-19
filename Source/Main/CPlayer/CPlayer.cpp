@@ -354,8 +354,10 @@ void ACPlayer::DropItem(class UCItem* Item, const int32 Quantity)
 
 			ensure(PickupClass);
 
-			if(ACPickup* Pickup = GetWorld()->SpawnActor<ACPickup>(PickupClass, SpawnTransform, SpawnParams))
-				Pickup->InitializePickup(Item->GetClass(), DroppedQuantity);			
+			if (ACPickup* Pickup = GetWorld()->SpawnActor<ACPickup>(PickupClass, SpawnTransform, SpawnParams))
+			{
+				Pickup->InitializePickup(Item->GetClass(), DroppedQuantity);
+			}
 		}
 	}
 }
@@ -443,6 +445,3 @@ void ACPlayer::SetMainWidget()
 {
 
 }
-
-
-
