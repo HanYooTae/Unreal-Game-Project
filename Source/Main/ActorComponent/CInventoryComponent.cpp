@@ -51,6 +51,7 @@ int32 UCInventoryComponent::ConsumeItem(class UCItem* Item, const int32 Quantity
 		if (Item->GetQuantity() <= 0)
 		{
 			RemoveItem(Item);
+			// ÇÑ¹ø´õ inventory updated
 			ClientRefreshInventory();
 		}
 		else
