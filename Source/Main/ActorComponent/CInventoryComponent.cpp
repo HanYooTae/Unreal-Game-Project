@@ -8,9 +8,7 @@
 #define LOCTEXT_NAMESPACE "Inventory"
 
 UCInventoryComponent::UCInventoryComponent()
-{
-
-	// object¸¦ º¹Á¦ ÇÏ±âÀ§ÇÑ ÇÔ¼ö SetIsReplicated°¡ callstackÀÌ ÀÏ¾î³ª SetIsReplicatedByDefault¸¦ »ç¿ëÇÔ
+	// objectë¥¼ ë³µì œ í•˜ê¸°ìœ„í•œ í•¨ìˆ˜ SetIsReplicatedê°€ callstackì´ ì¼ì–´ë‚˜ SetIsReplicatedByDefaultë¥¼ ì‚¬ìš©í•¨
 	SetIsReplicatedByDefault(true);
 }
 
@@ -42,16 +40,16 @@ int32 UCInventoryComponent::ConsumeItem(class UCItem* Item, const int32 Quantity
 	{
 		const int32 RemoveQuantity = FMath::Min(Quantity, Item->GetQuantity());
 
-		//¾ÆÀÌÅÛÀ» ¶³¾î¶ß¸° ÈÄ¿¡´Â ¸¶ÀÌ³Ê½º°¡ ³ª¿Í¾ß ÇÔ.
-		ensure(!(Item->GetQuantity() - RemoveQuantity < 0)); // Ç¥Çö½ÄÀ» °ËÁõÇÏ¿© ½ÇÆĞÇÏ¸é ±× ÁöÁ¡±îÁö ÀÌ¸£´Â Äİ½ºÅÃÀ» »ı¼ºÇÕ´Ï´Ù.
+		//ì•„ì´í…œì„ ë–¨ì–´ëœ¨ë¦° í›„ì—ëŠ” ë§ˆì´ë„ˆìŠ¤ê°€ ë‚˜ì™€ì•¼ í•¨.
+		ensure(!(Item->GetQuantity() - RemoveQuantity < 0)); // í‘œí˜„ì‹ì„ ê²€ì¦í•˜ì—¬ ì‹¤íŒ¨í•˜ë©´ ê·¸ ì§€ì ê¹Œì§€ ì´ë¥´ëŠ” ì½œìŠ¤íƒì„ ìƒì„±í•©ë‹ˆë‹¤.
 
-		//ÀÌÁ¦ ÀÌ Ç×¸ñÀÌ ¾ø½À´Ï´Ù.ÀÎº¥Åä¸®¿¡¼­ Á¦°ÅÇÏ¼¼¿ä.
+		//ì´ì œ ì´ í•­ëª©ì´ ì—†ìŠµë‹ˆë‹¤.ì¸ë²¤í† ë¦¬ì—ì„œ ì œê±°í•˜ì„¸ìš”.
 		Item->SetQuantity(Item->GetQuantity() - RemoveQuantity);
 
 		if (Item->GetQuantity() <= 0)
 		{
 			RemoveItem(Item);
-			// ÇÑ¹ø´õ inventory updated
+			// í•œë²ˆë” inventory updated
 			ClientRefreshInventory();
 		}
 		else
@@ -232,26 +230,26 @@ FItemAddResult UCInventoryComponent::TryAddItem_Internal(UCItem* Item)
 			}
 		}
 
-		//¾ÆÀÌÅÛÀÌ ½ºÅØÀ» ½×À» ¼ö ÀÖ´Ù¸é ÀÌ¹Ì ¼ÒÀ¯ÇÏ°í ÀÖ´ÂÁö¿Í ½ºÅØÀ» Ãß°¡ÇÏ´Â°ÍÀ» checkÇÑ´Ù.
+		//ì•„ì´í…œì´ ìŠ¤í…ì„ ìŒ“ì„ ìˆ˜ ìˆë‹¤ë©´ ì´ë¯¸ ì†Œìœ í•˜ê³  ìˆëŠ”ì§€ì™€ ìŠ¤í…ì„ ì¶”ê°€í•˜ëŠ”ê²ƒì„ checkí•œë‹¤.
 		if (Item->bStackable)
 		{
-			// MaxStackSize¸¦ ³Ñ±âÁö ¾Ê°ÔÇÑ´Ù.
+			// MaxStackSizeë¥¼ ë„˜ê¸°ì§€ ì•Šê²Œí•œë‹¤.
 			ensure(Item->GetQuantity() <= Item->MaxStackSize);
 
 			if (UCItem* ExistingItem = FindItem(Item))
 			{
 				if (ExistingItem->GetQuantity() < ExistingItem->MaxStackSize)
 				{
-					//Ãß°¡ÇÒ Ç×¸ñÀÇ ¾çÀ» È®ÀÎ
+					//ì¶”ê°€í•  í•­ëª©ì˜ ì–‘ì„ í™•ì¸
 					const int32 CapacityMaxAddAmount = ExistingItem->MaxStackSize - ExistingItem->GetQuantity();
 					int32 ActualAddAmount = FMath::Min(AddAmount, CapacityMaxAddAmount);
 
 					FText ErrorText = LOCTEXT("InventoryErrorText", "Couldn't add all of the item to your inventory.");
 
-					//¿ì¸®°¡ ¿î¹İÇÒ ¼ö ÀÖ´Â ¹«°Ô¿¡ µû¶ó Á¶Á¤
+					//ìš°ë¦¬ê°€ ìš´ë°˜í•  ìˆ˜ ìˆëŠ” ë¬´ê²Œì— ë”°ë¼ ì¡°ì •
 					if (!FMath::IsNearlyZero(Item->Weight))
 					{
-						//¹«°Ô·Î ÀÎÇØ °¡Á®°¥ ¼ö ÀÖ´Â Ç°¸ñÀÇ ÃÖ´ë ±İ¾×À» ±¸ÇÔ
+						//ë¬´ê²Œë¡œ ì¸í•´ ê°€ì ¸ê°ˆ ìˆ˜ ìˆëŠ” í’ˆëª©ì˜ ìµœëŒ€ ê¸ˆì•¡ì„ êµ¬í•¨
 						const int32 weightMaxAddAmount = FMath::FloorToInt((WeightCapacity - GetCurrentWeight()) / Item->Weight);
 						ActualAddAmount = FMath::Min(ActualAddAmount, weightMaxAddAmount);
 
@@ -262,10 +260,10 @@ FItemAddResult UCInventoryComponent::TryAddItem_Internal(UCItem* Item)
 					}
 					else if (ActualAddAmount < AddAmount)
 					{
-						//Ç°¸ñ ¹«°Ô°¡ ¾ø°í °¨´çÇÒ ¼ö ¾ø´Â °æ¿ì ¿ë·® ¹®Á¦°¡ ÀÖ´Â °Í
+						//í’ˆëª© ë¬´ê²Œê°€ ì—†ê³  ê°ë‹¹í•  ìˆ˜ ì—†ëŠ” ê²½ìš° ìš©ëŸ‰ ë¬¸ì œê°€ ìˆëŠ” ê²ƒ
 						ErrorText = FText::Format(LOCTEXT("InventoryCapacityFullText", "Couldn't add entire stack of {ItemName} to Inventory. Inventory was full."), Item->ItemDisplayName);
 					}
-					//ÀÌº¥¿¡ ¾Æ¹«°Íµµ ³ÖÀ»¼ö ¾øÀ»¶§
+					//ì´ë²¤ì— ì•„ë¬´ê²ƒë„ ë„£ì„ìˆ˜ ì—†ì„ë•Œ
 					if (ActualAddAmount <= 0)
 					{
 						return FItemAddResult::AddedNone(AddAmount, LOCTEXT("InventoryErrorText", "Couldn't add item to inventory"));
@@ -273,7 +271,7 @@ FItemAddResult UCInventoryComponent::TryAddItem_Internal(UCItem* Item)
 
 					ExistingItem->SetQuantity(ExistingItem->GetQuantity() + ActualAddAmount);
 
-					// ¾î¶»°Ôµç ÃÖ´ë ½ºÅÃ Å©±âº¸´Ù ´õ ¸¹Àº Ç×¸ñÀ» ¾ò´Â´Ù¸é ¹®Á¦°¡ ÀÖÀ½
+					// ì–´ë–»ê²Œë“  ìµœëŒ€ ìŠ¤íƒ í¬ê¸°ë³´ë‹¤ ë” ë§ì€ í•­ëª©ì„ ì–»ëŠ”ë‹¤ë©´ ë¬¸ì œê°€ ìˆìŒ
 					ensure(ExistingItem->GetQuantity() <= ExistingItem->MaxStackSize);
 
 					if (ActualAddAmount < AddAmount)
@@ -292,15 +290,15 @@ FItemAddResult UCInventoryComponent::TryAddItem_Internal(UCItem* Item)
 			}
 			else
 			{
-				// ÀÌ Ç×¸ñÀÌ ¾øÀ¸¹Ç·Î ÀüÃ¼ ½ºÅÃÀ» Ãß°¡
+				// ì´ í•­ëª©ì´ ì—†ìœ¼ë¯€ë¡œ ì „ì²´ ìŠ¤íƒì„ ì¶”ê°€
 				AddItem(Item);
 
 				return FItemAddResult::AddedAll(AddAmount);
 			}
 		}
-		else // itemÀÌ stackÇüÀÌ ¾Æ´Ò¶§
+		else // itemì´ stackí˜•ì´ ì•„ë‹ë•Œ
 		{
-			// stackÇüÀÌ ¾Æ´Ï¸é ¼ö·®Àº 1ÀÌ¿©¾ßÇÑ´Ù.
+			// stackí˜•ì´ ì•„ë‹ˆë©´ ìˆ˜ëŸ‰ì€ 1ì´ì—¬ì•¼í•œë‹¤.
 			ensure(Item->GetQuantity() == 1);
 
 			AddItem(Item);
@@ -309,7 +307,7 @@ FItemAddResult UCInventoryComponent::TryAddItem_Internal(UCItem* Item)
 		}
 	}
 
-	//AddItemÀº Å¬¶óÀÌ¾ğÆ®¿¡¼­ È£ÃâµÇ¾î¼­´Â ¾È µË´Ï´Ù.
+	//AddItemì€ í´ë¼ì´ì–¸íŠ¸ì—ì„œ í˜¸ì¶œë˜ì–´ì„œëŠ” ì•ˆ ë©ë‹ˆë‹¤.
 	check(false);
 	return FItemAddResult::AddedNone(-1, LOCTEXT("ErrorMessage", ""));
 }

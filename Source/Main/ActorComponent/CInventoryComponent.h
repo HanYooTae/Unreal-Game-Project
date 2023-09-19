@@ -5,164 +5,164 @@
 #include "Components/ActorComponent.h"
 #include "CInventoryComponent.generated.h"
 
-// ÀÎº¥Åä¸®³»ºÎ°¡ ¹Ù²î°Å³ª UI°¡ ¾÷µ¥ÀÌÆ®°¡ µÉ¶§ ½ÇÇà
+// ì¸ë²¤í† ë¦¬ë‚´ë¶€ê°€ ë°”ë€Œê±°ë‚˜ UIê°€ ì—…ë°ì´íŠ¸ê°€ ë ë•Œ ì‹¤í–‰
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryUpdated);
 
 UENUM(BlueprintType)
 enum class EItemAddResult : uint8
 {
-	IAR_NoItemsAdded UMETA(DisplayName = "No items added"),
-	IAR_SomeItemsAdded UMETA(DisplayName = "Some items added"),
-	IAR_AllItemsAdded UMETA(DisplayName = "All items added")
+    IAR_NoItemsAdded UMETA(DisplayName = "No items added"),
+    IAR_SomeItemsAdded UMETA(DisplayName = "Some items added"),
+    IAR_AllItemsAdded UMETA(DisplayName = "All items added")
 };
 
 USTRUCT(BlueprintType)
 struct FItemAddResult
 {
-	GENERATED_BODY()
+    GENERATED_BODY()
 
 public:
-	FItemAddResult() {};
-	FItemAddResult(int32 InItemQuantity) : AmountToGive(InItemQuantity), ActualAmountGiven(0) {};
-	FItemAddResult(int32 InItemQuantity, int32 InQuantityAdded) : AmountToGive(InItemQuantity), ActualAmountGiven(InQuantityAdded) {};
+    FItemAddResult() {};
+    FItemAddResult(int32 InItemQuantity) : AmountToGive(InItemQuantity), ActualAmountGiven(0) {};
+    FItemAddResult(int32 InItemQuantity, int32 InQuantityAdded) : AmountToGive(InItemQuantity), ActualAmountGiven(InQuantityAdded) {};
 
-	// °¹¼öÁõ°¡¸¦ µµ¿ï º¯¼ö
-	UPROPERTY(BlueprintReadOnly, Category = "Item Add Result")
-		int32 AmountToGive;
+    // ê°¯ìˆ˜ì¦ê°€ë¥¼ ë„ìš¸ ë³€ìˆ˜
+    UPROPERTY(BlueprintReadOnly, Category = "Item Add Result")
+        int32 AmountToGive;
 
-	// Á¤ÇØÁø ¹«°Ô, ÃÖ´ë È¹µæ°¹¼ö¿¡ ¸Â°Ô ItemÃß°¡¸¦ µµ¿ï º¯¼ö
-	UPROPERTY(BlueprintReadOnly, Category = "Item Add Result")
-		int32 ActualAmountGiven;
+    // ì •í•´ì§„ ë¬´ê²Œ, ìµœëŒ€ íšë“ê°¯ìˆ˜ì— ë§ê²Œ Itemì¶”ê°€ë¥¼ ë„ìš¸ ë³€ìˆ˜
+    UPROPERTY(BlueprintReadOnly, Category = "Item Add Result")
+        int32 ActualAmountGiven;
 
-	// °á°ú°ª
-	UPROPERTY(BlueprintReadOnly, Category = "Item Add Result")
-		EItemAddResult Result;
+    // ê²°ê³¼ê°’
+    UPROPERTY(BlueprintReadOnly, Category = "Item Add Result")
+        EItemAddResult Result;
 
-	// ¹«°Ôº¸´Ù ´õ ¸¹°Å³ª ¿ë·®ÀÌ ¸¹À¸¸é ¾Ë·ÁÁÖ´Â Text
-	UPROPERTY(BlueprintReadOnly, Category = "Item Add Result")
-		FText ErrorText;
+    // ë¬´ê²Œë³´ë‹¤ ë” ë§ê±°ë‚˜ ìš©ëŸ‰ì´ ë§ìœ¼ë©´ ì•Œë ¤ì£¼ëŠ” Text
+    UPROPERTY(BlueprintReadOnly, Category = "Item Add Result")
+        FText ErrorText;
 
-	// Helpers
-	static FItemAddResult AddedNone(const int32 InItemQuantity, const FText& ErrorText)
-	{
-		FItemAddResult AddedNoneResult(InItemQuantity);
-		AddedNoneResult.Result = EItemAddResult::IAR_NoItemsAdded;
-		AddedNoneResult.ErrorText = ErrorText;
+    // Helpers
+    static FItemAddResult AddedNone(const int32 InItemQuantity, const FText& ErrorText)
+    {
+        FItemAddResult AddedNoneResult(InItemQuantity);
+        AddedNoneResult.Result = EItemAddResult::IAR_NoItemsAdded;
+        AddedNoneResult.ErrorText = ErrorText;
 
-		return AddedNoneResult;
-	}
+        return AddedNoneResult;
+    }
 
-	static FItemAddResult AddedSome(const int32 InItemQuantity, const int32 ActualAmountGiven, const FText& ErrorText)
-	{
-		FItemAddResult AddedSomeResult(InItemQuantity, ActualAmountGiven);
-		AddedSomeResult.Result = EItemAddResult::IAR_SomeItemsAdded;
-		AddedSomeResult.ErrorText = ErrorText;
+    static FItemAddResult AddedSome(const int32 InItemQuantity, const int32 ActualAmountGiven, const FText& ErrorText)
+    {
+        FItemAddResult AddedSomeResult(InItemQuantity, ActualAmountGiven);
+        AddedSomeResult.Result = EItemAddResult::IAR_SomeItemsAdded;
+        AddedSomeResult.ErrorText = ErrorText;
 
-		return AddedSomeResult;
-	}
+        return AddedSomeResult;
+    }
 
-	static FItemAddResult AddedAll(const int32 InItemQuantity)
-	{
-		FItemAddResult AddAllResult(InItemQuantity, InItemQuantity);
-		AddAllResult.Result = EItemAddResult::IAR_AllItemsAdded;
+    static FItemAddResult AddedAll(const int32 InItemQuantity)
+    {
+        FItemAddResult AddAllResult(InItemQuantity, InItemQuantity);
+        AddAllResult.Result = EItemAddResult::IAR_AllItemsAdded;
 
-		return AddAllResult;
-	}
+        return AddAllResult;
+    }
 };
 
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class MAIN_API UCInventoryComponent : public UActorComponent
 {
-	GENERATED_BODY()
+    GENERATED_BODY()
 
-		friend class UCItem;
+        friend class UCItem;
 public:
-	UCInventoryComponent();
+    UCInventoryComponent();
 
 public:
-	// Inventory¿¡ ¾ÆÀÌÅÛ Ãß°¡
-	UFUNCTION(BlueprintCallable, Category = "Inventory")
-		FItemAddResult TryAddItem(class UCItem* Item);
+    // Inventoryì— ì•„ì´í…œ ì¶”ê°€
+    UFUNCTION(BlueprintCallable, Category = "Inventory")
+        FItemAddResult TryAddItem(class UCItem* Item);
 
-	// ¾ÆÀÌÅÛ ÀÎ½ºÅÏ½º ´ë½Å ¾ÆÀÌÅÛ Å¬·¡½º¸¦ »ç¿ëÇÏ¿© ÀÎº¥Åä¸®¿¡ ¾ÆÀÌÅÛ Ãß°¡
-	UFUNCTION(BlueprintCallable, Category = "Inventory")
-		FItemAddResult TryAddItemFromClass(TSubclassOf<class UCItem> ItemClass, const int32 Quantity);
+    // ì•„ì´í…œ ì¸ìŠ¤í„´ìŠ¤ ëŒ€ì‹  ì•„ì´í…œ í´ë˜ìŠ¤ë¥¼ ì‚¬ìš©í•˜ì—¬ ì¸ë²¤í† ë¦¬ì— ì•„ì´í…œ ì¶”ê°€
+    UFUNCTION(BlueprintCallable, Category = "Inventory")
+        FItemAddResult TryAddItemFromClass(TSubclassOf<class UCItem> ItemClass, const int32 Quantity);
 
-	// Ç°¸ñ¿¡¼­ ÀÏºÎ ¼ö·®À» »©³»°í ¼ö·®ÀÌ 0ÀÌ µÇ¸é Àç°í¿¡¼­ Á¦°ÅÇÕ´Ï´Ù.
-	int32 ConsumeItem(class UCItem* Item);
-	int32 ConsumeItem(class UCItem* Item, const int32 Quantity);
+    // í’ˆëª©ì—ì„œ ì¼ë¶€ ìˆ˜ëŸ‰ì„ ë¹¼ë‚´ê³  ìˆ˜ëŸ‰ì´ 0ì´ ë˜ë©´ ì¬ê³ ì—ì„œ ì œê±°í•©ë‹ˆë‹¤.
+    int32 ConsumeItem(class UCItem* Item);
+    int32 ConsumeItem(class UCItem* Item, const int32 Quantity);
 
-	// inventory ¿¡¼­ ItemÀÌµ¿
-	UFUNCTION(BlueprintCallable, Category = "Inventory")
-		bool RemoveItem(class UCItem* Item);
+    // inventory ì—ì„œ Itemì´ë™
+    UFUNCTION(BlueprintCallable, Category = "Inventory")
+        bool RemoveItem(class UCItem* Item);
 
-	// ¾ÆÀÌÅÛÀ» °¡Áö°í ÀÖ´Ù¸é return°ªÀº true
-	UFUNCTION(BlueprintPure, Category = "Inventory")
-		bool HasItem(TSubclassOf<class UCItem> ItemClass, const int32 Quantity = 1) const;
+    // ì•„ì´í…œì„ ê°€ì§€ê³  ìˆë‹¤ë©´ returnê°’ì€ true
+    UFUNCTION(BlueprintPure, Category = "Inventory")
+        bool HasItem(TSubclassOf<class UCItem> ItemClass, const int32 Quantity = 1) const;
 
-	// ¾òÀº ¾ÆÀÌÅÛÀÌ ÀÌ¹Ì °¡Áø ¾ÆÀÌÅÛÀÇ class¿Í µ¿ÀÏÇÑÁö¸¦ ¹İÈ¯ÇÏ´ÂÇÔ¼ö
-	UFUNCTION(BlueprintPure, Category = "Inventory")
-		UCItem* FindItem(class UCItem* Item) const;
+    // ì–»ì€ ì•„ì´í…œì´ ì´ë¯¸ ê°€ì§„ ì•„ì´í…œì˜ classì™€ ë™ì¼í•œì§€ë¥¼ ë°˜í™˜í•˜ëŠ”í•¨ìˆ˜
+    UFUNCTION(BlueprintPure, Category = "Inventory")
+        UCItem* FindItem(class UCItem* Item) const;
 
-	// ¾òÀº ¾ÆÀÌÅÛclass°¡ ÀÌ¹Ì °¡Áø ¾ÆÀÌÅÛÀÇ class¿Í µ¿ÀÏÇÑÁö¸¦ ¹İÈ¯ÇÏ´ÂÇÔ¼ö
-	UFUNCTION(BlueprintPure, Category = "Inventory")
-		UCItem* FindItemByClass(TSubclassOf<class UCItem> ItemClass) const;
+    // ì–»ì€ ì•„ì´í…œclassê°€ ì´ë¯¸ ê°€ì§„ ì•„ì´í…œì˜ classì™€ ë™ì¼í•œì§€ë¥¼ ë°˜í™˜í•˜ëŠ”í•¨ìˆ˜
+    UFUNCTION(BlueprintPure, Category = "Inventory")
+        UCItem* FindItemByClass(TSubclassOf<class UCItem> ItemClass) const;
 
-	// ¸ğµç ÀÎº¥ÀÇ ¾ÆÀÌÅÛ Å¬·¹½º¸¦ °¡Á®¿È
-	UFUNCTION(BlueprintPure, Category = "Inventory")
-		TArray<UCItem*> FindItemsByClass(TSubclassOf<class UCItem> ItemClass) const;
+    // ëª¨ë“  ì¸ë²¤ì˜ ì•„ì´í…œ í´ë ˆìŠ¤ë¥¼ ê°€ì ¸ì˜´
+    UFUNCTION(BlueprintPure, Category = "Inventory")
+        TArray<UCItem*> FindItemsByClass(TSubclassOf<class UCItem> ItemClass) const;
 
-	// ÇöÀçÀÇ ¹«°³¿Í ¾ÆÀÌÅÛ °¹¼ö ¸¦ °¡Á®¿È GetItems().Num()ÀÇ ¿ªÈ°À» ÇÑ´Ù.
-	UFUNCTION(BlueprintPure, Category = "Inventory")
-		float GetCurrentWeight() const;
+    // í˜„ì¬ì˜ ë¬´ê°œì™€ ì•„ì´í…œ ê°¯ìˆ˜ ë¥¼ ê°€ì ¸ì˜´ GetItems().Num()ì˜ ì—­í™œì„ í•œë‹¤.
+    UFUNCTION(BlueprintPure, Category = "Inventory")
+        float GetCurrentWeight() const;
 
-	UFUNCTION(BlueprintCallable, Category = "Inventory")
-		void SetWeightCapcity(const float NewWeightCapacity);
+    UFUNCTION(BlueprintCallable, Category = "Inventory")
+        void SetWeightCapcity(const float NewWeightCapacity);
 
-	UFUNCTION(BlueprintCallable, Category = "Inventory")
-		void SetCapacity(const int32 NewCapacity);
+    UFUNCTION(BlueprintCallable, Category = "Inventory")
+        void SetCapacity(const int32 NewCapacity);
 
-	UFUNCTION(Client, Reliable)
-		void ClientRefreshInventory();
-	void ClientRefreshInventory_Implementation();
+    UFUNCTION(Client, Reliable)
+        void ClientRefreshInventory();
+    void ClientRefreshInventory_Implementation();
 private:
-	// non_BP ³ëÃâ Ç×¸ñ Ãß°¡ ÇÔ¼ö, ¹Ù·Î È£Ãâ ºÒ°¡´É ¹«Á¶°Ç TryAddItem(), TryAddItemFromClass()¸¦ »ç¿ëÇØ¾ßÇÔ
-	FItemAddResult TryAddItem_Internal(class UCItem* Item);
+    // non_BP ë…¸ì¶œ í•­ëª© ì¶”ê°€ í•¨ìˆ˜, ë°”ë¡œ í˜¸ì¶œ ë¶ˆê°€ëŠ¥ ë¬´ì¡°ê±´ TryAddItem(), TryAddItemFromClass()ë¥¼ ì‚¬ìš©í•´ì•¼í•¨
+    FItemAddResult TryAddItem_Internal(class UCItem* Item);
 
-	// Items.Add()¸¦ ´ë½ÅÇÒ ÇÔ¼ö
-	UCItem* AddItem(class UCItem* Item);
-
-public:
-	UFUNCTION(BlueprintPure, Category = "Inventory")
-		FORCEINLINE float GetWeightCapacity() const { return WeightCapacity; }
-
-	UFUNCTION(BlueprintPure, Category = "Inventory")
-		FORCEINLINE int32 GetCapacity() const { return Capacity; }
-
-	UFUNCTION(BlueprintPure, Category = "Inventory")
-		FORCEINLINE TArray<class UCItem*> GetItems() const { return Items; }
+    // Items.Add()ë¥¼ ëŒ€ì‹ í•  í•¨ìˆ˜
+    UCItem* AddItem(class UCItem* Item);
 
 public:
-	UPROPERTY(BlueprintAssignable, Category = "Inventory")
-		FOnInventoryUpdated OnInventoryUpdated;
+    UFUNCTION(BlueprintPure, Category = "Inventory")
+        FORCEINLINE float GetWeightCapacity() const { return WeightCapacity; }
+
+    UFUNCTION(BlueprintPure, Category = "Inventory")
+        FORCEINLINE int32 GetCapacity() const { return Capacity; }
+
+    UFUNCTION(BlueprintPure, Category = "Inventory")
+        FORCEINLINE TArray<class UCItem*> GetItems() const { return Items; }
+
+public:
+    UPROPERTY(BlueprintAssignable, Category = "Inventory")
+        FOnInventoryUpdated OnInventoryUpdated;
 
 protected:
-	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Inventory")
-		float WeightCapacity;
+    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Inventory")
+        float WeightCapacity;
 
-	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Inventory", meta = (ClampMax = 200.0, ClampMin = 0.0))
-		int32 Capacity;
+    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Inventory", meta = (ClampMax = 200.0, ClampMin = 0.0))
+        int32 Capacity;
 
-	UPROPERTY(VisibleAnywhere, Category = "Inventory", ReplicatedUsing = "OnRep_Items")
-		TArray<class UCItem*> Items;
+    UPROPERTY(VisibleAnywhere, Category = "Inventory", ReplicatedUsing = "OnRep_Items")
+        TArray<class UCItem*> Items;
 
-	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const;
-	virtual bool ReplicateSubobjects(class UActorChannel* Channel, class FOutBunch* Bunch, FReplicationFlags* RepFlags);
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const;
+    virtual bool ReplicateSubobjects(class UActorChannel* Channel, class FOutBunch* Bunch, FReplicationFlags* RepFlags);
 
 private:
-	UFUNCTION()
-		void OnRep_Items();
+    UFUNCTION()
+        void OnRep_Items();
 
-	UPROPERTY()
-		int32 ReplicatedItemsKey;
+    UPROPERTY()
+        int32 ReplicatedItemsKey;
 };
