@@ -8,6 +8,7 @@
 #define LOCTEXT_NAMESPACE "Inventory"
 
 UCInventoryComponent::UCInventoryComponent()
+{
 	// object를 복제 하기위한 함수 SetIsReplicated가 callstack이 일어나 SetIsReplicatedByDefault를 사용함
 	SetIsReplicatedByDefault(true);
 }
@@ -49,7 +50,6 @@ int32 UCInventoryComponent::ConsumeItem(class UCItem* Item, const int32 Quantity
 		if (Item->GetQuantity() <= 0)
 		{
 			RemoveItem(Item);
-			// 한번더 inventory updated
 			ClientRefreshInventory();
 		}
 		else
