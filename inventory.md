@@ -1,3 +1,5 @@
+# Inventory System 구현
+
 1. 상호작용 가능한 오브젝트
 - 상호작용을 위한 InteractComponent 생성
 InteractComponent를 가진 오브젝트가 무엇인지 그리고 player, Item과의 상호작용 상태를 확인하기위한 Component
