@@ -2,6 +2,8 @@
 #include "Net/UnrealNetwork.h"
 #include "UObject/UObjectBase.h"
 #include "Engine/ActorChannel.h"
+#include "../Inventory/CPickup.h"
+#include "Global.h"
 
 #define LOCTEXT_NAMESPACE "Inventory"
 
@@ -48,6 +50,7 @@ int32 UCInventoryComponent::ConsumeItem(class UCItem* Item, const int32 Quantity
 		if (Item->GetQuantity() <= 0)
 		{
 			RemoveItem(Item);
+			ClientRefreshInventory();
 		}
 		else
 		{
