@@ -11,6 +11,8 @@ public class Main : ModuleRules
 		PublicIncludePaths.Add(ModuleDirectory);
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "Paper2D", "UMG", "OnlineSubsystem" });
 
+		PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
+
 		//PrivateDependencyModuleNames.AddRange(new string[] { "Paper2D" });
 
 

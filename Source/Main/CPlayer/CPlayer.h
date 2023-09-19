@@ -48,9 +48,9 @@ protected: //interact
     UPROPERTY(EditDefaultsOnly, Category = "Interaction")
         float InteractionCheckDistance;
 
-    void PerformInteractionCheck(); // ¾Æ·¡ µÎ ÇÔ¼ö ¸¦ ½ÇÇàÇÏ´Â ÇÔ¼ö
-    void CouldnotFindInteractable();   // »óÈ£ÀÛ¿ë ÇÏ´Â ¹°Ã¼¸¦ Ã£Áö¸øÇÒ°æ¿ì
-    void FoundNewInteractable(UCInteractionComponent* Interactable); // »óÈ£ÀÛ¿ëÇÏ´Â ¹°Ã¼¸¦ Ã£¾ÒÀ» °æ¿ì
+    void PerformInteractionCheck(); // ì•„ë˜ ë‘ í•¨ìˆ˜ ë¥¼ ì‹¤í–‰í•˜ëŠ” í•¨ìˆ˜
+    void CouldnotFindInteractable();   // ìƒí˜¸ì‘ìš© í•˜ëŠ” ë¬¼ì²´ë¥¼ ì°¾ì§€ëª»í• ê²½ìš°
+    void FoundNewInteractable(UCInteractionComponent* Interactable); // ìƒí˜¸ì‘ìš©í•˜ëŠ” ë¬¼ì²´ë¥¼ ì°¾ì•˜ì„ ê²½ìš°
 
     void BeginInteract();
     void EndInteract();
@@ -83,7 +83,7 @@ public:
     UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Components")
         class UCInventoryComponent* PlayerInventory;
 
-    // inventory¿¡¼­ ¾ÆÀÌÅÛÀ» »ç¿ëÇÒ¶§
+    // inventoryì—ì„œ ì•„ì´í…œì„ ì‚¬ìš©í• ë•Œ
     UFUNCTION(BlueprintCallable, Category = "Items")
         void UseItem(class UCItem* Item);
 
@@ -92,7 +92,7 @@ public:
     void ServerUseItem_Implementation(class UCItem* Item);
     bool ServerUseItem_Validate(class UCItem* Item);
 
-    // ¾ÆÀÌÅÛÀ» ¹ö¸±¶§
+    // ì•„ì´í…œì„ ë²„ë¦´ë•Œ
     UFUNCTION(BlueprintCallable, Category = "Items")
         void DropItem(class UCItem* Item, const int32 Quantity);
 
@@ -101,7 +101,7 @@ public:
     void ServerDropItem_Implementation(class UCItem* Item, const int32 Quantity);
     bool ServerDropItem_Validate(class UCItem* Item, const int32 Quantity);
 
-    // ºí·çÇÁ¸°Æ®¿¡¼­ »ç¿ë
+    // ë¸”ë£¨í”„ë¦°íŠ¸ì—ì„œ ì‚¬ìš©
     UPROPERTY(EditDefaultsOnly, Category = "Item")
         TSubclassOf<class ACPickup> PickupClass;
 
