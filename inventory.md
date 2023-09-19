@@ -1,3 +1,6 @@
+# Interaction System 구현
+1. 
+
 # Inventory System 구현
 
 1. 상호작용 가능한 오브젝트
