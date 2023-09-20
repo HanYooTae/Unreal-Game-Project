@@ -1,4 +1,4 @@
-# Interaction and Inventory System
+# Inventory System
 ## Interaction System 구현
 1. 상호작용을 위한 감지 시스템
 - player 카메라의 중점에서 시작 되어 InteractionCheckDistance(3000.f)만큼을 탐지하는 linetrace
