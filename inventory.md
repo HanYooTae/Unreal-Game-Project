@@ -1,6 +1,6 @@
 # Interaction and Inventory System
 ## Interaction System 구현
-####1. 상호작용을 위한 감지 시스템
+###1. 상호작용을 위한 감지 시스템
 - player 카메라의 중점에서 시작 되어 InteractionCheckDistance(3000.f)만큼을 탐지하는 linetrace
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/2a563fe9-81ed-4f58-8cf4-9b42732e586e)
