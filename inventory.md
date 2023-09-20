@@ -14,7 +14,7 @@
 -  CouldnotFindInteractable : interact가능 object를 찾지 못할 경우 타이머 헨들을 초기화 해주며 저장했던 상호작용 object들을 삭제한다.
 
 2. interaction widget
--  interact성공한 object가 CPickup class안의 InitializePickup함수를 통해 정보를 위젯으로 스폰한다.
+-  interact성공한 object가 CPickup class안의 InitializePickup함수를 통해 정보를 위젯으로 전달한다.
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/41f49f65-f36c-4293-97e6-c5c07293dc45)
 
