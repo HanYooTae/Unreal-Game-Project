@@ -18,7 +18,7 @@
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/41f49f65-f36c-4293-97e6-c5c07293dc45)
 
-*MarkDirtyForReplication() : 개체를 복제가 필요한 것으로 표시 하 함수. 복제된 속성을 수정한 후에는 이를 내부적으로 호출
+*MarkDirtyForReplication() : 개체를 복제가 필요한 것으로 표시 하는 함수. 복제된 속성을 수정한 후에는 이를 내부적으로 호출
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/77b3dad7-0622-4f67-af50-675677f30cea)
 
