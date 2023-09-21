@@ -88,7 +88,7 @@ public:
         FItemAddResult TryAddItemFromClass(TSubclassOf<class UCItem> ItemClass, const int32 Quantity);
 
     // 품목에서 일부 수량을 빼내고 수량이 0이 되면 재고에서 제거합니다.
-    //int32 ConsumeItem(class UCItem* Item);
+    int32 ConsumeItem(class UCItem* Item);
     int32 ConsumeItem(class UCItem* Item, const int32 Quantity);
 
     // inventory 에서 Item이동

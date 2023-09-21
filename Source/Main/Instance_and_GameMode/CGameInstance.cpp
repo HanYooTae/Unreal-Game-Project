@@ -191,7 +191,7 @@ void UCGameInstance::OnJoinSessionComplete(FName InSessionName, EOnJoinSessionCo
 {
 	FString address;
 
-	/*if (SessionInterface->GetResolvedConnectString(InSessionName, address) == false)
+	if (SessionInterface->GetResolvedConnectString(InSessionName, address) == false)
 	{
 		switch (InResult)
 		{
@@ -212,7 +212,7 @@ void UCGameInstance::OnJoinSessionComplete(FName InSessionName, EOnJoinSessionCo
 			break;
 		}
 		return;
-	}*/
+	}
 
 	APlayerController* controller = GetFirstLocalPlayerController();
 	CheckNull(controller);
