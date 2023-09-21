@@ -83,6 +83,8 @@ private:
 		class UEditableTextBox* SessionNameText;
 
 private:
+	class UCGameInstance* GameInstance;
+
 	// Session List Composition
 	TSubclassOf<class UCSessionRow> SessionRowClass;
 

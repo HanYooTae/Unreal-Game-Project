@@ -445,6 +445,3 @@ void ACPlayer::SetMainWidget()
 {
 
 }
-
-
-

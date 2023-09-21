@@ -34,6 +34,8 @@ void ACPickup::InitializePickup(const TSubclassOf<class UCItem> ItemClass, const
 		Item->SetQuantity(Quantity);
 
 		OnRep_Item();
+
+		Item->MarkDirtyForReplication();
 	}
 }
 

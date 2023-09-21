@@ -95,10 +95,10 @@ void UCMainMenu::OpenJoinGameMenu()
 	CheckNull(JoinGameMenu);
 	MenuSwitcher->SetActiveWidget(JoinGameMenu);
 
-	UCGameInstance* gameInstance = Cast<UCGameInstance>(GetGameInstance());
-	CheckNull(gameInstance);
+	GameInstance = Cast<UCGameInstance>(GetGameInstance());
+	CheckNull(GameInstance);
 
-	gameInstance->FindSession();
+	GameInstance->FindSession();
 }
 
 void UCMainMenu::OpenHostSessionMenu()
@@ -122,10 +122,23 @@ void UCMainMenu::HostServer()
 {
 	FString sessionName = SessionNameText->GetText().ToString();
 
-	UCGameInstance* gameInstance = Cast<UCGameInstance>(GetGameInstance());
-	CheckNull(gameInstance);
+	GameInstance = Cast<UCGameInstance>(GetGameInstance());
+	CheckNull(GameInstance);
 
-	gameInstance->Host(sessionName);
+	GameInstance->Host(sessionName);
 
 	CLog::Log("Host Button Pressed");
+}
+
+void UCMainMenu::JoinServer()
+{
+	if (SelectedRowIndex.IsSet())
+	{
+		GameInstance->JoinSession(SelectedRowIndex.GetValue());
+		CLog::Log("Clicked Session Number : " + SelectedRowIndex.GetValue());
+	}
+	else
+		CLog::Log("SelectedRowIndex is not set");
+
+	CLog::Log("JoinButton Pressed");
 }

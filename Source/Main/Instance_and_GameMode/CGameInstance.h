@@ -29,11 +29,13 @@ public:
 public:	// Session Event
 	void CreateSession();
 	void FindSession();
+	void JoinSession(uint32 InSessionIndex);
 
 private:	// Session Delegate
 	void OnCreateSessionComplete(FName InSessionName, bool InSuccess);
 	void OnDestroySessionComplete(FName InSessionName, bool InSuccess);
 	void OnFindSessionsComplete(bool InSccess);
+	void OnJoinSessionComplete(FName InSessionName, EOnJoinSessionCompleteResult::Type InResult);
 
 private:
 	TSubclassOf<UCMainMenu> MainMenuClass;
