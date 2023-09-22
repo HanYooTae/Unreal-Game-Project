@@ -24,16 +24,16 @@ FItemAddResult UCInventoryComponent::TryAddItemFromClass(TSubclassOf<class UCIte
 	Item->SetQuantity(Quantity);
 	return TryAddItem_Internal(Item);
 }
-
-//int32 UCInventoryComponent::ConsumeItem(class UCItem* Item)
-//{
-//	if (Item)
-//	{
-//		ConsumeItem(Item, Item->GetQuantity());
-//	}
 //
-//	return 0;
-//}
+int32 UCInventoryComponent::ConsumeItem(class UCItem* Item)
+{
+	if (Item)
+	{
+		ConsumeItem(Item, Item->GetQuantity());
+	}
+
+	return 0;
+}
 
 int32 UCInventoryComponent::ConsumeItem(class UCItem* Item, const int32 Quantity)
 {
