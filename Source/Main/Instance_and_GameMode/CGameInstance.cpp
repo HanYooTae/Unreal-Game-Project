@@ -24,6 +24,7 @@ void UCGameInstance::Init()
 		SessionInterface->OnCreateSessionCompleteDelegates.AddUObject(this, &UCGameInstance::OnCreateSessionComplete);
 		SessionInterface->OnDestroySessionCompleteDelegates.AddUObject(this, &UCGameInstance::OnDestroySessionComplete);
 		SessionInterface->OnFindSessionsCompleteDelegates.AddUObject(this, &UCGameInstance::OnFindSessionsComplete);
+		SessionInterface->OnJoinSessionCompleteDelegates.AddUObject(this, &UCGameInstance::OnJoinSessionComplete);
 	}
 }
 
@@ -103,6 +104,17 @@ void UCGameInstance::FindSession()
 	}
 }
 
+void UCGameInstance::JoinSession(uint32 InSessionIndex)
+{
+	CheckFalse(SessionInterface.IsValid());
+	CheckFalse(SearchSettings.IsValid());
+
+	if (!!MainMenu)
+		MainMenu->Detach();
+
+	SessionInterface->JoinSession(0, SESSION_NAME, SearchSettings->SearchResults[InSessionIndex]);
+}
+
 void UCGameInstance::OnCreateSessionComplete(FName InSessionName, bool InSuccess)
 {
 	UE_LOG(LogTemp, Error, L"CreateSessionComplete");
@@ -173,4 +185,39 @@ void UCGameInstance::OnFindSessionsComplete(bool InSuccess)
 
 	}
 
+}
+
+void UCGameInstance::OnJoinSessionComplete(FName InSessionName, EOnJoinSessionCompleteResult::Type InResult)
+{
+	FString address;
+
+	if (SessionInterface->GetResolvedConnectString(InSessionName, address) == false)
+	{
+		switch (InResult)
+		{
+		case EOnJoinSessionCompleteResult::SessionIsFull:
+			CLog::Log("SessionIsFull");
+			break;
+		case EOnJoinSessionCompleteResult::SessionDoesNotExist:
+			CLog::Log("SessionDoesNotExist");
+			break;
+		case EOnJoinSessionCompleteResult::CouldNotRetrieveAddress:
+			CLog::Log("CouldNotRetrieveAddress");
+			break;
+		case EOnJoinSessionCompleteResult::AlreadyInSession:
+			CLog::Log("AlreadyInSession");
+			break;
+		case EOnJoinSessionCompleteResult::UnknownError:
+			CLog::Log("UnknownError");
+			break;
+		}
+		return;
+	}
+
+	APlayerController* controller = GetFirstLocalPlayerController();
+	CheckNull(controller);
+	
+	CLog::Print("Address is " + address);
+
+	controller->ClientTravel(address, ETravelType::TRAVEL_Absolute);
 }
