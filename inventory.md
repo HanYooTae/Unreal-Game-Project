@@ -17,8 +17,7 @@ inventorySystem을 구현하기 위해 2개의 component가 필요함
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/307bf020-80cc-4475-bc89-65559c6bedc8)
 
 4. Line trace : player와 상호작욕을 할 Object를 감지하는 역할
-
-![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/79e67175-7d86-49f9-94e6-24ff87f90bcd)
+hitresult에 따라 FoundNewInteractable, CouldnotFindInteractable 호출
 
 - FoundNewInteractable     : 상호작용하는 물체를 찾았을 경우
 
