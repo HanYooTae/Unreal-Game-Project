@@ -6,7 +6,3 @@ Inventory를 최신화 해주는 Inventory updated가 변수에 바인딩된 OnR
 
 ##Fix
 아이템을 지우는 RemoveItem함수를 호출후 바로 최신화하는 ClientRefreshInventory 함수를 호출하여 빠른 최신화를 하게 하였다.
-
-
-
-
