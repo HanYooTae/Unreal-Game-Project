@@ -18,7 +18,7 @@ inventorySystem을 구현하기 위해 2개의 component가 필요함
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/53da5b9a-8ede-4016-842d-bd7772277276)
 
-4. Line trace : player와 상호작욕을 할 Object를 감지하는 역활
+4. Line trace : player와 상호작욕을 할 Object를 감지하는 역할
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/79e67175-7d86-49f9-94e6-24ff87f90bcd)
 
