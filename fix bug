@@ -1,8 +1,1 @@
-#1. Inventory Drop bug
-인벤토리 창에서 아이템을 버릴때 item의 Thumbnail이 지워지지 않는 버그가 있었다.
 
-##버그
-Inventory를 최신화 해주는 Inventory updated가 변수에 바인딩된 OnRep_Items에서 Broadcast를 하여 인벤토리를 최신화 해주는데 이과정에서 호출하는 과정에서 수동으로 인벤토리를 키고 켜야 한다는것을 발견했다.
-
-##Fix
-아이템을 지우는 RemoveItem함수를 호출후 바로 최신화하는 ClientRefreshInventory 함수를 호출하여 빠른 최신화를 하게 하였다.
