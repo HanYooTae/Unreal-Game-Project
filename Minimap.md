@@ -1,4 +1,4 @@
-## Main Widget 구현
+## Main Widget 구현 (한유태)
 
 1. Create Main Widget
    - (코드의 재사용성 활용) 앞으로 만들어질 모든 widget들을 Main Widget에 붙일 예정.
@@ -48,3 +48,4 @@
   
      ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/c5afcc3e-95ee-44ee-8486-c910e91bc7ef)
      ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/56104fa9-930d-4777-b045-7465a0922e32)
+)
