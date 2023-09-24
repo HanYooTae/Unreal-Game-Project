@@ -4,6 +4,7 @@
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/fb50c00b-f11f-4d85-983b-5b32d0af4797)
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/38f0aee0-1b9c-4cab-b5e9-3b3e486aa279)
+
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/ae320f46-273f-42ed-9a78-4e71c65cdb78)
 
 
@@ -11,6 +12,7 @@
 - Create 버튼을 누르면 2.Host(Create) Session Menu Widget으로 Switch
 - Join 버튼을 누르면 3.Join Session Menu Widget으로 Switch
 - 우측 상단 버튼을 누르면 게임종료
+  
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/0ef69ce9-7c2b-46a7-840e-fc3216b7bcbc)
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/6c2dff36-e184-4ad2-b759-fe30ff3fe27c)
