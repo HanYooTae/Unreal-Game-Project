@@ -24,7 +24,7 @@
 
 - CMainMenu.cpp
 
-![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/269ce4b4-ccf5-45b0-923f-a16266625f36)
+![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/a57da47e-9de2-4666-9457-175efdbb9fd7)
 
 - Server Player가 Session Create를 성공했다면 맵 이동
 
@@ -32,12 +32,22 @@
 
 
 ## 2. Destroy Session
+- Session을 Create한 후에 종료하더라도 세션은 그대로 남아있기 때문에 Session을 Create할 수 없음.
+- 기존에 만들어져 있던 Session을 Destroy해야 다시 Create할 수 있음.
+
+![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/b532b3df-bb8d-4a96-b0f8-7e5e4b580614)
+
+- Session Destroy가 완료되었다면 Session을 Create
+
+![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/783570b5-779e-49a1-978c-12e354d98d19)
 
 
 ## 3. Find Session
-
+- 만들어진 Session을 검색하려면 IOnlineSession::FindSessions함수를 사용하여 CreateSession에서 Setting한 Key값과 Name을 FOnlineSessionSearch로 전달받음.
+- FOnlineSessionSearch->SearchResults멤버가 일치하는 세션으로 채워지며, 검색이 완료되면 FindSessionComplete Delegate가 발
 
 ## 4. Join Session
 
 
 ## 5. Start Session && Game Mode
+- 추후 진행 예정
