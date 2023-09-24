@@ -21,17 +21,15 @@
   -> Lan Match Session or not
   
   -> etc.
-  
-![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/269ce4b4-ccf5-45b0-923f-a16266625f36)
 
-< OSS Settings >
+- CMainMenu.cpp
+
+![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/269ce4b4-ccf5-45b0-923f-a16266625f36)
 
 - Server Player가 Session Create를 성공했다면 맵 이동
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/3b4c0995-435a-48bb-9331-8ee589794738)
 
-
-< CreateSessionComplete >
 
 ## 2. Destroy Session
 
