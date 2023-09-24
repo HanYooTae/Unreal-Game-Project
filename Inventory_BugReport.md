@@ -12,3 +12,9 @@ Drop Item Bug
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/60e28376-aaf0-4cc4-a337-af0536bf3b2f)
 
+
+참고영상
+bug fix전 : https://youtu.be/HZYjlxezU5Y
+bug fix후 : https://youtu.be/dhlBdeyTq6c
+
+
