@@ -42,6 +42,36 @@ inventorySystem을 구현하기 위해 2개의 component가 필요함
 
 1. FItemAddResult : 아이템의 갯수, 무게 Text 를 찍어주는 구조체
 
+2. TryAddItem_Internal : TryAddItem(), TryAddItemFromClass()에서 호출하여 현 아이템의 상태를 체크하는 함수
+
+![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/4d3c63c9-0248-44ba-9f80-58d8e9a0b463)
+
+*코드가 길기 때문에 일부 예시만 올림
+
+3. AddItem : Items.Add()를 대신할 함수
+
+4. OnInventoryUpdated : 인벤토리내부가 바뀌거나 UI가 업데이트가 될때 실행
+
+![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/1b288ce8-0ecf-4339-b2c8-f18ed62767f6)
+
+5. TryAddItem : Inventory에 아이템 추가
+
+![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/5e16a6a8-0314-49e4-9c15-6192dd08a976)
+
+6. TryAddItemFromClass : 아이템 인스턴스 대신 아이템 클래스를 사용하여 인벤토리에 아이템 추가
+
+![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/eb30a73c-e613-4129-95e9-92a928f1d771)
+
+7. ConsumeItem : 품목에서 일부 수량을 빼내고 수량이 0이 되면 재고에서 제거
+
+![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/a76654d2-5324-46de-95f8-e24a6b2e8c54)
+
+
+
+
+
+
+
 
   참고영상 : https://youtu.be/5jAUMOePUg0
 
