@@ -6,10 +6,6 @@
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/f40c1d45-74be-4000-82cf-c590024b3827)
 
-
-
-
-
 ## 1. Create Session
 - OSS를 사용하려면 FOnlineSessionSettings클래스를 사용해야 함.
 - FOnlineSessionSettings클래스를 통해서 아래와 같은 정보들을 Setting할 수 있다.
@@ -24,7 +20,8 @@
 
 - CMainMenu.cpp
 
-![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/a57da47e-9de2-4666-9457-175efdbb9fd7)
+![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/4dde78fb-474b-4bc1-bc9d-46fc157b46b3)
+
 
 - Server Player가 Session Create를 성공했다면 맵 이동
 
@@ -41,7 +38,6 @@
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/783570b5-779e-49a1-978c-12e354d98d19)
 
-
 ## 3. Find Session
 - 만들어진 Session을 검색하려면,
 
@@ -51,19 +47,24 @@
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/573e5361-54bc-4899-80b9-6e132d20eef5)
 
-  
 - FOnlineSessionSearch->SearchResults멤버가 일치하는 세션으로 채워짐.
 - CreateSession에서 Setting한 Key값과 Name을 FOnlineSessionSearch로 전달받음.
 - Session Find가 완료되면 MainMenu의 Scrollbox에 Session이 조회됨.(https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/OnlineSubSystem_Widget.md#3-join-session-menu-widget)
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/0a454c4a-0937-4868-a356-66aa16f7a72c)
 
-
-  
-
-
-
 ## 4. Join Session
+- 찾은 세션에 접속하려면,
+
+    -> MainMenu->Scrollbox에 조회된 Session들의 index를 전달받아야 함.
+
+![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/1e561e9c-b883-4251-bfd2-754eae938ed7)
+
+
+- 접속이 실패했다면, 상세 사유 전달
+- Session에 접속이 성공했다면 ClinetTravel로 Session에 접속이 됨.
+
+![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/93062e6d-0a91-4d1f-aabd-687d61b29907)
 
 
 ## 5. Start Session && Game Mode
