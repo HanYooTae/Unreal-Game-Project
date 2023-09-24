@@ -4,9 +4,9 @@ Drop Item Bug
 
 1. 해결방법
 
-최신화가 inventory를 열고 닫았을때 수동으로 최신화가 되는 구조였다.
-RemoveItem이라는 아이템을 제거해주는 함수에서 바로 최신화하기 위해서는 
-ClientRefreshInventory라는 새로만든 최신화를 해주는 함수가 필요했다.
+    최신화가 inventory를 열고 닫았을때 수동으로 최신화가 되는 구조였다.
+    RemoveItem이라는 아이템을 제거해주는 함수에서 바로 최신화하기 위해서는 
+    ClientRefreshInventory라는 새로만든 최신화를 해주는 함수가 필요했다.
 
 2. fix한 코드는 아래와 같다.
 
