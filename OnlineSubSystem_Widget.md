@@ -1,4 +1,4 @@
-## Make OSS Widget
+## Make OSS Widget (한유태)
 - 3개의 위젯을 Menu Switcher기능을 통해 하나의 Widget으로 구현
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/fb50c00b-f11f-4d85-983b-5b32d0af4797)
