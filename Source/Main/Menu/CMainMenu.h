@@ -41,8 +41,7 @@ private:
 
 private:	// Create & Join Session
 	UFUNCTION()	void HostServer();
-	UFUNCTION()
-		void JoinServer();
+	UFUNCTION() void JoinServer();
 
 private:
 	// Menu
