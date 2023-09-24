@@ -9,27 +9,30 @@
 - Join 버튼을 누르면 3.Join Session Menu Widget으로 Switch
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/6c2dff36-e184-4ad2-b759-fe30ff3fe27c)
-<Edit Page>
+(Edit Page)
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/764cbfca-76da-412b-8b8a-84521cb9504c)
+(InGame)
 
 ### 2. Create Session Menu Widget
 - Back Button을 누르면 1.Main Menu Widget으로 Switch
 - EditableBox에 제목을 입력 후 Create Button을 누르면 해당 제목을 가진 Game이 생성
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/0e8178b4-e683-4213-82e0-35833fc53b12)
-<Edit Page>
+(Edit Page)
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/628bc423-727a-42e8-b340-caf5858c42bf)
+(InGame)
 
 ### 3. Join Session Menu Widget
 - Back Button을 누르면 1.Main Menu Widget으로 Switch
 - ScrollBox에 생성된 Game이 있다면, 클릭 후 Join버튼을 클릭하면 Game에 Join
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/f8fecdd6-da4d-47a3-ab54-651bc26aaaee)
-<Edit Page>
+(Edit Page)
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/a1498a06-4f84-48e9-86f6-e241b616f9c9)
+(InGame)
 
 
 ## Create OnlineSubSystem
