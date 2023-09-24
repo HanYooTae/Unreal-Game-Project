@@ -66,11 +66,40 @@ inventorySystem을 구현하기 위해 2개의 component가 필요함
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/a76654d2-5324-46de-95f8-e24a6b2e8c54)
 
+8. RemoveItem : inventory 에서 Item제거
 
+![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/646f760a-93db-4872-9039-312f447af6aa)
 
+9. HasItem : 아이템을 가지고 있다면 return값은 true
 
+![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/1ffd7e0e-ec52-423e-8f1f-c2ce339b9cf1)
 
+10. FindItem : 얻은 아이템이 이미 가진 아이템의 class와 동일한지를 반환하는함수
 
+![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/2e307527-3238-498c-903f-94340b4cb5e6)
+
+11. FindItemByClass : 모든 인벤의 아이템 클레스를 가져옴
+
+![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/b05ebdeb-125e-4f8c-9864-f06062710155)
+
+### Widget BluePrint
+
+1. WB_Inventory : WB_Inventory Widget, WB_DropWidget, WB_Equipment를 가진 main inventory widget
+
+![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/c14b36c0-4c61-42ac-babd-b49c6e8c5d88)
+
+2. WB_Inventory Widget : item을 먹으면 item thumbnail을 올려주며 item을 관리할 수 있는 widget
+- Initialize From Inventory : On Inventory Updated 바인딩을 하여 자기자신을 최신화 하여 실행해주며 map형태의 변수 Item Widget 을 item class 의 아이템들을 저장하고 지워주는 함
+
+![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/b79be96d-59ba-488a-8771-07429bd7a416)
+
+- UpdateInventory information : 인벤토리안에 아이템의 무게 갯수 를 표기해주는 함수
+
+![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/70cd884c-9bbe-4a8b-af4b-5b78cee792b4)
+  
+3. WB_DropWidget : 버릴 수량을 기임후 enter key를 누르면 입력한 갯수 만큼 버려주는 함수
+
+![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/43bbc6ed-633e-49fd-9c30-c0df6fe38645)
 
 
   참고영상 : https://youtu.be/5jAUMOePUg0
