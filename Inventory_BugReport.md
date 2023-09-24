@@ -1,4 +1,4 @@
-##Drop Item Bug
+## Drop Item Bug
 
 아이템을 버릴때 인벤토리에서 thumbnail이 늦게 지워지는 bug가 있었다.
 
@@ -14,7 +14,9 @@
 
 
 <참고영상>
--bug fix전 : https://youtu.be/HZYjlxezU5Y
--bug fix후 : https://youtu.be/dhlBdeyTq6c
+
+- bug fix전 : https://youtu.be/HZYjlxezU5Y
+
+- bug fix후 : https://youtu.be/dhlBdeyTq6c
 
 
