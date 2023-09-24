@@ -7,14 +7,13 @@ inventorySystem을 구현하기 위해 2개의 component가 필요함
 
 1. RefreshWidget : 아이템의 갯수 등 현 아이템의 상태를 알기위한 함수
 
-![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/12303e2d-4d4a-44cf-8533-505b81ed31a0)
 
-2. BeginFocus, EndFocus : 플레이어 상호 작용 확인 추적이 이 Client에 대한 타격을 시작/종료할 때 클라이언트에서 호출
+2. BeginFocus, EndFocus : 플레이어 상호 작용 확인 추적이 이 Object에 대한 타격을 시작/종료할 때 클라이언트에서 호출
 -UPrimitiveComponent : 충돌 데이터로 렌더링되거나 사용되는 일종의 형상을 포함하거나 생성하는 SceneComponent
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/0c577b11-6d8a-4a01-a55c-75a966f0becd)
 
-3. BeginInteract, EndInteract, Interact : 플레이어가 Client와의 상호 작용을 시작 / 종료할 때 클라이언트에서 호출
+3. BeginInteract, EndInteract, Interact : 플레이어가 Object와의 상호 작용을 시작 / 종료할 때 클라이언트에서 호출
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/53da5b9a-8ede-4016-842d-bd7772277276)
 
