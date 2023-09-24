@@ -30,6 +30,11 @@ inventorySystem을 구현하기 위해 2개의 component가 필요함
 
   ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/dd764f6c-e247-4a91-8d1c-c308b361d754)
 
+5. WB_InteractionCard
+   -상호작용을 성공했을 경우 Object의 정보를 알 수 있는 Widget
+
+   ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/6e3bb2ac-87ec-46ef-93c5-72587de15caf)
+
 
 ## Inventory System 구현
 
