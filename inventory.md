@@ -7,4 +7,4 @@ inventorySystem을 구현하기 위해 2개의 component가 필요함
 
 ## Inventory System 구현
 
-  참조영상 : https://youtu.be/5jAUMOePUg0
+  참고영상 : https://youtu.be/5jAUMOePUg0
