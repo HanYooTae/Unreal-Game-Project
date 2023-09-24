@@ -1,4 +1,4 @@
-## Make OSS Widget (한유태)
+# Make OSS Widget (한유태)
 - 3개의 위젯을 Menu Switcher기능을 통해 하나의 Widget으로 구현
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/fb50c00b-f11f-4d85-983b-5b32d0af4797)
@@ -8,7 +8,7 @@
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/ae320f46-273f-42ed-9a78-4e71c65cdb78)
 
 
-### 1. Main Menu Widget
+## 1. Main Menu Widget
 - Create 버튼을 누르면 2.Host(Create) Session Menu Widget으로 Switch
 - Join 버튼을 누르면 3.Join Session Menu Widget으로 Switch
 - 우측 상단 버튼을 누르면 게임종료
@@ -23,7 +23,7 @@
 
 < InGame >
 
-### 2. Host(Create) Session Menu Widget
+## 2. Host(Create) Session Menu Widget
 - Back Button을 누르면 1.Main Menu Widget으로 Switch
 - EditableBox에 제목을 입력 후 Create Button을 누르면 해당 제목을 가진 Game이 생성
 
@@ -38,7 +38,7 @@
 
 < InGame >
 
-### 3. Join Session Menu Widget
+## 3. Join Session Menu Widget
 - Back Button을 누르면 1.Main Menu Widget으로 Switch
 - ScrollBox에 생성된 Game이 있다면, 클릭 후 Join버튼을 클릭하면 Game에 Join
 
