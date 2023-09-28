@@ -152,8 +152,8 @@ private:
     TSubclassOf<class UCMainWidget> MainWidgetClass;
 
 private:
-    class UMaterialInstanceDynamic* BodyMaterial;
-    class UMaterialInstanceDynamic* LogoMaterial;
+    class UMaterialInstanceDynamic* Material_First;
+    class UMaterialInstanceDynamic* Material_Second;
 
     // Main Widget
 public:
