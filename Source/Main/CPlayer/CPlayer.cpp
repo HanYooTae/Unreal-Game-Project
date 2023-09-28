@@ -32,7 +32,7 @@ ACPlayer::ACPlayer()
 	GetMesh()->SetRelativeLocation(FVector(0, 0, -88));
 	GetMesh()->SetRelativeRotation(FRotator(0, -90, 0));
 
-	ConstructorHelpers::FClassFinder<UCAnimInstance> animClass(TEXT("AnimBlueprint'/Game/Character/Animations/ABP_CPlayer.ABP_CPlayer_C'"));
+	ConstructorHelpers::FClassFinder<UCAnimInstance> animClass(TEXT("AnimBlueprint'/Game/Character/Heraklios/Animation/ABP_MyCPlayer.ABP_MyCPlayer_C'"));
 	if (animClass.Succeeded())
 		GetMesh()->SetAnimInstanceClass(animClass.Class);
 
@@ -87,19 +87,19 @@ void ACPlayer::BeginPlay()
 {
 	Super::BeginPlay();
 	//Get Material Asset
-	UMaterialInstanceConstant* bodyMaterialAsset;
-	CHelpers::GetAssetDynamic(&bodyMaterialAsset, "MaterialInstanceConstant'/Game/Character/Materials/M_UE4Man_Body_Inst.M_UE4Man_Body_Inst'");
+	UMaterialInstanceConstant* firstMaterialAsset;
+	CHelpers::GetAssetDynamic(&firstMaterialAsset, "MaterialInstanceConstant'/Game/Character/Heraklios/Material/BattalionLeader_MAT_Inst.BattalionLeader_MAT_Inst'");
 
-	UMaterialInstanceConstant* logoMaterialAsset;
-	CHelpers::GetAssetDynamic(&logoMaterialAsset, "MaterialInstanceConstant'/Game/Character/Materials/M_UE4Man_ChestLogo.M_UE4Man_ChestLogo'");
+	UMaterialInstanceConstant* secondMaterialAsset;
+	CHelpers::GetAssetDynamic(&secondMaterialAsset, "MaterialInstanceConstant'/Game/Character/Heraklios/Material/phong1_Inst.phong1_Inst'");
 
 	//Create Dynamic Material
-	BodyMaterial = UMaterialInstanceDynamic::Create(bodyMaterialAsset, nullptr);
-	LogoMaterial = UMaterialInstanceDynamic::Create(logoMaterialAsset, nullptr);
+	Material_First = UMaterialInstanceDynamic::Create(firstMaterialAsset, nullptr);
+	Material_Second = UMaterialInstanceDynamic::Create(secondMaterialAsset, nullptr);
 
 	//Set Dynamic Material to Mesh Comp
-	GetMesh()->SetMaterial(0, BodyMaterial);
-	GetMesh()->SetMaterial(1, LogoMaterial);
+	GetMesh()->SetMaterial(0, Material_First);
+	GetMesh()->SetMaterial(1, Material_Second);
 
 	// Create & Attach MainWidget
 	MainWidget = CreateWidget<UCMainWidget>(GetWorld(), MainWidgetClass);

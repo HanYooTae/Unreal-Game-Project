@@ -137,7 +137,7 @@ void UCGameInstance::OnCreateSessionComplete(FName InSessionName, bool InSuccess
 	UWorld* world = GetWorld();
 	CheckNull(world);
 
-	//-> Everybody Move to Play Map
+	//-> Move to Play Map
 	world->ServerTravel("/Game/Map/Main?listen");
 }
 
