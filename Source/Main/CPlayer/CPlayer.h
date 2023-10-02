@@ -126,6 +126,20 @@ private: // Action
     void StopJump();
 
 private:
+    UFUNCTION()
+        void OnStateTypeChanged(EStateType InPrevType, EStateType InNewType);
+
+private:    // Character Component
+    UPROPERTY(VisibleDefaultsOnly)
+        class UCStatusComponent* Status;
+
+    UPROPERTY(VisibleDefaultsOnly)
+        class UCStateComponent* State;
+
+    UPROPERTY(VisibleDefaultsOnly)
+        class UCMontagesComponent* Montages;
+
+private:
     UPROPERTY(VisibleDefaultsOnly)
         class USpringArmComponent* SpringArm;
 

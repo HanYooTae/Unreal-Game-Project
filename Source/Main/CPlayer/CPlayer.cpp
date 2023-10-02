@@ -2,23 +2,31 @@
 #include "Global.h"
 #include "CAnimInstance.h"
 #include "Widget/CMainWidget.h"
+#include "Components/CapsuleComponent.h"
+#include "CharacterComponents/CStatusComponent.h"
+#include "CharacterComponents/CStateComponent.h"
+#include "CharacterComponents/CMontagesComponent.h"
+#include "GameFramework/SpringArmComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "Blueprint/UserWidget.h"
 #include "Camera/CameraComponent.h"
-#include "Components/CapsuleComponent.h"
-#include "../ActorComponent/CParkourSystem.h"
-#include "GameFramework/SpringArmComponent.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "Materials/MaterialInstanceConstant.h"
-#include "Components/SceneCaptureComponent2D.h"
-#include "GameFramework/CharacterMovementComponent.h"
+#include "../ActorComponent/CParkourSystem.h"
 #include "ActorComponent/CInteractionComponent.h"
 #include "ActorComponent/CInventoryComponent.h"
+#include "Components/SceneCaptureComponent2D.h"
 #include "../Inventory/CPickup.h"
 //#include "PaperSpriteComponent.h"
 
 ACPlayer::ACPlayer()
 {
 	PrimaryActorTick.bCanEverTick = true;
+
+	// Create CharacterComponent
+	CHelpers::CreateActorComponent(this, &Status, "Status");
+	CHelpers::CreateActorComponent(this, &State, "State");
+	CHelpers::CreateActorComponent(this, &Montages, "Montages");
 
 	CHelpers::CreateActorComponent(this, &parkour, "ACParkour");
 	
@@ -86,6 +94,10 @@ ACPlayer::ACPlayer()
 void ACPlayer::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Use CharacterComponents Delegate
+	State->OnStateTypeChanged.AddDynamic(this, &ACPlayer::OnStateTypeChanged);
+
 	//Get Material Asset
 	UMaterialInstanceConstant* firstMaterialAsset;
 	CHelpers::GetAssetDynamic(&firstMaterialAsset, "MaterialInstanceConstant'/Game/Character/Heraklios/Material/BattalionLeader_MAT_Inst.BattalionLeader_MAT_Inst'");
@@ -397,6 +409,7 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void ACPlayer::OnMoveForward(float Axis)
 {
+	CheckFalse(Status->IsCanMove());
 	FRotator rotator = FRotator(0, GetControlRotation().Yaw, 0);
 	FVector direction = FQuat(rotator).GetForwardVector().GetSafeNormal2D();
 
@@ -405,6 +418,7 @@ void ACPlayer::OnMoveForward(float Axis)
 
 void ACPlayer::OnMoveRight(float Axis)
 {
+	CheckFalse(Status->IsCanMove());
 	FRotator rotator = FRotator(0, GetControlRotation().Yaw, 0);
 	FVector direction = FQuat(rotator).GetRightVector().GetSafeNormal2D();
 
@@ -423,12 +437,14 @@ void ACPlayer::OnVerticalLook(float Axis)
 
 void ACPlayer::OnSprint()
 {
-	GetCharacterMovement()->MaxWalkSpeed = 600.f;
+	//GetCharacterMovement()->MaxWalkSpeed = 600.f;
+	Status->ChangeMoveSpeed(EWalkSpeedType::Run);
 }
 
 void ACPlayer::OffSprint()
 {
-	GetCharacterMovement()->MaxWalkSpeed = 400.f;
+	//GetCharacterMovement()->MaxWalkSpeed = 400.f;
+	Status->ChangeMoveSpeed(EWalkSpeedType::Walk);
 }
 
 void ACPlayer::StartJump()
@@ -439,6 +455,11 @@ void ACPlayer::StartJump()
 void ACPlayer::StopJump()
 {
 	bPressedJump = false;
+}
+
+void ACPlayer::OnStateTypeChanged(EStateType InPrevType, EStateType InNewType)
+{
+
 }
 
 void ACPlayer::SetMainWidget()
