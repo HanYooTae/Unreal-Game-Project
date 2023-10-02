@@ -39,6 +39,12 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+public:
+	void PlayJump();
+
+private:
+	void PlayMontage(EStateType InStateType);
+
 private:
 	UPROPERTY(EditDefaultsOnly, Category = "DataTable")
 		UDataTable* DataTable;
