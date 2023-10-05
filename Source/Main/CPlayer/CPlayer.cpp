@@ -2,23 +2,31 @@
 #include "Global.h"
 #include "CAnimInstance.h"
 #include "Widget/CMainWidget.h"
+#include "Components/CapsuleComponent.h"
+#include "CharacterComponents/CStatusComponent.h"
+#include "CharacterComponents/CStateComponent.h"
+#include "CharacterComponents/CMontagesComponent.h"
+#include "GameFramework/SpringArmComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "Blueprint/UserWidget.h"
 #include "Camera/CameraComponent.h"
-#include "Components/CapsuleComponent.h"
-#include "../ActorComponent/CParkourSystem.h"
-#include "GameFramework/SpringArmComponent.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "Materials/MaterialInstanceConstant.h"
-#include "Components/SceneCaptureComponent2D.h"
-#include "GameFramework/CharacterMovementComponent.h"
+#include "../ActorComponent/CParkourSystem.h"
 #include "ActorComponent/CInteractionComponent.h"
 #include "ActorComponent/CInventoryComponent.h"
+#include "Components/SceneCaptureComponent2D.h"
 #include "../Inventory/CPickup.h"
 //#include "PaperSpriteComponent.h"
 
 ACPlayer::ACPlayer()
 {
 	PrimaryActorTick.bCanEverTick = true;
+
+	// Create CharacterComponent
+	CHelpers::CreateActorComponent(this, &Status, "Status");
+	CHelpers::CreateActorComponent(this, &State, "State");
+	CHelpers::CreateActorComponent(this, &Montages, "Montages");
 
 	CHelpers::CreateActorComponent(this, &parkour, "ACParkour");
 	
@@ -32,7 +40,7 @@ ACPlayer::ACPlayer()
 	GetMesh()->SetRelativeLocation(FVector(0, 0, -88));
 	GetMesh()->SetRelativeRotation(FRotator(0, -90, 0));
 
-	ConstructorHelpers::FClassFinder<UCAnimInstance> animClass(TEXT("AnimBlueprint'/Game/Character/Animations/ABP_CPlayer.ABP_CPlayer_C'"));
+	ConstructorHelpers::FClassFinder<UCAnimInstance> animClass(TEXT("AnimBlueprint'/Game/Character/Heraklios/Animation/ABP_MyCPlayer.ABP_MyCPlayer_C'"));
 	if (animClass.Succeeded())
 		GetMesh()->SetAnimInstanceClass(animClass.Class);
 
@@ -86,20 +94,24 @@ ACPlayer::ACPlayer()
 void ACPlayer::BeginPlay()
 {
 	Super::BeginPlay();
-	//Get Material Asset
-	UMaterialInstanceConstant* bodyMaterialAsset;
-	CHelpers::GetAssetDynamic(&bodyMaterialAsset, "MaterialInstanceConstant'/Game/Character/Materials/M_UE4Man_Body_Inst.M_UE4Man_Body_Inst'");
 
-	UMaterialInstanceConstant* logoMaterialAsset;
-	CHelpers::GetAssetDynamic(&logoMaterialAsset, "MaterialInstanceConstant'/Game/Character/Materials/M_UE4Man_ChestLogo.M_UE4Man_ChestLogo'");
+	// Use CharacterComponents Delegate
+	State->OnStateTypeChanged.AddDynamic(this, &ACPlayer::OnStateTypeChanged);
+
+	//Get Material Asset
+	UMaterialInstanceConstant* firstMaterialAsset;
+	CHelpers::GetAssetDynamic(&firstMaterialAsset, "MaterialInstanceConstant'/Game/Character/Heraklios/Material/BattalionLeader_MAT_Inst.BattalionLeader_MAT_Inst'");
+
+	UMaterialInstanceConstant* secondMaterialAsset;
+	CHelpers::GetAssetDynamic(&secondMaterialAsset, "MaterialInstanceConstant'/Game/Character/Heraklios/Material/phong1_Inst.phong1_Inst'");
 
 	//Create Dynamic Material
-	BodyMaterial = UMaterialInstanceDynamic::Create(bodyMaterialAsset, nullptr);
-	LogoMaterial = UMaterialInstanceDynamic::Create(logoMaterialAsset, nullptr);
+	Material_First = UMaterialInstanceDynamic::Create(firstMaterialAsset, nullptr);
+	Material_Second = UMaterialInstanceDynamic::Create(secondMaterialAsset, nullptr);
 
 	//Set Dynamic Material to Mesh Comp
-	GetMesh()->SetMaterial(0, BodyMaterial);
-	GetMesh()->SetMaterial(1, LogoMaterial);
+	GetMesh()->SetMaterial(0, Material_First);
+	GetMesh()->SetMaterial(1, Material_Second);
 
 	// Create & Attach MainWidget
 	MainWidget = CreateWidget<UCMainWidget>(GetWorld(), MainWidgetClass);
@@ -142,6 +154,8 @@ void ACPlayer::PerformInteractionCheck()
 	FCollisionQueryParams QueryParams;
 	QueryParams.AddIgnoredActor(this);
 	
+	DrawDebugLine(GetWorld(), TraceStart, TraceEnd, FColor::Orange);
+
 	if (GetWorld()->LineTraceSingleByChannel(TraceHit, TraceStart, TraceEnd, ECC_Visibility, QueryParams))
 	{
 		// 상호작용가능한 object를 Check
@@ -189,7 +203,7 @@ void ACPlayer::CouldnotFindInteractable()
 	InteractionData.ViewedInteractionComponent = nullptr;
 }
 
-void ACPlayer::FoundNewInteractable(UCInteractionComponent* Interactable)
+void ACPlayer::FoundNewInteractable_Implementation(UCInteractionComponent* Interactable)
 {
 	EndInteract();
 	
@@ -207,6 +221,7 @@ void ACPlayer::BeginInteract()
 {
 	if (!HasAuthority())
 	{
+		CLog::Print("Im Client");
 		SeverBeginInteract();
 	}
 
@@ -397,6 +412,7 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void ACPlayer::OnMoveForward(float Axis)
 {
+	CheckFalse(Status->IsCanMove());
 	FRotator rotator = FRotator(0, GetControlRotation().Yaw, 0);
 	FVector direction = FQuat(rotator).GetForwardVector().GetSafeNormal2D();
 
@@ -405,6 +421,7 @@ void ACPlayer::OnMoveForward(float Axis)
 
 void ACPlayer::OnMoveRight(float Axis)
 {
+	CheckFalse(Status->IsCanMove());
 	FRotator rotator = FRotator(0, GetControlRotation().Yaw, 0);
 	FVector direction = FQuat(rotator).GetRightVector().GetSafeNormal2D();
 
@@ -423,23 +440,38 @@ void ACPlayer::OnVerticalLook(float Axis)
 
 void ACPlayer::OnSprint()
 {
-	GetCharacterMovement()->MaxWalkSpeed = 600.f;
+	//GetCharacterMovement()->MaxWalkSpeed = 600.f;
+	Status->ChangeMoveSpeed(EWalkSpeedType::Run);
 }
 
 void ACPlayer::OffSprint()
 {
-	GetCharacterMovement()->MaxWalkSpeed = 400.f;
+	//GetCharacterMovement()->MaxWalkSpeed = 400.f;
+	Status->ChangeMoveSpeed(EWalkSpeedType::Walk);
+}
+
+void ACPlayer::PlayJump()
+{
+	Montages->PlayJump();
 }
 
 void ACPlayer::StartJump()
 {
 	bPressedJump = true;
+	PlayJump();
 }
 
 void ACPlayer::StopJump()
 {
 	bPressedJump = false;
 }
+
+void ACPlayer::OnStateTypeChanged(EStateType InPrevType, EStateType InNewType)
+{
+
+}
+
+
 
 void ACPlayer::SetMainWidget()
 {

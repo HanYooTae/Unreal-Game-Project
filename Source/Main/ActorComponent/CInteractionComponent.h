@@ -75,8 +75,9 @@ protected:
 		TArray<class ACPlayer*> Interactors;
 
 public: 
-	// 아이템의 갯수 등 현 아이템의 상태를 알기위한 함수
-	void RefreshWidget();
+	// 상호작용중 (아이템의 갯수 등 현 아이템의 상태를 알기위한 함수)
+	UFUNCTION(NetMulticast, Reliable)
+		void RefreshWidget();
 
 	// 플레이어 상호 작용 확인 추적이 이 Client에 대한 타격을 시작/종료할 때 클라이언트에서 호출됩니다.
 	void BeginFocus(class ACPlayer* Character);

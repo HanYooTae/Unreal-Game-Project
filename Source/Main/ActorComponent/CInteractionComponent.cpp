@@ -1,4 +1,5 @@
 #include "ActorComponent/CInteractionComponent.h"
+#include "Global.h"
 #include "../CPlayer/CPlayer.h"
 #include "../Widget/CInteractionWidget.h"
 
@@ -17,6 +18,8 @@ UCInteractionComponent::UCInteractionComponent()
 	bDrawAtDesiredSize = true;
 	SetActive(true);
 	SetHiddenInGame(true);
+
+	SetIsReplicated(true); //Todo.
 }
 
 void UCInteractionComponent::SetInteractableNameText(const FText& NewNameText)
@@ -53,10 +56,13 @@ bool UCInteractionComponent::CanInteract(ACPlayer* Character) const
 	return !bPlayerAlreadyInteracting && IsActive() && GetOwner() != nullptr && Character != nullptr;
 }
 
-void UCInteractionComponent::RefreshWidget()
+void UCInteractionComponent::RefreshWidget_Implementation()
 {
-	if (!bHiddenInGame && GetOwner()->GetNetMode() != NM_DedicatedServer/*전용 서버: 로컬 플레이어가 없는 서버입니다.*/)
+	if (!bHiddenInGame /*&& GetOwner()->GetNetMode() != NM_DedicatedServer전용 서버: 로컬 플레이어가 없는 서버입니다.*/)
 	{
+		//Todo...
+		//CLog::Print(GetOwner()->GetLocalRole());
+
 		if (UCInteractionWidget* InteractionWidget = Cast<UCInteractionWidget>(GetUserWidgetObject()))
 		{
 			InteractionWidget->UpdateInteractionWidget(this);
@@ -66,10 +72,12 @@ void UCInteractionComponent::RefreshWidget()
 
 void UCInteractionComponent::BeginFocus(ACPlayer* Character)
 {
+	CLog::Print("1"); //Todo.
 	if (!IsActive() || !GetOwner() || !Character)
 	{
 		return;
 	}
+	CLog::Print("2"); //Todo.
 
 	OnBeginFocus.Broadcast(Character);
 
@@ -77,7 +85,6 @@ void UCInteractionComponent::BeginFocus(ACPlayer* Character)
 
 	if (!GetOwner()->HasAuthority())
 	{
-
 		for (auto& VisualComp : GetOwner()->GetComponentsByClass(UPrimitiveComponent::StaticClass()))
 		{
 			if (UPrimitiveComponent* prim = Cast<UPrimitiveComponent>(VisualComp))
@@ -116,6 +123,7 @@ void UCInteractionComponent::BeginInteract(ACPlayer* Character)
 		Interactors.AddUnique(Character);
 		OnBeginInteract.Broadcast(Character);
 	}
+
 }
 
 void UCInteractionComponent::EndInteract(ACPlayer* Character)

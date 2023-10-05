@@ -50,7 +50,9 @@ protected: //interact
 
     void PerformInteractionCheck(); // 아래 두 함수 를 실행하는 함수
     void CouldnotFindInteractable();   // 상호작용 하는 물체를 찾지못할경우
-    void FoundNewInteractable(UCInteractionComponent* Interactable); // 상호작용하는 물체를 찾았을 경우
+
+	UFUNCTION(Client, Reliable) //Todo.
+        void FoundNewInteractable(UCInteractionComponent* Interactable); // 상호작용하는 물체를 찾았을 경우
 
     void BeginInteract();
     void EndInteract();
@@ -126,6 +128,23 @@ private: // Action
     void StopJump();
 
 private:
+    UFUNCTION()
+        void OnStateTypeChanged(EStateType InPrevType, EStateType InNewType);
+
+private:
+    void PlayJump();
+
+private:    // Character Component
+    UPROPERTY(VisibleDefaultsOnly)
+        class UCStatusComponent* Status;
+
+    UPROPERTY(VisibleDefaultsOnly)
+        class UCStateComponent* State;
+
+    UPROPERTY(VisibleDefaultsOnly)
+        class UCMontagesComponent* Montages;
+
+private:
     UPROPERTY(VisibleDefaultsOnly)
         class USpringArmComponent* SpringArm;
 
@@ -152,8 +171,8 @@ private:
     TSubclassOf<class UCMainWidget> MainWidgetClass;
 
 private:
-    class UMaterialInstanceDynamic* BodyMaterial;
-    class UMaterialInstanceDynamic* LogoMaterial;
+    class UMaterialInstanceDynamic* Material_First;
+    class UMaterialInstanceDynamic* Material_Second;
 
     // Main Widget
 public:
