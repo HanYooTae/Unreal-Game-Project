@@ -60,9 +60,6 @@ void UCInteractionComponent::RefreshWidget_Implementation()
 {
 	if (!bHiddenInGame /*&& GetOwner()->GetNetMode() != NM_DedicatedServer전용 서버: 로컬 플레이어가 없는 서버입니다.*/)
 	{
-		//Todo...
-		//CLog::Print(GetOwner()->GetLocalRole());
-
 		if (UCInteractionWidget* InteractionWidget = Cast<UCInteractionWidget>(GetUserWidgetObject()))
 		{
 			InteractionWidget->UpdateInteractionWidget(this);
