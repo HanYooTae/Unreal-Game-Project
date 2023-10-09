@@ -12,7 +12,8 @@ UCFoodItem::UCFoodItem()
 void UCFoodItem::Use(ACPlayer* Character)
 {
 	//heal Character here
-	CLog::Print("we ate some posion. ><");
+	Super::Use(Character);
+
 }
 
 #undef LOCTEXT_NAMEPSPACE

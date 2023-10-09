@@ -1,6 +1,8 @@
 #include "Inventory/CItem.h"
 #include "../ActorComponent/CInventoryComponent.h"
 #include "Net/UnrealNetwork.h"
+#include "CPlayer/CPlayer.h"
+#include "ActorComponent/CInventoryComponent.h"
 
 #define LOCTEXT_NAMESPACE "Item"
 
@@ -62,6 +64,13 @@ bool UCItem::ShouldShowInInventory() const
 
 void UCItem::Use(ACPlayer* Character)
 {
+	if (Character)
+	{
+		if (UCInventoryComponent* Inventory = Character->PlayerInventory)
+		{
+			Inventory->ConsumeItem(this, 1);
+		}
+	}
 }
 
 void UCItem::AddedToInventory(UCInventoryComponent* Inventory)

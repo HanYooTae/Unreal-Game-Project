@@ -48,11 +48,12 @@ protected: //interact
     UPROPERTY(EditDefaultsOnly, Category = "Interaction")
         float InteractionCheckDistance;
 
-    void PerformInteractionCheck(); // 아래 두 함수 를 실행하는 함수
-    void CouldnotFindInteractable();   // 상호작용 하는 물체를 찾지못할경우
+	UFUNCTION(NetMulticast, Reliable)
+        void PerformInteractionCheck(); // 아래 두 함수 를 실행하는 함수
+   
+    void CouldnotFindInteractable();    // 상호작용 하는 물체를 찾지못할경우
+    void FoundNewInteractable(UCInteractionComponent* Interactable); // 상호작용하는 물체를 찾았을 경우
 
-	UFUNCTION(Client, Reliable) //Todo.
-        void FoundNewInteractable(UCInteractionComponent* Interactable); // 상호작용하는 물체를 찾았을 경우
 
     void BeginInteract();
     void EndInteract();

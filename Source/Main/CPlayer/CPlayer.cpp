@@ -136,7 +136,7 @@ void ACPlayer::Tick(float DeltaTime)
 	}
 }
 
-void ACPlayer::PerformInteractionCheck()
+void ACPlayer::PerformInteractionCheck_Implementation()
 {
 	CheckNull(GetController());
 
@@ -167,7 +167,8 @@ void ACPlayer::PerformInteractionCheck()
 
 				if (InteractionComponent != GetInteractable() && Distance <= InteractionComponent->InteractionDistance)
 				{
-					FoundNewInteractable(InteractionComponent);
+					if (HasAuthority())
+						FoundNewInteractable(InteractionComponent);
 				}
 				else if (Distance > InteractionComponent->InteractionDistance && GetInteractable())
 				{
@@ -203,7 +204,7 @@ void ACPlayer::CouldnotFindInteractable()
 	InteractionData.ViewedInteractionComponent = nullptr;
 }
 
-void ACPlayer::FoundNewInteractable_Implementation(UCInteractionComponent* Interactable)
+void ACPlayer::FoundNewInteractable(UCInteractionComponent* Interactable)
 {
 	EndInteract();
 	
