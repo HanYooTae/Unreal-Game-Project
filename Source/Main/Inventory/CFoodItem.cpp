@@ -11,9 +11,7 @@ UCFoodItem::UCFoodItem()
 
 void UCFoodItem::Use(ACPlayer* Character)
 {
-	//heal Character here
 	Super::Use(Character);
-
 }
 
 #undef LOCTEXT_NAMEPSPACE

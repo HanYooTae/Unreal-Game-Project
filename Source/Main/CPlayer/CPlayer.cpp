@@ -167,8 +167,7 @@ void ACPlayer::PerformInteractionCheck_Implementation()
 
 				if (InteractionComponent != GetInteractable() && Distance <= InteractionComponent->InteractionDistance)
 				{
-					if (HasAuthority())
-						FoundNewInteractable(InteractionComponent);
+					FoundNewInteractable(InteractionComponent);
 				}
 				else if (Distance > InteractionComponent->InteractionDistance && GetInteractable())
 				{
@@ -184,7 +183,7 @@ void ACPlayer::PerformInteractionCheck_Implementation()
 
 }
 
-void ACPlayer::CouldnotFindInteractable()
+void ACPlayer::CouldnotFindInteractable_Implementation()
 {
 	if (GetWorldTimerManager().IsTimerActive(TimerHandle_Interact))
 	{
@@ -204,7 +203,7 @@ void ACPlayer::CouldnotFindInteractable()
 	InteractionData.ViewedInteractionComponent = nullptr;
 }
 
-void ACPlayer::FoundNewInteractable(UCInteractionComponent* Interactable)
+void ACPlayer::FoundNewInteractable_Implementation(UCInteractionComponent* Interactable)
 {
 	EndInteract();
 	
