@@ -136,7 +136,7 @@ void ACPlayer::Tick(float DeltaTime)
 	}
 }
 
-void ACPlayer::PerformInteractionCheck()
+void ACPlayer::PerformInteractionCheck_Implementation()
 {
 	CheckNull(GetController());
 
@@ -183,7 +183,7 @@ void ACPlayer::PerformInteractionCheck()
 
 }
 
-void ACPlayer::CouldnotFindInteractable()
+void ACPlayer::CouldnotFindInteractable_Implementation()
 {
 	if (GetWorldTimerManager().IsTimerActive(TimerHandle_Interact))
 	{
