@@ -136,7 +136,7 @@ void ACPlayer::Tick(float DeltaTime)
 	}
 }
 
-void ACPlayer::PerformInteractionCheck()
+void ACPlayer::PerformInteractionCheck_Implementation()
 {
 	CheckNull(GetController());
 
@@ -154,6 +154,8 @@ void ACPlayer::PerformInteractionCheck()
 	FCollisionQueryParams QueryParams;
 	QueryParams.AddIgnoredActor(this);
 	
+	DrawDebugLine(GetWorld(), TraceStart, TraceEnd, FColor::Orange);
+
 	if (GetWorld()->LineTraceSingleByChannel(TraceHit, TraceStart, TraceEnd, ECC_Visibility, QueryParams))
 	{
 		// 상호작용가능한 object를 Check
@@ -181,7 +183,7 @@ void ACPlayer::PerformInteractionCheck()
 
 }
 
-void ACPlayer::CouldnotFindInteractable()
+void ACPlayer::CouldnotFindInteractable_Implementation()
 {
 	if (GetWorldTimerManager().IsTimerActive(TimerHandle_Interact))
 	{
@@ -201,7 +203,7 @@ void ACPlayer::CouldnotFindInteractable()
 	InteractionData.ViewedInteractionComponent = nullptr;
 }
 
-void ACPlayer::FoundNewInteractable(UCInteractionComponent* Interactable)
+void ACPlayer::FoundNewInteractable_Implementation(UCInteractionComponent* Interactable)
 {
 	EndInteract();
 	
@@ -219,6 +221,7 @@ void ACPlayer::BeginInteract()
 {
 	if (!HasAuthority())
 	{
+		CLog::Print("Im Client");
 		SeverBeginInteract();
 	}
 
@@ -447,15 +450,9 @@ void ACPlayer::OffSprint()
 	Status->ChangeMoveSpeed(EWalkSpeedType::Walk);
 }
 
-void ACPlayer::PlayJump()
-{
-	Montages->PlayJump();
-}
-
 void ACPlayer::StartJump()
 {
 	bPressedJump = true;
-	PlayJump();
 }
 
 void ACPlayer::StopJump()
@@ -467,8 +464,6 @@ void ACPlayer::OnStateTypeChanged(EStateType InPrevType, EStateType InNewType)
 {
 
 }
-
-
 
 void ACPlayer::SetMainWidget()
 {
