@@ -27,6 +27,7 @@
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/36673683-6a7f-461b-9c39-588ca582e95a)
 
+2. 아ㅟ운 부분
 처음 원했던 완성본은 server와 client가 서로 정보창을 공유하지 않고 개인적으로 볼 수 있게 해주는것이 목적이었다. 하지만 이럴 경우 아이템이 상호작용중 먹어지거나 기능이 실행에 있어서 큰 문제가 있었다. 때문에 서로 정보를 공유하기로 결정했다.
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/2ab682b3-42cb-47dd-860a-403ba275db81)
