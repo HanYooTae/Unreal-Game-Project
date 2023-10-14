@@ -22,7 +22,8 @@
 ## Interact Bug 
 아이템과 플레이어와의 상호작용중 아이템 정보창인 interactCard가 server와 client간의 연결에서 버그가있었다.
 
-1. CPlayer에서 상호작용의 가능의 여부를 판단하는 두함수가 있는데 그함수들을 호출하는 라인트레이스 함수에 UFUNCTION(Reliable, Server)를 추가하고 호출받는 두함수에 UFUNCTION(NetMulticast, Reliable) 를 추가해 주었다. 이는 두함수가 서버를 한번 거쳐서 나와야 한다고 판단이 되었기 때문이다.
+1. 해결방안
+   - CPlayer에서 상호작용의 가능의 여부를 판단하는 두함수가 있는데 그함수들을 호출하는 라인트레이스 함수에 UFUNCTION(Reliable, Server)를 추가하고 호출받는 두함수에 UFUNCTION(NetMulticast, Reliable) 를 추가해 주었다. 이는 두함수가 서버를 한번 거쳐서 나와야 한다고 판단이 되었기 때문이다.
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/36673683-6a7f-461b-9c39-588ca582e95a)
 
