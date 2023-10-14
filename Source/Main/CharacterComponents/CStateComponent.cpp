@@ -21,11 +21,6 @@ void UCStateComponent::SetIdleMode()
 //	ChangeType(EStateType::Warp);
 //}
 
-void UCStateComponent::SetJumpMode()
-{
-	ChangeType(EStateType::Jump);
-}
-
 void UCStateComponent::SetEquipMode()
 {
 	ChangeType(EStateType::Equip);

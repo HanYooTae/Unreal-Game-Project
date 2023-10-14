@@ -30,11 +30,6 @@ void UCMontagesComponent::BeginPlay()
 	}
 }
 
-void UCMontagesComponent::PlayJump()
-{
-	PlayMontage(EStateType::Jump);
-}
-
 void UCMontagesComponent::PlayMontage(EStateType InStateType)
 {
 	ACharacter* ownerCharacter = Cast<ACharacter>(GetOwner());

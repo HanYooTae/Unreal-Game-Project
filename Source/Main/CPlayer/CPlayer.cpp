@@ -450,15 +450,9 @@ void ACPlayer::OffSprint()
 	Status->ChangeMoveSpeed(EWalkSpeedType::Walk);
 }
 
-void ACPlayer::PlayJump()
-{
-	Montages->PlayJump();
-}
-
 void ACPlayer::StartJump()
 {
 	bPressedJump = true;
-	PlayJump();
 }
 
 void ACPlayer::StopJump()
@@ -470,8 +464,6 @@ void ACPlayer::OnStateTypeChanged(EStateType InPrevType, EStateType InNewType)
 {
 
 }
-
-
 
 void ACPlayer::SetMainWidget()
 {

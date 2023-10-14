@@ -133,9 +133,6 @@ private:
     UFUNCTION()
         void OnStateTypeChanged(EStateType InPrevType, EStateType InNewType);
 
-private:
-    void PlayJump();
-
 private:    // Character Component
     UPROPERTY(VisibleDefaultsOnly)
         class UCStatusComponent* Status;
