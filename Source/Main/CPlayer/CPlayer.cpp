@@ -12,11 +12,15 @@
 #include "Camera/CameraComponent.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "Materials/MaterialInstanceConstant.h"
-#include "../ActorComponent/CParkourSystem.h"
+#include "ActorComponent/CParkourSystem.h"
 #include "ActorComponent/CInteractionComponent.h"
 #include "ActorComponent/CInventoryComponent.h"
 #include "Components/SceneCaptureComponent2D.h"
-#include "../Inventory/CPickup.h"
+#include "Inventory/CPickup.h"
+#include "Inventory/CWeaponsItem.h"
+#include "Inventory/CWeapon_Sniper.h"
+#include "Inventory/CWeapon_Sword.h"
+
 //#include "PaperSpriteComponent.h"
 
 ACPlayer::ACPlayer()
@@ -121,6 +125,11 @@ void ACPlayer::BeginPlay()
 	// Hidden Players in Minimap
 	CheckNull(RenderMinimap);
 	RenderMinimap->ShowFlags.SkeletalMeshes = false;
+
+	sniperClass = GetWorld()->SpawnActor<ACWeapon_Sniper>(FVector::ZeroVector, FRotator::ZeroRotator);
+
+	swordClass = GetWorld()->SpawnActor<ACWeapon_Sword>(FVector::ZeroVector, FRotator::ZeroRotator);
+
 }
 
 void ACPlayer::Tick(float DeltaTime)
@@ -311,6 +320,8 @@ float ACPlayer::GetRemainingInteractime() const
 
 void ACPlayer::UseItem(class UCItem* Item)
 {
+	
+
 	if (!HasAuthority() && Item)
 	{
 		ServerUseItem(Item);
@@ -327,6 +338,16 @@ void ACPlayer::UseItem(class UCItem* Item)
 	if (Item)
 	{
 		Item->Use(this);
+		if (Item->Rarity == EItemRarity::IR_Legendary)
+		{
+			if (sniperClass != nullptr)
+				sniperClass->Attachment(this, "Holster_M14");
+		}
+		else if (Item->Rarity == EItemRarity::IR_VeryRare)
+		{
+			if (swordClass != nullptr)
+				swordClass->Attachment(this, "Holster_OneHand");
+		}
 	}
 }
 
@@ -335,10 +356,6 @@ void ACPlayer::ServerUseItem_Implementation(class UCItem* Item)
 	UseItem(Item);
 }
 
-bool ACPlayer::ServerUseItem_Validate(class UCItem* Item)
-{
-	return true;
-}
 
 void ACPlayer::DropItem(class UCItem* Item, const int32 Quantity)
 {
