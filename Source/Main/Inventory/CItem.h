@@ -7,7 +7,7 @@
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnItemModified);
 
 UENUM(BlueprintType)
-enum class EItemRarity : uint8 // 나중에 조정 딱히 필요없음
+enum class EItemRarity : uint8 // 현제 무기 분류할때 사용중
 {
 	IR_Common UMETA(DisplayName = "Common"),
 	IR_UnCommon UMETA(DisplayName = "Uncommon"),

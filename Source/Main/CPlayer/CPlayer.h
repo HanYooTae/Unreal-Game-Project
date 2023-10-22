@@ -91,10 +91,9 @@ public:
     UFUNCTION(BlueprintCallable, Category = "Items")
         void UseItem(class UCItem* Item);
 
-    UFUNCTION(Reliable, Server, WithValidation)
+    UFUNCTION(Reliable, Server)
         void ServerUseItem(class UCItem* Item);
     void ServerUseItem_Implementation(class UCItem* Item);
-    bool ServerUseItem_Validate(class UCItem* Item);
 
     // 아이템을 버릴때
     UFUNCTION(BlueprintCallable, Category = "Items")
@@ -176,5 +175,6 @@ private:
     // Main Widget
 public:
     void SetMainWidget();
-
+    class ACWeapon_Sniper* sniperClass = nullptr;
+    class ACWeapon_Sword* swordClass = nullptr;
 };

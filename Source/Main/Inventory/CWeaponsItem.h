@@ -12,11 +12,8 @@ class MAIN_API UCWeaponsItem : public UCItem
 public:
 	UCWeaponsItem();
 
-	virtual void Use(class ACPlayer* Character) override;
-
-public:
-	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
-		class AActor* Actor;
+	UFUNCTION(BlueprintCallable)
+		virtual void Use(class ACPlayer* Character) override;
 
 
 };

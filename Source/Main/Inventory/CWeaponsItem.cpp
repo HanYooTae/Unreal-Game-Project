@@ -13,15 +13,6 @@ UCWeaponsItem::UCWeaponsItem()
 void UCWeaponsItem::Use(ACPlayer* Character)
 {
 	Super::Use(Character);
-
-	CheckNull(Actor);
-
-	Actor->AttachToComponent
-	(
-		Character->GetMesh(),
-		FAttachmentTransformRules(EAttachmentRule::KeepRelative, true),
-		"Holster_M14"
-	);
 }
 
 #undef LOCTEXT_NAMEPSPACE
