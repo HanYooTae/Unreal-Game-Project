@@ -128,9 +128,6 @@ private: // Action
     void StartJump();
     void StopJump();
 
-private:    // Player Equip, Action, Hitted, Dead
-    void OnSword();
-
 private:
     UFUNCTION()
         void OnStateTypeChanged(EStateType InPrevType, EStateType InNewType);

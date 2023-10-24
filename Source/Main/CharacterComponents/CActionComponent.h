@@ -1,23 +1,21 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Components/ActorComponent.h"
+#include "GameFramework/Actor.h"
 #include "CActionComponent.generated.h"
 
-
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class MAIN_API UCActionComponent : public UActorComponent
+UCLASS()
+class MAIN_API ACActionComponent : public AActor
 {
 	GENERATED_BODY()
-
+	
 public:	
-	UCActionComponent();
+	ACActionComponent();
 
 protected:
 	virtual void BeginPlay() override;
 
 public:	
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	virtual void Tick(float DeltaTime) override;
 
-		
 };

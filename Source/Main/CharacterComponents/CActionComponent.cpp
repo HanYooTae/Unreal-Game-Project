@@ -1,23 +1,19 @@
 #include "CharacterComponents/CActionComponent.h"
 
-UCActionComponent::UCActionComponent()
+ACActionComponent::ACActionComponent()
 {
-	PrimaryComponentTick.bCanEverTick = true;
 
 }
 
-
-void UCActionComponent::BeginPlay()
+void ACActionComponent::BeginPlay()
 {
 	Super::BeginPlay();
-
 	
 }
 
-
-void UCActionComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+void ACActionComponent::Tick(float DeltaTime)
 {
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	Super::Tick(DeltaTime);
 
 }
 
