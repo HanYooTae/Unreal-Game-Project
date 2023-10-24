@@ -26,7 +26,7 @@ protected:
 public:		// Get StateType
 	bool IsIdleMode() { return Type == EStateType::Idle; }
 	//bool IsWarpMode() { return Type == EStateType::Warp; }		// q키를 누르면 앞으로 텔레포트(대쉬)
-	bool IsEquipMode() { return Type == EStateType::Equip; }
+	bool IsEquipMode() { return Type == EStateType::Equip; }		// 뺄 수도 있음
 	bool IsActionMode() { return Type == EStateType::Action; }
 	bool IsHittedMode() { return Type == EStateType::Hitted; }
 	bool IsDeadMode() { return Type == EStateType::Dead; }
