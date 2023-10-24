@@ -20,6 +20,7 @@
 #include "Inventory/CWeaponsItem.h"
 #include "Inventory/CWeapon_Sniper.h"
 #include "Inventory/CWeapon_Sword.h"
+
 //#include "PaperSpriteComponent.h"
 
 ACPlayer::ACPlayer()
@@ -423,8 +424,6 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAction("Vaulting", EInputEvent::IE_Pressed, parkour, &UCParkourSystem::Vault);
 	PlayerInputComponent->BindAction("Interact", EInputEvent::IE_Pressed, this, &ACPlayer::BeginInteract);
 	PlayerInputComponent->BindAction("Interact", EInputEvent::IE_Released, this, &ACPlayer::EndInteract);
-	
-	PlayerInputComponent->BindAction("OnSword", EInputEvent::IE_Pressed, this, &ACPlayer::OnSword);
 
 }
 
@@ -478,22 +477,9 @@ void ACPlayer::StopJump()
 	bPressedJump = false;
 }
 
-void ACPlayer::OnSword()
-{
-	CheckFalse(State->IsIdleMode());
-
-	// Todo. ActionComponent
-}
-
 void ACPlayer::OnStateTypeChanged(EStateType InPrevType, EStateType InNewType)
 {
-	switch (InNewType)
-	{
-	case EStateType::Hitted:
-		break;
-	case EStateType::Dead:
-		break;
-	}
+
 }
 
 void ACPlayer::SetMainWidget()
