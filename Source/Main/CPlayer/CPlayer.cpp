@@ -18,8 +18,8 @@
 #include "Components/SceneCaptureComponent2D.h"
 #include "Inventory/CPickup.h"
 #include "Inventory/CWeaponsItem.h"
-#include "Inventory/CWeapon_Sniper.h"
-#include "Inventory/CWeapon_Sword.h"
+#include "Actions/CWeapon_Sniper.h"
+#include "Actions/CWeapon_Sword.h"
 
 //#include "PaperSpriteComponent.h"
 

@@ -1,4 +1,4 @@
-#include "Inventory/CWeapon.h"
+#include "Actions/CWeapon.h"
 #include "GameFramework/Character.h"
 
 ACWeapon::ACWeapon()

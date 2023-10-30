@@ -1,4 +1,5 @@
 #include "CharacterComponents/CActionComponent.h"
+#include "CActionComponent.h"
 
 ACActionComponent::ACActionComponent()
 {
@@ -11,9 +12,38 @@ void ACActionComponent::BeginPlay()
 	
 }
 
-void ACActionComponent::Tick(float DeltaTime)
+void ACActionComponent::SetUnarmedMode()
 {
-	Super::Tick(DeltaTime);
-
 }
 
+void ACActionComponent::SetFistMode()
+{
+}
+
+void ACActionComponent::SetSwordMode()
+{
+}
+
+void ACActionComponent::SetSniperMode()
+{
+}
+
+void ACActionComponent::SetMagicBallMode()
+{
+}
+
+void ACActionComponent::SetWarpMode()
+{
+}
+
+void ACActionComponent::SetStormMode()
+{
+}
+
+void ACActionComponent::SetMode(EActionType InNewType)
+{
+}
+
+void ACActionComponent::ChangeType(EActionType InNewType)
+{
+}
