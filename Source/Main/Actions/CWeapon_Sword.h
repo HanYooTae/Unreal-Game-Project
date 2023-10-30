@@ -2,16 +2,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Inventory/CWeapon.h"
-#include "CWeapon_Sniper.generated.h"
+#include "Actions/CWeapon.h"
+#include "CWeapon_Sword.generated.h"
 
 UCLASS()
-class MAIN_API ACWeapon_Sniper : public ACWeapon
+class MAIN_API ACWeapon_Sword : public ACWeapon
 {
 	GENERATED_BODY()
 	
 public:	
-	ACWeapon_Sniper();
+	ACWeapon_Sword();
 
 protected:
 	virtual void BeginPlay() override;
