@@ -13,12 +13,12 @@ enum class EActionType : uint8
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FActionTypeChangedSignature, EActionType, InPrevType, EActionType, InNewType);
 
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
-class MAIN_API ACActionComponent : public UActorComponent
+class MAIN_API UCActionComponent : public UActorComponent
 {
 	GENERATED_BODY()
 	
 public:	
-	ACActionComponent();
+	UCActionComponent();
 
 protected:
 	virtual void BeginPlay() override;
