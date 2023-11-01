@@ -55,7 +55,7 @@ class MAIN_API UCActionData_Spawned : public UObject
 {
 	GENERATED_BODY()
 
-public:
+public:		// UCActionData와의 접근성을 용이하게 하기 위하여 friend class로 지정
 	friend class UCActionData;
 
 public:

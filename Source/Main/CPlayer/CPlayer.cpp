@@ -6,6 +6,7 @@
 #include "CharacterComponents/CStatusComponent.h"
 #include "CharacterComponents/CStateComponent.h"
 #include "CharacterComponents/CMontagesComponent.h"
+#include "CharacterComponents/CActionComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Blueprint/UserWidget.h"
@@ -20,7 +21,6 @@
 #include "Inventory/CWeaponsItem.h"
 #include "Actions/CWeapon_Sniper.h"
 #include "Actions/CWeapon_Sword.h"
-
 //#include "PaperSpriteComponent.h"
 
 ACPlayer::ACPlayer()
@@ -28,10 +28,10 @@ ACPlayer::ACPlayer()
 	PrimaryActorTick.bCanEverTick = true;
 
 	// Create CharacterComponent
+	CHelpers::CreateActorComponent(this, &Action, "Action");
 	CHelpers::CreateActorComponent(this, &Status, "Status");
 	CHelpers::CreateActorComponent(this, &State, "State");
-	CHelpers::CreateActorComponent(this, &Montages, "Montages");
-
+	CHelpers::CreateActorComponent(this, &Montages, "Montages");\
 	CHelpers::CreateActorComponent(this, &parkour, "ACParkour");
 	
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>("SpringArm");
@@ -128,7 +128,8 @@ void ACPlayer::BeginPlay()
 
 	sniperClass = GetWorld()->SpawnActor<ACWeapon_Sniper>(FVector::ZeroVector, FRotator::ZeroRotator);
 
-	swordClass = GetWorld()->SpawnActor<ACWeapon_Sword>(FVector::ZeroVector, FRotator::ZeroRotator);
+	Action->SetUnarmedMode();
+	//swordClass = GetWorld()->SpawnActor<ACWeapon_Sword>(FVector::ZeroVector, FRotator::ZeroRotator);
 
 }
 

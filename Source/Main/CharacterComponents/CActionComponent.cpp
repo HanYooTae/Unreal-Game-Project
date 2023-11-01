@@ -1,49 +1,71 @@
-#include "CharacterComponents/CActionComponent.h"
 #include "CActionComponent.h"
+#include "Actions/CActionData_Spawned.h"
+#include "Actions/CActionData.h"
+#include "Actions/CEquipment.h"
+#include "GameFramework/Character.h"
 
-ACActionComponent::ACActionComponent()
+UCActionComponent::UCActionComponent()
 {
 
 }
 
-void ACActionComponent::BeginPlay()
+void UCActionComponent::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	ACharacter* ownerCharacter = Cast<ACharacter>(GetOwner());
+
+	for (int32 i = 0; i < (int32)EActionType::Max; i++)
+	{
+		if (!!DataAssets[i])
+			DataAssets[i]->BeginPlay(ownerCharacter, &Datas[i]);
+	}
 }
 
-void ACActionComponent::SetUnarmedMode()
+void UCActionComponent::SetUnarmedMode()
+{
+	if (!!Datas[(int32)Type] && !!Datas[(int32)Type]->GetEquipment())
+		Datas[(int32)Type]->GetEquipment();
+
+	// Unarmed ÀåÂø
+	Datas[(int32)EActionType::Unarmed]->GetEquipment();
+
+	ChangeType(EActionType::Unarmed);
+}
+
+void UCActionComponent::SetFistMode()
 {
 }
 
-void ACActionComponent::SetFistMode()
+void UCActionComponent::SetSwordMode()
 {
 }
 
-void ACActionComponent::SetSwordMode()
+void UCActionComponent::SetSniperMode()
 {
 }
 
-void ACActionComponent::SetSniperMode()
+void UCActionComponent::SetMagicBallMode()
 {
 }
 
-void ACActionComponent::SetMagicBallMode()
+void UCActionComponent::SetWarpMode()
 {
 }
 
-void ACActionComponent::SetWarpMode()
+void UCActionComponent::SetStormMode()
 {
 }
 
-void ACActionComponent::SetStormMode()
+void UCActionComponent::SetMode(EActionType InNewType)
 {
 }
 
-void ACActionComponent::SetMode(EActionType InNewType)
+void UCActionComponent::ChangeType(EActionType InNewType)
 {
-}
+	EActionType prev = Type;
+	Type = InNewType;
 
-void ACActionComponent::ChangeType(EActionType InNewType)
-{
+	if (OnActionTypeChanged.IsBound())
+		OnActionTypeChanged.Broadcast(prev, InNewType);
 }

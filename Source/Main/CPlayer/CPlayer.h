@@ -142,6 +142,9 @@ private:    // Character Component
     UPROPERTY(VisibleDefaultsOnly)
         class UCMontagesComponent* Montages;
 
+    UPROPERTY(VisibleDefaultsOnly)
+        class UCActionComponent* Action;
+
 private:
     UPROPERTY(VisibleDefaultsOnly)
         class USpringArmComponent* SpringArm;

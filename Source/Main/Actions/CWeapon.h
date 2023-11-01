@@ -23,4 +23,8 @@ public:
 public:
 	UPROPERTY(VisibleAnywhere)
 		class USkeletalMeshComponent* Weapon;
+
+private:	// Component
+	UPROPERTY(VisibleDefaultsOnly)
+		class USceneComponent* Root;
 };
