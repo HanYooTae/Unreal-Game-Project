@@ -39,6 +39,7 @@ void UCActionComponent::SetFistMode()
 
 void UCActionComponent::SetSwordMode()
 {
+	SetMode(EActionType::Sword);
 }
 
 void UCActionComponent::SetSniperMode()
@@ -59,6 +60,26 @@ void UCActionComponent::SetStormMode()
 
 void UCActionComponent::SetMode(EActionType InNewType)
 {
+	// 같은 키를 2번 눌렀을 때
+	if (Type == InNewType)
+	{
+		SetUnarmedMode();
+
+		return;
+	}
+
+	// Unarmed가 아닌 Type을 장착하고 있었다면
+	else if (IsUnarmedMode() == false)
+	{
+		// 이전 무기 장착 해제
+		if (!!Datas[(int32)Type] && !!Datas[(int32)Type]->GetEquipment())
+			Datas[(int32)Type]->GetEquipment();
+	}
+	// 새로운 무기 장착
+	if (!!Datas[(int32)InNewType] && !!Datas[(int32)InNewType]->GetEquipment())
+		Datas[(int32)InNewType]->GetEquipment();
+
+	ChangeType(InNewType);
 }
 
 void UCActionComponent::ChangeType(EActionType InNewType)
