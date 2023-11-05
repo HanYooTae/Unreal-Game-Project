@@ -31,4 +31,7 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "DoAction")
 		TArray<FDoActionData> DoActionDatas;
+
+	class ACWeapon* Weapon;
+	class ACEquipment* Equipment;
 };

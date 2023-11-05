@@ -9,7 +9,7 @@ void UCActionData::BeginPlay(class ACharacter* InOwnerCharacter, UCActionData_Sp
 {
 	FTransform transform;
 
-	ACWeapon* Weapon = nullptr;
+	Weapon = nullptr;
 	if (!!WeaponClass)
 	{
 		Weapon = InOwnerCharacter->GetWorld()->SpawnActorDeferred<ACWeapon>(WeaponClass, transform, InOwnerCharacter);
@@ -19,8 +19,27 @@ void UCActionData::BeginPlay(class ACharacter* InOwnerCharacter, UCActionData_Sp
 		UGameplayStatics::FinishSpawningActor(Weapon, transform);
 	}
 
+	Equipment = nullptr;
+	if (!!EquipmentClass)
+	{
+		Equipment = InOwnerCharacter->GetWorld()->SpawnActorDeferred<ACEquipment>(EquipmentClass, transform, InOwnerCharacter);
+		
+		Equipment->SetData(EquipmentData);
+		Equipment->SetActorLabel(GetCustomLabel(InOwnerCharacter, "Equipment"));
+
+		//Equipment->FinishSpawning()
+		UGameplayStatics::FinishSpawningActor(Equipment, transform);
+
+		if (!!Weapon)
+		{
+			Equipment->OnBeginEquip.AddDynamic(Weapon, &ACWeapon::OnEquip);
+			Equipment->OnUnequip.AddDynamic(Weapon, &ACWeapon::OnUnequip);
+		}
+	}
+
 	(*OutSpawned) = NewObject<UCActionData_Spawned>();
 	(*OutSpawned)->Weapon = Weapon;
+	(*OutSpawned)->Equipment = Equipment;
 }
 
 FString UCActionData::GetCustomLabel(ACharacter* InOwnerCharacter, FString InMiddleName)

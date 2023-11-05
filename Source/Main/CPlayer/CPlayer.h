@@ -128,6 +128,14 @@ private: // Action
     void StartJump();
     void StopJump();
 
+private: // Weapon
+    UFUNCTION() void OnFist();
+    UFUNCTION() void OnSword();
+    UFUNCTION() void OnSniper();
+    UFUNCTION() void OnMagicBall();
+    UFUNCTION() void OnWarp();
+    UFUNCTION() void OnStorm();
+
 private:
     UFUNCTION()
         void OnStateTypeChanged(EStateType InPrevType, EStateType InNewType);
@@ -175,9 +183,6 @@ private:
     class UMaterialInstanceDynamic* Material_First;
     class UMaterialInstanceDynamic* Material_Second;
 
-    // Main Widget
-public:
+public:     // Main Widget
     void SetMainWidget();
-    class ACWeapon_Sniper* sniperClass = nullptr;
-    class ACWeapon_Sword* swordClass = nullptr;
 };

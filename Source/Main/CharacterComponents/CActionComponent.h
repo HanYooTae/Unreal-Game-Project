@@ -81,7 +81,7 @@ public:
 	UPROPERTY(BlueprintAssignable)
 		FActionTypeChangedSignature OnActionTypeChanged;
 
-private:
+public:
 	UPROPERTY(EditDefaultsOnly)
 		class UCActionData* DataAssets[(int32)EActionType::Max];
 
