@@ -35,6 +35,7 @@ void UCActionComponent::SetUnarmedMode()
 
 void UCActionComponent::SetFistMode()
 {
+	SetMode(EActionType::Fist);
 }
 
 void UCActionComponent::SetSwordMode()
@@ -44,18 +45,22 @@ void UCActionComponent::SetSwordMode()
 
 void UCActionComponent::SetSniperMode()
 {
+	SetMode(EActionType::Sniper);
 }
 
 void UCActionComponent::SetMagicBallMode()
 {
+	SetMode(EActionType::MagicBall);
 }
 
 void UCActionComponent::SetWarpMode()
 {
+	SetMode(EActionType::Warp);
 }
 
 void UCActionComponent::SetStormMode()
 {
+	SetMode(EActionType::Storm);
 }
 
 void UCActionComponent::SetMode(EActionType InNewType)
@@ -73,11 +78,11 @@ void UCActionComponent::SetMode(EActionType InNewType)
 	{
 		// 이전 무기 장착 해제
 		if (!!Datas[(int32)Type] && !!Datas[(int32)Type]->GetEquipment())
-			Datas[(int32)Type]->GetEquipment();
+			Datas[(int32)Type]->GetEquipment()->Unequip();
 	}
 	// 새로운 무기 장착
 	if (!!Datas[(int32)InNewType] && !!Datas[(int32)InNewType]->GetEquipment())
-		Datas[(int32)InNewType]->GetEquipment();
+		Datas[(int32)InNewType]->GetEquipment()->Equip();
 
 	ChangeType(InNewType);
 }

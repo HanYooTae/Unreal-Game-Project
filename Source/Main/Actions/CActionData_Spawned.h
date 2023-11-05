@@ -54,23 +54,17 @@ UCLASS()
 class MAIN_API UCActionData_Spawned : public UObject
 {
 	GENERATED_BODY()
-
+		
 public:		// UCActionData와의 접근성을 용이하게 하기 위하여 friend class로 지정
 	friend class UCActionData;
 
 public:
-	FORCEINLINE class ACWeapon_Sniper* GetSniper() { return Sniper; }
-
-public:
-	class ACWeapon_Sniper* Sniper;
-
-public:
-	FORCEINLINE class ACEquipment* GetEquipment() { return Equipment; }
 	FORCEINLINE class ACWeapon* GetWeapon() { return Weapon; }
+	FORCEINLINE class ACEquipment* GetEquipment() { return Equipment; }
 	FORCEINLINE class ACDoAction* GetDoAction() { return DoAction; }
 
 private:
-	class ACEquipment* Equipment;
 	class ACWeapon* Weapon;
+	class ACEquipment* Equipment;
 	class ACDoAction* DoAction;
 };

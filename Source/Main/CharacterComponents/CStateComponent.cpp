@@ -16,9 +16,9 @@ void UCStateComponent::SetIdleMode()
 	ChangeType(EStateType::Idle);
 }
 
-//void UCStateComponent::SetWarpMode()
+//void UCStateComponent::SetDaseMode()
 //{
-//	ChangeType(EStateType::Warp);
+//	ChangeType(EStateType::Dash);
 //}
 
 void UCStateComponent::SetEquipMode()
