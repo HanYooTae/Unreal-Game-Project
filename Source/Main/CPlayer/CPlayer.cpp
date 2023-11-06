@@ -102,6 +102,7 @@ void ACPlayer::BeginPlay()
 
 	// Use CharacterComponents Delegate
 	State->OnStateTypeChanged.AddDynamic(this, &ACPlayer::OnStateTypeChanged);
+	Action->SetUnarmedMode();
 
 	//Get Material Asset
 	UMaterialInstanceConstant* firstMaterialAsset;
@@ -127,7 +128,6 @@ void ACPlayer::BeginPlay()
 	CheckNull(RenderMinimap);
 	RenderMinimap->ShowFlags.SkeletalMeshes = false;
 
-	Action->SetUnarmedMode();
 }
 
 void ACPlayer::Tick(float DeltaTime)
