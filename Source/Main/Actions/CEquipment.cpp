@@ -13,7 +13,7 @@ ACEquipment::ACEquipment()
 void ACEquipment::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 	OwnerCharacter = Cast<ACharacter>(GetOwner());
 
 	StateComp = CHelpers::GetComponent<UCStateComponent>(OwnerCharacter);
