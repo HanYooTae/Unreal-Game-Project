@@ -37,9 +37,33 @@ void UCActionData::BeginPlay(class ACharacter* InOwnerCharacter, UCActionData_Sp
 		}
 	}
 
+	DoAction = nullptr;
+	if (!!DoActionClass)
+	{
+		DoAction = InOwnerCharacter->GetWorld()->SpawnActorDeferred<ACDoAction>(DoActionClass, transform, InOwnerCharacter);
+
+		DoAction->SetDatas(DoActionDatas);
+		DoAction->SetActorLabel(GetCustomLabel(InOwnerCharacter, "DoAction"));
+
+		UGameplayStatics::FinishSpawningActor(DoAction, transform);
+
+		// Equipment에 있는 주소가 DoAction으로 참조됨 (같은 주소를 사용함)
+		if (!!Equipment)
+		{
+			DoAction->SetEquippedThis(Equipment->IsEquippedThis());
+		}
+
+		if (!!Weapon)
+		{
+			/*Weapon->OnBeginOverlap.AddDynamic(DoAction, &ACDoAction::OnBeginOverlap);
+			Weapon->OnEndOverlap.AddDynamic(DoAction, &ACDoAction::OnEndOverlap);*/
+		}
+	}
+
 	(*OutSpawned) = NewObject<UCActionData_Spawned>();
 	(*OutSpawned)->Weapon = Weapon;
 	(*OutSpawned)->Equipment = Equipment;
+	(*OutSpawned)->DoAction = DoAction;
 }
 
 FString UCActionData::GetCustomLabel(ACharacter* InOwnerCharacter, FString InMiddleName)
