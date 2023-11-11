@@ -56,8 +56,10 @@ protected: //interact
 	UFUNCTION(NetMulticast, Reliable) //Todo.
         void FoundNewInteractable(UCInteractionComponent* Interactable); // 상호작용하는 물체를 찾았을 경우
 
+protected:  // Action Event
     void BeginInteract();
     void EndInteract();
+    void OnAction();
 
 	UFUNCTION(Reliable, Server, WithValidation)
         void SeverBeginInteract();
@@ -70,6 +72,21 @@ protected: //interact
     bool SeverEndInteract_Validate();
 
     void Interact();
+
+private: // Action
+    void OnSprint();
+    void OffSprint();
+
+    void StartJump();
+    void StopJump();
+
+private: // Weapon
+    UFUNCTION() void OnFist();
+    UFUNCTION() void OnSword();
+    UFUNCTION() void OnSniper();
+    UFUNCTION() void OnMagicBall();
+    UFUNCTION() void OnWarp();
+    UFUNCTION() void OnStorm();
 
     UPROPERTY()
         FInteractionData InteractionData;
@@ -120,21 +137,6 @@ private: // Axis
 
     void OnHorizontalLook(float Axis);
     void OnVerticalLook(float Axis);
-
-private: // Action
-    void OnSprint();
-    void OffSprint();
-
-    void StartJump();
-    void StopJump();
-
-private: // Weapon
-    UFUNCTION() void OnFist();
-    UFUNCTION() void OnSword();
-    UFUNCTION() void OnSniper();
-    UFUNCTION() void OnMagicBall();
-    UFUNCTION() void OnWarp();
-    UFUNCTION() void OnStorm();
 
 private:
     UFUNCTION()

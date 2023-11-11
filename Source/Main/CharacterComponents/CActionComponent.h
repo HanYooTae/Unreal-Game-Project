@@ -30,6 +30,7 @@ public:		// Get Action
 	UFUNCTION(BlueprintPure)
 		class UCActionData* GetCurrentDataAsset() { return DataAssets[(int32)Type]; }
 
+public:		// bool Type
 	UFUNCTION(BlueprintPure)
 		FORCEINLINE bool IsUnarmedMode() { return Type == EActionType::Unarmed; }
 
@@ -76,6 +77,10 @@ public:		// Set Action
 private:
 	void SetMode(EActionType InNewType);		// 무기를 들고 있을 때 같은 무기를 호출하면 Unarmed로 회귀시켜주는 함수
 	void ChangeType(EActionType InNewType);
+
+public:		// Get Assets
+	void DoAction();
+	void DoAim();
 
 public:
 	UPROPERTY(BlueprintAssignable)
