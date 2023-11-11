@@ -3,6 +3,8 @@
 #include "Actions/CActionData.h"
 #include "Actions/CEquipment.h"
 #include "GameFramework/Character.h"
+#include "Global.h"
+#include "Actions/CDoAction.h"
 
 UCActionComponent::UCActionComponent()
 {
@@ -95,4 +97,22 @@ void UCActionComponent::ChangeType(EActionType InNewType)
 
 	if (OnActionTypeChanged.IsBound())
 		OnActionTypeChanged.Broadcast(prev, InNewType);
+}
+
+void UCActionComponent::DoAction()
+{
+	CheckTrue(IsUnarmedMode());
+
+	if (!!GetCurrentData())
+	{
+		ACDoAction* doAction = GetCurrentData()->GetDoAction();
+		if (!!doAction)
+		{
+			doAction->DoAction();
+		}
+	}
+}
+
+void UCActionComponent::DoAim()
+{
 }
