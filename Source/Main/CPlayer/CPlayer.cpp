@@ -6,6 +6,7 @@
 #include "CharacterComponents/CStatusComponent.h"
 #include "CharacterComponents/CStateComponent.h"
 #include "CharacterComponents/CMontagesComponent.h"
+#include "CharacterComponents/CActionComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Blueprint/UserWidget.h"
@@ -18,9 +19,9 @@
 #include "Components/SceneCaptureComponent2D.h"
 #include "Inventory/CPickup.h"
 #include "Inventory/CWeaponsItem.h"
-#include "Inventory/CWeapon_Sniper.h"
-#include "Inventory/CWeapon_Sword.h"
-
+#include "Actions/CWeapon_Sniper.h"
+#include "Actions/CWeapon_Sword.h"
+#include "Actions/CActionData.h"
 //#include "PaperSpriteComponent.h"
 
 ACPlayer::ACPlayer()
@@ -28,10 +29,10 @@ ACPlayer::ACPlayer()
 	PrimaryActorTick.bCanEverTick = true;
 
 	// Create CharacterComponent
+	CHelpers::CreateActorComponent(this, &Action, "Action");
 	CHelpers::CreateActorComponent(this, &Status, "Status");
 	CHelpers::CreateActorComponent(this, &State, "State");
-	CHelpers::CreateActorComponent(this, &Montages, "Montages");
-
+	CHelpers::CreateActorComponent(this, &Montages, "Montages");\
 	CHelpers::CreateActorComponent(this, &parkour, "ACParkour");
 	
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>("SpringArm");
@@ -101,6 +102,7 @@ void ACPlayer::BeginPlay()
 
 	// Use CharacterComponents Delegate
 	State->OnStateTypeChanged.AddDynamic(this, &ACPlayer::OnStateTypeChanged);
+	Action->SetUnarmedMode();
 
 	//Get Material Asset
 	UMaterialInstanceConstant* firstMaterialAsset;
@@ -125,10 +127,6 @@ void ACPlayer::BeginPlay()
 	// Hidden Players in Minimap
 	CheckNull(RenderMinimap);
 	RenderMinimap->ShowFlags.SkeletalMeshes = false;
-
-	sniperClass = GetWorld()->SpawnActor<ACWeapon_Sniper>(FVector::ZeroVector, FRotator::ZeroRotator);
-
-	swordClass = GetWorld()->SpawnActor<ACWeapon_Sword>(FVector::ZeroVector, FRotator::ZeroRotator);
 
 }
 
@@ -338,16 +336,25 @@ void ACPlayer::UseItem(class UCItem* Item)
 	if (Item)
 	{
 		Item->Use(this);
-		if (Item->Rarity == EItemRarity::IR_Legendary)
+
+		if (Item->Rarity == EItemRarity::IR_VeryRare)
 		{
-			if (sniperClass != nullptr)
-				sniperClass->Attachment(this, "Holster_M14");
+			if (Action->DataAssets[(int32)EActionType::Sword]->Weapon != nullptr)
+			{
+				Action->DataAssets[(int32)EActionType::Sword]->Weapon->Attachment(this, "Holster_OneHand");
+
+				// Random한 아이템을 -> UActorFactory -> Actor를 Spawn시켜주는거 -> 변수값을 조금 바꾸면 여러 개를 스폰할 수 있음
+			}
 		}
-		else if (Item->Rarity == EItemRarity::IR_VeryRare)
+
+		else if (Item->Rarity == EItemRarity::IR_Legendary)
 		{
-			if (swordClass != nullptr)
-				swordClass->Attachment(this, "Holster_OneHand");
+			if (Action->DataAssets[(int32)EActionType::Sniper]->Weapon != nullptr)
+			{
+				Action->DataAssets[(int32)EActionType::Sniper]->Weapon->Attachment(this, "Holster_M14");
+			}
 		}
+		
 	}
 }
 
@@ -421,9 +428,18 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAction("Sprint", EInputEvent::IE_Released, this, &ACPlayer::OffSprint);
 	PlayerInputComponent->BindAction("Jump", EInputEvent::IE_Pressed, this, &ACPlayer::StartJump);
 	PlayerInputComponent->BindAction("Jump", EInputEvent::IE_Released, this, &ACPlayer::StopJump);
-	PlayerInputComponent->BindAction("Vaulting", EInputEvent::IE_Pressed, parkour, &UCParkourSystem::Vault);
+	PlayerInputComponent->BindAction("Vaulting", EInputEvent::IE_Pressed, parkour, &UCParkourSystem::Parkour);
 	PlayerInputComponent->BindAction("Interact", EInputEvent::IE_Pressed, this, &ACPlayer::BeginInteract);
 	PlayerInputComponent->BindAction("Interact", EInputEvent::IE_Released, this, &ACPlayer::EndInteract);
+	PlayerInputComponent->BindAction("Action", EInputEvent::IE_Pressed, this, &ACPlayer::OnAction);
+	
+	// Weapon Event
+	PlayerInputComponent->BindAction("Fist", EInputEvent::IE_Pressed, this, &ACPlayer::OnFist);
+	PlayerInputComponent->BindAction("Sword", EInputEvent::IE_Pressed, this, &ACPlayer::OnSword);
+	PlayerInputComponent->BindAction("Sniper", EInputEvent::IE_Pressed, this, &ACPlayer::OnSniper);
+	PlayerInputComponent->BindAction("MagicBall", EInputEvent::IE_Pressed, this, &ACPlayer::OnMagicBall);
+	PlayerInputComponent->BindAction("Warp", EInputEvent::IE_Pressed, this, &ACPlayer::OnWarp);
+	PlayerInputComponent->BindAction("Storm", EInputEvent::IE_Pressed, this, &ACPlayer::OnStorm);
 
 }
 
@@ -467,15 +483,9 @@ void ACPlayer::OffSprint()
 	Status->ChangeMoveSpeed(EWalkSpeedType::Walk);
 }
 
-void ACPlayer::PlayJump()
-{
-	Montages->PlayJump();
-}
-
 void ACPlayer::StartJump()
 {
 	bPressedJump = true;
-	PlayJump();
 }
 
 void ACPlayer::StopJump()
@@ -483,12 +493,57 @@ void ACPlayer::StopJump()
 	bPressedJump = false;
 }
 
+void ACPlayer::OnAction()
+{
+	Action->DoAction();
+}
+
+void ACPlayer::OnFist()
+{
+	CheckFalse(State->IsIdleMode());
+
+	Action->SetFistMode();
+}
+
+void ACPlayer::OnSword()
+{
+	CheckFalse(State->IsIdleMode());
+
+	Action->SetSwordMode();
+}
+
+void ACPlayer::OnSniper()
+{
+	CheckFalse(State->IsIdleMode());
+
+	Action->SetSniperMode();
+}
+
+void ACPlayer::OnMagicBall()
+{
+	CheckFalse(State->IsIdleMode());
+
+	Action->SetMagicBallMode();
+}
+
+void ACPlayer::OnWarp()
+{
+	CheckFalse(State->IsIdleMode());
+
+	Action->SetWarpMode();
+}
+
+void ACPlayer::OnStorm()
+{
+	CheckFalse(State->IsIdleMode());
+
+	Action->SetStormMode();
+}
+
 void ACPlayer::OnStateTypeChanged(EStateType InPrevType, EStateType InNewType)
 {
 
 }
-
-
 
 void ACPlayer::SetMainWidget()
 {

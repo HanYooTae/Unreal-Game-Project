@@ -1,4 +1,4 @@
-#include "Inventory/CWeapon_Sniper.h"
+#include "Actions/CWeapon_Sniper.h"
 #include "Global.h"
 #include "GameFramework/Character.h"
 

@@ -2,10 +2,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Actions/CWeapon.h"
 #include "CWeapon_Sniper.generated.h"
 
 UCLASS()
-class MAIN_API ACWeapon_Sniper : public AActor
+class MAIN_API ACWeapon_Sniper : public ACWeapon
 {
 	GENERATED_BODY()
 	
@@ -16,10 +17,5 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
-	void Attachment(class ACharacter* OwnerCharacter, FName InSocketName);
-
-public:	
-	UPROPERTY(VisibleAnywhere)
-		class USkeletalMeshComponent* Weapon;
-
+	void Attachment(class ACharacter* OwnerCharacter, FName InSocketName) override;
 };

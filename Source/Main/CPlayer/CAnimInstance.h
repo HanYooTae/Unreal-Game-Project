@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Animation/AnimInstance.h"
+#include "CharacterComponents/CActionComponent.h"
 #include "CAnimInstance.generated.h"
 
 UCLASS()
@@ -20,6 +21,11 @@ public:
 	void PlayJumpingDownMontage();
 	void PlayGettingUpMontage();
 	void PlayVaultMontage();
+
+private:
+	UFUNCTION()
+		void OnActionTypeChanged(EActionType InPrevType, EActionType InNewType);
+
 protected:
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Animation")
 		float Speed;
@@ -32,6 +38,9 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Animation")
 		bool Falling;
+
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Animation")
+		EActionType ActionType;
 
 
 public:

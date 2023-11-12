@@ -7,7 +7,7 @@
 UENUM(BlueprintType)
 enum class EStateType : uint8
 {
-	Idle, Jump, Equip, Action, Hitted, Dead, Max
+	Idle, Equip, Action, Hitted, Dead, Max
 };
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FStateTypeChangedSignature, EStateType, InPrevType, EStateType, InNewType);
@@ -25,8 +25,7 @@ protected:
 
 public:		// Get StateType
 	bool IsIdleMode() { return Type == EStateType::Idle; }
-	//bool IsWarpMode() { return Type == EStateType::Warp; }		// q키를 누르면 앞으로 텔레포트(대쉬)
-	bool IsJumpMode() { return Type == EStateType::Jump; }
+	//bool IsDashMode() { return Type == EStateType::Dash; }		// q키를 누르면 앞으로 텔레포트(대쉬)
 	bool IsEquipMode() { return Type == EStateType::Equip; }
 	bool IsActionMode() { return Type == EStateType::Action; }
 	bool IsHittedMode() { return Type == EStateType::Hitted; }
@@ -36,8 +35,7 @@ public:		// Get StateType
 
 public:		// Set StateType
 	void SetIdleMode();
-	//void SetWarpMode();
-	void SetJumpMode();
+	//void SetDashMode();
 	void SetEquipMode();
 	void SetActionMode();
 	void SetHittedMode();

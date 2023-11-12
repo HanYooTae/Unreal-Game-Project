@@ -1,4 +1,4 @@
-#include "Inventory/CWeapon_Sword.h"
+#include "Actions/CWeapon_Sword.h"
 #include "Global.h"
 #include "GameFramework/Character.h"
 
