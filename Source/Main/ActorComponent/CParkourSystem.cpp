@@ -13,12 +13,7 @@ UCParkourSystem::UCParkourSystem()
 {
 }
 
-void UCParkourSystem::Parkour_Implementation()
-{
-	Vault();
-}
-
-void UCParkourSystem::Vault_Implementation()
+void UCParkourSystem::Vault()
 {
 	if (IsClimbing == false)
 	{
@@ -131,8 +126,14 @@ void UCParkourSystem::Vault_Implementation()
 
 					if (HminusL >= 60)
 					{
-						Jump();
+						ShouldPlayerClimb = true;
 					}
+					else
+					{
+						ShouldPlayerClimb = false;
+					}
+
+					JumpAndUp();
 				}
 				else
 				{
@@ -143,15 +144,33 @@ void UCParkourSystem::Vault_Implementation()
 
 					if (HminusL >= 60)
 					{
-						Jump();
+						ShouldPlayerClimb = true;
 					}
+					else
+					{
+						ShouldPlayerClimb = false;
+					}
+
+					JumpAndUp();
 				}
 			}
 		}
 	}
 }
 
-void UCParkourSystem::Jump_Implementation()
+void UCParkourSystem::JumpAndUp()
+{
+	if (ShouldPlayerClimb == true)
+	{
+		Jump();
+	}
+	else
+	{
+		Up();
+	}
+}
+
+void UCParkourSystem::Jump()
 {
 	Owner = Cast<ACPlayer>(GetOwner());
 	CheckNull(Owner);
@@ -239,9 +258,9 @@ void UCParkourSystem::Jump_Implementation()
 		Owner->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		Owner->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Flying);
 
-		auto AnimInstance = Cast<UCAnimInstance>(Owner->GetMesh()->GetAnimInstance());
-		CheckNull(AnimInstance);
-		AnimInstance->PlayClimbMontage();
+		//float yaw = Owner->GetActorForwardVector().Z;
+		//FRotator Rotation = FRotator(Owner->GetActorRotation().Roll, Owner->GetActorRotation().Pitch, yaw);
+		//Owner->SetActorRotation(Rotation);
 
 		FVector Location = (Owner->GetActorForwardVector() * 5.0f) + Owner->GetActorLocation();
 		Owner->SetActorLocation(Location);
@@ -251,15 +270,20 @@ void UCParkourSystem::Jump_Implementation()
 		Owner->SetActorLocation(Location2);
 		CLog::Print("Good");
 
+		auto AnimInstance = Cast<UCAnimInstance>(Owner->GetMesh()->GetAnimInstance());
+		CheckNull(AnimInstance);
+
+		AnimInstance->PlayClimbMontage();
+		//->Montage_Play(Anim->ClimbMontage, 1.0f); //error
 
 		FTimerHandle timerHandle;
 		GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UCParkourSystem::NextMontageYorN, 1.13f);
-
+			
 	}
 
 }
 
-void UCParkourSystem::NextMontageYorN_Implementation()
+void UCParkourSystem::NextMontageYorN()
 {
 	auto AnimInstance = Cast<UCAnimInstance>(Owner->GetMesh()->GetAnimInstance());
 	CheckNull(AnimInstance);
@@ -268,7 +292,7 @@ void UCParkourSystem::NextMontageYorN_Implementation()
 	{
 		Owner->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 		Owner->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
-		IsClimbing = false;
+		IsClimbing = false;		
 	}
 	else
 	{
@@ -280,6 +304,42 @@ void UCParkourSystem::NextMontageYorN_Implementation()
 		IsClimbing = false;
 	}
 }
+
+void UCParkourSystem::Up()
+{
+	IsClimbing = true;
+	auto AnimInstance = Cast<UCAnimInstance>(Owner->GetMesh()->GetAnimInstance());
+	CheckNull(AnimInstance);
+	Owner = Cast<ACPlayer>(GetOwner());
+	CheckNull(Owner);
+	Owner->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	Owner->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Flying);
+	if (IsWallThick == true)
+	{
+		FVector Location = (Owner->GetActorForwardVector() * 5.0f) + Owner->GetActorLocation();
+		Owner->SetActorLocation(Location);
+		AnimInstance->PlayGettingUpMontage();
+	}
+	else
+	{			
+		FVector Location = (Owner->GetActorForwardVector() * 10.0f) + Owner->GetActorLocation();
+		Owner->SetActorLocation(Location);
+		FVector Location2 = FVector(Owner->GetActorLocation().X, Owner->GetActorLocation().Y, WallHeight.Z - 30);
+		Owner->SetActorLocation(Location2);
+		AnimInstance->PlayVaultMontage();
+	}
+	FTimerHandle timerHandle;
+	GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UCParkourSystem::LastCollision, 1.0f);
+	
+	IsClimbing = false;
+}
+
+void UCParkourSystem::LastCollision()
+{
+	Owner->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	Owner->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
+}
+
 
 
 
