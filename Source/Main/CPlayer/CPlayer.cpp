@@ -276,11 +276,6 @@ void ACPlayer::EndInteract()
 
 }
 
-void ACPlayer::OnAction()
-{
-	Action->DoAction();
-}
-
 void ACPlayer::SeverBeginInteract_Implementation()
 {
 	BeginInteract();
@@ -496,6 +491,11 @@ void ACPlayer::StartJump()
 void ACPlayer::StopJump()
 {
 	bPressedJump = false;
+}
+
+void ACPlayer::OnAction()
+{
+	Action->DoAction();
 }
 
 void ACPlayer::OnFist()
