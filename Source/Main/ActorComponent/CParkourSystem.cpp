@@ -13,7 +13,12 @@ UCParkourSystem::UCParkourSystem()
 {
 }
 
-void UCParkourSystem::Vault()
+void UCParkourSystem::Parkour_Implementation()
+{
+	Vault();
+}
+
+void UCParkourSystem::Vault_Implementation()
 {
 	if (IsClimbing == false)
 	{
@@ -126,14 +131,8 @@ void UCParkourSystem::Vault()
 
 					if (HminusL >= 60)
 					{
-						ShouldPlayerClimb = true;
+						Jump();
 					}
-					else
-					{
-						ShouldPlayerClimb = false;
-					}
-
-					JumpAndUp();
 				}
 				else
 				{
@@ -144,33 +143,17 @@ void UCParkourSystem::Vault()
 
 					if (HminusL >= 60)
 					{
-						ShouldPlayerClimb = true;
+						Jump();
 					}
-					else
-					{
-						ShouldPlayerClimb = false;
-					}
-
-					JumpAndUp();
 				}
 			}
 		}
 	}
 }
 
-void UCParkourSystem::JumpAndUp()
-{
-	if (ShouldPlayerClimb == true)
-	{
-		Jump();
-	}
-	else
-	{
-		Up();
-	}
-}
 
-void UCParkourSystem::Jump()
+
+void UCParkourSystem::Jump_Implementation()
 {
 	Owner = Cast<ACPlayer>(GetOwner());
 	CheckNull(Owner);
@@ -283,7 +266,7 @@ void UCParkourSystem::Jump()
 
 }
 
-void UCParkourSystem::NextMontageYorN()
+void UCParkourSystem::NextMontageYorN_Implementation()
 {
 	auto AnimInstance = Cast<UCAnimInstance>(Owner->GetMesh()->GetAnimInstance());
 	CheckNull(AnimInstance);
@@ -305,40 +288,7 @@ void UCParkourSystem::NextMontageYorN()
 	}
 }
 
-void UCParkourSystem::Up()
-{
-	IsClimbing = true;
-	auto AnimInstance = Cast<UCAnimInstance>(Owner->GetMesh()->GetAnimInstance());
-	CheckNull(AnimInstance);
-	Owner = Cast<ACPlayer>(GetOwner());
-	CheckNull(Owner);
-	Owner->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-	Owner->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Flying);
-	if (IsWallThick == true)
-	{
-		FVector Location = (Owner->GetActorForwardVector() * 5.0f) + Owner->GetActorLocation();
-		Owner->SetActorLocation(Location);
-		AnimInstance->PlayGettingUpMontage();
-	}
-	else
-	{			
-		FVector Location = (Owner->GetActorForwardVector() * 10.0f) + Owner->GetActorLocation();
-		Owner->SetActorLocation(Location);
-		FVector Location2 = FVector(Owner->GetActorLocation().X, Owner->GetActorLocation().Y, WallHeight.Z - 30);
-		Owner->SetActorLocation(Location2);
-		AnimInstance->PlayVaultMontage();
-	}
-	FTimerHandle timerHandle;
-	GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UCParkourSystem::LastCollision, 1.0f);
-	
-	IsClimbing = false;
-}
 
-void UCParkourSystem::LastCollision()
-{
-	Owner->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-	Owner->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
-}
 
 
 
