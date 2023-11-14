@@ -437,9 +437,6 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAction("Fist", EInputEvent::IE_Pressed, this, &ACPlayer::OnFist);
 	PlayerInputComponent->BindAction("Sword", EInputEvent::IE_Pressed, this, &ACPlayer::OnSword);
 	PlayerInputComponent->BindAction("Sniper", EInputEvent::IE_Pressed, this, &ACPlayer::OnSniper);
-	PlayerInputComponent->BindAction("MagicBall", EInputEvent::IE_Pressed, this, &ACPlayer::OnMagicBall);
-	PlayerInputComponent->BindAction("Warp", EInputEvent::IE_Pressed, this, &ACPlayer::OnWarp);
-	PlayerInputComponent->BindAction("Storm", EInputEvent::IE_Pressed, this, &ACPlayer::OnStorm);
 
 }
 
@@ -517,27 +514,6 @@ void ACPlayer::OnSniper()
 	CheckFalse(State->IsIdleMode());
 
 	Action->SetSniperMode();
-}
-
-void ACPlayer::OnMagicBall()
-{
-	CheckFalse(State->IsIdleMode());
-
-	Action->SetMagicBallMode();
-}
-
-void ACPlayer::OnWarp()
-{
-	CheckFalse(State->IsIdleMode());
-
-	Action->SetWarpMode();
-}
-
-void ACPlayer::OnStorm()
-{
-	CheckFalse(State->IsIdleMode());
-
-	Action->SetStormMode();
 }
 
 void ACPlayer::OnStateTypeChanged(EStateType InPrevType, EStateType InNewType)

@@ -12,3 +12,13 @@ void ACWeapon::BeginPlay()
 	Super::BeginPlay();
 	
 }
+
+//void ACWeapon::AttachmentToComp(class USceneComponent* InComponent, class ACharacter* OwnerCharacter, FName InSocketName)
+//{
+//	InComponent->AttachToComponent
+//	(
+//		OwnerCharacter->GetMesh(),
+//		FAttachmentTransformRules(EAttachmentRule::KeepRelative, true),
+//		InSocketName
+//	);
+//}

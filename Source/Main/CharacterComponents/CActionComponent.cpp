@@ -51,21 +51,6 @@ void UCActionComponent::SetSniperMode()
 	SetMode(EActionType::Sniper);
 }
 
-void UCActionComponent::SetMagicBallMode()
-{
-	SetMode(EActionType::MagicBall);
-}
-
-void UCActionComponent::SetWarpMode()
-{
-	SetMode(EActionType::Warp);
-}
-
-void UCActionComponent::SetStormMode()
-{
-	SetMode(EActionType::Storm);
-}
-
 void UCActionComponent::SetMode(EActionType InNewType)
 {
 	// 같은 키를 2번 눌렀을 때

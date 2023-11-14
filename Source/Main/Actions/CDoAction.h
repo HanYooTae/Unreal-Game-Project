@@ -27,7 +27,6 @@ public:
 	virtual void DoAction() {};
 	virtual void Begin_DoAction() {};
 	virtual void End_DoAction() {};
-	virtual void Abort() {};	// Storm전용 함수. Storm공격 중에 맞으면 공격중단
 
 public:		// 원거리 무기 전용 함수
 	virtual void OnAim() {};
