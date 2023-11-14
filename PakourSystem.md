@@ -4,9 +4,6 @@
      
    ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/c6bcc657-8483-45ee-b789-b3d07dcdebf9)
 
-
-   * S는 Linetrace가 시작하는 곳이면 E는 Linetrace끝점(Parkour를 할수 있는 최소한의 사정거리)입니다.
-
    - LineTrace Result값 설명
       1. FVector형 WallLocation, WallNormal의 값을 저장
       2. FVector형 WallHeight의 값을 저장(이어질 모든 Linetrace는 앞번호의 Linetrace result값이 true일때만 작동해야하므로 2번linetrace와 동일하게 윗번의 result if문 안에 작성)
@@ -22,18 +19,20 @@
 
       - Action Event 불러오기(CPlayer.h)
 
-      ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/c41d5ac6-2afc-4b08-b28d-40a415458f59)
+      ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/c55085ce-fdb1-437d-bcf8-7d05c9035058)
+
    
       - Linetrace의 Result값을 사용한 bool변수 셋팅
           IsWallThick(물체의 두께를 학인하고 올라갈지 넘어갈지에 대한 bool변수)
            
          ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/293637d2-a93a-4cf6-9832-9be63c658097)
 
-          ShouldPlayerClimb(점프를 통한 parkour 실행 bool변수)
+          전방 위로쏘는 trace조건에 따른 함수 살행
 
-         ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/67fc4031-faaf-4248-b688-ee6ec01cba82)
+         ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/545482d9-4cf0-42a9-9d7c-66aefef3b2ef)
 
-         *Jump와 Up은 아래에 설명되어있음
+
+         *Jump는 아래에 설명되어있음
          
           4번 Linetrace의 Result값이 true라면 Canclimb = true
 
@@ -57,8 +56,7 @@
 
       ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/92402bb5-9619-464d-84ad-cae32fbb4729)
 
-   - LastCollision()
-      *Delay를 대신할 Settimer함수를 좀더 부드러운 몽타주 재생을 위한 콜리전 셋팅 함수
-   
-      ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/ce55623c-f10a-4d1f-8be9-c488bc1ab6f0)
+     
+3. RPC환경에 맞게 함수설정
+      ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/a0d9665f-e249-4c54-9471-0878007401e1)
 
