@@ -84,9 +84,6 @@ private: // Weapon
     UFUNCTION() void OnFist();
     UFUNCTION() void OnSword();
     UFUNCTION() void OnSniper();
-    UFUNCTION() void OnMagicBall();
-    UFUNCTION() void OnWarp();
-    UFUNCTION() void OnStorm();
 
     UPROPERTY()
         FInteractionData InteractionData;
