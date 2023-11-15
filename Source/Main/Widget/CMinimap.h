@@ -9,7 +9,9 @@ class MAIN_API UCMinimap : public UUserWidget
 {
 	GENERATED_BODY()
 	
+
 public:
+
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 		class UTextBlock* TextBlock_52;
 };
