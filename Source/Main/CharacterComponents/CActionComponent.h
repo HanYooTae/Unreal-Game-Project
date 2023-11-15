@@ -7,7 +7,7 @@
 UENUM(BlueprintType)
 enum class EActionType : uint8
 {
-	Unarmed, Fist, Sword, Sniper, MagicBall, Warp, Storm, Max
+	Unarmed, Fist, Sword, Sniper, Max
 };
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FActionTypeChangedSignature, EActionType, InPrevType, EActionType, InNewType);
@@ -43,15 +43,6 @@ public:		// bool Type
 	UFUNCTION(BlueprintPure)
 		FORCEINLINE bool IsSniperMode() { return Type == EActionType::Sniper; }
 
-	UFUNCTION(BlueprintPure)
-		FORCEINLINE bool IsMagicBallMode() { return Type == EActionType::MagicBall; }
-
-	UFUNCTION(BlueprintPure)
-		FORCEINLINE bool IsWarpMode() { return Type == EActionType::Warp; }
-
-	UFUNCTION(BlueprintPure)
-		FORCEINLINE bool IsStormMode() { return Type == EActionType::Storm; }
-
 public:		// Set Action
 	UFUNCTION(BlueprintCallable)
 		void SetUnarmedMode();
@@ -64,15 +55,6 @@ public:		// Set Action
 
 	UFUNCTION(BlueprintCallable)
 		void SetSniperMode();
-
-	UFUNCTION(BlueprintCallable)
-		void SetMagicBallMode();
-
-	UFUNCTION(BlueprintCallable)
-		void SetWarpMode();
-
-	UFUNCTION(BlueprintCallable)
-		void SetStormMode();
 
 private:
 	void SetMode(EActionType InNewType);		// 무기를 들고 있을 때 같은 무기를 호출하면 Unarmed로 회귀시켜주는 함수
