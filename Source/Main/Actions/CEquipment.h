@@ -63,4 +63,5 @@ private:
 	FEquipmentData EquipmentData;
 
 	bool bEquippedThis;		// 무기가 장착이 되어있는지 아닌지 판단하는 변수
+
 };
