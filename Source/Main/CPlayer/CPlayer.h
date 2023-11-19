@@ -182,6 +182,10 @@ private:
     class UMaterialInstanceDynamic* Material_First;
     class UMaterialInstanceDynamic* Material_Second;
 
+    bool bsword;
+    bool bsniper;
+
 public:     // Main Widget
     void SetMainWidget();
+    
 };

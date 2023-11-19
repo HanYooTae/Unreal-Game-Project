@@ -339,6 +339,7 @@ void ACPlayer::UseItem(class UCItem* Item)
 
 		if (Item->Rarity == EItemRarity::IR_VeryRare)
 		{
+			bsword = true;
 			if (Action->DataAssets[(int32)EActionType::Sword]->Weapon != nullptr)
 			{
 				Action->DataAssets[(int32)EActionType::Sword]->Weapon->Attachment(this, "Holster_OneHand");
@@ -349,6 +350,7 @@ void ACPlayer::UseItem(class UCItem* Item)
 
 		else if (Item->Rarity == EItemRarity::IR_Legendary)
 		{
+			bsniper = true;
 			if (Action->DataAssets[(int32)EActionType::Sniper]->Weapon != nullptr)
 			{
 				Action->DataAssets[(int32)EActionType::Sniper]->Weapon->Attachment(this, "Holster_M14");
@@ -505,6 +507,7 @@ void ACPlayer::OnFist()
 void ACPlayer::OnSword()
 {
 	CheckFalse(State->IsIdleMode());
+	CheckFalse(bsword);
 
 	Action->SetSwordMode();
 }
@@ -512,6 +515,7 @@ void ACPlayer::OnSword()
 void ACPlayer::OnSniper()
 {
 	CheckFalse(State->IsIdleMode());
+	CheckFalse(bsniper);
 
 	Action->SetSniperMode();
 }
