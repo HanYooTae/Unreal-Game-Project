@@ -106,10 +106,10 @@ void ACPlayer::BeginPlay()
 
 	//Get Material Asset
 	UMaterialInstanceConstant* firstMaterialAsset;
-	CHelpers::GetAssetDynamic(&firstMaterialAsset, "MaterialInstanceConstant'/Game/Character/Heraklios/Material/BattalionLeader_MAT_Inst.BattalionLeader_MAT_Inst'");
+	CHelpers::GetAssetDynamic(&firstMaterialAsset, "MaterialInstanceConstant'/Game/Material/MI_Player_Dissolve.MI_Player_Dissolve'");
 
 	UMaterialInstanceConstant* secondMaterialAsset;
-	CHelpers::GetAssetDynamic(&secondMaterialAsset, "MaterialInstanceConstant'/Game/Character/Heraklios/Material/phong1_Inst.phong1_Inst'");
+	CHelpers::GetAssetDynamic(&secondMaterialAsset, "MaterialInstanceConstant'/Game/Material/MI_Player_Dissolve_2.MI_Player_Dissolve_2'");
 
 	//Create Dynamic Material
 	Material_First = UMaterialInstanceDynamic::Create(firstMaterialAsset, nullptr);
@@ -434,6 +434,10 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAction("Interact", EInputEvent::IE_Pressed, this, &ACPlayer::BeginInteract);
 	PlayerInputComponent->BindAction("Interact", EInputEvent::IE_Released, this, &ACPlayer::EndInteract);
 	PlayerInputComponent->BindAction("Action", EInputEvent::IE_Pressed, this, &ACPlayer::OnAction);
+
+	// Condition Event
+	PlayerInputComponent->BindAction("Aim", EInputEvent::IE_Pressed, this, &ACPlayer::OnAim);
+	PlayerInputComponent->BindAction("Aim", EInputEvent::IE_Released, this, &ACPlayer::OffAim);
 	
 	// Weapon Event
 	PlayerInputComponent->BindAction("Fist", EInputEvent::IE_Pressed, this, &ACPlayer::OnFist);
@@ -495,6 +499,16 @@ void ACPlayer::StopJump()
 void ACPlayer::OnAction()
 {
 	Action->DoAction();
+}
+
+void ACPlayer::OnAim()
+{
+	Action->DoAim(true);
+}
+
+void ACPlayer::OffAim()
+{
+	Action->DoAim(false);
 }
 
 void ACPlayer::OnFist()

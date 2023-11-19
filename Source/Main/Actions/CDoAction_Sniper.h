@@ -25,5 +25,8 @@ public:
 	virtual void OffAim() override;
 
 private:
+	UPROPERTY()
+		class UCAim* Aim;
+
 	class UCActionComponent* ActionComp;
 };

@@ -1,4 +1,5 @@
 #include "Actions/CDoAction_Sniper.h"
+#include "Actions/CAim.h"
 #include "CharacterComponents/CActionComponent.h"
 #include "CharacterComponents/CStateComponent.h"
 #include "CharacterComponents/CStatusComponent.h"
@@ -8,6 +9,8 @@
 void ACDoAction_Sniper::BeginPlay()
 {
 	Super::BeginPlay();
+	Aim = NewObject<UCAim>();
+	Aim->BeginPlay(OwnerCharacter);
 }
 
 void ACDoAction_Sniper::Tick(float DeltaTime)
@@ -39,8 +42,12 @@ void ACDoAction_Sniper::End_DoAction()
 
 void ACDoAction_Sniper::OnAim()
 {
+	CheckNull(Aim);
+	Aim->On();
 }
 
 void ACDoAction_Sniper::OffAim()
 {
+	CheckNull(Aim);
+	Aim->Off();
 }
