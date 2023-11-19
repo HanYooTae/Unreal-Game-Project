@@ -60,6 +60,8 @@ protected:  // Action Event
     void BeginInteract();
     void EndInteract();
     void OnAction();
+    void OnAim();
+    void OffAim();
 
 	UFUNCTION(Reliable, Server, WithValidation)
         void SeverBeginInteract();
@@ -182,6 +184,10 @@ private:
     class UMaterialInstanceDynamic* Material_First;
     class UMaterialInstanceDynamic* Material_Second;
 
+    bool bsword;
+    bool bsniper;
+
 public:     // Main Widget
     void SetMainWidget();
+    
 };
