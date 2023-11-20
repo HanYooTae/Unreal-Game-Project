@@ -55,6 +55,8 @@ ACPlayer::ACPlayer()
 	SpringArm->bDoCollisionTest = false;
 	SpringArm->bUsePawnControlRotation = true;
 	SpringArm->SetRelativeLocation(FVector(0, 0, 60));
+	SpringArm->bEnableCameraLag = true;
+	SpringArm->CameraLagSpeed = 100.f;
 
 	//Camera
 	Camera->SetupAttachment(SpringArm);

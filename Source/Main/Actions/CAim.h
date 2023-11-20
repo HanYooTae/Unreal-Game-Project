@@ -28,4 +28,6 @@ private:
 	class UCameraComponent* Camera;
 
 	bool bZooming;
+
+	class ACHUD* HUD;
 };
