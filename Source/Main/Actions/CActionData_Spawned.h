@@ -44,10 +44,10 @@ struct FDoActionData : public FEquipmentData
 		FTransform EffectTransform;
 
 	/*UPROPERTY(EditAnywhere)
-		TSubclassOf<class UMatineeCameraShake> ShakeClass;*/
+		TSubclassOf<UMatineeCameraShake> ShakeClass;*/
 
-	/*UPROPERTY(EditAnywhere)
-		TSubclassOf<class ACMagicBall> ProjectileClass;*/
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<class ACBullet> ProjectileClass;
 };
 
 UCLASS()

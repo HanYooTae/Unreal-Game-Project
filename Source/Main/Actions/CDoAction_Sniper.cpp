@@ -16,6 +16,7 @@ void ACDoAction_Sniper::BeginPlay()
 void ACDoAction_Sniper::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	Aim->Tick(DeltaTime);
 }
 
 void ACDoAction_Sniper::DoAction()
