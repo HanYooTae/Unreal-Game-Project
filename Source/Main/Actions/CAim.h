@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "Components/TimelineComponent.h"
 #include "CAim.generated.h"
 
 UCLASS()
@@ -23,11 +24,21 @@ public:
 	FORCEINLINE bool IsZooming() { return bZooming; }
 	
 private:
+	UFUNCTION()
+		void Zooming(float Output);
+
+public:
+	FOnTimelineFloat OnTimeline;
+
+private:
 	class ACharacter* OwnerCharacter;
 	class USpringArmComponent* SpringArm;
 	class UCameraComponent* Camera;
 
 	bool bZooming;
+
+	class UCurveFloat* Curve;
+	FTimeline Timeline;
 
 	class ACHUD* HUD;
 };
