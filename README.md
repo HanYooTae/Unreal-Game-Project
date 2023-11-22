@@ -393,3 +393,19 @@ https://youtu.be/bDcn5IZL_90
 
 
 ## 18주차
+<h3>**1. 이번주에 한 것**</h3>
+
+1. Cweapon이 Holster Socket에 붙어있지 않을 때 무기를 사용할 수 없도록 변경
+2. Sniper DoAction Montage 제작
+3. Dissolve Material 구현 및 적용
+https://youtu.be/yTe7Dtlw55s
+
+<h3>**2. 고찰 및 다음주 할 것**</h3>
+
+<다음 주까지 프로젝트 마감 후 문서작업 예정>
+- Sniper DoAction 시 Bullet생성
+- Sniper 장착 시 Aim Offset 적용
+- Character HP 및 Collision 생성
+- Start Session 시 Map 변경 예정
+- Enemy montage작업 및 AI생성
+- Enemy 생성 및 BehaviorTree제작
