@@ -395,6 +395,47 @@ https://youtu.be/bDcn5IZL_90
 ## 18주차
 <h3>**1. 이번주에 한 것**</h3>
 
+(유태)
+1. Player의 무기(Fist, Sword, Sniper) 완성
+ -> Fist(Combo기능 O) - 어떤 무기도 장착하지 않아도 사용할 수 있는 무기type
+ -> Sword(Combo기능 O) - Sword를 장착해야 사용할 수 있는 무기type
+ -> Sniper(Combo기능 X) - Sniper를 장착해야 사용할 수 있는 무기type
+https://www.youtube.com/watch?v=N_izGPPNbW8
+
+2. 무기별 장착, 공격 몽타주 재생
+ -> Notify 및 Notify State를 이용하여 Combo기능 및 몽타주 동작이 겹치지 않도록 기능 추가
+
+3.  아직 해결하지 못한 것
+ -> Inventory에서 무기를 장착해야 무기 장착 몽타주를 재생할 수 있어야 하지만, 지금은 무기를 장착하지 않아도 몽타주가 재생될 때 무기가 Spawn됨.
+https://www.youtube.com/watch?v=AutQ0_UdCCU
+ -> Cweapon이 Holster Socket에 붙어있지 않을 때 재생하지 않도록 변경할 예정
+
+(현범)
+1. Player State중 Sniper모드에서 이동, 조준, 발사 Animation Retarget
+
+2. Parkour 관련 AnimInstance 수정 Vault와 GettingUp Animation을 가져오는 코드 삭제 및 관련함수 정리
+
+3.  아직 해결하지 못한 것
+- Inventory UI 제작 -> 정상 작동 -> Editor껐다키면 Crash되는 현상 발생. 원인 불
+
+<h3>**2. 스크린샷**</h3>
+
+
+
+
+<h3>**3. 고찰 및 다음주 할 것**</h3>
+
+- Cweapon이 Holster Socket에 붙어있지 않을 때 무기를 사용할 수 없도록 변경 예정
+- Sniper DoAction 시 Bullet생성
+- Enemy 생성 및 BehaviorTree제작
+- Enemy montage작업 및 AI생성
+- Character HP 및 Collision 생성
+- Inventory UI 문제 해결
+- Dissolve Material 구현
+
+## 19주차
+<h3>**1. 이번주에 한 것**</h3>
+
 1. Cweapon이 Holster Socket에 붙어있지 않을 때 무기를 사용할 수 없도록 변경
 2. Sniper DoAction Montage 제작
 3. Dissolve Material 구현 및 적용
