@@ -280,14 +280,56 @@ https://youtu.be/5jAUMOePUg0
 
 
 ## 13주차
-
-
+1. 이번주 프로젝트 진행 상황
+* Host, Client server간 버그 fix
+* 각 서버 inventory 기능 정상작동
+  
+2. 사진첨부   
+![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/54293456-3249-4593-b64c-22fe8c362959)
+   
+3. 고찰 및 다음주 할 것
+* Item.Class의 use함수 내용 작성
+* Item Datatable 생성
+* parkour Montage 적용 및 Test
+  
 ## 14주차
+1. 이번주 프로젝트 진행 상황
+* item Asset 가져오기, 월드상에 스폰
+* item use함수(inventory에서 아이템 thumbnail 더블 클릭시 실행 하는 함수) 실행시 각    weapon class의 attachment 실행
+* 점프 montage를 사용하는 방식에서 animgrap(WBP)로 바꾸며 더 자연스러워짐
 
+2. 사진첨부
+   ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/38c305e8-fffb-4808-8572-8ed4317e6b0f)
 
+3. 고찰 및 다음주에 할 것
+* ParkourSystem 멀티 플레이화 및 현제 플레이어 스켈레톤 메시에 맞는 몽타주 파밍 및 적용
+* 아이템 데이어테이블 작성
+  
 ## 15주차
+1. 이번주 프로젝트 진행 상황
+-Item Attachment
+*short sword 크기 조절
 
+* 무기 클레스 CWeapon_Sword, CWeapon_Sniper를 따로 만들어서 attachment 함수 생성 (각 무기 클라스는 스켈레탈 메시를 가지고있는 actor이다.)
 
+* Player.cpp use함수 에서 바로 호출하는 방식으로 바꿈
+
+* if조건으로 아이템 등급으로 사용하기위해 만들었던 EItemRarity를 사용하여 각 무기를 나누고 pickupBase아이템 설정에서 등급을 수동으로 주어 각 아이템의 등급을 부여
+
+2. 사진첨부
+* short sword 크기 조절
+  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/fd158a84-d5f9-418f-a75d-be837d312f26)
+
+* Player.cpp use함수 에서 바로 호출하는 방식으로 바꿈
+![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/1ffc203b-1cd2-4ff3-b901-171e18866bfa)
+
+* 등급에 따른 if문 Attachment
+![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/e909fa78-005c-40bb-9d90-f963cba92241)
+
+3. 고찰 및 다음주에 할 것
+* ParkourSystem 멀티 플레이화 및 현제 플레이어 스켈레톤 메시에 맞는 몽타주 파밍 및 적용
+* player state 작업 시작
+  
 ## 16주차
 1. 이번주에 한 것
 - CWeapon_Sniper, CWeapon_Sword를 CWeapon의 자식으로 상속시킴
