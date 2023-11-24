@@ -9,7 +9,7 @@ public class Main : ModuleRules
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
 		PublicIncludePaths.Add(ModuleDirectory);
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "Paper2D", "UMG", "OnlineSubsystem" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "Paper2D", "UMG", "OnlineSubsystem", "GameplayCameras" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
 

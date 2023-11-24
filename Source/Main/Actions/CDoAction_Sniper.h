@@ -9,6 +9,9 @@ class MAIN_API ACDoAction_Sniper : public ACDoAction
 {
 	GENERATED_BODY()
 	
+public:
+	ACDoAction_Sniper();
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -29,4 +32,7 @@ private:
 		class UCAim* Aim;
 
 	class UCActionComponent* ActionComp;
+
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<class UMatineeCameraShake> ShakeClass;
 };
