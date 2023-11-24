@@ -3,9 +3,16 @@
 #include "CharacterComponents/CActionComponent.h"
 #include "CharacterComponents/CStateComponent.h"
 #include "CharacterComponents/CStatusComponent.h"
+#include "CPlayer/CPlayer.h"
 #include "GameFramework/Character.h"
+#include "MatineeCameraShake.h"
 #include "CBullet.h"
 #include "Global.h"
+
+ACDoAction_Sniper::ACDoAction_Sniper()
+{
+	CHelpers::GetClass(&ShakeClass, "Blueprint'/Game/Character/BP_FireShake.BP_FireShake_C'");
+}
 
 void ACDoAction_Sniper::BeginPlay()
 {
@@ -26,6 +33,15 @@ void ACDoAction_Sniper::DoAction()
 
 	CheckFalse(StateComp->IsIdleMode());
 	StateComp->SetActionMode();
+
+	// Camera Shake
+	ACPlayer* player = Cast<ACPlayer>(OwnerCharacter);
+	if (!!player)
+	{
+		APlayerController* controller = player->GetController<APlayerController>();
+		if (!!controller)
+			controller->PlayerCameraManager->StartCameraShake(ShakeClass);
+	}
 
 	Datas[0].bCanMove ? StatusComp->SetMove() : StatusComp->SetStop();
 
@@ -61,10 +77,11 @@ void ACDoAction_Sniper::Begin_DoAction()
 			ESpawnActorCollisionHandlingMethod::AlwaysSpawn
 			);
 
+	bullet->FinishSpawning(transform);
+
 	// 충돌처리
 	
 
-	bullet->FinishSpawning(transform);
 }
 
 void ACDoAction_Sniper::End_DoAction()
