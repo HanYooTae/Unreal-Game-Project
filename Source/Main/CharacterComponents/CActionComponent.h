@@ -44,16 +44,16 @@ public:		// bool Type
 		FORCEINLINE bool IsSniperMode() { return Type == EActionType::Sniper; }
 
 public:		// Set Action
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
 		void SetUnarmedMode();
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
 		void SetFistMode();
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
 		void SetSwordMode();
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
 		void SetSniperMode();
 
 private:
