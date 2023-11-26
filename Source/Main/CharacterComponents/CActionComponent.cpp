@@ -24,7 +24,7 @@ void UCActionComponent::BeginPlay()
 	}
 }
 
-void UCActionComponent::SetUnarmedMode()
+void UCActionComponent::SetUnarmedMode_Implementation()
 {
 	// 무기 해제
 	if (!!Datas[(int32)Type] && !!Datas[(int32)Type]->GetEquipment())
@@ -36,17 +36,17 @@ void UCActionComponent::SetUnarmedMode()
 	ChangeType(EActionType::Unarmed);
 }
 
-void UCActionComponent::SetFistMode()
+void UCActionComponent::SetFistMode_Implementation()
 {
 	SetMode(EActionType::Fist);
 }
 
-void UCActionComponent::SetSwordMode()
+void UCActionComponent::SetSwordMode_Implementation()
 {
 	SetMode(EActionType::Sword);
 }
 
-void UCActionComponent::SetSniperMode()
+void UCActionComponent::SetSniperMode_Implementation()
 {
 	SetMode(EActionType::Sniper);
 }

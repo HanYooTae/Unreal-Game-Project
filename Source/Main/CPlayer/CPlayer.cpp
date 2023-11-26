@@ -435,16 +435,16 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAction("Vaulting", EInputEvent::IE_Pressed, parkour, &UCParkourSystem::Parkour);
 	PlayerInputComponent->BindAction("Interact", EInputEvent::IE_Pressed, this, &ACPlayer::BeginInteract);
 	PlayerInputComponent->BindAction("Interact", EInputEvent::IE_Released, this, &ACPlayer::EndInteract);
-	PlayerInputComponent->BindAction("Action", EInputEvent::IE_Pressed, this, &ACPlayer::OnAction);
+	PlayerInputComponent->BindAction("Action", EInputEvent::IE_Pressed, this, &ACPlayer::OnAction_Server);
 
 	// Condition Event
 	PlayerInputComponent->BindAction("Aim", EInputEvent::IE_Pressed, this, &ACPlayer::OnAim);
 	PlayerInputComponent->BindAction("Aim", EInputEvent::IE_Released, this, &ACPlayer::OffAim);
 	
 	// Weapon Event
-	PlayerInputComponent->BindAction("Fist", EInputEvent::IE_Pressed, this, &ACPlayer::OnFist);
-	PlayerInputComponent->BindAction("Sword", EInputEvent::IE_Pressed, this, &ACPlayer::OnSword);
-	PlayerInputComponent->BindAction("Sniper", EInputEvent::IE_Pressed, this, &ACPlayer::OnSniper);
+	PlayerInputComponent->BindAction("Fist", EInputEvent::IE_Pressed, this, &ACPlayer::OnFist_Server);
+	PlayerInputComponent->BindAction("Sword", EInputEvent::IE_Pressed, this, &ACPlayer::OnSword_Server);
+	PlayerInputComponent->BindAction("Sniper", EInputEvent::IE_Pressed, this, &ACPlayer::OnSniper_Server);
 
 }
 
@@ -498,10 +498,16 @@ void ACPlayer::StopJump()
 	bPressedJump = false;
 }
 
-void ACPlayer::OnAction()
+void ACPlayer::OnAction_Server_Implementation()
+{
+	OnAction();
+}
+
+void ACPlayer::OnAction_Implementation()
 {
 	Action->DoAction();
 }
+
 
 void ACPlayer::OnAim()
 {
@@ -513,14 +519,14 @@ void ACPlayer::OffAim()
 	Action->DoAim(false);
 }
 
-void ACPlayer::OnFist()
+void ACPlayer::OnFist_Implementation()
 {
 	CheckFalse(State->IsIdleMode());
 
 	Action->SetFistMode();
 }
 
-void ACPlayer::OnSword()
+void ACPlayer::OnSword_Implementation()
 {
 	CheckFalse(State->IsIdleMode());
 	CheckFalse(bsword);
@@ -528,12 +534,27 @@ void ACPlayer::OnSword()
 	Action->SetSwordMode();
 }
 
-void ACPlayer::OnSniper()
+void ACPlayer::OnSniper_Implementation()
 {
 	CheckFalse(State->IsIdleMode());
 	CheckFalse(bsniper);
 
 	Action->SetSniperMode();
+}
+
+void ACPlayer::OnFist_Server_Implementation()
+{
+	OnFist();
+}
+
+void ACPlayer::OnSword_Server_Implementation()
+{
+	OnSword();
+}
+
+void ACPlayer::OnSniper_Server_Implementation()
+{
+	OnSniper();
 }
 
 void ACPlayer::OnStateTypeChanged(EStateType InPrevType, EStateType InNewType)
@@ -545,3 +566,5 @@ void ACPlayer::SetMainWidget()
 {
 
 }
+
+//Todo.. RPC
