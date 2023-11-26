@@ -59,7 +59,13 @@ protected: //interact
 protected:  // Action Event
     void BeginInteract();
     void EndInteract();
-    void OnAction();
+
+    UFUNCTION(Reliable, Server)
+        void OnAction_Server();
+
+    UFUNCTION(NetMulticast, Reliable)
+        void OnAction();
+
     void OnAim();
     void OffAim();
 
@@ -83,9 +89,19 @@ private: // Action
     void StopJump();
 
 private: // Weapon
-    UFUNCTION() void OnFist();
-    UFUNCTION() void OnSword();
-    UFUNCTION() void OnSniper();
+    UFUNCTION(Reliable, Server)
+        void OnFist_Server();
+    UFUNCTION(Reliable, Server)
+        void OnSword_Server();
+    UFUNCTION(Reliable, Server)
+        void OnSniper_Server();
+
+    UFUNCTION(NetMulticast, Reliable)
+        void OnFist();
+    UFUNCTION(NetMulticast, Reliable)
+        void OnSword();
+    UFUNCTION(NetMulticast, Reliable)
+        void OnSniper();
 
     UPROPERTY()
         FInteractionData InteractionData;
