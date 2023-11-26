@@ -11,6 +11,7 @@ void UCStatusComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
+	CurrentHealth = MaxHealth;
 }
 
 void UCStatusComponent::ChangeMoveSpeed(EWalkSpeedType InType)
@@ -19,4 +20,16 @@ void UCStatusComponent::ChangeMoveSpeed(EWalkSpeedType InType)
 	CheckNull(movementComp);
 
 	movementComp->MaxWalkSpeed = WalkSpeed[(int8)InType];
+}
+
+void UCStatusComponent::DecreaseHealth(float InAmount)
+{
+	CurrentHealth -= InAmount;
+	CurrentHealth = FMath::Clamp(CurrentHealth, 0.f, MaxHealth);
+}
+
+void UCStatusComponent::IncreaseHealth(float InAmount)
+{
+	CurrentHealth += InAmount;
+	CurrentHealth = FMath::Clamp(CurrentHealth, 0.f, MaxHealth);
 }

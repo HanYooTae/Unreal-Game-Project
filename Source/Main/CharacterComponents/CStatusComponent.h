@@ -34,10 +34,23 @@ public:		// Change Can Move
 	FORCEINLINE void SetMove() { bCanMove = true; }
 	FORCEINLINE void SetStop() { bCanMove = false; }
 
+public:		// Health Controll
+	void DecreaseHealth(float InAmount);
+	void IncreaseHealth(float InAmount);
+
+public:		// Get Health
+	FORCEINLINE float GetMaxHealth() { return MaxHealth; }
+	FORCEINLINE float GetCurrentHealth() { return CurrentHealth; }
+	FORCEINLINE bool IsDead() { return CurrentHealth <= 0; }
+
 private:
 	UPROPERTY(EditDefaultsOnly, Category = "Speed")
 		TArray<float> WalkSpeed{ 200.f, 400.f, 600.f };
 
+	UPROPERTY(EditDefaultsOnly, Category = "Health")
+		float MaxHealth = 100.f;
+
 private:
 	bool bCanMove = true;
+	float CurrentHealth;
 };

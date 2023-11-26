@@ -1,5 +1,7 @@
 #include "Actions/CDoAction_Sniper.h"
+#include "Actions/CWeapon_Sniper.h"
 #include "Actions/CAim.h"
+#include "Particles/ParticleSystem.h"
 #include "CharacterComponents/CActionComponent.h"
 #include "CharacterComponents/CStateComponent.h"
 #include "CharacterComponents/CStatusComponent.h"
@@ -11,7 +13,17 @@
 
 ACDoAction_Sniper::ACDoAction_Sniper()
 {
+	// Initialize Camera Shake
 	CHelpers::GetClass(&ShakeClass, "Blueprint'/Game/Character/BP_FireShake.BP_FireShake_C'");
+
+	//Mesh = Sniper->GetWeapon();
+
+	// Initialize Sniper DoAction Particle
+	/*CHelpers::GetAsset(&MuzzleParticle, "ParticleSystem'/Game/Particles_Rifle/Particles/VFX_Muzzleflash.VFX_Muzzleflash'");
+	CHelpers::GetAsset(&EjectParticle, "ParticleSystem'/Game/Particles_Rifle/Particles/VFX_Eject_bullet.VFX_Eject_bullet'");*/
+
+	// Initialize Sniper DoAction Sound
+	/*CHelpers::GetAsset(&FireSound, "SoundCue'/Game/Sounds/S_RifleShoot_Cue.S_RifleShoot_Cue'");*/
 }
 
 void ACDoAction_Sniper::BeginPlay()
@@ -33,15 +45,6 @@ void ACDoAction_Sniper::DoAction()
 
 	CheckFalse(StateComp->IsIdleMode());
 	StateComp->SetActionMode();
-
-	// Camera Shake
-	ACPlayer* player = Cast<ACPlayer>(OwnerCharacter);
-	if (!!player)
-	{
-		APlayerController* controller = player->GetController<APlayerController>();
-		if (!!controller)
-			controller->PlayerCameraManager->StartCameraShake(ShakeClass);
-	}
 
 	Datas[0].bCanMove ? StatusComp->SetMove() : StatusComp->SetStop();
 
@@ -76,6 +79,20 @@ void ACDoAction_Sniper::Begin_DoAction()
 			OwnerCharacter,
 			ESpawnActorCollisionHandlingMethod::AlwaysSpawn
 			);
+
+	// Camera Shake
+	ACPlayer* player = Cast<ACPlayer>(OwnerCharacter);
+	if (!!player)
+	{
+		APlayerController* controller = player->GetController<APlayerController>();
+		if (!!controller)
+			controller->PlayerCameraManager->StartCameraShake(ShakeClass);
+	}
+
+	// Play Effect
+	//UGameplayStatics::SpawnEmitterAttached(MuzzleParticle, Mesh, "Muzzle");
+	//UGameplayStatics::SpawnEmitterAttached(EjectParticle, Mesh, "ADSSocket");
+	//UGameplayStatics::PlaySoundAtLocation(GetWorld(), FireSound, muzzleLocation);
 
 	bullet->FinishSpawning(transform);
 
