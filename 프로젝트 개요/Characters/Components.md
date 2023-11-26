@@ -56,15 +56,33 @@
 
 #### CStateComponent에서 정의한 상태 중, Hitted와 Dead상태를 저장할 Component
 
+- 몽타주 구조체
+  
   ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/1b2b247d-c0cd-4cff-9bdb-df275a8a1623)
+
+- 정의된 구조체를 저장시킬 변수 DataTable
+
+  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/06af6a18-7593-44e4-8337-126f5f08d607)
+
 
 - ex) Player Data Table 구성
   
-  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/483c4ba4-141f-4688-8b19-2562394b1ff4)
+  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/90b4de5c-08a2-467f-abbe-6ee0b05559cf)
+
+
+- DataTable에 저장되어있는 구조체를 행단위로 끊어서 불러옴
+
+  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/6e522588-c9e5-48c9-90f2-6ff81ef510f6)
+
+- 불러온 구조체의 행을 실행
+
+  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/415e6dd8-33a1-475c-a92a-f02ab9c7e6ba)
+
+
 
 - 샘플 영상
   
-https://youtu.be/qrRIF-q8YQk
+  https://youtu.be/qrRIF-q8YQk
 
 
 ## 4. CActionComponent
