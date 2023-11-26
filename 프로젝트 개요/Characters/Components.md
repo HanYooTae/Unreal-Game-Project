@@ -54,6 +54,18 @@
 
 ## 3. CMontagesComponent
 
+#### CStateComponent에서 정의한 상태 중, Hitted와 Dead상태를 저장할 Component
+
+  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/1b2b247d-c0cd-4cff-9bdb-df275a8a1623)
+
+- ex) Player Data Table 구성
+  
+  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/483c4ba4-141f-4688-8b19-2562394b1ff4)
+
+- 샘플 영상
+  
+https://youtu.be/qrRIF-q8YQk
+
 
 ## 4. CActionComponent
 
