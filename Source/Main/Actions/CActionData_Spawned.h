@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "MatineeCameraShake.h"
 #include "CActionData_Spawned.generated.h"
 
 USTRUCT(BlueprintType)
@@ -43,11 +44,11 @@ struct FDoActionData : public FEquipmentData
 	UPROPERTY(EditAnywhere)
 		FTransform EffectTransform;
 
-	/*UPROPERTY(EditAnywhere)
-		TSubclassOf<class UMatineeCameraShake> ShakeClass;*/
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<UMatineeCameraShake> ShakeClass;
 
-	/*UPROPERTY(EditAnywhere)
-		TSubclassOf<class ACMagicBall> ProjectileClass;*/
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<class ACBullet> ProjectileClass;
 };
 
 UCLASS()

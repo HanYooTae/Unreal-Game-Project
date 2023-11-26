@@ -12,6 +12,7 @@ class MAIN_API ACWeapon_Sniper : public ACWeapon
 	
 public:	
 	ACWeapon_Sniper();
+	USkeletalMeshComponent* GetWeapon() { return Weapon; }
 
 protected:
 	virtual void BeginPlay() override;

@@ -60,6 +60,8 @@ protected:  // Action Event
     void BeginInteract();
     void EndInteract();
     void OnAction();
+    void OnAim();
+    void OffAim();
 
 	UFUNCTION(Reliable, Server, WithValidation)
         void SeverBeginInteract();

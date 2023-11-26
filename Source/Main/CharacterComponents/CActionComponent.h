@@ -62,7 +62,7 @@ private:
 
 public:		// Get Assets
 	void DoAction();
-	void DoAim();
+	void DoAim(bool InPressed);
 
 public:
 	UPROPERTY(BlueprintAssignable)
