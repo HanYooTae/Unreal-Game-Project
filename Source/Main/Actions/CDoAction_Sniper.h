@@ -35,4 +35,19 @@ private:
 
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<class UMatineeCameraShake> ShakeClass;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Effect")
+		class UParticleSystem* MuzzleParticle;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Effect")
+		class UParticleSystem* EjectParticle;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Sound")
+		class USoundCue* FireSound;
+
+	UPROPERTY(VisibleDefaultsOnly)
+		class USkeletalMeshComponent* Mesh;
+
+private:
+	class ACWeapon_Sniper* Sniper;
 };
