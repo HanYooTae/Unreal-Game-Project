@@ -74,7 +74,7 @@
 
   ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/6e522588-c9e5-48c9-90f2-6ff81ef510f6)
 
-- 불러온 구조체의 행을 실행
+- 불러온 구조체의 행에 해당하는 몽타주 실행
 
   ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/415e6dd8-33a1-475c-a92a-f02ab9c7e6ba)
 
