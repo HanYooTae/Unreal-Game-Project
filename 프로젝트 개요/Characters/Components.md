@@ -87,3 +87,26 @@
 
 ## 4. CActionComponent
 
+#### Character의 장착 무기를 정의한 Component
+
+  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/04037d08-b212-45bc-b86f-e0582092b64b)
+
+#### FActionTypeChangedSignature 델리게이트를 생성하여 Character의 상태를 변화시킴
+
+  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/4ce5ff3c-8809-4412-84b6-d346c035626a)
+
+  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/8685e901-cb1d-4031-b941-7c203db6e4de)
+
+
+- Character의 무기(CWeapon), 무기장착 시 재생되는 몽타주(CEquipment), 장착한 무기로 공격하는 몽타주(CDoAction)를 DataAsset에 담아 재생
+
+  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/ae300c87-58d7-4f3b-9d28-2ca569665315)
+
+EX) MyCPlayer->CActionComponent
+
+  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/e47c6b68-40f8-4d7f-a5a0-3441dd75ebc0)
+
+EX) DA_Sniper
+
+  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/6d034db7-f4d1-4f5b-9d41-7503cadeb0a7)
+
