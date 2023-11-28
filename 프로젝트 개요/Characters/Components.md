@@ -127,11 +127,3 @@ ex) DA_Sniper
 - UCActionData
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/5714af02-24e1-43f0-baba-04d0e4d2fc25)
-
-
-
-// TODO.
-1. ActionData, ActionData_Spawned 나눈 이유
-2. CWeapon, CEquipment, CDoAction과 각각의 노티파이 샘플코드 설명
-3. CBullet 설명
-4. CPlayer에서 무기장착안하면 무기장착 및 공격이 안되는 코드 설명
