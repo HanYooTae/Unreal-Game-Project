@@ -17,5 +17,5 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
-	void Attachment(class ACharacter* OwnerCharacter, FName InSocketName) override;
+	void Attachment(FName InSocketName) override;
 };

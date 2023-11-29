@@ -1,17 +1,15 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
 #include "Actions/CWeapon.h"
-#include "CWeapon_Sniper.generated.h"
+#include "CWeapon_Enemy.generated.h"
 
 UCLASS()
-class MAIN_API ACWeapon_Sniper : public ACWeapon
+class MAIN_API ACWeapon_Enemy : public ACWeapon
 {
 	GENERATED_BODY()
-	
-public:	
-	ACWeapon_Sniper();
+public:
+	ACWeapon_Enemy();
 	USkeletalMeshComponent* GetWeapon() { return Weapon; }
 
 protected:

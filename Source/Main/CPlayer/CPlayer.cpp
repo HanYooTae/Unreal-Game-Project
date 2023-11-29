@@ -344,7 +344,7 @@ void ACPlayer::UseItem(class UCItem* Item)
 			bsword = true;
 			if (Action->DataAssets[(int32)EActionType::Sword]->Weapon != nullptr)
 			{
-				Action->DataAssets[(int32)EActionType::Sword]->Weapon->Attachment(this, "Holster_OneHand");
+				Action->DataAssets[(int32)EActionType::Sword]->Weapon->Attachment("Holster_OneHand");
 
 				// Random한 아이템을 -> UActorFactory -> Actor를 Spawn시켜주는거 -> 변수값을 조금 바꾸면 여러 개를 스폰할 수 있음
 			}
@@ -355,7 +355,7 @@ void ACPlayer::UseItem(class UCItem* Item)
 			bsniper = true;
 			if (Action->DataAssets[(int32)EActionType::Sniper]->Weapon != nullptr)
 			{
-				Action->DataAssets[(int32)EActionType::Sniper]->Weapon->Attachment(this, "Holster_M14");
+				Action->DataAssets[(int32)EActionType::Sniper]->Weapon->Attachment("Holster_M14");
 			}
 		}
 		
@@ -565,6 +565,11 @@ void ACPlayer::OnStateTypeChanged(EStateType InPrevType, EStateType InNewType)
 void ACPlayer::SetMainWidget()
 {
 
+}
+
+FGenericTeamId ACPlayer::GetGenericTeamId() const
+{
+	return FGenericTeamId(PlayerTeamID);
 }
 
 //Todo.. RPC

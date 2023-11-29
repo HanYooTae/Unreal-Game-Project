@@ -9,6 +9,8 @@ ACWeapon::ACWeapon()
 
 void ACWeapon::BeginPlay()
 {
+	OwnerCharacter = Cast<ACharacter>(GetOwner());
+
 	Super::BeginPlay();
 	
 }

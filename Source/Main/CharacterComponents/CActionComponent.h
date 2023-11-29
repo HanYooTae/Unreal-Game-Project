@@ -61,7 +61,10 @@ private:
 	void ChangeType(EActionType InNewType);
 
 public:		// Get Assets
-	void DoAction();
+	UFUNCTION(Reliable, Server)
+		void DoAction();
+	UFUNCTION(NetMulticast, Reliable)
+		void DoAction_Client();
 	void DoAim(bool InPressed);
 
 public:
@@ -75,6 +78,5 @@ public:
 private:
 	EActionType Type;
 
-	UPROPERTY()
-		class UCActionData_Spawned* Datas[(int32)EActionType::Max];
+	class UCActionData_Spawned* Datas[(int32)EActionType::Max];
 };
