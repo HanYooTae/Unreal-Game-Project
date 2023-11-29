@@ -20,6 +20,8 @@
 
 - Components
 
+- Parkour System
+
 - Player
 
 - Enemy
