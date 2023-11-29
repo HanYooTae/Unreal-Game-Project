@@ -1,13 +1,13 @@
-#include "Actions/CWeapon_Sword.h"
+#include "Actions/CWeapon_Enemy.h"
 #include "Global.h"
 #include "GameFramework/Character.h"
 
-ACWeapon_Sword::ACWeapon_Sword()
+ACWeapon_Enemy::ACWeapon_Enemy()
 {
 	Weapon = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("WEAPON"));
 	RootComponent = Weapon;
 
-	static ConstructorHelpers::FObjectFinder<USkeletalMesh> WEAPON(TEXT("SkeletalMesh'/Game/ItemAsset/Weapons/Sword/SK_Straight_Sword.SK_Straight_Sword'"));
+	static ConstructorHelpers::FObjectFinder<USkeletalMesh> WEAPON(TEXT("SkeletalMesh'/Game/InfinityBladeWeapons/Weapons/Blade/Silly_Weapons/Blade_ChickenBlade/SK_Blade_ChickenBlade.SK_Blade_ChickenBlade'"));
 	if (WEAPON.Succeeded())
 	{
 		Weapon->SetSkeletalMesh(WEAPON.Object);
@@ -16,13 +16,12 @@ ACWeapon_Sword::ACWeapon_Sword()
 	SetReplicates(true);
 }
 
-void ACWeapon_Sword::BeginPlay()
+void ACWeapon_Enemy::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
-void ACWeapon_Sword::Attachment(FName InSocketName)
+void ACWeapon_Enemy::Attachment(FName InSocketName)
 {
 	AttachToComponent
 	(
@@ -31,5 +30,3 @@ void ACWeapon_Sword::Attachment(FName InSocketName)
 		InSocketName
 	);
 }
-
-

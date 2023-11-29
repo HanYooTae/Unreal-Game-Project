@@ -17,10 +17,10 @@ protected:
 
 public:
 	UFUNCTION(BlueprintCallable)
-		virtual void Attachment(class ACharacter* OwnerCharacter, FName InSocketName) {};
+		virtual void Attachment(FName InSocketName) {};
 
 	UFUNCTION(BlueprintCallable)
-		virtual void AttachmentToComp(class USceneComponent* InComponent, class ACharacter* OwnerCharacter, FName InSocketName) {};
+		virtual void AttachmentToComp(class USceneComponent* InComponent, FName InSocketName) {};
 
 public:		// 무기 장착 or 해제 시 socket변경
 	UFUNCTION(BlueprintImplementableEvent)
@@ -33,7 +33,13 @@ public:
 	UPROPERTY(VisibleAnywhere)
 		class USkeletalMeshComponent* Weapon;
 
+public:
+	UPROPERTY(BlueprintReadOnly)
+		class ACharacter* OwnerCharacter;
+
 private:	// Component
 	UPROPERTY(VisibleDefaultsOnly)
 		class USceneComponent* Root;
+
+
 };

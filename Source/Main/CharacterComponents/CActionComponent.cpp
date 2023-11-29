@@ -84,7 +84,12 @@ void UCActionComponent::ChangeType(EActionType InNewType)
 		OnActionTypeChanged.Broadcast(prev, InNewType);
 }
 
-void UCActionComponent::DoAction()
+void UCActionComponent::DoAction_Implementation()
+{
+	DoAction_Client();
+}
+
+void UCActionComponent::DoAction_Client_Implementation()
 {
 	CheckTrue(IsUnarmedMode());
 
