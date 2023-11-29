@@ -18,9 +18,7 @@
 
 ### 2. Characters
 
-- Character Components
-
-- Actor Components
+- Components
 
 - Player
 
