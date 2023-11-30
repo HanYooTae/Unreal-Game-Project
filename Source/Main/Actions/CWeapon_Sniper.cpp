@@ -21,7 +21,7 @@ void ACWeapon_Sniper::BeginPlay()
 	Super::BeginPlay();
 }
 
-void ACWeapon_Sniper::Attachment(class ACharacter* OwnerCharacter, FName InSocketName)
+void ACWeapon_Sniper::Attachment(FName InSocketName)
 {
 	AttachToComponent
 	(

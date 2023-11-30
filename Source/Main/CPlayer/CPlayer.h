@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Engine/EngineTypes.h"
+#include "GenericTeamAgentInterface.h"
 #include "CPlayer.generated.h"
 
 USTRUCT()
@@ -30,7 +31,7 @@ public:
 };
 
 UCLASS()
-class MAIN_API ACPlayer : public ACharacter
+class MAIN_API ACPlayer : public ACharacter , public IGenericTeamAgentInterface
 {
     GENERATED_BODY()
 
@@ -205,5 +206,9 @@ private:
 
 public:     // Main Widget
     void SetMainWidget();
-    
+    virtual FGenericTeamId GetGenericTeamId() const override;
+private:
+    UPROPERTY(EditDefaultsOnly)
+        uint8 PlayerTeamID = 0;
+    FGenericTeamId TeamGeneicID;
 };

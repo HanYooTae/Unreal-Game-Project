@@ -22,7 +22,7 @@ void ACWeapon_Sword::BeginPlay()
 	
 }
 
-void ACWeapon_Sword::Attachment(ACharacter* OwnerCharacter, FName InSocketName)
+void ACWeapon_Sword::Attachment(FName InSocketName)
 {
 	AttachToComponent
 	(
