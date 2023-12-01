@@ -16,3 +16,20 @@
     ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/8b64be51-e347-4a23-aec6-c2c3b195353b)
 
   ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/b0d85ca9-d16a-4734-8153-73315d0b2008)
+
+
+- 월드 상에 Spawn시킬 DataAsset의 부품들을 담은 BeginPlay함수
+
+[CWeapon](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/DataAssets/CWeapon.md)
+
+  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/343014b6-fc84-43b6-87b7-0e9fe5661fc9)
+
+
+[CEquipment](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/DataAssets/CEquipment.md)
+
+  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/e577d64b-c8a3-49fa-9567-eddc6768655a)
+
+
+[CDoAction](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/DataAssets/CDoAction.md)
+
+  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/9fa70967-e722-477f-ab8f-eaea5cf360d8)
