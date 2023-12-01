@@ -100,14 +100,10 @@
 
 - Character의 무기(CWeapon), 무기장착 시 재생되는 몽타주(CEquipment), 장착한 무기로 공격하는 몽타주(CDoAction)를 DataAsset에 담아 재생
 
-- https://github.com/HanYooTae/Unreal-Game-Project1/edit/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/DataAssets/DataAssets.md
+- [DataAssets](https://github.com/HanYooTae/Unreal-Game-Project1/edit/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/DataAssets/DataAssets.md)
 
   ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/ae300c87-58d7-4f3b-9d28-2ca569665315)
 
 ex) MyCPlayer->CActionComponent
 
   ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/e47c6b68-40f8-4d7f-a5a0-3441dd75ebc0)
-
-ex) DA_Sniper
-
-  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/6d034db7-f4d1-4f5b-9d41-7503cadeb0a7)
