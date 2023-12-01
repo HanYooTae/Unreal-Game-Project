@@ -51,4 +51,12 @@
 - CDoAction
 
 
-### Todo. RPC적용 코드 별도로 언급
+### Todo1. RPC적용 코드 별도로 언급
+
+### Todo2. Overlap, Damage Event
+
+### Todo3. CStatus HP
+
+### Todo4. Hit, Dead montages
+
+### Todo5. Exit GameMode
