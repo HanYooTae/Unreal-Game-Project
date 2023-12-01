@@ -29,7 +29,7 @@
 - [Parkour System](https://github.com/HanYooTae/Unreal-Game-Project1/tree/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Characters/ParkourSystemComponent)
 
 - [Player](https://github.com/HanYooTae/Unreal-Game-Project1/tree/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Characters/Player)
-  : 아직 작성못함
+  : 작성 중
 
 - [Enemy](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Characters/Enemy/Enemy.md) : 작성 중
 
@@ -40,15 +40,17 @@
 - [Inventory](https://github.com/HanYooTae/Unreal-Game-Project1/tree/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Inventory)
 
 ### 4. Items
-- 아직 X
+- [Items](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Items/Items.md) : 작성 중
 
-### 5. Data Assets
+### 5. Data Assets : 작성 중
 
-- CWeapon
+- [DataAssets](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/DataAssets/DataAssets.md)
 
-- CEquipment
+- [CWeapon](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/DataAssets/CWeapon.md)
 
-- CDoAction
+- [CEquipment](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/DataAssets/CEquipment.md)
+
+- [CDoAction](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/DataAssets/CDoAction.md)
 
 
 ### Todo1. RPC적용 코드 별도로 언급
