@@ -49,3 +49,6 @@
 - CEquipment
 
 - CDoAction
+
+
+### Todo. RPC적용 코드 별도로 언급
