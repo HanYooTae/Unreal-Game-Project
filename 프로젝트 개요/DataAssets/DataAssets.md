@@ -9,8 +9,10 @@
 
 - UDataAsset을 상속받는 UCActionData를 생성
 
-  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/5714af02-24e1-43f0-baba-04d0e4d2fc25)
+  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/8e605aae-a081-4a33-95ab-df5dcbaeefc7)
 
-ex) DataAsset(DA_Sniper)
+- Spawn시킨 asset들이 World에 올라왔는지 빠르고 편하게 확인하기 위하여 GetCustomLabel함수 생성
 
-  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/6d034db7-f4d1-4f5b-9d41-7503cadeb0a7)
+    ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/8b64be51-e347-4a23-aec6-c2c3b195353b)
+
+  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/b0d85ca9-d16a-4734-8153-73315d0b2008)
