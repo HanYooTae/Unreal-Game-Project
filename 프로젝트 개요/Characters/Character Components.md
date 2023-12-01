@@ -104,6 +104,11 @@
 
   ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/ae300c87-58d7-4f3b-9d28-2ca569665315)
 
+- DataAsset에서 커스텀한 BeginPlay를 CActionComponent의 BeginPlay에서 실행
+  
+  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/42a08b3e-64f3-40be-bf63-85e1a533bb30)
+
+
 ex) MyCPlayer->CActionComponent
 
   ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/e47c6b68-40f8-4d7f-a5a0-3441dd75ebc0)
