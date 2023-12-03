@@ -66,4 +66,6 @@
 
 ### Todo3. Hit, Dead montages
 
-### Todo4. Exit GameMode
+### Todo4. Start Session
+
+### Todo5. Exit GameMode
