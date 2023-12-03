@@ -100,30 +100,15 @@
 
 - Character의 무기(CWeapon), 무기장착 시 재생되는 몽타주(CEquipment), 장착한 무기로 공격하는 몽타주(CDoAction)를 DataAsset에 담아 재생
 
+- [DataAssets](https://github.com/HanYooTae/Unreal-Game-Project1/edit/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/DataAssets/DataAssets.md)
+
   ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/ae300c87-58d7-4f3b-9d28-2ca569665315)
+
+- DataAsset에서 커스텀한 BeginPlay를 CActionComponent의 BeginPlay에서 실행
+  
+  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/42a08b3e-64f3-40be-bf63-85e1a533bb30)
+
 
 ex) MyCPlayer->CActionComponent
 
   ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/e47c6b68-40f8-4d7f-a5a0-3441dd75ebc0)
-
-ex) DA_Sniper
-
-  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/6d034db7-f4d1-4f5b-9d41-7503cadeb0a7)
-
-
-#### Data Asset
--> 만약 Player와 Enemy가 똑같은 무기를 사용한다면 Player 또는 Enemy 중 하나의 socket에 2개 이상의 Weapon이 Attach됨. 이를 방지하기 위하여 아래 작업 진행
-
--> UObject를 상속받는 UCActionData_Spawned클래스를 생성하여 Weapon, Equipment, DoAction 변수를 생성
-
--> UDataAsset을 상속받는 UCActionData를 생성
-
--> UCActionData를 UCActionData_Spawned의 Friend class로 지정하여 Weapon, Equipment, DoAction을 사용
-
-- UCActionData_Spawned
-
-![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/bf38072f-38b9-4247-b94c-2fa49b697e86)
-
-- UCActionData
-
-![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/5714af02-24e1-43f0-baba-04d0e4d2fc25)
