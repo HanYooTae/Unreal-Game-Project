@@ -9,7 +9,7 @@ class MAIN_API ACWeapon : public AActor
 {
 	GENERATED_BODY()
 	
-public:	
+public:
 	ACWeapon();
 
 protected:
@@ -17,10 +17,10 @@ protected:
 
 public:
 	UFUNCTION(BlueprintCallable)
-		virtual void Attachment(FName InSocketName) {};
+		virtual void Attachment(FName InSocketName);
 
 	UFUNCTION(BlueprintCallable)
-		virtual void AttachmentToComp(class USceneComponent* InComponent, FName InSocketName) {};
+		virtual void AttachmentToComp(class USceneComponent* InComponent, FName InSocketName);
 
 public:		// 무기 장착 or 해제 시 socket변경
 	UFUNCTION(BlueprintImplementableEvent)
@@ -28,6 +28,10 @@ public:		// 무기 장착 or 해제 시 socket변경
 
 	UFUNCTION(BlueprintImplementableEvent)
 		void OnUnequip();
+
+public:
+	void OnCollisions();
+	void OffCollisions();
 
 public:
 	UPROPERTY(VisibleAnywhere)
@@ -41,5 +45,6 @@ private:	// Component
 	UPROPERTY(VisibleDefaultsOnly)
 		class USceneComponent* Root;
 
-
+private:
+	TArray<class UShapeComponent*> Collisions;
 };
