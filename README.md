@@ -17,6 +17,7 @@
 - [CHelpers.h](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Utilities/CHelpers.md)
 - [CLog.h](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Utilities/CLog.md)
 - [Global.h](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Utilities/Global.md)
+- [CHUD](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Utilities/CHUD.md) : 작성 예정
 
 ### 1. OnlinelineSubSystem
 - [OSS Widget](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/OnlineSubSystem/OnlineSubSystem_Widget.md)
@@ -29,7 +30,7 @@
 - [Parkour System](https://github.com/HanYooTae/Unreal-Game-Project1/tree/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Characters/ParkourSystemComponent)
 
 - [Player](https://github.com/HanYooTae/Unreal-Game-Project1/tree/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Characters/Player)
-  : 작성 중
+  : 작성 예정
 
 - [Enemy](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Characters/Enemy/Enemy.md) : 작성 중
 
@@ -40,7 +41,7 @@
 - [Inventory](https://github.com/HanYooTae/Unreal-Game-Project1/tree/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Inventory)
 
 ### 4. Items
-- [Items](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Items/Items.md) : 작성 중
+- [Items](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Items/Items.md) : 작성 예정
 
 ### 5. Data Assets : 작성 중
 
@@ -54,7 +55,7 @@
 
 
 
-### 6. RPC
+### 6. RPC : 작성 예정
 
 - [RPC](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/RPC/RPC.md)
 
