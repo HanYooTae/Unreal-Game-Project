@@ -59,12 +59,11 @@
 
 - [RPC](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/RPC/RPC.md)
 
-### Todo1. HUD 클래스 언급
 
-### Todo2. Overlap, Damage Event
+### Todo1. Overlap, Damage Event
 
-### Todo3. CStatus HP
+### Todo2. CStatus HP
 
-### Todo4. Hit, Dead montages
+### Todo3. Hit, Dead montages
 
-### Todo5. Exit GameMode
+### Todo4. Exit GameMode
