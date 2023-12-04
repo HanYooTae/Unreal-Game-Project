@@ -30,6 +30,16 @@ void UCMontagesComponent::BeginPlay()
 	}
 }
 
+void UCMontagesComponent::PlayHitted()
+{
+	PlayMontage(EStateType::Hitted);
+}
+
+void UCMontagesComponent::PlayDead()
+{
+	PlayMontage(EStateType::Dead);
+}
+
 void UCMontagesComponent::PlayMontage(EStateType InStateType)
 {
 	ACharacter* ownerCharacter = Cast<ACharacter>(GetOwner());

@@ -39,6 +39,10 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+public:
+	void PlayHitted();
+	void PlayDead();
+
 private:
 	void PlayMontage(EStateType InStateType);
 

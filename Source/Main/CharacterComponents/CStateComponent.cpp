@@ -16,11 +16,6 @@ void UCStateComponent::SetIdleMode()
 	ChangeType(EStateType::Idle);
 }
 
-//void UCStateComponent::SetDashMode()
-//{
-//	ChangeType(EStateType::Dash);
-//}
-
 void UCStateComponent::SetEquipMode()
 {
 	ChangeType(EStateType::Equip);
