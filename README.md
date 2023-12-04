@@ -35,7 +35,7 @@
 - [Player](https://github.com/HanYooTae/Unreal-Game-Project1/tree/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Characters/Player)
   : 작성 예정
 
-- [Enemy](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Characters/Enemy/Enemy.md) : 작성 중
+- [Enemy](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Characters/Enemy/Enemy.md)
 
 
 
@@ -44,7 +44,7 @@
 - [Inventory](https://github.com/HanYooTae/Unreal-Game-Project1/tree/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Inventory)
 
 ### 4. Items
-- [Items](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Items/Items.md) : 작성 예정
+- [Items](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Items/Items.md)
 
 ### 5. Data Assets : 작성 중
 
@@ -58,9 +58,9 @@
 
 
 
-### 6. RPC : 작성 예정
+### 6. RPC
 
-- [RPC](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/RPC/RPC.md)
+- [RPC](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/RPC/RPC.md) : 작성 중
 
 
 ### Todo1. Overlap, Damage Event
