@@ -1,0 +1,114 @@
+# Create Character Components
+- Characters(Player, Enemy)를 구성하는 컴포넌트들을 역할별로 나누어 생성.
+
+- 구성된 Components
+  1. CStateComponent
+  2. CStatusComponent
+  3. CMontagesComponent
+  4. CActionComponent
+
+
+## 1. CStateComponent
+
+#### Character의 현재 상태를 나타내는 컴포넌트
+- Idle(아무것도 안하는 상태)
+- Equip(무기를 장착하는 상태)
+- Action(공격하는 상태, 장착한 무기타입에 따라 공격하는 몽타주가 상이함)
+- Hitted(Character가 공격에 맞은 상태)
+- Dead(Character가 죽은 상태)
+  
+![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/ac300712-0313-4cb6-80fa-9b2c87fa7215)
+
+
+#### FStateTypeChangedSignature라는 델리게이트를 생성하여 Character의 상태를 변화시킴
+![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/87dfc344-52e5-4b54-b205-9bc71284b417)
+
+![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/2e5ab983-47d8-4e3e-9009-6ba579f3a7b1)
+
+![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/56f3a402-c60c-40be-9279-5dfa1c654e63)
+![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/b3a79a0a-ba26-4206-be88-4dd1c4545d07)
+
+
+## 2. CStatusComponent
+
+#### Character의 이동능력 및 HP를 나타내는 컴포넌트
+
+- Character의 이동속도, 최대 체력, 이동능력, 현재 체력
+  
+   ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/0d8fee6a-0c62-4a61-9983-cf682cf44541)
+
+- Enum으로 정의한 이동속도 Sneak(200), Walk(400), Run(600)
+  
+   ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/418a757f-0541-4f72-8014-039c65d9b447)
+   ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/e9baf471-931a-44bd-b651-c4a5c1356b08)
+
+- 이동능력 정의 (움직일 수 있는가, 움직일 수 없는가)
+  
+   ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/a04b9bdb-0cff-4fe8-9caf-833c5d30135c)
+
+- 체력 상태 정의
+  
+   ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/80fcbf1d-c883-4615-8c28-dbe9fd609c11)
+
+
+
+## 3. CMontagesComponent
+
+#### CStateComponent에서 정의한 상태 중, Hitted와 Dead상태를 저장할 Component
+
+- 몽타주 구조체
+  
+  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/1b2b247d-c0cd-4cff-9bdb-df275a8a1623)
+
+- 정의된 구조체를 저장시킬 변수 DataTable
+
+  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/06af6a18-7593-44e4-8337-126f5f08d607)
+
+
+- ex) Player Data Table 구성
+  
+  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/90b4de5c-08a2-467f-abbe-6ee0b05559cf)
+
+
+- DataTable에 저장되어있는 구조체를 행단위로 끊어서 불러옴
+
+  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/6e522588-c9e5-48c9-90f2-6ff81ef510f6)
+
+- 불러온 구조체의 행에 해당하는 몽타주 실행
+
+  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/415e6dd8-33a1-475c-a92a-f02ab9c7e6ba)
+
+
+
+- 샘플 영상
+  
+  https://youtu.be/qrRIF-q8YQk
+
+
+## 4. CActionComponent
+
+#### Character의 장착 무기를 정의한 Component
+
+  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/04037d08-b212-45bc-b86f-e0582092b64b)
+
+#### FActionTypeChangedSignature 델리게이트를 생성하여 Character의 상태를 변화시킴
+
+  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/4ce5ff3c-8809-4412-84b6-d346c035626a)
+
+  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/8685e901-cb1d-4031-b941-7c203db6e4de)
+
+
+- Character의 무기(CWeapon), 무기장착 시 재생되는 몽타주(CEquipment), 장착한 무기로 공격하는 몽타주(CDoAction)를 DataAsset에 담아 재생
+
+- [DataAssets](https://github.com/HanYooTae/Unreal-Game-Project1/edit/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/DataAssets/DataAssets.md)
+
+  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/ae300c87-58d7-4f3b-9d28-2ca569665315)
+
+- DataAsset에서 커스텀한 BeginPlay를 CActionComponent의 BeginPlay에서 실행
+  
+  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/42a08b3e-64f3-40be-bf63-85e1a533bb30)
+
+
+ex) MyCPlayer->CActionComponent
+
+  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/e47c6b68-40f8-4d7f-a5a0-3441dd75ebc0)
