@@ -14,7 +14,7 @@
 ACDoAction_Sniper::ACDoAction_Sniper()
 {
 	// Initialize Camera Shake
-	CHelpers::GetClass(&ShakeClass, "Blueprint'/Game/Character/BP_FireShake.BP_FireShake_C'");
+	CHelpers::GetClass(&ShakeClass, "Blueprint'/Game/Character/CameraShake/BP_FireShake.BP_FireShake_C'");
 
 	//Mesh = Sniper->GetWeapon();
 

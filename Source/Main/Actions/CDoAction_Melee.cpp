@@ -72,6 +72,23 @@ void ACDoAction_Melee::OnBeginOverlap(ACharacter* InAttacker, AActor* InCauser, 
 		UGameplayStatics::SetGlobalTimeDilation(GetWorld(), 0.02f);
 		UKismetSystemLibrary::K2_SetTimer(this, "RestoreTimeDilation", 0.02f * hitStop, false);
 	}
+
+	// Camera Shake
+	TSubclassOf<UMatineeCameraShake> shakeClass = Datas[ComboCount].ShakeClass;
+	if (!!shakeClass)
+	{
+		APlayerController* controller = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+		CheckNull(controller);
+		controller->PlayerCameraManager->StartCameraShake(shakeClass);
+	}
+
+	// Play Particles
+	UParticleSystem* effect = Datas[ComboCount].Effect;
+	CheckNull(effect);
+	FTransform transform = Datas[ComboCount].EffectTransform;
+	transform.AddToTranslation(InOtherCharacter->GetActorLocation());
+
+	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), effect, transform);
 }
 
 void ACDoAction_Melee::OnEndOverlap(ACharacter* InAttacker, AActor* InCauser, ACharacter* InOtherCharacter)
