@@ -13,6 +13,12 @@ void ACWeapon::BeginPlay()
 
 	GetComponents(Collisions);
 
+	for (const auto& collision : Collisions)
+	{
+		collision->OnComponentBeginOverlap.AddDynamic(this, &ACWeapon::BeginOverlap);
+		collision->OnComponentEndOverlap.AddDynamic(this, &ACWeapon::EndOverlap);
+	}
+
 	OffCollisions();
 
 	Super::BeginPlay();
@@ -49,4 +55,30 @@ void ACWeapon::OffCollisions()
 {
 	for (const auto& collision : Collisions)
 		collision->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+}
+
+void ACWeapon::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	CheckTrue(OwnerCharacter == OtherActor);
+
+	ACharacter* otherCharacter = Cast<ACharacter>(OtherActor);
+
+	if (OnBeginOverlap.IsBound())
+	{
+		if (!!otherCharacter)
+			OnBeginOverlap.Broadcast(OwnerCharacter, this, otherCharacter);
+	}
+}
+
+void ACWeapon::EndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	CheckTrue(OwnerCharacter == OtherActor);
+
+	ACharacter* otherCharacter = Cast<ACharacter>(OtherActor);
+
+	if (OnEndOverlap.IsBound())
+	{
+		if (!!otherCharacter)
+			OnEndOverlap.Broadcast(OwnerCharacter, this, otherCharacter);
+	}
 }

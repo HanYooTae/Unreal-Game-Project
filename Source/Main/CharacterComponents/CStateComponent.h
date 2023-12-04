@@ -25,7 +25,6 @@ protected:
 
 public:		// Get StateType
 	bool IsIdleMode() { return Type == EStateType::Idle; }
-	//bool IsDashMode() { return Type == EStateType::Dash; }		// q키를 누르면 앞으로 텔레포트(대쉬)
 	bool IsEquipMode() { return Type == EStateType::Equip; }
 	bool IsActionMode() { return Type == EStateType::Action; }
 	bool IsHittedMode() { return Type == EStateType::Hitted; }
@@ -35,7 +34,6 @@ public:		// Get StateType
 
 public:		// Set StateType
 	void SetIdleMode();
-	//void SetDashMode();
 	void SetEquipMode();
 	void SetActionMode();
 	void SetHittedMode();
