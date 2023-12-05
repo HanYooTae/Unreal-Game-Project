@@ -62,9 +62,9 @@
 
 - [RPC](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/RPC/RPC.md) : 작성 중
 
-### Todo1. Hit, Dead montages
+## Todo1. Player, Enemy 동기화
 
-### Todo2. Damage Event
+### Todo2. Dead montages
 
 ### Todo3. CStatus HP
 
