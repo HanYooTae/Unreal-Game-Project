@@ -89,6 +89,9 @@ void ACDoAction_Melee::OnBeginOverlap(ACharacter* InAttacker, AActor* InCauser, 
 	transform.AddToTranslation(InOtherCharacter->GetActorLocation());
 
 	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), effect, transform);
+
+	FDamageEvent damageEvent;
+	InOtherCharacter->TakeDamage(Datas[ComboCount].power, damageEvent, InAttacker->GetController(), InCauser);
 }
 
 void ACDoAction_Melee::OnEndOverlap(ACharacter* InAttacker, AActor* InCauser, ACharacter* InOtherCharacter)

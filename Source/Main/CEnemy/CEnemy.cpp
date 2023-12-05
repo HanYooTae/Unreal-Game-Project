@@ -53,12 +53,32 @@ void ACEnemy::BeginPlay()
 	//Widget Settings
 }
 
-//float ACEnemy::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
-//{
-//}
+float ACEnemy::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+	DamageValue = Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
+
+	Attacker = EventInstigator->GetCharacter();
+	Causer = DamageCauser;
+
+	Status->DecreaseHealth(DamageValue);
+
+	// Dead
+
+	State->SetHittedMode();
+	PrintLine();
+
+	return DamageValue;
+}
 
 void ACEnemy::Hitted()
 {
+	Montages->PlayHitted();
+
+	// Look at Attacker
+
+
+	// Hit Back
+
 }
 
 void ACEnemy::Dead()
@@ -71,5 +91,11 @@ void ACEnemy::End_Dead()
 
 void ACEnemy::OnStateTypeChanged(EStateType InPrevType, EStateType InNewType)
 {
+	switch (InNewType)
+	{
+	case EStateType::Hitted:	Hitted();	 break;
+	case EStateType::Dead:		Dead();		 break;
+	}
+
 }
 
