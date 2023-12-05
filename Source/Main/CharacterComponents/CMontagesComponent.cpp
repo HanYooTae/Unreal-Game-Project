@@ -45,7 +45,7 @@ void UCMontagesComponent::PlayMontage(EStateType InStateType)
 	ACharacter* ownerCharacter = Cast<ACharacter>(GetOwner());
 	CheckNull(ownerCharacter);
 
-	FMontageData* data = Datas[(int8)InStateType];
+	const FMontageData* data = Datas[(int32)InStateType];
 
 	if (!!data && !!data->AnimMontage)
 		ownerCharacter->PlayAnimMontage(data->AnimMontage, data->PlayRate, data->StartSection);
