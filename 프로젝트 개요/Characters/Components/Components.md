@@ -1,5 +1,5 @@
 # Create Character Components
-- Characters(Player, Enemy)를 구성하는 컴포넌트들을 역할별로 나누어 생성.
+Characters(Player, Enemy)를 구성하는 컴포넌트들을 역할별로 나누어 생성
 
 ------------
 
