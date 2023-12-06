@@ -17,7 +17,7 @@ private:
 	FString GetCustomLabel(class ACharacter* InOwnerCharacter, FString InMiddleName);
 
 public:
-	UPROPERTY(EditAnywhere, Category = "Attachment")
+	UPROPERTY(EditAnywhere, Category = "Weapon")
 		TSubclassOf<class ACWeapon> WeaponClass;
 
 	UPROPERTY(EditAnywhere, Category = "Equipment")
