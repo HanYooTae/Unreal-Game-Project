@@ -14,7 +14,7 @@
 
 ## 팀원 역할
 
-#### 한유태
+#### 1. 한유태
    
   - Minimap 
   - OSS(Online SubSystem)
@@ -22,9 +22,10 @@
   - Weapons
   - Equip Weapon/Attack Montages
   - Data Assets
+  - Overlap/Damage Event
   - HUD
 
-#### 김현범
+#### 2. 김현범
    
   - Parkour System Component
   - Inventory
@@ -32,7 +33,7 @@
   - Enemy
   - Asset Retarget
 
-#### 공동 작업
+#### 3. 공동 작업
 
   - Player
   - RPC
@@ -45,7 +46,7 @@
 
 ### 2. Characters
 
-- [Character Components](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Characters/Character%20Components.md)
+- [Actor Components](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Characters/Character%20Components.md)
 
 - [Parkour System](https://github.com/HanYooTae/Unreal-Game-Project1/tree/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Characters/ParkourSystemComponent)
 
@@ -66,11 +67,11 @@
 
 - [DataAssets](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/DataAssets/DataAssets.md)
 
-- [CWeapon](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/DataAssets/CWeapon.md)
+- [Weapon](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/DataAssets/CWeapon.md)
 
-- [CEquipment](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/DataAssets/CEquipment.md)
+- [Equipment Montages](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/DataAssets/CEquipment.md)
 
-- [CDoAction](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/DataAssets/CDoAction.md)
+- [Attack Montages](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/DataAssets/CDoAction.md)
 
 
 
