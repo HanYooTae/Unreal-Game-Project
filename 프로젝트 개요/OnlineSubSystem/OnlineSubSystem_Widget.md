@@ -4,6 +4,11 @@
 
   ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/fb50c00b-f11f-4d85-983b-5b32d0af4797)
 
+### 구성된 OSS 위젯
+ >   1. Main Menu Widget
+ >   2. Host Session Menu Widget
+ >   3. Join Session Menu Widget
+
 
 ## 1. Main Menu Widget
 - Create 버튼을 누르면 [Host Session Menu Widget](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/OnlineSubSystem/OnlineSubSystem_Widget.md#2-hostcreate-session-menu-widget)으로 Switch
