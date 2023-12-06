@@ -18,7 +18,7 @@
    
   - Minimap 
   - OSS(Online SubSystem)
-  - Actor Component(Player와 Enemy의 SubResource)
+  - Actor Components(Player와 Enemy의 SubResource)
   - Weapons
   - Equip Weapon/Attack Montages
   - Data Assets
@@ -26,8 +26,9 @@
 
 #### 김현범
    
-  - Parkour System
+  - Parkour System Component
   - Inventory
+  - Items
   - Enemy
   - Asset Retarget
 
@@ -37,13 +38,6 @@
   - RPC
 
 ## 주요 기능(목차)
-
-### 0. Utilities
-
-- [CHelpers.h](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Utilities/CHelpers.md)
-- [CLog.h](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Utilities/CLog.md)
-- [Global.h](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Utilities/Global.md)
-- [CHUD](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Utilities/CHUD.md) : 작성 예정
 
 ### 1. OnlinelineSubSystem
 - [OSS Widget](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/OnlineSubSystem/OnlineSubSystem_Widget.md)
@@ -84,13 +78,3 @@
 ### 6. RPC
 
 - [RPC](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/RPC/RPC.md) : 작성 중
-
-## Todo1. Player, Enemy 동기화
-
-### Todo2. Dead montages
-
-### Todo3. CStatus HP
-
-### Todo4. Start Session
-
-### Todo5. Exit GameMode
