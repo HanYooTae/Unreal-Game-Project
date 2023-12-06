@@ -6,16 +6,23 @@
 
 - OSS를 활용한 2인 멀티플레이 게임
 
+![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/77b436bb-7c42-4c68-97c9-2adbb651640f)
+
+
 ## 개발 기간
 - 2023/07/30 ~ 2023/12/10(예상 종료일)
 
 ## 팀원 역할
+
 #### 한유태
    
   - Minimap 
   - OSS(Online SubSystem)
   - Actor Component(Player와 Enemy의 SubResource)
-  - DataAsset
+  - Weapons
+  - Equip Weapon/Attack Montages
+  - Data Assets
+  - HUD
 
 #### 김현범
    
