@@ -1,4 +1,4 @@
-## 2. CStatusComponent
+## 2. StatusComponent
 
 #### Character의 이동능력 및 체력을 관리하는 컴포넌트
 
