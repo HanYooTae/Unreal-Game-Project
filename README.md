@@ -56,7 +56,7 @@
 
 > + [아이템 구성](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Items/Items.md)
 >    + [검 아이템]
->    + [활 아이템]
+>    + [총 아이템]
 
 
 ### 데이터 에셋
