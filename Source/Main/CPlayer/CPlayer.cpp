@@ -32,7 +32,7 @@ ACPlayer::ACPlayer()
 	CHelpers::CreateActorComponent(this, &Action, "Action");
 	CHelpers::CreateActorComponent(this, &Status, "Status");
 	CHelpers::CreateActorComponent(this, &State, "State");
-	CHelpers::CreateActorComponent(this, &Montages, "Montages");\
+	CHelpers::CreateActorComponent(this, &Montages, "Montages");
 	CHelpers::CreateActorComponent(this, &parkour, "ACParkour");
 	
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>("SpringArm");
