@@ -6,6 +6,9 @@ Player는 미니맵과 컴포넌트들로 구성되어있음
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/7da9d2f4-6413-481f-b9bd-edd7a3e261e7)
 
+![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/75135724-f68e-4e9c-a55b-1b83222e8085)
+
+
 Player에 붙힌 컴포넌트
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/b85c2ce4-f437-4a11-87c3-feb503136d12)
