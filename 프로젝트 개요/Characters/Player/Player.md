@@ -1,14 +1,7 @@
 # Player
 
-Player는 미니맵과 컴포넌트들로 구성되어있음
-
-미니맵을 생성하여 MainWidget에 붙였음
-
-![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/7da9d2f4-6413-481f-b9bd-edd7a3e261e7)
-
-![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/75135724-f68e-4e9c-a55b-1b83222e8085)
-
-
+##### 무기를 장착해야 해당 Type에 맞는 무기 장착 및 공격 몽타주가 실행될 수 있도록 구성하였음
+--------
 Player에 붙힌 컴포넌트
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/b85c2ce4-f437-4a11-87c3-feb503136d12)
