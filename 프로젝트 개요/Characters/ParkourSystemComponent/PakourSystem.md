@@ -1,4 +1,4 @@
-## ParkourSystem 구현 (김현범)
+## ParkourSystem 구현
 
    - 총 4개의 LineTrace사용
      
