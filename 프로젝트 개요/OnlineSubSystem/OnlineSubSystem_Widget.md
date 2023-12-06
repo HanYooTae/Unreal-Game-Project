@@ -12,7 +12,7 @@
 
   ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/8e16ca14-f650-45e4-8123-0c64a1c88a06)
 
-## 2. Host(Create) Session Menu Widget
+## 2. Host Session Menu Widget
 - Back Button을 누르면 [Main Menu Widget](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/OnlineSubSystem/OnlineSubSystem_Widget.md#1-main-menu-widget)으로 Switch
 - EditableBox에 제목을 입력 후 Create Button을 누르면 해당 제목을 가진 Game이 생성
 
