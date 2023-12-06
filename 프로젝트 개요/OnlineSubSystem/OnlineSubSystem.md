@@ -1,19 +1,17 @@
-# Create OnlineSubSystem (한유태)
+# Create OnlineSubSystem
 
-- MultiPlay Game을 만들기 위해서 OnlineSubSystem(OSS)를 사용.
-
-- 구성된 OSS
-  1. Create Session
-  2. Destroy Session
-  3. Find Session
-  4. Join Session
-  5. Start Session
-  
 - Dedicate Server를 감당할 PC가 없어서 Listen Server로 구현.
 - OSS를 구성하기 위해서는 인터페이스 함수인 IOnlineSubsystem을 사용해야 함.
 - 각각의 역할을 가지고 있는 함수들(Create, Destroy, Find, Join)이 마무리되었을 때 호출되는 함수들이 필요
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/f40c1d45-74be-4000-82cf-c590024b3827)
+
+### 구성된 OSS
+  1. Create Session
+  2. Destroy Session
+  3. Find Session
+  4. Join Session
+  5. Start Session
 
 
 ## 1. Create Session
