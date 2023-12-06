@@ -4,7 +4,10 @@
 ------------
 
 ### 구성된 Components
-  > 1. CStateComponent
-  > 2. CStatusComponent
-  > 3. CMontagesComponent
-  > 4. CActionComponent
+  > 1. State Component
+  > 2. Status Component
+  > 3. Montages Component
+  > 4. Action Component
+  > 5. Behavior Component
+  > 6. Patrol Component
+  > 7. Parkour System Component
