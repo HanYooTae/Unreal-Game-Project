@@ -6,7 +6,7 @@
 
 
 ## 1. Main Menu Widget
-- Create 버튼을 누르면 [Host(Create) Session Menu Widget](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/OnlineSubSystem/OnlineSubSystem_Widget.md#2-hostcreate-session-menu-widget)으로 Switch
+- Create 버튼을 누르면 [Host Session Menu Widget](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/OnlineSubSystem/OnlineSubSystem_Widget.md#2-hostcreate-session-menu-widget)으로 Switch
 - Join 버튼을 누르면 [Join Session Menu Widget](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/OnlineSubSystem/OnlineSubSystem_Widget.md#3-join-session-menu-widget)으로 Switch
 - 우측 상단 버튼을 누르면 게임종료
 
