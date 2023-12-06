@@ -9,9 +9,25 @@
 ## 개발 기간
 - 2023/07/30 ~ 2023/12/10(예상 종료일)
 
-## 플레이 영상
-- 개발 종료 후에 넣을 예정
+## 팀원 역할
+#### 한유태
+   
+  - Minimap 
+  - OSS(Online SubSystem)
+  - Actor Component(Player와 Enemy의 SubResource)
+  - DataAsset
 
+#### 김현범
+   
+  - Parkour System
+  - Inventory
+  - Enemy
+  - Asset Retarget
+
+#### 공동 작업
+
+  - Player
+  - RPC
 
 ## 주요 기능(목차)
 
