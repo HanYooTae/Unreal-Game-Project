@@ -1,6 +1,6 @@
 ## 1. StateComponent
 
-#### 캐릭터의 현재 상태를 나타내는 컴포넌트
+#### 캐릭터의 현재 상태를 관리하는 컴포넌트
 ```
   UENUM(BlueprintType)
   enum class EStateType : uint8
