@@ -23,12 +23,14 @@ private:
 	void Hitted();
 	void Dead();
 
+	UFUNCTION()
+		void End_Dead();
+
 private:
 	UFUNCTION()
 		void OnStateTypeChanged(EStateType InPrevType, EStateType InNewType);
 
-	UFUNCTION()
-		void End_Dead();
+	
 
 private: //Scene Component
 

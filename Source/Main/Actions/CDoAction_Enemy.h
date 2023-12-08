@@ -26,15 +26,13 @@ public:
 
 	FORCEINLINE void EnableCombo() { bCanCombo = true; }
 	FORCEINLINE void DisableCombo() { bCanCombo = false; }
-	FORCEINLINE void ClearHittedCharacters() { HittedCharacters.Empty(); }
 
 private:
-	void RestoreTimeDilation();
+	UFUNCTION()
+		void RestoreTimeDilation();
 
 private:
 	int32 ComboCount;
 	bool bCanCombo;
 	bool bSucceed;
-
-	TArray<class ACharacter*> HittedCharacters;
 };
