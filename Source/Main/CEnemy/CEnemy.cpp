@@ -14,9 +14,9 @@ ACEnemy::ACEnemy()
 	
 	//Create Actor Component
 	CHelpers::CreateActorComponent(this, &Action, "Action");
+	CHelpers::CreateActorComponent(this, &Status, "Status");
 	CHelpers::CreateActorComponent(this, &Montages, "Montages");
 	CHelpers::CreateActorComponent(this, &State, "State");
-	CHelpers::CreateActorComponent(this, &Status, "Status");
 	
 	//Component Settings
 	// -> MeshComp
@@ -63,9 +63,13 @@ float ACEnemy::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AContro
 	Status->DecreaseHealth(DamageValue);
 
 	// Dead
+	if (Status->IsDead())
+	{
+		State->SetDeadMode();
+		return DamageValue;
+	}
 
 	State->SetHittedMode();
-	PrintLine();
 
 	return DamageValue;
 }
@@ -83,10 +87,31 @@ void ACEnemy::Hitted()
 
 void ACEnemy::Dead()
 {
+	// Ragdoll
+	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	GetMesh()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	GetMesh()->SetSimulatePhysics(true);
+	GetMesh()->GlobalAnimRateScale = 0.f;
+
+	// Add Force
+	FVector start = GetActorLocation();
+	FVector target = Attacker->GetActorLocation();
+	FVector direction = (start - target).GetSafeNormal();
+	FVector force = direction * LaunchValue * DamageValue;
+	GetMesh()->AddForceAtLocation(force, start);
+
+	// Off All Collisions
+	Action->OffAllCollisions();
+
+	// Destroy All(Attachment, Equipment, DoAction...)
+	UKismetSystemLibrary::K2_SetTimer(this, "End_Dead", 5.f, false);
 }
 
 void ACEnemy::End_Dead()
 {
+	Action->End_Dead();
+
+	Destroy();
 }
 
 void ACEnemy::OnStateTypeChanged(EStateType InPrevType, EStateType InNewType)
