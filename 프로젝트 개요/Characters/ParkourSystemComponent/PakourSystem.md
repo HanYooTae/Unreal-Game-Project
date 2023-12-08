@@ -9,11 +9,5 @@
       * 1번 : FVector형 벽의 위치값, 벽의 normal vector의 값을 저장
       * 2번 : FVector형 벽의 높이의 값을 저장
       * 3번 : FVector형 벽의 두께 값을 저장
-      * 4번 : 올라갈수 있는지의 여부를 판단할 bool변수 저장
-
-
-     
-   - RPC환경에 맞게 함수설정
-     
-      ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/a0d9665f-e249-4c54-9471-0878007401e1)
+      * 4번 : 올라갈수 있는지의 여부를 판단할 bool변수    
 
