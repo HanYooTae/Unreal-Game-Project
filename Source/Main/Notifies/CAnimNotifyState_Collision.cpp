@@ -4,7 +4,7 @@
 #include "CharacterComponents/CActionComponent.h"
 #include "Actions/CWeapon.h"
 #include "Actions/CActionData_Spawned.h"
-#include "Actions/CDoAction_Melee.h"
+#include "Actions/CDoAction.h"
 
 FString	UCAnimNotifyState_Collision::GetNotifyName_Implementation() const
 {
@@ -48,9 +48,9 @@ void UCAnimNotifyState_Collision::NotifyEnd(USkeletalMeshComponent* MeshComp, UA
 
 	weapon->OffCollisions();
 
-	ACDoAction_Melee* doAction_melee = Cast<ACDoAction_Melee>(currentData->GetDoAction());
-	CheckNull(doAction_melee);
+	ACDoAction* doAction = Cast<ACDoAction>(currentData->GetDoAction());
+	CheckNull(doAction);
 	
 	// 다단히트 방지
-	doAction_melee->ClearHittedCharacters();
+	doAction->ClearHittedCharacters();
 }

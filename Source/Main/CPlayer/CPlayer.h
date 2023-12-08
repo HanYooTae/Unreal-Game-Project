@@ -89,6 +89,15 @@ private: // Action
     void StartJump();
     void StopJump();
 
+private:
+    virtual float TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
+
+    void Hitted();
+    void Dead();
+
+    UFUNCTION()
+        void End_Dead();
+
 private: // Weapon
     UFUNCTION(Reliable, Server)
         void OnFist_Server();
@@ -211,4 +220,8 @@ private:
     UPROPERTY(EditDefaultsOnly)
         uint8 PlayerTeamID = 0;
     FGenericTeamId TeamGeneicID;
+
+    class ACharacter* Attacker;
+    class AActor* Causer;
+    float DamageValue;
 };

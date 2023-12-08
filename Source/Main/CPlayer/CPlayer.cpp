@@ -498,6 +498,36 @@ void ACPlayer::StopJump()
 	bPressedJump = false;
 }
 
+float ACPlayer::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+	DamageValue = Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
+
+	Attacker = EventInstigator->GetCharacter();
+	Causer = DamageCauser;
+
+	Status->DecreaseHealth(DamageValue);
+
+	// Dead
+
+	State->SetHittedMode();
+	PrintLine();
+
+	return DamageValue;
+}
+
+void ACPlayer::Hitted()
+{
+	Montages->PlayHitted();
+}
+
+void ACPlayer::Dead()
+{
+}
+
+void ACPlayer::End_Dead()
+{
+}
+
 void ACPlayer::OnAction_Server_Implementation()
 {
 	OnAction();
@@ -559,7 +589,11 @@ void ACPlayer::OnSniper_Server_Implementation()
 
 void ACPlayer::OnStateTypeChanged(EStateType InPrevType, EStateType InNewType)
 {
-
+	switch (InNewType)
+	{
+	case EStateType::Hitted:	Hitted();	 break;
+	case EStateType::Dead:		Dead();		 break;
+	}
 }
 
 void ACPlayer::SetMainWidget()

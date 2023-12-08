@@ -101,6 +101,5 @@ void ACDoAction_Melee::OnEndOverlap(ACharacter* InAttacker, AActor* InCauser, AC
 
 void ACDoAction_Melee::RestoreTimeDilation()
 {
-	PrintLine();
 	UGameplayStatics::SetGlobalTimeDilation(GetWorld(), 1.f);
 }
