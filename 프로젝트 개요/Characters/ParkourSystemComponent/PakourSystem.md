@@ -2,61 +2,18 @@
 
    - 총 4개의 LineTrace사용
      
-   ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/c6bcc657-8483-45ee-b789-b3d07dcdebf9)
+   ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/48af6d19-dfa9-406a-8abe-a46bf376445a)
+
 
    - LineTrace Result값 설명
-      1. FVector형 WallLocation, WallNormal의 값을 저장
-      2. FVector형 WallHeight의 값을 저장(이어질 모든 Linetrace는 앞번호의 Linetrace result값이 true일때만 작동해야하므로 2번linetrace와 동일하게 윗번의 result if문 안에 작성)
-      3. WallHeight2의 값을 저장
-      4. Canclimb인 bool변에 값을 true로 저장(player 머리위로 쏘는 Linetrace는 위에 막혀있는지에 대한 검사를 하며 현제 사용여부에 따라 result값을 셋팅)
+      * 1번 : FVector형 벽의 위치값, 벽의 normal vector의 값을 저장
+      * 2번 : FVector형 벽의 높이의 값을 저장
+      * 3번 : FVector형 벽의 두께 값을 저장
+      * 4번 : 올라갈수 있는지의 여부를 판단할 bool변수 저장
 
-1. Montage_Play
-
-    몽타주를 실행하기전 작업
-      - 몽타주 레퍼런스 가져오기(AnimInstance.h)
-      
-      ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/69595733-851d-475d-a508-d28e7801fe6a)
-
-      - Action Event 불러오기(CPlayer.h)
-
-      ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/c55085ce-fdb1-437d-bcf8-7d05c9035058)
-
-   
-      - Linetrace의 Result값을 사용한 bool변수 셋팅
-          IsWallThick(물체의 두께를 학인하고 올라갈지 넘어갈지에 대한 bool변수)
-           
-         ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/293637d2-a93a-4cf6-9832-9be63c658097)
-
-          전방 위로쏘는 trace조건에 따른 함수 살행
-
-         ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/545482d9-4cf0-42a9-9d7c-66aefef3b2ef)
-
-
-         *Jump는 아래에 설명되어있음
-         
-          4번 Linetrace의 Result값이 true라면 Canclimb = true
-
-    Montage_Play
-   
-   - 재생하기위한 함수를 셋팅
-
-      ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/8155ae47-4aa3-4ec3-9441-0b527749991c)
-
-
-   - 재생 및 delay
-
-      ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/ccf52393-f81d-47f2-b3e7-5e598d0a6030)
-
-
-2. 기타 함수 소개
-- NextMontageYorN(), LastCollision()
-      
-   - NextMontageYorN()
-      *벽의 두깨의 정도를 저장한 변수 IsWallThick을 사용하여 각 다른 몽타주 재생
-
-      ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/92402bb5-9619-464d-84ad-cae32fbb4729)
 
      
-3. RPC환경에 맞게 함수설정
+   - RPC환경에 맞게 함수설정
+     
       ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/a0d9665f-e249-4c54-9471-0878007401e1)
 
