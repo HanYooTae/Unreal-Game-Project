@@ -1,7 +1,7 @@
-### Todo2. Dead montages
+### Todo1. CStatus HP Widget
 
-### Todo3. CStatus HP
+### Todo2. Start Session
 
-### Todo4. Start Session
+### Todo3. Exit GameMode
 
-### Todo5. Exit GameMode
+### Todo4. Dissolve Material
