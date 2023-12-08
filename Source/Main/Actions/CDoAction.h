@@ -39,9 +39,6 @@ public:
 	UFUNCTION()
 		virtual void OnEndOverlap(class ACharacter* InAttacker, class AActor* InCauser, class ACharacter* InOtherCharacter) {};
 
-public:
-	FORCEINLINE void ClearHittedCharacters() { HittedCharacters.Empty(); }
-
 protected:
 	UPROPERTY(BlueprintReadOnly)
 		class ACharacter* OwnerCharacter;
@@ -56,6 +53,4 @@ protected:
 	TArray<FDoActionData> Datas;
 	const bool* bEquippedThis;
 
-public:
-	TArray<class ACharacter*> HittedCharacters;
 };

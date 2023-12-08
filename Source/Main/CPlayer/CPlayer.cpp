@@ -31,8 +31,8 @@ ACPlayer::ACPlayer()
 	// Create CharacterComponent
 	CHelpers::CreateActorComponent(this, &Action, "Action");
 	CHelpers::CreateActorComponent(this, &Status, "Status");
-	CHelpers::CreateActorComponent(this, &State, "State");
 	CHelpers::CreateActorComponent(this, &Montages, "Montages");
+	CHelpers::CreateActorComponent(this, &State, "State");
 	CHelpers::CreateActorComponent(this, &parkour, "ACParkour");
 	
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>("SpringArm");
@@ -501,16 +501,20 @@ void ACPlayer::StopJump()
 float ACPlayer::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
 {
 	DamageValue = Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
-
+	
 	Attacker = EventInstigator->GetCharacter();
 	Causer = DamageCauser;
 
 	Status->DecreaseHealth(DamageValue);
 
 	// Dead
+	if (Status->IsDead())
+	{
+		State->SetDeadMode();
+		return DamageValue;
+	}
 
 	State->SetHittedMode();
-	PrintLine();
 
 	return DamageValue;
 }
@@ -522,10 +526,31 @@ void ACPlayer::Hitted()
 
 void ACPlayer::Dead()
 {
+	CheckFalse(State->IsDeadMode());
+
+	// Disable Input
+	APlayerController* controller = GetWorld()->GetFirstPlayerController();
+	CheckNull(controller);
+
+	DisableInput(controller);
+
+	// Play Dead Montage
+	Montages->PlayDead();
+
+	// 충돌체 상태 변경
+	Action->OffAllCollisions();
+	GetCapsuleComponent()->SetCollisionProfileName("Spectator");
+
+	UKismetSystemLibrary::K2_SetTimer(this, "End_Dead", 5.f, false);
 }
 
 void ACPlayer::End_Dead()
 {
+	Action->End_Dead();
+
+	CLog::Log("You Died");
+	CLog::Print("You Died");
+
 }
 
 void ACPlayer::OnAction_Server_Implementation()
