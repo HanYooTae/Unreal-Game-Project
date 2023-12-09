@@ -22,6 +22,7 @@
 #include "Actions/CWeapon_Sniper.h"
 #include "Actions/CWeapon_Sword.h"
 #include "Actions/CActionData.h"
+#include "Widget/CPlayerHealthWidget.h"
 //#include "PaperSpriteComponent.h"
 
 ACPlayer::ACPlayer()
@@ -48,6 +49,9 @@ ACPlayer::ACPlayer()
 	ConstructorHelpers::FClassFinder<UCAnimInstance> animClass(TEXT("AnimBlueprint'/Game/Character/Heraklios/Animation/ABP_MyCPlayer.ABP_MyCPlayer_C'"));
 	if (animClass.Succeeded())
 		GetMesh()->SetAnimInstanceClass(animClass.Class);
+
+	// Get Widget Class Asset
+	CHelpers::GetClass<UCPlayerHealthWidget>(&HealthWidgetClass, "WidgetBlueprint'/Game/Widget/HealthWidget/WB_CPlayerHealthWidget.WB_CPlayerHealthWidget_C'");
 
 	//<SpringArm>
 	SpringArm->SetupAttachment(GetCapsuleComponent());
@@ -120,6 +124,11 @@ void ACPlayer::BeginPlay()
 	//Set Dynamic Material to Mesh Comp
 	GetMesh()->SetMaterial(0, Material_First);
 	GetMesh()->SetMaterial(1, Material_Second);
+
+	// Create Widgets
+	HealthWidget = Cast<UCPlayerHealthWidget>(CreateWidget(GetController<APlayerController>(), HealthWidgetClass));
+	CheckNull(HealthWidget);
+	HealthWidget->AddToViewport();
 
 	// Create & Attach MainWidget
 	MainWidget = CreateWidget<UCMainWidget>(GetWorld(), MainWidgetClass);
@@ -506,6 +515,7 @@ float ACPlayer::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AContr
 	Causer = DamageCauser;
 
 	Status->DecreaseHealth(DamageValue);
+	HealthWidget->UpdateHealth();
 
 	// Dead
 	if (Status->IsDead())

@@ -7,10 +7,12 @@
 #include "CharacterComponents/CActionComponent.h"
 #include "CharacterComponents/CMontagesComponent.h"
 #include "CharacterComponents/CStatusComponent.h"
+#include "Widget/CEnemyHealthWidget.h"
 
 ACEnemy::ACEnemy()
 {
 	//Create Scene Component
+	CHelpers::CreateSceneComponent(this, &HealthWidget, "HealthWidget", GetMesh());
 	
 	//Create Actor Component
 	CHelpers::CreateActorComponent(this, &Action, "Action");
@@ -36,6 +38,12 @@ ACEnemy::ACEnemy()
 	GetCharacterMovement()->MaxWalkSpeed = Status->GetRunSpeed();
 
 	// -> WidgetComp
+	TSubclassOf<UCEnemyHealthWidget> healthWidgetClass;
+	CHelpers::GetClass(&healthWidgetClass, "WidgetBlueprint'/Game/Widget/HealthWidget/WB_CEnemyHealthWidget.WB_CEnemyHealthWidget_C'");
+	HealthWidget->SetWidgetClass(healthWidgetClass);
+	HealthWidget->SetRelativeLocation(FVector(0, 0, 180));
+	HealthWidget->SetDrawSize(FVector2D(120, 20));
+	HealthWidget->SetWidgetSpace(EWidgetSpace::Screen);
 }
 
 void ACEnemy::BeginPlay()
@@ -51,6 +59,11 @@ void ACEnemy::BeginPlay()
 	Super::BeginPlay();
 	
 	//Widget Settings
+	HealthWidget->InitWidget();
+	UCEnemyHealthWidget* healthWidget = Cast<UCEnemyHealthWidget>(HealthWidget->GetUserWidgetObject());
+
+	if (!!healthWidget)
+		healthWidget->UpdateHealth(Status->GetCurrentHealth(), Status->GetMaxHealth());
 }
 
 float ACEnemy::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
@@ -76,10 +89,19 @@ float ACEnemy::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AContro
 
 void ACEnemy::Hitted()
 {
+	// Apply Health Widget
+	UCEnemyHealthWidget* healthWidget = Cast<UCEnemyHealthWidget>(HealthWidget->GetUserWidgetObject());
+	if (!!healthWidget)
+		healthWidget->UpdateHealth(Status->GetCurrentHealth(), Status->GetMaxHealth());
+
+	// Play Hit Montage
 	Montages->PlayHitted();
 
 	// Look at Attacker
-
+	FVector start = GetActorLocation();
+	FVector target = Attacker->GetActorLocation();
+	FRotator rotation = FRotator(0, UKismetMathLibrary::FindLookAtRotation(start, target).Yaw, 0);
+	SetActorRotation(rotation);
 
 	// Hit Back
 
@@ -87,6 +109,8 @@ void ACEnemy::Hitted()
 
 void ACEnemy::Dead()
 {
+	HealthWidget->SetVisibility(false);
+
 	// Ragdoll
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	GetMesh()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
@@ -97,7 +121,7 @@ void ACEnemy::Dead()
 	FVector start = GetActorLocation();
 	FVector target = Attacker->GetActorLocation();
 	FVector direction = (start - target).GetSafeNormal();
-	FVector force = direction * LaunchValue * DamageValue;
+	FVector force = direction * LaunchValue * DamageValue * 3000.f;
 	GetMesh()->AddForceAtLocation(force, start);
 
 	// Off All Collisions
