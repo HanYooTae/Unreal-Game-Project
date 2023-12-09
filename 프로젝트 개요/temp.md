@@ -1,7 +1,9 @@
-### Todo1. CStatus HP Widget
+### Todo1. Start Session
 
-### Todo2. Start Session
+### Todo2. Exit GameMode
 
-### Todo3. Exit GameMode
+### Todo3. Dissolve Material
 
-### Todo4. Dissolve Material
+** 심각한 문제 발생 **
+1. server player가 공격하면 client player가 터짐
+2. client player가 공격하면 둘다 터짐
