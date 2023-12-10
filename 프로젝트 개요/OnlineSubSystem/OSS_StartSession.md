@@ -1,6 +1,6 @@
 ## 5. Start Session
 
-- 게임 시작
+- 게임 시작 함수
 
   ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/dc4fcac2-989a-4833-907b-96f7b3b461be)
 
