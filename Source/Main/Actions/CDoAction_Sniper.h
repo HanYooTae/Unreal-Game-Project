@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Actions/CDoAction.h"
+#include "CharacterComponents/CActionComponent.h"
 #include "CDoAction_Sniper.generated.h"
 
 UCLASS()
@@ -26,6 +27,13 @@ public:
 public:
 	virtual void OnAim() override;
 	virtual void OffAim() override;
+
+private:
+	UFUNCTION()
+		void OnBulletBeginOverlap(FHitResult hitResult);
+
+	UFUNCTION()
+		void AbortByTypeChanged(EActionType InPrevType, EActionType InNewType);
 
 private:
 	UPROPERTY()
