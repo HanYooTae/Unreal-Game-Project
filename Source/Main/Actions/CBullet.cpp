@@ -20,6 +20,26 @@ ACBullet::ACBullet()
 
 void ACBullet::BeginPlay()
 {
+	Sphere->OnComponentBeginOverlap.AddDynamic(this, &ACBullet::OnComponentBeginOverlap);
+
 	Super::BeginPlay();
-	
+}
+
+void ACBullet::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	CheckTrue(OtherActor == GetOwner());
+
+	// Play Impact Particles
+	if (!!ImpactParticle)
+	{
+		FTransform transform = ImpactTransform;
+
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactParticle, transform);
+	}
+
+	// 데미지를 입히면
+	if (OnBeginOverlap.IsBound())
+		OnBeginOverlap.Broadcast(SweepResult);
+
+	Destroy();
 }
