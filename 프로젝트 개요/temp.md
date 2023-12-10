@@ -1,5 +1,3 @@
-### Todo1. Start Session
-
 ### Todo2. Exit GameMode
 
 ### Todo3. Dissolve Material
