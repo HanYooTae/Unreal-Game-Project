@@ -101,10 +101,15 @@ private:
 private: // Weapon
     UFUNCTION(Reliable, Server)
         void OnFist_Server();
+    void OnFist_Server_Implementation();
+
     UFUNCTION(Reliable, Server)
         void OnSword_Server();
+    void OnSword_Server_Implementation();
+
     UFUNCTION(Reliable, Server)
         void OnSniper_Server();
+    void OnSniper_Server_Implementation();
 
     UFUNCTION(NetMulticast, Reliable)
         void OnFist();
@@ -112,7 +117,16 @@ private: // Weapon
         void OnSword();
     UFUNCTION(NetMulticast, Reliable)
         void OnSniper();
+    
+    void OnSelectAction();
+    void OffSelectAction();
 
+public:
+    FORCEINLINE class UCSelectActionWidget_Group* GetSelectActionWidget() { return SelectActionWidget; }
+
+
+
+private:
     UPROPERTY()
         FInteractionData InteractionData;
 
@@ -228,6 +242,11 @@ private:
 private:
     UPROPERTY(EditDefaultsOnly, Category = "Widget")
         TSubclassOf<class UCPlayerHealthWidget> HealthWidgetClass;
+    
+    UPROPERTY(EditDefaultsOnly, Category = "Widget")
+        TSubclassOf<class UCSelectActionWidget_Group> SelectActionWidgetClass;
+
 
     class UCPlayerHealthWidget* HealthWidget;
+    class UCSelectActionWidget_Group* SelectActionWidget;
 };
