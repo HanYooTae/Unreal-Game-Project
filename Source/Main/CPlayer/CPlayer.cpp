@@ -558,6 +558,7 @@ void ACPlayer::End_Dead()
 {
 	Action->End_Dead();
 
+	PrintLine();
 	CLog::Log("You Died");
 	CLog::Print("You Died");
 

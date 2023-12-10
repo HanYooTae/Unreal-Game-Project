@@ -17,15 +17,24 @@ void UCGameInstance::Init()
 	
 	IOnlineSubsystem* oss = IOnlineSubsystem::Get();
 
-	SessionInterface = oss->GetSessionInterface();
-
-	if (SessionInterface.IsValid())
+	if (!!oss)
 	{
-		SessionInterface->OnCreateSessionCompleteDelegates.AddUObject(this, &UCGameInstance::OnCreateSessionComplete);
-		SessionInterface->OnDestroySessionCompleteDelegates.AddUObject(this, &UCGameInstance::OnDestroySessionComplete);
-		SessionInterface->OnFindSessionsCompleteDelegates.AddUObject(this, &UCGameInstance::OnFindSessionsComplete);
-		SessionInterface->OnJoinSessionCompleteDelegates.AddUObject(this, &UCGameInstance::OnJoinSessionComplete);
+		SessionInterface = oss->GetSessionInterface();
+
+		if (SessionInterface.IsValid())
+		{
+			SessionInterface->OnCreateSessionCompleteDelegates.AddUObject(this, &UCGameInstance::OnCreateSessionComplete);
+			SessionInterface->OnDestroySessionCompleteDelegates.AddUObject(this, &UCGameInstance::OnDestroySessionComplete);
+			SessionInterface->OnFindSessionsCompleteDelegates.AddUObject(this, &UCGameInstance::OnFindSessionsComplete);
+			SessionInterface->OnJoinSessionCompleteDelegates.AddUObject(this, &UCGameInstance::OnJoinSessionComplete);
+		}
 	}
+
+	else
+		CLog::Log("OSS Not Found!!");
+
+	if (!!GEngine)
+		GEngine->OnNetworkFailure().AddUObject(this, &UCGameInstance::OnNetworkFailure);
 }
 
 void UCGameInstance::LoadMenu()
@@ -113,6 +122,12 @@ void UCGameInstance::JoinSession(uint32 InSessionIndex)
 		MainMenu->Detach();
 
 	SessionInterface->JoinSession(0, SESSION_NAME, SearchSettings->SearchResults[InSessionIndex]);
+}
+
+void UCGameInstance::StartSession()
+{
+	CheckFalse(SessionInterface.IsValid());
+	SessionInterface->StartSession(SESSION_NAME);
 }
 
 void UCGameInstance::OnCreateSessionComplete(FName InSessionName, bool InSuccess)
@@ -220,4 +235,11 @@ void UCGameInstance::OnJoinSessionComplete(FName InSessionName, EOnJoinSessionCo
 	CLog::Print("Address is " + address);
 
 	controller->ClientTravel(address, ETravelType::TRAVEL_Absolute);
+}
+
+void UCGameInstance::OnNetworkFailure(UWorld* InWorld, UNetDriver* InNetDriver, ENetworkFailure::Type InFailureReason, const FString& InErrorMessage)
+{
+	CLog::Print("Network Error Message : " + InErrorMessage);
+
+	ReturnToMainMenu();
 }
