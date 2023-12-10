@@ -59,12 +59,23 @@ void ACDoAction_Melee::End_DoAction()
 void ACDoAction_Melee::OnBeginOverlap(ACharacter* InAttacker, AActor* InCauser, ACharacter* InOtherCharacter)
 {
 	Super::OnBeginOverlap(InAttacker, InCauser, InOtherCharacter);
+	
 
-	// 다단히트 방지
-	int32 hittedCharactersNum = HittedCharacters.Num();
-	HittedCharacters.AddUnique(InOtherCharacter);
-	CheckFalse(hittedCharactersNum < HittedCharacters.Num());
+	InOtherCharacter_RPC_Server(InAttacker, InCauser, InOtherCharacter);
+}
 
+void ACDoAction_Melee::OnEndOverlap(ACharacter* InAttacker, AActor* InCauser, ACharacter* InOtherCharacter)
+{
+	Super::OnEndOverlap(InAttacker, InCauser, InOtherCharacter);
+}
+
+void ACDoAction_Melee::InOtherCharacter_RPC_Server_Implementation(ACharacter* InAttacker, AActor* InCauser, ACharacter* InOtherCharacter)
+{
+	InOtherCharacter_RPC_Client(InAttacker, InCauser, InOtherCharacter);
+}
+
+void ACDoAction_Melee::InOtherCharacter_RPC_Client_Implementation(ACharacter* InAttacker, AActor* InCauser, ACharacter* InOtherCharacter)
+{
 	// HitStop(해당 무기로 때리면 or 맞으면 일정 시간동안 설정한 배속으로 플레이됨
 	float hitStop = Datas[ComboCount].HitStop;
 	if (FMath::IsNearlyZero(hitStop) == false)
@@ -81,6 +92,10 @@ void ACDoAction_Melee::OnBeginOverlap(ACharacter* InAttacker, AActor* InCauser, 
 		CheckNull(controller);
 		controller->PlayerCameraManager->StartCameraShake(shakeClass);
 	}
+	// 다단히트 방지
+	int32 hittedCharactersNum = HittedCharacters.Num();
+	HittedCharacters.AddUnique(InOtherCharacter);
+	CheckFalse(hittedCharactersNum < HittedCharacters.Num());
 
 	// Play Particles
 	UParticleSystem* effect = Datas[ComboCount].Effect;
@@ -91,12 +106,7 @@ void ACDoAction_Melee::OnBeginOverlap(ACharacter* InAttacker, AActor* InCauser, 
 	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), effect, transform);
 
 	FDamageEvent damageEvent;
-	InOtherCharacter->TakeDamage(Datas[ComboCount].power, damageEvent, InAttacker->GetController(), InCauser);
-}
-
-void ACDoAction_Melee::OnEndOverlap(ACharacter* InAttacker, AActor* InCauser, ACharacter* InOtherCharacter)
-{
-	Super::OnEndOverlap(InAttacker, InCauser, InOtherCharacter);
+	InOtherCharacter->TakeDamage(Datas[ComboCount].power, damageEvent, InAttacker->GetController(), InCauser);	
 }
 
 void ACDoAction_Melee::RestoreTimeDilation()

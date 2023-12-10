@@ -92,6 +92,11 @@ private: // Action
 private:
     virtual float TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 
+    UFUNCTION(Reliable, Server)
+        void TakeDamage_Server(AController* EventInstigator, AActor* DamageCauser);
+    UFUNCTION(Client, Reliable)
+        void TakeDamage_Client(AController* EventInstigator, AActor* DamageCauser);
+
     void Hitted();
     void Dead();
 
