@@ -67,6 +67,9 @@ public:		// Get Assets
 		void DoAction_Client();
 	void DoAim(bool InPressed);
 
+	void OffAllCollisions();		// 죽었을 때 무기 충돌체 Off
+	void End_Dead();
+
 public:
 	UPROPERTY(BlueprintAssignable)
 		FActionTypeChangedSignature OnActionTypeChanged;

@@ -17,20 +17,23 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
-	//virtual float TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
+	virtual float TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 
 private:
 	void Hitted();
 	void Dead();
 
+	UFUNCTION()
+		void End_Dead();
+
 private:
 	UFUNCTION()
 		void OnStateTypeChanged(EStateType InPrevType, EStateType InNewType);
 
-	UFUNCTION()
-		void End_Dead();
+	
 
-private: //Scene Component
+private: // Health Widget
+	class UWidgetComponent* HealthWidget;
 
 protected: //Actor Component
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly)

@@ -48,8 +48,9 @@ void UCAnimNotifyState_Collision::NotifyEnd(USkeletalMeshComponent* MeshComp, UA
 
 	weapon->OffCollisions();
 
-	ACDoAction_Melee* doAction_melee = Cast<ACDoAction_Melee>(currentData->GetDoAction());
-	CheckNull(doAction_melee);
-
-	doAction_melee->ClearHittedCharacters();
+	ACDoAction_Melee* doAction_Melee = Cast<ACDoAction_Melee>(currentData->GetDoAction());
+	CheckNull(doAction_Melee);
+	
+	// 다단히트 방지
+	doAction_Melee->ClearHittedCharacters();
 }

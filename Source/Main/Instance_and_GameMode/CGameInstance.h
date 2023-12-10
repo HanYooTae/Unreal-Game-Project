@@ -30,12 +30,14 @@ public:	// Session Event
 	void CreateSession();
 	void FindSession();
 	void JoinSession(uint32 InSessionIndex);
+	void StartSession();
 
 private:	// Session Delegate
 	void OnCreateSessionComplete(FName InSessionName, bool InSuccess);
 	void OnDestroySessionComplete(FName InSessionName, bool InSuccess);
 	void OnFindSessionsComplete(bool InSccess);
 	void OnJoinSessionComplete(FName InSessionName, EOnJoinSessionCompleteResult::Type InResult);
+	void OnNetworkFailure(UWorld* InWorld, UNetDriver* InNetDriver, ENetworkFailure::Type InFailureReason, const FString& InErrorMessage);
 
 private:
 	TSubclassOf<UCMainMenu> MainMenuClass;

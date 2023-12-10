@@ -14,7 +14,7 @@
 ACDoAction_Sniper::ACDoAction_Sniper()
 {
 	// Initialize Camera Shake
-	CHelpers::GetClass(&ShakeClass, "Blueprint'/Game/Character/BP_FireShake.BP_FireShake_C'");
+	CHelpers::GetClass(&ShakeClass, "Blueprint'/Game/Character/CameraShake/BP_FireShake.BP_FireShake_C'");
 
 	//Mesh = Sniper->GetWeapon();
 
@@ -31,6 +31,9 @@ void ACDoAction_Sniper::BeginPlay()
 	Super::BeginPlay();
 	Aim = NewObject<UCAim>();
 	Aim->BeginPlay(OwnerCharacter);
+
+	ActionComp = CHelpers::GetComponent<UCActionComponent>(OwnerCharacter);
+	ActionComp->OnActionTypeChanged.AddDynamic(this, &ACDoAction_Sniper::AbortByTypeChanged);
 }
 
 void ACDoAction_Sniper::Tick(float DeltaTime)
@@ -97,7 +100,7 @@ void ACDoAction_Sniper::Begin_DoAction()
 	bullet->FinishSpawning(transform);
 
 	// 충돌처리
-	
+	bullet->OnBeginOverlap.AddDynamic(this, &ACDoAction_Sniper::OnBulletBeginOverlap);
 
 }
 
@@ -116,5 +119,24 @@ void ACDoAction_Sniper::OnAim()
 void ACDoAction_Sniper::OffAim()
 {
 	CheckNull(Aim);
+	Aim->Off();
+}
+
+void ACDoAction_Sniper::OnBulletBeginOverlap(FHitResult hitResult)
+{
+	FDamageEvent damageEvent;
+	hitResult.GetActor()->TakeDamage
+	(
+		Datas[0].power,
+		damageEvent,
+		OwnerCharacter->GetController(),
+		this
+	);
+}
+
+void ACDoAction_Sniper::AbortByTypeChanged(EActionType InPrevType, EActionType InNewType)
+{
+	CheckFalse(Aim->IsAvailable());
+	CheckFalse(Aim->IsZooming());
 	Aim->Off();
 }

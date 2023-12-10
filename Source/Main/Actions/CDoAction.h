@@ -52,4 +52,5 @@ protected:
 protected:
 	TArray<FDoActionData> Datas;
 	const bool* bEquippedThis;
+
 };

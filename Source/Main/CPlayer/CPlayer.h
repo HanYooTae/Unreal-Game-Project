@@ -89,13 +89,27 @@ private: // Action
     void StartJump();
     void StopJump();
 
+private:
+    virtual float TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
+
+    void Hitted();
+    void Dead();
+
+    UFUNCTION()
+        void End_Dead();
+
 private: // Weapon
     UFUNCTION(Reliable, Server)
         void OnFist_Server();
+    void OnFist_Server_Implementation();
+
     UFUNCTION(Reliable, Server)
         void OnSword_Server();
+    void OnSword_Server_Implementation();
+
     UFUNCTION(Reliable, Server)
         void OnSniper_Server();
+    void OnSniper_Server_Implementation();
 
     UFUNCTION(NetMulticast, Reliable)
         void OnFist();
@@ -103,7 +117,18 @@ private: // Weapon
         void OnSword();
     UFUNCTION(NetMulticast, Reliable)
         void OnSniper();
+    
+    void OnSelectAction();
+    void OffSelectAction();
 
+    void BackQuitMenu_Back_Action();
+
+public:
+    FORCEINLINE class UCSelectActionWidget_Group* GetSelectActionWidget() { return SelectActionWidget; }
+
+
+
+private:
     UPROPERTY()
         FInteractionData InteractionData;
 
@@ -211,4 +236,23 @@ private:
     UPROPERTY(EditDefaultsOnly)
         uint8 PlayerTeamID = 0;
     FGenericTeamId TeamGeneicID;
+
+    class ACharacter* Attacker;
+    class AActor* Causer;
+    float DamageValue;
+
+private:
+    UPROPERTY(EditDefaultsOnly, Category = "Widget")
+        TSubclassOf<class UCPlayerHealthWidget> HealthWidgetClass;
+    
+    UPROPERTY(EditDefaultsOnly, Category = "Widget")
+        TSubclassOf<class UCSelectActionWidget_Group> SelectActionWidgetClass;
+
+    UPROPERTY(EditDefaultsOnly, Category = "Menu")
+        TSubclassOf<class UCBackQuitMenu> BackQuitMenuClass;
+
+
+    class UCPlayerHealthWidget* HealthWidget;
+    class UCSelectActionWidget_Group* SelectActionWidget;
+    class UCBackQuitMenu* BackQuitMenu;
 };

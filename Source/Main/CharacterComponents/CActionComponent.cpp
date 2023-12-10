@@ -2,6 +2,7 @@
 #include "Actions/CActionData_Spawned.h"
 #include "Actions/CActionData.h"
 #include "Actions/CEquipment.h"
+#include "Actions/CWeapon.h"
 #include "GameFramework/Character.h"
 #include "Global.h"
 #include "Actions/CDoAction.h"
@@ -114,5 +115,34 @@ void UCActionComponent::DoAim(bool InPressed)
 		{
 			InPressed ? doAction->OnAim() : doAction->OffAim();
 		}
+	}
+}
+
+void UCActionComponent::OffAllCollisions()
+{
+	for (const auto& data : Datas)
+	{
+		if (data == nullptr)
+			continue;
+
+		if (data->GetWeapon() == nullptr)
+			continue;
+
+		data->GetWeapon()->OffCollisions();
+	}
+}
+
+void UCActionComponent::End_Dead()
+{
+	for (int32 i = 0; i < (int32)EActionType::Max; i++)
+	{
+		if (!!Datas[i] && !!Datas[i]->GetEquipment())
+			Datas[i]->GetEquipment()->Destroy();
+
+		if (!!Datas[i] && !!Datas[i]->GetWeapon())
+			Datas[i]->GetWeapon()->Destroy();
+
+		if (!!Datas[i] && !!Datas[i]->GetDoAction())
+			Datas[i]->GetDoAction()->Destroy();
 	}
 }

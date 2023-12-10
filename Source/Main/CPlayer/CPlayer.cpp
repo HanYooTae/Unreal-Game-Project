@@ -22,6 +22,10 @@
 #include "Actions/CWeapon_Sniper.h"
 #include "Actions/CWeapon_Sword.h"
 #include "Actions/CActionData.h"
+#include "Widget/CPlayerHealthWidget.h"
+#include "Widget/CSelectActionWidget_Group.h"
+#include "Widget/CSelectActionWidget_Icon.h"
+#include "Menu/CBackQuitMenu.h"
 //#include "PaperSpriteComponent.h"
 
 ACPlayer::ACPlayer()
@@ -31,8 +35,8 @@ ACPlayer::ACPlayer()
 	// Create CharacterComponent
 	CHelpers::CreateActorComponent(this, &Action, "Action");
 	CHelpers::CreateActorComponent(this, &Status, "Status");
+	CHelpers::CreateActorComponent(this, &Montages, "Montages");
 	CHelpers::CreateActorComponent(this, &State, "State");
-	CHelpers::CreateActorComponent(this, &Montages, "Montages");\
 	CHelpers::CreateActorComponent(this, &parkour, "ACParkour");
 	
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>("SpringArm");
@@ -48,6 +52,14 @@ ACPlayer::ACPlayer()
 	ConstructorHelpers::FClassFinder<UCAnimInstance> animClass(TEXT("AnimBlueprint'/Game/Character/Heraklios/Animation/ABP_MyCPlayer.ABP_MyCPlayer_C'"));
 	if (animClass.Succeeded())
 		GetMesh()->SetAnimInstanceClass(animClass.Class);
+
+	// Get Widget Class Asset
+	CHelpers::GetClass<UCPlayerHealthWidget>(&HealthWidgetClass, "WidgetBlueprint'/Game/Widget/HealthWidget/WB_CPlayerHealthWidget.WB_CPlayerHealthWidget_C'");
+	
+	CHelpers::GetClass<UCSelectActionWidget_Group>(&SelectActionWidgetClass, "WidgetBlueprint'/Game/Widget/Skill/WB_SelectAction_Group.WB_SelectAction_Group_C'");
+
+	CHelpers::GetClass<UCBackQuitMenu>(&BackQuitMenuClass, "WidgetBlueprint'/Game/Widget/Menu/WB_BackQuitMenu.WB_BackQuitMenu_C'");
+
 
 	//<SpringArm>
 	SpringArm->SetupAttachment(GetCapsuleComponent());
@@ -120,6 +132,26 @@ void ACPlayer::BeginPlay()
 	//Set Dynamic Material to Mesh Comp
 	GetMesh()->SetMaterial(0, Material_First);
 	GetMesh()->SetMaterial(1, Material_Second);
+
+	// Create Widgets
+	HealthWidget = Cast<UCPlayerHealthWidget>(CreateWidget(GetController<APlayerController>(), HealthWidgetClass));
+	CheckNull(HealthWidget);
+	HealthWidget->AddToViewport();
+
+	BackQuitMenu = Cast<UCBackQuitMenu>(CreateWidget(GetController<APlayerController>(), BackQuitMenuClass));
+	CheckNull(BackQuitMenu);
+	BackQuitMenu->AddToViewport();
+	BackQuitMenu->SetVisibility(ESlateVisibility::Hidden);
+
+	SelectActionWidget = Cast<UCSelectActionWidget_Group>(CreateWidget(GetController<APlayerController>(), SelectActionWidgetClass));
+	CheckNull(SelectActionWidget);
+	SelectActionWidget->AddToViewport();
+	SelectActionWidget->SetVisibility(ESlateVisibility::Hidden);
+
+	// Bind SelectAction Widget Event
+	SelectActionWidget->GetChildWidget("Icon1")->OnImageButtonPressed.AddDynamic(this, &ACPlayer::OnFist_Server);
+	SelectActionWidget->GetChildWidget("Icon2")->OnImageButtonPressed.AddDynamic(this, &ACPlayer::OnSword_Server);
+	SelectActionWidget->GetChildWidget("Icon3")->OnImageButtonPressed.AddDynamic(this, &ACPlayer::OnSniper_Server);
 
 	// Create & Attach MainWidget
 	MainWidget = CreateWidget<UCMainWidget>(GetWorld(), MainWidgetClass);
@@ -446,6 +478,11 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAction("Sword", EInputEvent::IE_Pressed, this, &ACPlayer::OnSword_Server);
 	PlayerInputComponent->BindAction("Sniper", EInputEvent::IE_Pressed, this, &ACPlayer::OnSniper_Server);
 
+	// Select Weapon
+	PlayerInputComponent->BindAction("SelectAction", EInputEvent::IE_Pressed, this, &ACPlayer::OnSelectAction);
+	PlayerInputComponent->BindAction("SelectAction", EInputEvent::IE_Released, this, &ACPlayer::OffSelectAction);
+
+	PlayerInputComponent->BindAction("BackButton", EInputEvent::IE_Pressed, this, &ACPlayer::BackQuitMenu_Back_Action);
 }
 
 void ACPlayer::OnMoveForward(float Axis)
@@ -496,6 +533,63 @@ void ACPlayer::StartJump()
 void ACPlayer::StopJump()
 {
 	bPressedJump = false;
+}
+
+float ACPlayer::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+	DamageValue = Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
+	
+	Attacker = EventInstigator->GetCharacter();
+	Causer = DamageCauser;
+
+	Status->DecreaseHealth(DamageValue);
+	HealthWidget->UpdateHealth();
+
+	// Dead
+	if (Status->IsDead())
+	{
+		State->SetDeadMode();
+		return DamageValue;
+	}
+
+	State->SetHittedMode();
+
+	return DamageValue;
+}
+
+void ACPlayer::Hitted()
+{
+	Montages->PlayHitted();
+}
+
+void ACPlayer::Dead()
+{
+	CheckFalse(State->IsDeadMode());
+
+	// Disable Input
+	APlayerController* controller = GetWorld()->GetFirstPlayerController();
+	CheckNull(controller);
+
+	DisableInput(controller);
+
+	// Play Dead Montage
+	Montages->PlayDead();
+
+	// 충돌체 상태 변경
+	Action->OffAllCollisions();
+	GetCapsuleComponent()->SetCollisionProfileName("Spectator");
+
+	UKismetSystemLibrary::K2_SetTimer(this, "End_Dead", 5.f, false);
+}
+
+void ACPlayer::End_Dead()
+{
+	Action->End_Dead();
+
+	PrintLine();
+	CLog::Log("You Died");
+	CLog::Print("You Died");
+
 }
 
 void ACPlayer::OnAction_Server_Implementation()
@@ -557,9 +651,36 @@ void ACPlayer::OnSniper_Server_Implementation()
 	OnSniper();
 }
 
+void ACPlayer::OnSelectAction()
+{
+	CheckFalse(State->IsIdleMode());
+	
+	SelectActionWidget->SetVisibility(ESlateVisibility::Visible);
+	GetController<APlayerController>()->bShowMouseCursor = true;
+	GetController<APlayerController>()->SetInputMode(FInputModeGameAndUI());
+}
+
+void ACPlayer::OffSelectAction()
+{
+	SelectActionWidget->SetVisibility(ESlateVisibility::Hidden);
+	GetController<APlayerController>()->bShowMouseCursor = false;
+	GetController<APlayerController>()->SetInputMode(FInputModeGameOnly());
+}
+
+void ACPlayer::BackQuitMenu_Back_Action()
+{
+	BackQuitMenu->SetVisibility(ESlateVisibility::Visible);
+	GetController<APlayerController>()->bShowMouseCursor = true;
+	GetController<APlayerController>()->SetInputMode(FInputModeUIOnly());
+}
+
 void ACPlayer::OnStateTypeChanged(EStateType InPrevType, EStateType InNewType)
 {
-
+	switch (InNewType)
+	{
+	case EStateType::Hitted:	Hitted();	 break;
+	case EStateType::Dead:		Dead();		 break;
+	}
 }
 
 void ACPlayer::SetMainWidget()

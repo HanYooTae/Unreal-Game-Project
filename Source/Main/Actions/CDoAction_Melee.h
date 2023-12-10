@@ -24,7 +24,8 @@ public:
 	FORCEINLINE void ClearHittedCharacters() { HittedCharacters.Empty(); }
 
 private:
-	void RestoreTimeDilation();
+	UFUNCTION()
+		void RestoreTimeDilation();
 
 private:
 	int32 ComboCount;

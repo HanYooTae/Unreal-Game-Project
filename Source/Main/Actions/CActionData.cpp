@@ -55,8 +55,8 @@ void UCActionData::BeginPlay(class ACharacter* InOwnerCharacter, UCActionData_Sp
 
 		if (!!Weapon)
 		{
-			/*Weapon->OnBeginOverlap.AddDynamic(DoAction, &ACDoAction::OnBeginOverlap);
-			Weapon->OnEndOverlap.AddDynamic(DoAction, &ACDoAction::OnEndOverlap);*/
+			Weapon->OnBeginOverlap.AddDynamic(DoAction, &ACDoAction::OnBeginOverlap);
+			Weapon->OnEndOverlap.AddDynamic(DoAction, &ACDoAction::OnEndOverlap);
 		}
 	}
 
