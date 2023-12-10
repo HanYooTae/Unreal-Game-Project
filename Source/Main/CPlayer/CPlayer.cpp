@@ -23,6 +23,8 @@
 #include "Actions/CWeapon_Sword.h"
 #include "Actions/CActionData.h"
 #include "Widget/CPlayerHealthWidget.h"
+#include "Widget/CSelectActionWidget_Group.h"
+#include "Widget/CSelectActionWidget_Icon.h"
 //#include "PaperSpriteComponent.h"
 
 ACPlayer::ACPlayer()
@@ -52,6 +54,9 @@ ACPlayer::ACPlayer()
 
 	// Get Widget Class Asset
 	CHelpers::GetClass<UCPlayerHealthWidget>(&HealthWidgetClass, "WidgetBlueprint'/Game/Widget/HealthWidget/WB_CPlayerHealthWidget.WB_CPlayerHealthWidget_C'");
+	
+	CHelpers::GetClass<UCSelectActionWidget_Group>(&SelectActionWidgetClass, "WidgetBlueprint'/Game/Widget/Skill/WB_SelectAction_Group.WB_SelectAction_Group_C'");
+
 
 	//<SpringArm>
 	SpringArm->SetupAttachment(GetCapsuleComponent());
@@ -129,6 +134,16 @@ void ACPlayer::BeginPlay()
 	HealthWidget = Cast<UCPlayerHealthWidget>(CreateWidget(GetController<APlayerController>(), HealthWidgetClass));
 	CheckNull(HealthWidget);
 	HealthWidget->AddToViewport();
+
+	SelectActionWidget = Cast<UCSelectActionWidget_Group>(CreateWidget(GetController<APlayerController>(), SelectActionWidgetClass));
+	CheckNull(SelectActionWidget);
+	SelectActionWidget->AddToViewport();
+	SelectActionWidget->SetVisibility(ESlateVisibility::Hidden);
+
+	// Bind SelectAction Widget Event
+	SelectActionWidget->GetChildWidget("Icon1")->OnImageButtonPressed.AddDynamic(this, &ACPlayer::OnFist_Server);
+	SelectActionWidget->GetChildWidget("Icon2")->OnImageButtonPressed.AddDynamic(this, &ACPlayer::OnSword_Server);
+	SelectActionWidget->GetChildWidget("Icon3")->OnImageButtonPressed.AddDynamic(this, &ACPlayer::OnSniper_Server);
 
 	// Create & Attach MainWidget
 	MainWidget = CreateWidget<UCMainWidget>(GetWorld(), MainWidgetClass);
@@ -455,6 +470,9 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAction("Sword", EInputEvent::IE_Pressed, this, &ACPlayer::OnSword_Server);
 	PlayerInputComponent->BindAction("Sniper", EInputEvent::IE_Pressed, this, &ACPlayer::OnSniper_Server);
 
+	// Select Weapon
+	PlayerInputComponent->BindAction("SelectAction", EInputEvent::IE_Pressed, this, &ACPlayer::OnSelectAction);
+	PlayerInputComponent->BindAction("SelectAction", EInputEvent::IE_Released, this, &ACPlayer::OffSelectAction);
 }
 
 void ACPlayer::OnMoveForward(float Axis)
@@ -621,6 +639,22 @@ void ACPlayer::OnSword_Server_Implementation()
 void ACPlayer::OnSniper_Server_Implementation()
 {
 	OnSniper();
+}
+
+void ACPlayer::OnSelectAction()
+{
+	CheckFalse(State->IsIdleMode());
+	
+	SelectActionWidget->SetVisibility(ESlateVisibility::Visible);
+	GetController<APlayerController>()->bShowMouseCursor = true;
+	GetController<APlayerController>()->SetInputMode(FInputModeGameAndUI());
+}
+
+void ACPlayer::OffSelectAction()
+{
+	SelectActionWidget->SetVisibility(ESlateVisibility::Hidden);
+	GetController<APlayerController>()->bShowMouseCursor = false;
+	GetController<APlayerController>()->SetInputMode(FInputModeGameOnly());
 }
 
 void ACPlayer::OnStateTypeChanged(EStateType InPrevType, EStateType InNewType)
