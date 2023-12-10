@@ -224,4 +224,10 @@ private:
     class ACharacter* Attacker;
     class AActor* Causer;
     float DamageValue;
+
+private:
+    UPROPERTY(EditDefaultsOnly, Category = "Widget")
+        TSubclassOf<class UCPlayerHealthWidget> HealthWidgetClass;
+
+    class UCPlayerHealthWidget* HealthWidget;
 };

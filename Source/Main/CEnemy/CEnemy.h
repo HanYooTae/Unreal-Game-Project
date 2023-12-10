@@ -32,7 +32,8 @@ private:
 
 	
 
-private: //Scene Component
+private: // Health Widget
+	class UWidgetComponent* HealthWidget;
 
 protected: //Actor Component
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly)
