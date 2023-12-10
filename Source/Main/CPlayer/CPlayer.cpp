@@ -25,6 +25,7 @@
 #include "Widget/CPlayerHealthWidget.h"
 #include "Widget/CSelectActionWidget_Group.h"
 #include "Widget/CSelectActionWidget_Icon.h"
+#include "Menu/CBackQuitMenu.h"
 //#include "PaperSpriteComponent.h"
 
 ACPlayer::ACPlayer()
@@ -56,6 +57,8 @@ ACPlayer::ACPlayer()
 	CHelpers::GetClass<UCPlayerHealthWidget>(&HealthWidgetClass, "WidgetBlueprint'/Game/Widget/HealthWidget/WB_CPlayerHealthWidget.WB_CPlayerHealthWidget_C'");
 	
 	CHelpers::GetClass<UCSelectActionWidget_Group>(&SelectActionWidgetClass, "WidgetBlueprint'/Game/Widget/Skill/WB_SelectAction_Group.WB_SelectAction_Group_C'");
+
+	CHelpers::GetClass<UCBackQuitMenu>(&BackQuitMenuClass, "WidgetBlueprint'/Game/Widget/Menu/WB_BackQuitMenu.WB_BackQuitMenu_C'");
 
 
 	//<SpringArm>
@@ -134,6 +137,11 @@ void ACPlayer::BeginPlay()
 	HealthWidget = Cast<UCPlayerHealthWidget>(CreateWidget(GetController<APlayerController>(), HealthWidgetClass));
 	CheckNull(HealthWidget);
 	HealthWidget->AddToViewport();
+
+	BackQuitMenu = Cast<UCBackQuitMenu>(CreateWidget(GetController<APlayerController>(), BackQuitMenuClass));
+	CheckNull(BackQuitMenu);
+	BackQuitMenu->AddToViewport();
+	BackQuitMenu->SetVisibility(ESlateVisibility::Hidden);
 
 	SelectActionWidget = Cast<UCSelectActionWidget_Group>(CreateWidget(GetController<APlayerController>(), SelectActionWidgetClass));
 	CheckNull(SelectActionWidget);
@@ -473,6 +481,8 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	// Select Weapon
 	PlayerInputComponent->BindAction("SelectAction", EInputEvent::IE_Pressed, this, &ACPlayer::OnSelectAction);
 	PlayerInputComponent->BindAction("SelectAction", EInputEvent::IE_Released, this, &ACPlayer::OffSelectAction);
+
+	PlayerInputComponent->BindAction("BackButton", EInputEvent::IE_Pressed, this, &ACPlayer::BackQuitMenu_Back_Action);
 }
 
 void ACPlayer::OnMoveForward(float Axis)
@@ -655,6 +665,13 @@ void ACPlayer::OffSelectAction()
 	SelectActionWidget->SetVisibility(ESlateVisibility::Hidden);
 	GetController<APlayerController>()->bShowMouseCursor = false;
 	GetController<APlayerController>()->SetInputMode(FInputModeGameOnly());
+}
+
+void ACPlayer::BackQuitMenu_Back_Action()
+{
+	BackQuitMenu->SetVisibility(ESlateVisibility::Visible);
+	GetController<APlayerController>()->bShowMouseCursor = true;
+	GetController<APlayerController>()->SetInputMode(FInputModeUIOnly());
 }
 
 void ACPlayer::OnStateTypeChanged(EStateType InPrevType, EStateType InNewType)

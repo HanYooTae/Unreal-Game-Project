@@ -121,6 +121,8 @@ private: // Weapon
     void OnSelectAction();
     void OffSelectAction();
 
+    void BackQuitMenu_Back_Action();
+
 public:
     FORCEINLINE class UCSelectActionWidget_Group* GetSelectActionWidget() { return SelectActionWidget; }
 
@@ -246,7 +248,11 @@ private:
     UPROPERTY(EditDefaultsOnly, Category = "Widget")
         TSubclassOf<class UCSelectActionWidget_Group> SelectActionWidgetClass;
 
+    UPROPERTY(EditDefaultsOnly, Category = "Menu")
+        TSubclassOf<class UCBackQuitMenu> BackQuitMenuClass;
+
 
     class UCPlayerHealthWidget* HealthWidget;
     class UCSelectActionWidget_Group* SelectActionWidget;
+    class UCBackQuitMenu* BackQuitMenu;
 };
