@@ -17,7 +17,7 @@
 - SetHittedMode : 플레이어에게 공격을 받았을때
 - SetAvoidMode : 플레이어를 감지하지않은 상태
 
-* 참고 영상
+#### 샘플 영상
 
   [![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/3f18b27a-a677-4220-9d5e-438bfc64a01f)
 ](https://youtu.be/mEzlJJxJeYE)
