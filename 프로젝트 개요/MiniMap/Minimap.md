@@ -46,6 +46,7 @@
    - Minimap에서 Player의 방향을 표시하기 위하여 사용
    - Mesh의 자식으로 PaperSprite를 붙여주었으며 Sprite image를 붙인 후, Owner no see를 통하여 Player는 Sprite image를 볼 수 없게 구현하였음
   
-     ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/c5afcc3e-95ee-44ee-8486-c910e91bc7ef)
+     ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/85131015-ec93-4c1f-aa6e-caa33462ea88)
+
      ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/56104fa9-930d-4777-b045-7465a0922e32)
 )
