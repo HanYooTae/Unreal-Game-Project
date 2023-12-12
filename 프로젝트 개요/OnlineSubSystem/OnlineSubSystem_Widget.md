@@ -5,7 +5,7 @@
   ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/fb50c00b-f11f-4d85-983b-5b32d0af4797)
 
 
-*참고영상
+#### 샘플 영상
 - Host
     
   [![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/cad827f9-9d86-455c-9b64-aea328ec0791)](https://youtu.be/e1t1-gyMnAc)
