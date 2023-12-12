@@ -30,5 +30,7 @@
 
 
 
-  참고영상 : https://youtu.be/5jAUMOePUg0
+  * 참고영상 
 
+   [![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/299b5704-51ff-42ce-92ef-3f35f27e163b)
+](https://youtu.be/lKYUg1sQXCo)

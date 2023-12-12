@@ -7,3 +7,4 @@
    - Item종류 로는 UCFoodItem, UCWeaponsItem이 있다
       * UCItem을 상속받은 class. UCFoodItem은 소비 아이템이며 UCWeaponsItem은 장착 아이템으로 분류
 
+   ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/97daaef4-575c-4b91-9c18-6892c26d5f22)

@@ -17,3 +17,8 @@ Character가 장착한 무기에 알맞는 공격몽타주를 실행시키는 �
 + Start Section : 몽타주의 실행 섹션
 + Can Move : 무기를 장착하는 상태(Equip)동안 이동 가능 여부
 + Pawn Control : 무기를 장착하는 상태(Equip)동안 정면만 바라보게 할 것인지
+
+* 참고 영상
+
+    [![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/99e5aa0a-1ea2-45ed-b9a3-dc716f658022)
+](https://youtu.be/A5RssflIlDU)
