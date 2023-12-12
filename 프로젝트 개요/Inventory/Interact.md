@@ -16,3 +16,13 @@ hitresult에 따라 FoundNewInteractable, CouldnotFindInteractable 호출
    -상호작용을 성공했을 경우 Object의 정보를 알 수 있는 Widget
 
    ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/6e3bb2ac-87ec-46ef-93c5-72587de15caf)
+
+
+* 참고영상
+
+    
+
+  * 참고영상 
+
+   [![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/299b5704-51ff-42ce-92ef-3f35f27e163b)
+](https://youtu.be/lKYUg1sQXCo)
