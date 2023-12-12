@@ -20,4 +20,4 @@
 * 참고 영상
 
   [![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/3f18b27a-a677-4220-9d5e-438bfc64a01f)
-](https://youtu.be/mEzlJJxJeYE)
+](https://youtu.be/owj9-RuassI)
