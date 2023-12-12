@@ -11,3 +11,8 @@ UpdateNextIndex : world상 배치되어 있는 patrol의 다음 이동 위치로
 --------------
 
 Enemy에게만 적용하는 component이기 때문에 data에셋에 등록을 하지않아도 된다.
+
+* 참고 영상
+
+    [![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/862d2b99-10ff-425c-8a80-d526bb6a20c1)
+](https://youtu.be/FEG18CJy0do)
