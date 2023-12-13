@@ -1,6 +1,7 @@
 #include "Actions/CWeapon_Sniper.h"
 #include "Global.h"
 #include "GameFramework/Character.h"
+#include "Particles/ParticleSystemComponent.h"
 
 ACWeapon_Sniper::ACWeapon_Sniper()
 {
@@ -12,6 +13,14 @@ ACWeapon_Sniper::ACWeapon_Sniper()
 	{
 		Weapon->SetSkeletalMesh(WEAPON.Object);
 	}
+
+	CHelpers::CreateSceneComponent(this, &GunshotParticle, "GunshotParticle", Weapon);
+	GunshotParticle->SetupAttachment(Weapon, "Muzzle");
+	GunshotParticle->bAutoActivate = false;
+
+	CHelpers::CreateSceneComponent(this, &CartridgeParticle, "CartridgeParticle", Weapon);
+	GunshotParticle->SetupAttachment(Weapon, "LeftHandGripPoint");
+	GunshotParticle->bAutoActivate = false;
 
 	SetReplicates(true);
 }

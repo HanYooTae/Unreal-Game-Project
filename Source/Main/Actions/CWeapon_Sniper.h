@@ -19,4 +19,11 @@ protected:
 
 public:
 	void Attachment(FName InSocketName) override;
+
+public:
+	UPROPERTY(VisibleDefaultsOnly)
+		class UParticleSystemComponent* GunshotParticle;
+
+	UPROPERTY(VisibleDefaultsOnly)
+		class UParticleSystemComponent* CartridgeParticle;
 };
