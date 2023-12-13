@@ -11,3 +11,8 @@
       * 3번 : FVector형 벽의 두께 값을 저장
       * 4번 : 올라갈수 있는지의 여부를 판단할 bool변수    
 
+
+* 참고 영상
+
+   [![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/b6790950-5d63-45d5-af63-b147429350d1)
+](https://youtu.be/U_DXD4b5zmM)

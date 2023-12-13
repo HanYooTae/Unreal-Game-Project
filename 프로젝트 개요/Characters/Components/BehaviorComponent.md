@@ -16,3 +16,8 @@
 - SetPatrolMode : 플레이어를 감지하지 않은 상태에서 정해진 이동 경로를 따라 이동
 - SetHittedMode : 플레이어에게 공격을 받았을때
 - SetAvoidMode : 플레이어를 감지하지않은 상태
+
+#### 샘플 영상
+
+  [![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/3f18b27a-a677-4220-9d5e-438bfc64a01f)
+](https://youtu.be/owj9-RuassI)

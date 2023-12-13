@@ -15,4 +15,6 @@ hitresult에 따라 FoundNewInteractable, CouldnotFindInteractable 호출
 - WB_InteractionCard
    -상호작용을 성공했을 경우 Object의 정보를 알 수 있는 Widget
 
-   ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/6e3bb2ac-87ec-46ef-93c5-72587de15caf)
+#### 샘플 사진
+
+   ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/6e21658c-c8f9-4f18-9ecf-ebebe1e59430)

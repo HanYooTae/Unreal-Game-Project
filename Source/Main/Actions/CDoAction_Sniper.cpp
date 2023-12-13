@@ -1,7 +1,9 @@
 #include "Actions/CDoAction_Sniper.h"
 #include "Actions/CWeapon_Sniper.h"
+#include "Actions/CActionData.h"
 #include "Actions/CAim.h"
 #include "Particles/ParticleSystem.h"
+#include "Particles/ParticleSystemComponent.h"
 #include "CharacterComponents/CActionComponent.h"
 #include "CharacterComponents/CStateComponent.h"
 #include "CharacterComponents/CStatusComponent.h"
@@ -91,6 +93,13 @@ void ACDoAction_Sniper::Begin_DoAction()
 		if (!!controller)
 			controller->PlayerCameraManager->StartCameraShake(ShakeClass);
 	}
+
+	ACWeapon_Sniper* sniper = Cast<ACWeapon_Sniper>(ActionComp->DataAssets[(int32)EActionType::Sniper]->Weapon);
+	if (!!sniper->GunshotParticle)
+		sniper->GunshotParticle->Activate(true);
+
+	if (!!sniper->CartridgeParticle)
+		sniper->CartridgeParticle->Activate(true);
 
 	// Play Effect
 	//UGameplayStatics::SpawnEmitterAttached(MuzzleParticle, Mesh, "Muzzle");
