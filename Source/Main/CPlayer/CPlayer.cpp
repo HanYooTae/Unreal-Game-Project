@@ -648,17 +648,17 @@ void ACPlayer::OnSniper_Implementation()
 
 void ACPlayer::OnFist_Server_Implementation()
 {
-	OnFist();
+	OnFist_Implementation();
 }
 
 void ACPlayer::OnSword_Server_Implementation()
 {
-	OnSword();
+	OnSword_Implementation();
 }
 
 void ACPlayer::OnSniper_Server_Implementation()
 {
-	OnSniper();
+	OnSniper_Implementation();
 }
 
 void ACPlayer::OnSelectAction()

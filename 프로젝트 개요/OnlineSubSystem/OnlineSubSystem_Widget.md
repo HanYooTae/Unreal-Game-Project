@@ -4,6 +4,16 @@
 
   ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/fb50c00b-f11f-4d85-983b-5b32d0af4797)
 
+
+#### 샘플 영상
+- Host
+    
+  [![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/cad827f9-9d86-455c-9b64-aea328ec0791)](https://youtu.be/e1t1-gyMnAc)
+  
+- Client  
+  [![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/239874c7-7a7f-49e3-a461-ede4e51325cf)](https://youtu.be/F0uGI3IhnkI)
+
+
 ### 구성된 OSS 위젯
  >   1. Main Menu Widget
  >   2. Host Session Menu Widget

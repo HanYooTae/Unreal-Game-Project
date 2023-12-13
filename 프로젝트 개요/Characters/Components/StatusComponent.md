@@ -6,3 +6,8 @@
 
 + 플레이어의 기본 이동속도는 400이며, shift키를 누르면 600
 + 몬스터가 Patrol Path를 순회하는 이동속도는 200
+
+#### 샘플 영상
+
+  [![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/672551c1-2154-4e0b-86ae-dbceb99bc867)
+](https://youtu.be/yKqT7DQiIP8)

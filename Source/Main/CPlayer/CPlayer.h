@@ -116,12 +116,17 @@ private: // Weapon
         void OnSniper_Server();
     void OnSniper_Server_Implementation();
 
-    UFUNCTION(NetMulticast, Reliable)
+	UFUNCTION(NetMulticast, Reliable)
         void OnFist();
-    UFUNCTION(NetMulticast, Reliable)
+        void OnFist_Implementation();
+
+	UFUNCTION(NetMulticast, Reliable)
         void OnSword();
-    UFUNCTION(NetMulticast, Reliable)
+        void OnSword_Implementation();
+
+	UFUNCTION(NetMulticast, Reliable)
         void OnSniper();
+        void OnSniper_Implementation();
     
     void OnSelectAction();
     void OffSelectAction();

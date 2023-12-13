@@ -8,6 +8,11 @@
 
 -----------
 
+#### 샘플 영상
+
+[![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/af7b61e7-2dc6-4984-b353-1f5521ff6345)](https://youtu.be/yZy6kH5sfX8)
+
+
 Float Curve 사용
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/21b4bd30-f965-45d4-a6b0-19e49e7817c1)
