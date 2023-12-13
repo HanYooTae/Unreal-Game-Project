@@ -195,7 +195,7 @@ void ACPlayer::PerformInteractionCheck_Implementation()
 	FCollisionQueryParams QueryParams;
 	QueryParams.AddIgnoredActor(this);
 	
-	DrawDebugLine(GetWorld(), TraceStart, TraceEnd, FColor::Orange);
+	//DrawDebugLine(GetWorld(), TraceStart, TraceEnd, FColor::Orange);
 
 	if (GetWorld()->LineTraceSingleByChannel(TraceHit, TraceStart, TraceEnd, ECC_Visibility, QueryParams))
 	{

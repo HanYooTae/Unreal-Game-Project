@@ -49,8 +49,8 @@ void UCParkourSystem::Vault_Implementation()
 			EDrawDebugTrace::ForDuration,
 			hitResult,
 			true,
-			TraceColor.Red,
-			TraceHitColor.Green,
+			TraceColor,
+			TraceHitColor,
 			5.0f
 		);
 
@@ -58,8 +58,7 @@ void UCParkourSystem::Vault_Implementation()
 		{
 			WallLocation = hitResult.Location;	// 닿은 물체의 위치 저장
 			WallNormal = hitResult.Normal;		// 닿은 물체의 normal vector 저장
-			CLog::Print("Result Good");
-			CLog::Print("WallLocation z: " + FString::FromInt(WallLocation.Z));
+			//CLog::Print("WallLocation z: " + FString::FromInt(WallLocation.Z));
 			FVector SAndE = ((Owner->GetActorForwardVector() * 10.0f) + WallLocation); // 플레이어 전방에서 시작하며 수직으로 떨어지는 트레이서 셋팅
 			FVector Start1 = SAndE + FVector(0, 0, 200);
 			FVector End1 = Start1 - FVector(0, 0, 200);
@@ -77,16 +76,15 @@ void UCParkourSystem::Vault_Implementation()
 				EDrawDebugTrace::ForDuration,
 				hitResult1,
 				true,
-				TraceColor.Red,
-				TraceHitColor.Green,
+				TraceColor,
+				TraceHitColor,
 				5.0f
 			);
 
 			if (Result1 == true)
 			{
 				WallHeight = hitResult1.Location;	// 물체의 높이 저장
-				CLog::Print("Result1 Good");
-				CLog::Print("WallHeight : " + FString::FromInt(WallHeight.Z));
+				//CLog::Print("WallHeight : " + FString::FromInt(WallHeight.Z));
 				FVector SAndE2 = ((Owner->GetActorForwardVector() * 50.0f) + WallLocation);	// 물체의 두께를 알기위한 두번째 수직trace
 				FVector Start2 = SAndE2 + FVector(0, 0, 250);
 				FVector End2 = Start2 - FVector(0, 0, 300);
@@ -103,20 +101,19 @@ void UCParkourSystem::Vault_Implementation()
 					EDrawDebugTrace::ForDuration,
 					hitResult2,
 					true,
-					TraceColor.Red,
-					TraceHitColor.Green,
+					TraceColor,
+					TraceHitColor,
 					5.0f
 				);
 
 				if (Result2 == true)
 				{
 					WallHeight2 = hitResult2.Location; // 두번째 수직trace 위치저장
-					CLog::Print("WallHeight2 : " + FString::FromInt(WallHeight2.Z));
-					CLog::Print("Result2 Good");
+					//CLog::Print("WallHeight2 : " + FString::FromInt(WallHeight2.Z));
 
 					FVector HminusH2 = WallHeight - WallHeight2;
-					CLog::Print("HminusH2.x : " + FString::FromInt(HminusH2.X));
-					CLog::Print("HminusH2.y" + FString::FromInt(HminusH2.Y));
+					//CLog::Print("HminusH2.x : " + FString::FromInt(HminusH2.X));
+					//CLog::Print("HminusH2.y" + FString::FromInt(HminusH2.Y));
 					if (HminusH2.Z > 30)
 					{
 						IsWallThick = false;
@@ -139,7 +136,7 @@ void UCParkourSystem::Vault_Implementation()
 					IsWallThick = false;
 
 					float HminusL = WallHeight.Z - WallLocation.Z;
-					CLog::Print("HminusL: " + FString::FromInt(HminusL));
+					//CLog::Print("HminusL: " + FString::FromInt(HminusL));
 
 					if (HminusL >= 60)
 					{
@@ -158,7 +155,6 @@ void UCParkourSystem::Jump_Implementation()
 	Owner = Cast<ACPlayer>(GetOwner());
 	CheckNull(Owner);
 
-	CLog::Print("JUMPIN!!!!!!!!!!!!!!!!!!!!!!!!");
 	FVector JStart = Owner->GetActorLocation() + FVector(0);
 	FVector JEnd = JStart + (Owner->GetActorForwardVector() * 70);
 	FHitResult hitResult;
@@ -181,8 +177,8 @@ void UCParkourSystem::Jump_Implementation()
 		EDrawDebugTrace::ForDuration,
 		hitResult,
 		true,
-		TraceColor.Red,
-		TraceHitColor.Green,
+		TraceColor,
+		TraceHitColor,
 		5.0f
 	);
 
@@ -204,12 +200,12 @@ void UCParkourSystem::Jump_Implementation()
 			EDrawDebugTrace::ForDuration,
 			hitResult,
 			true,
-			TraceColor.Red,
-			TraceHitColor.Green,
+			TraceColor,
+			TraceHitColor,
 			5.0f
 		);
 
-		CLog::Print("CanClimb = true");
+		//CLog::Print("CanClimb = true");
 	}
 	else
 	{
@@ -227,12 +223,12 @@ void UCParkourSystem::Jump_Implementation()
 			EDrawDebugTrace::ForDuration,
 			hitResult,
 			true,
-			TraceColor.Red,
-			TraceHitColor.Green,
+			TraceColor,
+			TraceHitColor,
 			5.0f
 		);
 
-		CLog::Print("CanClimb = false");
+		//CLog::Print("CanClimb = false");
 	}
 
 	if (Canclimb == true)
@@ -251,7 +247,6 @@ void UCParkourSystem::Jump_Implementation()
 		FVector Z = WallHeight - FVector(0, 0, 44);
 		FVector Location2 = FVector(Owner->GetActorLocation().X, Owner->GetActorLocation().Y, Z.Z);
 		Owner->SetActorLocation(Location2);
-		CLog::Print("Good");
 
 		auto AnimInstance = Cast<UCAnimInstance>(Owner->GetMesh()->GetAnimInstance());
 		CheckNull(AnimInstance);
