@@ -24,9 +24,12 @@ public:
 	FORCEINLINE void ClearHittedCharacters() { HittedCharacters.Empty(); }
 
 	UFUNCTION(Reliable, Server)
-		void InOtherCharacter_RPC_Server(class ACharacter* InAttacker, class AActor* InCauser, class ACharacter* InOtherCharacter);
-	UFUNCTION(Client, Reliable)
-		void InOtherCharacter_RPC_Client(class ACharacter* InAttacker, class AActor* InCauser, class ACharacter* InOtherCharacter);
+		void SetAttacker_Server(ACharacter* InAttacker, AActor* InCauser);
+	void SetAttacker_Server_Implementation(ACharacter* InAttacker, AActor* InCauser);
+
+	UFUNCTION(NetMulticast, Reliable)
+		void SetAttacker(ACharacter* InAttacker, AActor* InCauser);
+	void SetAttacker_Implementation(ACharacter* InAttacker, AActor* InCauser);
 
 private:
 	UFUNCTION()
@@ -38,4 +41,8 @@ private:
 	bool bSucceed;
 
 	TArray<class ACharacter*> HittedCharacters;
+
+private:
+	ACharacter* Attacker;
+	AActor* Causer;
 };

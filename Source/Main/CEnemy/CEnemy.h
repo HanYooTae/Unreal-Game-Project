@@ -19,6 +19,14 @@ protected:
 public:
 	virtual float TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 
+	UFUNCTION(Reliable, Server)
+		void SetAttacker_Server(AController* EventInstigator, AActor* DamageCauser);
+	void SetAttacker_Server_Implementation(AController* EventInstigator, AActor* DamageCauser);
+
+	UFUNCTION(NetMulticast, Reliable)
+		void SetAttacker(AController* EventInstigator, AActor* DamageCauser);
+	void SetAttacker_Implementation(AController* EventInstigator, AActor* DamageCauser);
+
 private:
 	void Hitted();
 	void Dead();

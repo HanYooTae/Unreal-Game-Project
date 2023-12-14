@@ -24,11 +24,9 @@ public:
 	virtual void Begin_DoAction() override;
 	virtual void End_DoAction() override;
 
-public:
-	UFUNCTION(Reliable, Server)
-		virtual void OnAim() override;
-	UFUNCTION(Reliable, Server)
-		virtual void OffAim() override;
+public:		// UFuction(?)
+	virtual void OnAim() override;
+	virtual void OffAim() override;
 
 private:
 	UFUNCTION()

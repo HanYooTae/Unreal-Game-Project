@@ -66,14 +66,19 @@ void ACEnemy::BeginPlay()
 		healthWidget->UpdateHealth(Status->GetCurrentHealth(), Status->GetMaxHealth());
 }
 
+void ACEnemy::SetAttacker_Implementation(AController* EventInstigator, AActor* DamageCauser)
+{
+	Attacker = EventInstigator->GetCharacter();
+	Causer = DamageCauser;
+}
+
 float ACEnemy::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
 {
 	DamageValue = Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
 
-	Attacker = EventInstigator->GetCharacter();
-	Causer = DamageCauser;
+	SetAttacker_Server_Implementation(EventInstigator, DamageCauser);
 
-	Status->DecreaseHealth(DamageValue);
+	//Status->DecreaseHealth(DamageValue);
 
 	// Dead
 	if (Status->IsDead())
@@ -85,6 +90,11 @@ float ACEnemy::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AContro
 	State->SetHittedMode();
 
 	return DamageValue;
+}
+
+void ACEnemy::SetAttacker_Server_Implementation(AController* EventInstigator, AActor* DamageCauser)
+{
+	SetAttacker_Implementation(EventInstigator, DamageCauser);
 }
 
 void ACEnemy::Hitted()

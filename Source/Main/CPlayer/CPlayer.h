@@ -93,9 +93,12 @@ private:
     virtual float TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 
     UFUNCTION(Reliable, Server)
-        void TakeDamage_Server(AController* EventInstigator, AActor* DamageCauser);
-    UFUNCTION(Client, Reliable)
-        void TakeDamage_Client(AController* EventInstigator, AActor* DamageCauser);
+        void TakeDamage_Server(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser);
+    void TakeDamage_Server_Implementation(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser);
+	
+    UFUNCTION(NetMulticast, Reliable)
+        void TakeDamage_NetMulticast(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser);
+    void TakeDamage_NetMulticast_Implementation(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser);
 
     void Hitted();
     void Dead();

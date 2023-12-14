@@ -539,8 +539,14 @@ float ACPlayer::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AContr
 {
 	DamageValue = Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
 	
-	TakeDamage_Server(EventInstigator, DamageCauser);
+	//TakeDamage_Server(Damage, DamageEvent, EventInstigator, DamageCauser);
 	
+	//Attacker = EventInstigator->GetCharacter();
+	//Causer = DamageCauser;
+
+	//Status->DecreaseHealth(DamageValue);
+	//HealthWidget->UpdateHealth();
+
 	// Dead
 	if (Status->IsDead())
 	{
@@ -553,18 +559,14 @@ float ACPlayer::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AContr
 	return DamageValue;
 }
 
-void ACPlayer::TakeDamage_Server_Implementation(AController* EventInstigator, AActor* DamageCauser)
+void ACPlayer::TakeDamage_Server_Implementation(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
 {
-	TakeDamage_Client(EventInstigator, DamageCauser);
+	TakeDamage_NetMulticast_Implementation(Damage, DamageEvent, EventInstigator, DamageCauser);
 }
 
-void ACPlayer::TakeDamage_Client_Implementation(AController* EventInstigator, AActor* DamageCauser)
+void ACPlayer::TakeDamage_NetMulticast_Implementation(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
 {
-	Attacker = EventInstigator->GetCharacter();
-	Causer = DamageCauser;
-
-	Status->DecreaseHealth(DamageValue);
-	HealthWidget->UpdateHealth();
+	
 }
 
 void ACPlayer::Hitted()
