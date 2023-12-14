@@ -23,14 +23,6 @@ public:
 	FORCEINLINE void DisableCombo() { bCanCombo = false; }
 	FORCEINLINE void ClearHittedCharacters() { HittedCharacters.Empty(); }
 
-	UFUNCTION(Reliable, Server)
-		void SetAttacker_Server(ACharacter* InAttacker, AActor* InCauser);
-	void SetAttacker_Server_Implementation(ACharacter* InAttacker, AActor* InCauser);
-
-	UFUNCTION(NetMulticast, Reliable)
-		void SetAttacker(ACharacter* InAttacker, AActor* InCauser);
-	void SetAttacker_Implementation(ACharacter* InAttacker, AActor* InCauser);
-
 private:
 	UFUNCTION()
 		void RestoreTimeDilation();
@@ -45,4 +37,5 @@ private:
 private:
 	ACharacter* Attacker;
 	AActor* Causer;
+	ACharacter* OtherCharacter;
 };

@@ -544,8 +544,8 @@ float ACPlayer::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AContr
 	//Attacker = EventInstigator->GetCharacter();
 	//Causer = DamageCauser;
 
-	//Status->DecreaseHealth(DamageValue);
-	//HealthWidget->UpdateHealth();
+	Status->DecreaseHealth(DamageValue);
+	HealthWidget->UpdateHealth();
 
 	// Dead
 	if (Status->IsDead())
@@ -557,16 +557,6 @@ float ACPlayer::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AContr
 	State->SetHittedMode();
 
 	return DamageValue;
-}
-
-void ACPlayer::TakeDamage_Server_Implementation(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
-{
-	TakeDamage_NetMulticast_Implementation(Damage, DamageEvent, EventInstigator, DamageCauser);
-}
-
-void ACPlayer::TakeDamage_NetMulticast_Implementation(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
-{
-	
 }
 
 void ACPlayer::Hitted()

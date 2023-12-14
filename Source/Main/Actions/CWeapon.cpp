@@ -59,8 +59,6 @@ void ACWeapon::OffCollisions()
 
 void ACWeapon::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	OverlappedActor_Server_Implementation(OverlappedComponent, OtherActor);
-
 	CheckTrue(OwnerCharacter == OtherActor);
 
 	ACharacter* otherCharacter = Cast<ACharacter>(OtherActor);
@@ -74,8 +72,6 @@ void ACWeapon::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Ot
 
 void ACWeapon::EndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	OverlappedActor_Server_Implementation(OverlappedComponent, OtherActor);
-
 	CheckTrue(OwnerCharacter == OtherActor);
 
 	ACharacter* otherCharacter = Cast<ACharacter>(OtherActor);
@@ -85,15 +81,4 @@ void ACWeapon::EndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Othe
 		if (!!otherCharacter)
 			OnEndOverlap.Broadcast(OwnerCharacter, this, otherCharacter);
 	}
-}
-
-void ACWeapon::OverlappedActor_Server_Implementation(UPrimitiveComponent* InOverlappedComponent, AActor* InOtherActor)
-{
-	OverlappedActor_Implementation(InOverlappedComponent, InOtherActor);
-}
-
-void ACWeapon::OverlappedActor_Implementation(UPrimitiveComponent* InOverlappedComponent, AActor* InOtherActor)
-{
-	OverlappedComp = InOverlappedComponent;
-	OtherAct = InOtherActor;
 }

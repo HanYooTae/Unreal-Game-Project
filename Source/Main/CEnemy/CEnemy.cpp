@@ -66,19 +66,14 @@ void ACEnemy::BeginPlay()
 		healthWidget->UpdateHealth(Status->GetCurrentHealth(), Status->GetMaxHealth());
 }
 
-void ACEnemy::SetAttacker_Implementation(AController* EventInstigator, AActor* DamageCauser)
-{
-	Attacker = EventInstigator->GetCharacter();
-	Causer = DamageCauser;
-}
-
 float ACEnemy::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
 {
 	DamageValue = Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
 
-	SetAttacker_Server_Implementation(EventInstigator, DamageCauser);
+	//Attacker = EventInstigator->GetCharacter();
+	//Causer = DamageCauser;
 
-	//Status->DecreaseHealth(DamageValue);
+	Status->DecreaseHealth(DamageValue);
 
 	// Dead
 	if (Status->IsDead())
@@ -92,11 +87,6 @@ float ACEnemy::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AContro
 	return DamageValue;
 }
 
-void ACEnemy::SetAttacker_Server_Implementation(AController* EventInstigator, AActor* DamageCauser)
-{
-	SetAttacker_Implementation(EventInstigator, DamageCauser);
-}
-
 void ACEnemy::Hitted()
 {
 	// Apply Health Widget
@@ -108,10 +98,10 @@ void ACEnemy::Hitted()
 	Montages->PlayHitted();
 
 	// Look at Attacker
-	FVector start = GetActorLocation();
+	/*FVector start = GetActorLocation();
 	FVector target = Attacker->GetActorLocation();
 	FRotator rotation = FRotator(0, UKismetMathLibrary::FindLookAtRotation(start, target).Yaw, 0);
-	SetActorRotation(rotation);
+	SetActorRotation(rotation);*/
 
 	// Hit Back
 
@@ -128,11 +118,11 @@ void ACEnemy::Dead()
 	GetMesh()->GlobalAnimRateScale = 0.f;
 
 	// Add Force
-	FVector start = GetActorLocation();
+	/*FVector start = GetActorLocation();
 	FVector target = Attacker->GetActorLocation();
 	FVector direction = (start - target).GetSafeNormal();
 	FVector force = direction * LaunchValue * DamageValue * 3000.f;
-	GetMesh()->AddForceAtLocation(force, start);
+	GetMesh()->AddForceAtLocation(force, start);*/
 
 	// Off All Collisions
 	Action->OffAllCollisions();

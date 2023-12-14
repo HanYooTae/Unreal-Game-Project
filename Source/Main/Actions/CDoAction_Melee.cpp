@@ -60,8 +60,6 @@ void ACDoAction_Melee::OnBeginOverlap(ACharacter* InAttacker, AActor* InCauser, 
 {
 	Super::OnBeginOverlap(InAttacker, InCauser, InOtherCharacter);
 	
-	SetAttacker_Server_Implementation(InAttacker, InCauser);
-	
 	// HitStop(해당 무기로 때리면 or 맞으면 일정 시간동안 설정한 배속으로 플레이됨
 	float hitStop = Datas[ComboCount].HitStop;
 	if (FMath::IsNearlyZero(hitStop) == false)
@@ -92,24 +90,13 @@ void ACDoAction_Melee::OnBeginOverlap(ACharacter* InAttacker, AActor* InCauser, 
 	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), effect, transform);
 
 	FDamageEvent damageEvent;
-	InOtherCharacter->TakeDamage(Datas[ComboCount].power, damageEvent, Attacker->GetController(), Causer);
+	InOtherCharacter->TakeDamage(Datas[ComboCount].power, damageEvent, InAttacker->GetController(), InCauser);
 }
 
 void ACDoAction_Melee::OnEndOverlap(ACharacter* InAttacker, AActor* InCauser, ACharacter* InOtherCharacter)
 {
 	Super::OnEndOverlap(InAttacker, InCauser, InOtherCharacter);
-}
-
-
-void ACDoAction_Melee::SetAttacker_Server_Implementation(ACharacter* InAttacker, AActor* InCauser)
-{
-	SetAttacker_Implementation(InAttacker, InCauser);
-}
-
-void ACDoAction_Melee::SetAttacker_Implementation(ACharacter* InAttacker, AActor* InCauser)
-{
-	Attacker = InAttacker;
-	Causer = InCauser;
+	
 }
 
 void ACDoAction_Melee::RestoreTimeDilation()

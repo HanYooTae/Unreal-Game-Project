@@ -42,14 +42,6 @@ public:
 	UFUNCTION()
 		void EndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
-	UFUNCTION(Reliable, Server)
-		void OverlappedActor_Server(UPrimitiveComponent* InOverlappedComponent, AActor* InOtherActor);
-	void OverlappedActor_Server_Implementation(UPrimitiveComponent* InOverlappedComponent, AActor* InOtherActor);
-
-	UFUNCTION(NetMulticast, Reliable)
-		void OverlappedActor(UPrimitiveComponent* InOverlappedComponent, AActor* InOtherActor);
-	void OverlappedActor_Implementation(UPrimitiveComponent* InOverlappedComponent, AActor* InOtherActor);
-
 public:
 	UPROPERTY(VisibleAnywhere)
 		class USkeletalMeshComponent* Weapon;
@@ -71,4 +63,6 @@ private:
 
 	UPrimitiveComponent* OverlappedComp;
 	AActor* OtherAct;
+	UPrimitiveComponent* OtherComponent;
+	int32 OtherBodyInx;
 };
