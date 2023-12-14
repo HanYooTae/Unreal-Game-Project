@@ -31,7 +31,7 @@ void UCAim::Tick(float DeltaTime)
 	Timeline.TickTimeline(DeltaTime);
 }
 
-void UCAim::On_Implementation()
+void UCAim::On()
 {
 	CheckFalse(IsAvailable());
 	CheckTrue(bZooming);
@@ -47,7 +47,7 @@ void UCAim::On_Implementation()
 	Timeline.PlayFromStart();
 }
 
-void UCAim::Off_Implementation()
+void UCAim::Off()
 {
 	CheckFalse(IsAvailable());
 	CheckFalse(bZooming);

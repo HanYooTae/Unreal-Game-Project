@@ -119,13 +119,13 @@ void ACDoAction_Sniper::End_DoAction()
 	StatusComp->SetMove();
 }
 
-void ACDoAction_Sniper::OnAim_Implementation()
+void ACDoAction_Sniper::OnAim()
 {
 	CheckNull(Aim);
 	Aim->On();
 }
 
-void ACDoAction_Sniper::OffAim_Implementation()
+void ACDoAction_Sniper::OffAim()
 {
 	CheckNull(Aim);
 	Aim->Off();

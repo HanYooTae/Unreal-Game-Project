@@ -61,10 +61,7 @@ private:
 	void ChangeType(EActionType InNewType);
 
 public:		// Get Assets
-	UFUNCTION(Reliable, Server)
-		void DoAction();
-	UFUNCTION(NetMulticast, Reliable)
-		void DoAction_Client();
+	void DoAction();
 	void DoAim(bool InPressed);
 
 	void OffAllCollisions();		// 죽었을 때 무기 충돌체 Off

@@ -16,10 +16,10 @@ public:
 	void BeginPlay(class ACharacter* InOwnerCharacter);
 	void Tick(float DeltaTime);
 
-	UFUNCTION(NetMulticast, Reliable)
-		void On();
-	UFUNCTION(NetMulticast, Reliable)
-		void Off();
+	
+	// UFuction(?)
+	void On();
+	void Off();
 
 public:
 	FORCEINLINE bool IsAvailable() { return SpringArm != nullptr && Camera != nullptr; }
