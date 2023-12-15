@@ -20,20 +20,22 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 public:
-	virtual void DoAction() override;
-	virtual void Begin_DoAction() override;
-	virtual void End_DoAction() override;
+		virtual void DoAction() override;
+		virtual void Begin_DoAction() override;
+		virtual void End_DoAction() override;
 
-public:		// UFuction(?)
-	virtual void OnAim() override;
-	virtual void OffAim() override;
+public:
+		virtual void OnAim() override;
+		virtual void OffAim() override;
 
 private:
-	UFUNCTION()
+	UFUNCTION(NetMulticast, Reliable)
 		void OnBulletBeginOverlap(FHitResult hitResult);
+	void OnBulletBeginOverlap_Implementation(FHitResult hitResult);
 
-	UFUNCTION()
+	UFUNCTION(NetMulticast, Reliable)
 		void AbortByTypeChanged(EActionType InPrevType, EActionType InNewType);
+	void AbortByTypeChanged_Implementation(EActionType InPrevType, EActionType InNewType);
 
 private:
 	UPROPERTY()

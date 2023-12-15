@@ -26,7 +26,9 @@ public:		// Change Character Movement Speed
 	FORCEINLINE float GetWalkSpeed() { return WalkSpeed[(int8)EWalkSpeedType::Walk]; }
 	FORCEINLINE float GetRunSpeed() { return WalkSpeed[(int8)EWalkSpeedType::Run]; }
 
-	void ChangeMoveSpeed(EWalkSpeedType InType);
+	UFUNCTION(NetMulticast, Reliable)
+		void ChangeMoveSpeed(EWalkSpeedType InType);
+	void ChangeMoveSpeed_Implementation(EWalkSpeedType InType);
 
 public:		// Change Can Move
 	FORCEINLINE bool IsCanMove() { return bCanMove; }
@@ -39,8 +41,13 @@ public:		// Get Health
 	FORCEINLINE float GetCurrentHealth() { return CurrentHealth; }
 
 public:		// Health Controll
-	void DecreaseHealth(float InAmount);
-	void IncreaseHealth(float InAmount);
+	UFUNCTION(NetMulticast, Reliable)
+		void DecreaseHealth(float InAmount);
+	void DecreaseHealth_Implementation(float InAmount);
+
+	UFUNCTION(NetMulticast, Reliable)
+		void IncreaseHealth(float InAmount);
+	void IncreaseHealth_Implementation(float InAmount);
 
 	FORCEINLINE bool IsDead() { return CurrentHealth <= 0; }
 

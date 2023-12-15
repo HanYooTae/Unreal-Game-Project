@@ -11,32 +11,32 @@ void UCStateComponent::BeginPlay()
 
 }
 
-void UCStateComponent::SetIdleMode()
+void UCStateComponent::SetIdleMode_Implementation()
 {
 	ChangeType(EStateType::Idle);
 }
 
-void UCStateComponent::SetEquipMode()
+void UCStateComponent::SetEquipMode_Implementation()
 {
 	ChangeType(EStateType::Equip);
 }
 
-void UCStateComponent::SetActionMode()
+void UCStateComponent::SetActionMode_Implementation()
 {
 	ChangeType(EStateType::Action);
 }
 
-void UCStateComponent::SetHittedMode()
+void UCStateComponent::SetHittedMode_Implementation()
 {
 	ChangeType(EStateType::Hitted);
 }
 
-void UCStateComponent::SetDeadMode()
+void UCStateComponent::SetDeadMode_Implementation()
 {
 	ChangeType(EStateType::Dead);
 }
 
-void UCStateComponent::ChangeType(EStateType InNewType)
+void UCStateComponent::ChangeType_Implementation(EStateType InNewType)
 {
 	EStateType prev = Type;
 	Type = InNewType;

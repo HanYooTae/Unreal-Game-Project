@@ -87,7 +87,7 @@ float ACEnemy::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AContro
 	return DamageValue;
 }
 
-void ACEnemy::Hitted()
+void ACEnemy::Hitted_Implementation()
 {
 	// Apply Health Widget
 	UCEnemyHealthWidget* healthWidget = Cast<UCEnemyHealthWidget>(HealthWidget->GetUserWidgetObject());
@@ -107,7 +107,7 @@ void ACEnemy::Hitted()
 
 }
 
-void ACEnemy::Dead()
+void ACEnemy::Dead_Implementation()
 {
 	HealthWidget->SetVisibility(false);
 
@@ -128,10 +128,10 @@ void ACEnemy::Dead()
 	Action->OffAllCollisions();
 
 	// Destroy All(Attachment, Equipment, DoAction...)
-	UKismetSystemLibrary::K2_SetTimer(this, "End_Dead", 5.f, false);
+	UKismetSystemLibrary::K2_SetTimer(this, "End_Dead_Implementation", 5.f, false);
 }
 
-void ACEnemy::End_Dead()
+void ACEnemy::End_Dead_Implementation()
 {
 	Action->End_Dead();
 

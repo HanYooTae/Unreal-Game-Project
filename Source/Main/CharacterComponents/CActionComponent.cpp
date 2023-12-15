@@ -52,7 +52,7 @@ void UCActionComponent::SetSniperMode_Implementation()
 	SetMode(EActionType::Sniper);
 }
 
-void UCActionComponent::SetMode(EActionType InNewType)
+void UCActionComponent::SetMode_Implementation(EActionType InNewType)
 {
 	// 같은 키를 2번 눌렀을 때
 	if (Type == InNewType)
@@ -76,7 +76,7 @@ void UCActionComponent::SetMode(EActionType InNewType)
 	ChangeType(InNewType);
 }
 
-void UCActionComponent::ChangeType(EActionType InNewType)
+void UCActionComponent::ChangeType_Implementation(EActionType InNewType)
 {
 	EActionType prev = Type;
 	Type = InNewType;
@@ -85,7 +85,7 @@ void UCActionComponent::ChangeType(EActionType InNewType)
 		OnActionTypeChanged.Broadcast(prev, InNewType);
 }
 
-void UCActionComponent::DoAction()
+void UCActionComponent::DoAction_Implementation()
 {
 	CheckTrue(IsUnarmedMode());
 
@@ -99,7 +99,7 @@ void UCActionComponent::DoAction()
 	}
 }
 
-void UCActionComponent::DoAim(bool InPressed)
+void UCActionComponent::DoAim_Implementation(bool InPressed)
 {
 	CheckTrue(IsUnarmedMode());
 
@@ -113,7 +113,7 @@ void UCActionComponent::DoAim(bool InPressed)
 	}
 }
 
-void UCActionComponent::OffAllCollisions()
+void UCActionComponent::OffAllCollisions_Implementation()
 {
 	for (const auto& data : Datas)
 	{
@@ -127,7 +127,7 @@ void UCActionComponent::OffAllCollisions()
 	}
 }
 
-void UCActionComponent::End_Dead()
+void UCActionComponent::End_Dead_Implementation()
 {
 	for (int32 i = 0; i < (int32)EActionType::Max; i++)
 	{
