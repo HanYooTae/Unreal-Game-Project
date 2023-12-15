@@ -237,6 +237,9 @@ private:
 public:     // Main Widget
     void SetMainWidget();
     virtual FGenericTeamId GetGenericTeamId() const override;
+
+    UFUNCTION(BlueprintCallable)
+        bool GetPlayerDead() { return playerDead; }
 private:
     UPROPERTY(EditDefaultsOnly)
         uint8 PlayerTeamID = 0;
@@ -245,6 +248,8 @@ private:
     class ACharacter* Attacker;
     class AActor* Causer;
     float DamageValue;
+
+    bool playerDead = false;
 
 private:
     UPROPERTY(EditDefaultsOnly, Category = "Widget")

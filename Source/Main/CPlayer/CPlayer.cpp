@@ -542,8 +542,8 @@ float ACPlayer::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AContr
 	//Attacker = EventInstigator->GetCharacter();
 	//Causer = DamageCauser;
 
-	//Status->DecreaseHealth(DamageValue);
-	//HealthWidget->UpdateHealth();
+	Status->DecreaseHealth(DamageValue);
+	HealthWidget->UpdateHealth();
 
 	// Dead
 	if (Status->IsDead())
@@ -564,6 +564,8 @@ void ACPlayer::Hitted()
 
 void ACPlayer::Dead()
 {
+	playerDead = true;
+
 	CheckFalse(State->IsDeadMode());
 
 	// Disable Input
