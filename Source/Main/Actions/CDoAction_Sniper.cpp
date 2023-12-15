@@ -1,7 +1,9 @@
 #include "Actions/CDoAction_Sniper.h"
 #include "Actions/CWeapon_Sniper.h"
+#include "Actions/CActionData.h"
 #include "Actions/CAim.h"
 #include "Particles/ParticleSystem.h"
+#include "Particles/ParticleSystemComponent.h"
 #include "CharacterComponents/CActionComponent.h"
 #include "CharacterComponents/CStateComponent.h"
 #include "CharacterComponents/CStatusComponent.h"
@@ -92,6 +94,13 @@ void ACDoAction_Sniper::Begin_DoAction()
 			controller->PlayerCameraManager->StartCameraShake(ShakeClass);
 	}
 
+	ACWeapon_Sniper* sniper = Cast<ACWeapon_Sniper>(ActionComp->DataAssets[(int32)EActionType::Sniper]->Weapon);
+	if (!!sniper->GunshotParticle)
+		sniper->GunshotParticle->Activate(true);
+
+	if (!!sniper->CartridgeParticle)
+		sniper->CartridgeParticle->Activate(true);
+
 	// Play Effect
 	//UGameplayStatics::SpawnEmitterAttached(MuzzleParticle, Mesh, "Muzzle");
 	//UGameplayStatics::SpawnEmitterAttached(EjectParticle, Mesh, "ADSSocket");
@@ -110,19 +119,19 @@ void ACDoAction_Sniper::End_DoAction()
 	StatusComp->SetMove();
 }
 
-void ACDoAction_Sniper::OnAim_Implementation()
+void ACDoAction_Sniper::OnAim()
 {
 	CheckNull(Aim);
 	Aim->On();
 }
 
-void ACDoAction_Sniper::OffAim_Implementation()
+void ACDoAction_Sniper::OffAim()
 {
 	CheckNull(Aim);
 	Aim->Off();
 }
 
-void ACDoAction_Sniper::OnBulletBeginOverlap(FHitResult hitResult)
+void ACDoAction_Sniper::OnBulletBeginOverlap_Implementation(FHitResult hitResult)
 {
 	FDamageEvent damageEvent;
 	hitResult.GetActor()->TakeDamage
@@ -134,7 +143,7 @@ void ACDoAction_Sniper::OnBulletBeginOverlap(FHitResult hitResult)
 	);
 }
 
-void ACDoAction_Sniper::AbortByTypeChanged(EActionType InPrevType, EActionType InNewType)
+void ACDoAction_Sniper::AbortByTypeChanged_Implementation(EActionType InPrevType, EActionType InNewType)
 {
 	CheckFalse(Aim->IsAvailable());
 	CheckFalse(Aim->IsZooming());

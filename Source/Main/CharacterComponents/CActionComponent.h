@@ -43,32 +43,49 @@ public:		// bool Type
 	UFUNCTION(BlueprintPure)
 		FORCEINLINE bool IsSniperMode() { return Type == EActionType::Sniper; }
 
-public:		// Set Action
+public:		// Set Action NetMulticast
 	UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
 		void SetUnarmedMode();
+		void SetUnarmedMode_Implementation();
 
 	UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
 		void SetFistMode();
+		void SetFistMode_Implementation();
 
 	UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
 		void SetSwordMode();
+		void SetSwordMode_Implementation();
 
 	UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
 		void SetSniperMode();
+		void SetSniperMode_Implementation();
 
 private:
-	void SetMode(EActionType InNewType);		// 무기를 들고 있을 때 같은 무기를 호출하면 Unarmed로 회귀시켜주는 함수
-	void ChangeType(EActionType InNewType);
+	UFUNCTION(NetMulticast, Reliable)
+		void SetMode(EActionType InNewType);		// 무기를 들고 있을 때 같은 무기를 호출하면 Unarmed로 회귀시켜주는 함수
+		void SetMode_Implementation(EActionType InNewType);
+
+	UFUNCTION(NetMulticast, Reliable)
+		void ChangeType(EActionType InNewType);
+	void ChangeType_Implementation(EActionType InNewType);
 
 public:		// Get Assets
-	UFUNCTION(Reliable, Server)
-		void DoAction();
 	UFUNCTION(NetMulticast, Reliable)
-		void DoAction_Client();
-	void DoAim(bool InPressed);
+		void DoAction();
+	void DoAction_Implementation();
+	
+	UFUNCTION(NetMulticast, Reliable)
+		void DoAim(bool InPressed);
+	void DoAim_Implementation(bool InPressed);
 
-	void OffAllCollisions();		// 죽었을 때 무기 충돌체 Off
-	void End_Dead();
+
+	UFUNCTION(NetMulticast, Reliable)
+		void OffAllCollisions();		// 죽었을 때 무기 충돌체 Off
+	void OffAllCollisions_Implementation();		// 죽었을 때 무기 충돌체 Off
+	
+	UFUNCTION(NetMulticast, Reliable)
+		void End_Dead();
+	void End_Dead_Implementation();
 
 public:
 	UPROPERTY(BlueprintAssignable)

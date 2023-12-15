@@ -59,16 +59,6 @@ void ACWeapon::OffCollisions()
 
 void ACWeapon::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	OtherActor_Server(OtherActor);
-}
-
-void ACWeapon::OtherActor_Server_Implementation(AActor* OtherActor)
-{
-	OtherActor_Client(OtherActor);
-}
-
-void ACWeapon::OtherActor_Client_Implementation(AActor* OtherActor)
-{
 	CheckTrue(OwnerCharacter == OtherActor);
 
 	ACharacter* otherCharacter = Cast<ACharacter>(OtherActor);

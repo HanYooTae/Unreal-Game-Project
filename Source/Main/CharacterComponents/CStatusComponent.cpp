@@ -14,7 +14,7 @@ void UCStatusComponent::BeginPlay()
 	CurrentHealth = MaxHealth;
 }
 
-void UCStatusComponent::ChangeMoveSpeed(EWalkSpeedType InType)
+void UCStatusComponent::ChangeMoveSpeed_Implementation(EWalkSpeedType InType)
 {
 	UCharacterMovementComponent* movementComp = CHelpers::GetComponent<UCharacterMovementComponent>(GetOwner());
 	CheckNull(movementComp);
@@ -22,13 +22,13 @@ void UCStatusComponent::ChangeMoveSpeed(EWalkSpeedType InType)
 	movementComp->MaxWalkSpeed = WalkSpeed[(int8)InType];
 }
 
-void UCStatusComponent::DecreaseHealth(float InAmount)
+void UCStatusComponent::DecreaseHealth_Implementation(float InAmount)
 {
 	CurrentHealth -= InAmount;
 	CurrentHealth = FMath::Clamp(CurrentHealth, 0.f, MaxHealth);
 }
 
-void UCStatusComponent::IncreaseHealth(float InAmount)
+void UCStatusComponent::IncreaseHealth_Implementation(float InAmount)
 {
 	CurrentHealth += InAmount;
 	CurrentHealth = FMath::Clamp(CurrentHealth, 0.f, MaxHealth);

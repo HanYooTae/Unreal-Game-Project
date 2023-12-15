@@ -23,11 +23,6 @@ public:
 	FORCEINLINE void DisableCombo() { bCanCombo = false; }
 	FORCEINLINE void ClearHittedCharacters() { HittedCharacters.Empty(); }
 
-	UFUNCTION(Reliable, Server)
-		void InOtherCharacter_RPC_Server(class ACharacter* InAttacker, class AActor* InCauser, class ACharacter* InOtherCharacter);
-	UFUNCTION(Client, Reliable)
-		void InOtherCharacter_RPC_Client(class ACharacter* InAttacker, class AActor* InCauser, class ACharacter* InOtherCharacter);
-
 private:
 	UFUNCTION()
 		void RestoreTimeDilation();
@@ -38,4 +33,9 @@ private:
 	bool bSucceed;
 
 	TArray<class ACharacter*> HittedCharacters;
+
+private:
+	ACharacter* Attacker;
+	AActor* Causer;
+	ACharacter* OtherCharacter;
 };

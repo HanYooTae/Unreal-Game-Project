@@ -18,8 +18,11 @@ public:
 
 	UFUNCTION(NetMulticast, Reliable)
 		void On();
+	void On_Implementation();
+
 	UFUNCTION(NetMulticast, Reliable)
 		void Off();
+	void Off_Implementation();
 
 public:
 	FORCEINLINE bool IsAvailable() { return SpringArm != nullptr && Camera != nullptr; }
