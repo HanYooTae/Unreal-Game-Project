@@ -20,11 +20,17 @@ public:
 	virtual float TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 
 private:
-	void Hitted();
-	void Dead();
+	UFUNCTION(NetMulticast, Reliable)
+		void Hitted();
+	void Hitted_Implementation();
+	
+	UFUNCTION(NetMulticast, Reliable)
+		void Dead();
+	void Dead_Implementation();
 
-	UFUNCTION()
+	UFUNCTION(NetMulticast, Reliable)
 		void End_Dead();
+	void End_Dead_Implementation();
 
 private:
 	UFUNCTION()

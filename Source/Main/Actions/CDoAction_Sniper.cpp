@@ -131,7 +131,7 @@ void ACDoAction_Sniper::OffAim()
 	Aim->Off();
 }
 
-void ACDoAction_Sniper::OnBulletBeginOverlap(FHitResult hitResult)
+void ACDoAction_Sniper::OnBulletBeginOverlap_Implementation(FHitResult hitResult)
 {
 	FDamageEvent damageEvent;
 	hitResult.GetActor()->TakeDamage
@@ -143,7 +143,7 @@ void ACDoAction_Sniper::OnBulletBeginOverlap(FHitResult hitResult)
 	);
 }
 
-void ACDoAction_Sniper::AbortByTypeChanged(EActionType InPrevType, EActionType InNewType)
+void ACDoAction_Sniper::AbortByTypeChanged_Implementation(EActionType InPrevType, EActionType InNewType)
 {
 	CheckFalse(Aim->IsAvailable());
 	CheckFalse(Aim->IsZooming());

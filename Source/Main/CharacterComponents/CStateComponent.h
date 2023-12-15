@@ -33,13 +33,29 @@ public:		// Get StateType
 	EStateType GetType() { return Type; }
 
 public:		// Set StateType
-	void SetIdleMode();
-	void SetEquipMode();
-	void SetActionMode();
-	void SetHittedMode();
-	void SetDeadMode();
+	UFUNCTION(NetMulticast, Reliable)
+		void SetIdleMode();
+	void SetIdleMode_Implementation();
+	
+	UFUNCTION(NetMulticast, Reliable)
+		void SetEquipMode();
+	void SetEquipMode_Implementation();
+	
+	UFUNCTION(NetMulticast, Reliable)
+		void SetActionMode();
+	void SetActionMode_Implementation();
+	
+	UFUNCTION(NetMulticast, Reliable)
+		void SetHittedMode();
+	void SetHittedMode_Implementation();
+	
+	UFUNCTION(NetMulticast, Reliable)
+		void SetDeadMode();
+	void SetDeadMode_Implementation();
 
-	void ChangeType(EStateType InNewType);
+	UFUNCTION(NetMulticast, Reliable)
+		void ChangeType(EStateType InNewType);
+	void ChangeType_Implementation(EStateType InNewType);
 
 public:
 	UPROPERTY(BlueprintAssignable)

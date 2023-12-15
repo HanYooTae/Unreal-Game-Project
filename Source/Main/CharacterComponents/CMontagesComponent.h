@@ -44,7 +44,9 @@ public:
 	void PlayDead();
 
 private:
-	void PlayMontage(EStateType InStateType);
+	UFUNCTION(NetMulticast, Reliable)
+		void PlayMontage(EStateType InStateType);
+	void PlayMontage_Implementation(EStateType InStateType);
 
 private:
 	UPROPERTY(EditDefaultsOnly, Category = "DataTable")

@@ -40,7 +40,7 @@ void UCMontagesComponent::PlayDead()
 	PlayMontage(EStateType::Dead);
 }
 
-void UCMontagesComponent::PlayMontage(EStateType InStateType)
+void UCMontagesComponent::PlayMontage_Implementation(EStateType InStateType)
 {
 	ACharacter* ownerCharacter = Cast<ACharacter>(GetOwner());
 	CheckNull(ownerCharacter);
