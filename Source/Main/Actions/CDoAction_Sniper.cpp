@@ -44,12 +44,12 @@ void ACDoAction_Sniper::Tick(float DeltaTime)
 	Aim->Tick(DeltaTime);
 }
 
-void ACDoAction_Sniper::DoAction()
+void ACDoAction_Sniper::DoAction_Implementation()
 {
 	CheckFalse(Datas.Num() > 0);
 
 	CheckFalse(StateComp->IsIdleMode());
-	StateComp->SetActionMode();
+	StateComp->SetActionMode_Server();
 
 	Datas[0].bCanMove ? StatusComp->SetMove() : StatusComp->SetStop();
 
@@ -115,7 +115,7 @@ void ACDoAction_Sniper::Begin_DoAction()
 
 void ACDoAction_Sniper::End_DoAction()
 {
-	StateComp->SetIdleMode();
+	StateComp->SetIdleMode_Server();
 	StatusComp->SetMove();
 }
 

@@ -543,26 +543,26 @@ float ACPlayer::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AContr
 	//Causer = DamageCauser;
 
 	Status->DecreaseHealth(DamageValue);
-	HealthWidget->UpdateHealth();
+	HealthWidget->UpdateHealth_Client();
 
 	// Dead
 	if (Status->IsDead())
 	{
-		State->SetDeadMode();
+		State->SetDeadMode_Server();
 		return DamageValue;
 	}
 
-	State->SetHittedMode();
+	State->SetHittedMode_Server();
 
 	return DamageValue;
 }
 
-void ACPlayer::Hitted()
+void ACPlayer::Hitted_Implementation()
 {
 	Montages->PlayHitted();
 }
 
-void ACPlayer::Dead()
+void ACPlayer::Dead_Implementation()
 {
 	playerDead = true;
 
@@ -640,17 +640,17 @@ void ACPlayer::OnSniper_Implementation()
 
 void ACPlayer::OnFist_Server_Implementation()
 {
-	OnFist_Implementation();
+	OnFist();
 }
 
 void ACPlayer::OnSword_Server_Implementation()
 {
-	OnSword_Implementation();
+	OnSword();
 }
 
 void ACPlayer::OnSniper_Server_Implementation()
 {
-	OnSniper_Implementation();
+	OnSniper();
 }
 
 void ACPlayer::OnSelectAction()

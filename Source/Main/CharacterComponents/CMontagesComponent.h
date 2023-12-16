@@ -40,8 +40,14 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
-	void PlayHitted();
-	void PlayDead();
+
+	UFUNCTION(NetMulticast, Reliable)
+		void PlayHitted();
+	void PlayHitted_Implementation();
+
+	UFUNCTION(NetMulticast, Reliable)
+		void PlayDead();
+	void PlayDead_Implementation();
 
 private:
 	UFUNCTION(NetMulticast, Reliable)

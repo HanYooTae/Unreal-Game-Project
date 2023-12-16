@@ -40,3 +40,8 @@ void UCPlayerHealthWidget::UpdateHealth_Implementation()
 
 	//PlayAnimation(ImpactDamage);
 }
+
+void UCPlayerHealthWidget::UpdateHealth_Client_Implementation()
+{
+	UpdateHealth_Implementation();
+}

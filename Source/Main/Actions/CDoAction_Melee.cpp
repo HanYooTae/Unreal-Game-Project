@@ -4,7 +4,7 @@
 #include "CharacterComponents/CStatusComponent.h"
 #include "Global.h"
 
-void ACDoAction_Melee::DoAction()
+void ACDoAction_Melee::DoAction_Implementation()
 {
 	Super::DoAction();
 
@@ -22,7 +22,7 @@ void ACDoAction_Melee::DoAction()
 	// 무기 장착안했으면 return
 	CheckFalse(StateComp->IsIdleMode());
 
-	StateComp->SetActionMode();
+	StateComp->SetActionMode_Server();
 
 	// 첫 번째 액션(공격) 몽타주 재생
 	OwnerCharacter->PlayAnimMontage(Datas[0].AnimMontage, Datas[0].PlayRate, Datas[0].StartSection);
@@ -52,7 +52,7 @@ void ACDoAction_Melee::End_DoAction()
 
 	ComboCount = 0;
 
-	StateComp->SetIdleMode();
+	StateComp->SetIdleMode_Server();
 	StatusComp->SetMove();
 }
 

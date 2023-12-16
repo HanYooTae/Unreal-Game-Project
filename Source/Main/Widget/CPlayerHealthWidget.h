@@ -17,6 +17,10 @@ public:
 		void UpdateHealth();
 	void UpdateHealth_Implementation();
 
+	UFUNCTION(Client, Reliable)
+		void UpdateHealth_Client();
+	void UpdateHealth_Client_Implementation();
+
 private:
 	UPROPERTY(meta = (BindWidget))
 		class UImage* CircleGuage;
