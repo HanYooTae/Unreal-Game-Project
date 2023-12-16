@@ -13,7 +13,7 @@ UCGameInstance::UCGameInstance(const FObjectInitializer& ObjectInitializer)
 void UCGameInstance::Init()
 {
 	Super::Init();
-	CLog::Print("GameInstace::Constructor Called");
+	//CLog::Print("GameInstace::Constructor Called");
 	
 	IOnlineSubsystem* oss = IOnlineSubsystem::Get();
 
@@ -232,7 +232,7 @@ void UCGameInstance::OnJoinSessionComplete(FName InSessionName, EOnJoinSessionCo
 	APlayerController* controller = GetFirstLocalPlayerController();
 	CheckNull(controller);
 	
-	CLog::Print("Address is " + address);
+	//CLog::Print("Address is " + address);
 
 	controller->ClientTravel(address, ETravelType::TRAVEL_Absolute);
 }
