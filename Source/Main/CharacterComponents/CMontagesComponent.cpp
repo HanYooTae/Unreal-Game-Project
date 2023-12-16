@@ -30,12 +30,12 @@ void UCMontagesComponent::BeginPlay()
 	}
 }
 
-void UCMontagesComponent::PlayHitted()
+void UCMontagesComponent::PlayHitted_Implementation()
 {
 	PlayMontage(EStateType::Hitted);
 }
 
-void UCMontagesComponent::PlayDead()
+void UCMontagesComponent::PlayDead_Implementation()
 {
 	PlayMontage(EStateType::Dead);
 }

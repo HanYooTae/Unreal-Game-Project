@@ -36,7 +36,32 @@ void UCStateComponent::SetDeadMode_Implementation()
 	ChangeType(EStateType::Dead);
 }
 
-void UCStateComponent::ChangeType_Implementation(EStateType InNewType)
+void UCStateComponent::SetIdleMode_Server_Implementation()
+{
+	SetIdleMode();
+}
+
+void UCStateComponent::SetEquipMode_Server_Implementation()
+{
+	SetEquipMode();
+}
+
+void UCStateComponent::SetActionMode_Server_Implementation()
+{
+	SetActionMode();
+}
+
+void UCStateComponent::SetHittedMode_Server_Implementation()
+{
+	SetHittedMode();
+}
+
+void UCStateComponent::SetDeadMode_Server_Implementation()
+{
+	SetDeadMode();
+}
+
+void UCStateComponent::ChangeType(EStateType InNewType)
 {
 	EStateType prev = Type;
 	Type = InNewType;

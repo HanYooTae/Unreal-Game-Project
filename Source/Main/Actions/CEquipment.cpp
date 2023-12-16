@@ -23,7 +23,7 @@ void ACEquipment::BeginPlay()
 void ACEquipment::Equip_Implementation()
 {
 	// Set State Equip
-	StateComp->SetEquipMode();
+	StateComp->SetEquipMode_Server();
 
 	// bCanMove
 	EquipmentData.bCanMove ? StatusComp->SetMove() : StatusComp->SetStop();
@@ -59,7 +59,7 @@ void ACEquipment::End_Equip_Implementation()
 {
 	bEquippedThis = true;
 
-	StateComp->SetIdleMode();
+	StateComp->SetIdleMode_Server();
 	StatusComp->SetMove();
 }
 

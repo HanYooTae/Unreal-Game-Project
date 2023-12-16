@@ -92,8 +92,13 @@ private: // Action
 private:
     virtual float TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 
-    void Hitted();
-    void Dead();
+	UFUNCTION(NetMulticast, Reliable)
+        void Hitted();
+    void Hitted_Implementation();
+
+	UFUNCTION(NetMulticast, Reliable)
+        void Dead();
+    void Dead_Implementation();
 
     UFUNCTION()
         void End_Dead();
@@ -237,6 +242,9 @@ private:
 public:     // Main Widget
     void SetMainWidget();
     virtual FGenericTeamId GetGenericTeamId() const override;
+
+    UFUNCTION(BlueprintCallable)
+        bool GetPlayerDead() { return playerDead; }
 private:
     UPROPERTY(EditDefaultsOnly)
         uint8 PlayerTeamID = 0;
@@ -245,6 +253,8 @@ private:
     class ACharacter* Attacker;
     class AActor* Causer;
     float DamageValue;
+
+    bool playerDead = false;
 
 private:
     UPROPERTY(EditDefaultsOnly, Category = "Widget")

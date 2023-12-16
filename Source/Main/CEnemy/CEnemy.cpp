@@ -111,6 +111,8 @@ void ACEnemy::Dead_Implementation()
 {
 	HealthWidget->SetVisibility(false);
 
+	dead = true;
+
 	// Ragdoll
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	GetMesh()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
@@ -128,7 +130,7 @@ void ACEnemy::Dead_Implementation()
 	Action->OffAllCollisions();
 
 	// Destroy All(Attachment, Equipment, DoAction...)
-	UKismetSystemLibrary::K2_SetTimer(this, "End_Dead_Implementation", 5.f, false);
+	UKismetSystemLibrary::K2_SetTimer(this, "End_Dead", 5.f, false);
 }
 
 void ACEnemy::End_Dead_Implementation()

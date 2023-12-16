@@ -19,6 +19,10 @@ protected:
 public:
 	virtual float TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 
+	UFUNCTION(BlueprintCallable)
+		bool Getdead() { return dead; }
+	bool dead = false;
+
 private:
 	UFUNCTION(NetMulticast, Reliable)
 		void Hitted();

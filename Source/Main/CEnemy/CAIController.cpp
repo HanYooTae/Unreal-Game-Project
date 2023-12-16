@@ -19,7 +19,7 @@ ACAIController::ACAIController()
 	Sight = CreateDefaultSubobject<UAISenseConfig_Sight>("Sight");
 	Sight->SightRadius = 600.f;
 	Sight->LoseSightRadius = 800.f;
-	Sight->PeripheralVisionAngleDegrees = 90.f;
+	Sight->PeripheralVisionAngleDegrees = 180.f;
 	Sight->SetMaxAge(2.f);
 	Sight->DetectionByAffiliation.bDetectEnemies = true;
 	Sight->DetectionByAffiliation.bDetectFriendlies = false;
