@@ -34,8 +34,6 @@ void UCParkourSystem::Vault_Implementation()
 		TEnumAsByte<EObjectTypeQuery> WorldStatic = UEngineTypes::ConvertToObjectType(ECollisionChannel::ECC_WorldStatic);
 		ObjectTypes.Add(WorldStatic);
 		TArray<AActor*> ignoreActor;
-		FLinearColor TraceColor;
-		FLinearColor TraceHitColor;
 		FHitResult hitResult;
 
 		bool Result = UKismetSystemLibrary::LineTraceSingleForObjects // player 전방 물체 인식trace
@@ -46,12 +44,9 @@ void UCParkourSystem::Vault_Implementation()
 			ObjectTypes,					// 비워둘수 없어서 기본값 셋팅
 			true,
 			ignoreActor,					// 비워둘수 없어서 기본값 셋팅
-			EDrawDebugTrace::ForDuration,
+			EDrawDebugTrace::None,
 			hitResult,
-			true,
-			TraceColor,
-			TraceHitColor,
-			5.0f
+			true
 		);
 
 		if (Result == true)
@@ -73,12 +68,9 @@ void UCParkourSystem::Vault_Implementation()
 				ObjectTypes,					// 비워둘수 없어서 기본값 셋팅
 				true,
 				ignoreActor,					// 비워둘수 없어서 기본값 셋팅
-				EDrawDebugTrace::ForDuration,
+				EDrawDebugTrace::None,
 				hitResult1,
-				true,
-				TraceColor,
-				TraceHitColor,
-				5.0f
+				true
 			);
 
 			if (Result1 == true)
@@ -98,12 +90,9 @@ void UCParkourSystem::Vault_Implementation()
 					ObjectTypes,					// 비워둘수 없어서 기본값 셋팅
 					true,
 					ignoreActor,					// 비워둘수 없어서 기본값 셋팅
-					EDrawDebugTrace::ForDuration,
+					EDrawDebugTrace::None,
 					hitResult2,
-					true,
-					TraceColor,
-					TraceHitColor,
-					5.0f
+					true
 				);
 
 				if (Result2 == true)
@@ -124,7 +113,7 @@ void UCParkourSystem::Vault_Implementation()
 					}
 
 					float HminusL = WallHeight.Z - WallLocation.Z;
-					CLog::Print("HminusL: " + FString::FromInt(HminusL));
+					//CLog::Print("HminusL: " + FString::FromInt(HminusL));
 
 					if (HminusL >= 60)
 					{
@@ -163,8 +152,6 @@ void UCParkourSystem::Jump_Implementation()
 	TEnumAsByte<EObjectTypeQuery> WorldStatic = UEngineTypes::ConvertToObjectType(ECollisionChannel::ECC_WorldStatic);
 	ObjectTypes.Add(WorldStatic);
 	TArray<AActor*> ignoreActor;
-	FLinearColor TraceColor;
-	FLinearColor TraceHitColor;
 
 	bool Result = UKismetSystemLibrary::LineTraceSingleForObjects // 점프를 통해 올라갈수 있는지여부를 판단하는 trace
 	(
@@ -174,12 +161,9 @@ void UCParkourSystem::Jump_Implementation()
 		ObjectTypes,					// 비워둘수 없어서 기본값 셋팅
 		true,
 		ignoreActor,					// 비워둘수 없어서 기본값 셋팅
-		EDrawDebugTrace::ForDuration,
+		EDrawDebugTrace::None,
 		hitResult,
-		true,
-		TraceColor,
-		TraceHitColor,
-		5.0f
+		true
 	);
 
 	if (Result == true)
@@ -197,12 +181,9 @@ void UCParkourSystem::Jump_Implementation()
 			ObjectTypes,					// 비워둘수 없어서 기본값 셋팅
 			true,
 			ignoreActor,					// 비워둘수 없어서 기본값 셋팅
-			EDrawDebugTrace::ForDuration,
+			EDrawDebugTrace::None,
 			hitResult,
-			true,
-			TraceColor,
-			TraceHitColor,
-			5.0f
+			true
 		);
 
 		//CLog::Print("CanClimb = true");
@@ -220,12 +201,9 @@ void UCParkourSystem::Jump_Implementation()
 			ObjectTypes,					// 비워둘수 없어서 기본값 셋팅
 			true,
 			ignoreActor,					// 비워둘수 없어서 기본값 셋팅
-			EDrawDebugTrace::ForDuration,
+			EDrawDebugTrace::None,
 			hitResult,
-			true,
-			TraceColor,
-			TraceHitColor,
-			5.0f
+			true
 		);
 
 		//CLog::Print("CanClimb = false");

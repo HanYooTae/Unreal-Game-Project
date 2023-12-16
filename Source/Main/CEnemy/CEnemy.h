@@ -23,6 +23,9 @@ public:
 		bool Getdead() { return dead; }
 	bool dead = false;
 
+	UFUNCTION(BlueprintImplementableEvent)
+		void Dissolve();
+
 private:
 	UFUNCTION(NetMulticast, Reliable)
 		void Hitted();

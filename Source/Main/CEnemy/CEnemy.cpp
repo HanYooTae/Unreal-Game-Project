@@ -130,7 +130,8 @@ void ACEnemy::Dead_Implementation()
 	Action->OffAllCollisions();
 
 	// Destroy All(Attachment, Equipment, DoAction...)
-	UKismetSystemLibrary::K2_SetTimer(this, "End_Dead", 5.f, false);
+	Dissolve();
+	UKismetSystemLibrary::K2_SetTimer(this, "End_Dead", 8.f, false);
 }
 
 void ACEnemy::End_Dead_Implementation()
