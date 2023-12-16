@@ -20,6 +20,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 public:
+	UFUNCTION(NetMulticast, Reliable)
 		virtual void DoAction() override;
 		virtual void Begin_DoAction() override;
 		virtual void End_DoAction() override;

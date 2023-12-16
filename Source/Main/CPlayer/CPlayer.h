@@ -92,8 +92,13 @@ private: // Action
 private:
     virtual float TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 
-    void Hitted();
-    void Dead();
+	UFUNCTION(NetMulticast, Reliable)
+        void Hitted();
+    void Hitted_Implementation();
+
+	UFUNCTION(NetMulticast, Reliable)
+        void Dead();
+    void Dead_Implementation();
 
     UFUNCTION()
         void End_Dead();

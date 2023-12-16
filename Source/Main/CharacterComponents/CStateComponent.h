@@ -32,7 +32,7 @@ public:		// Get StateType
 	
 	EStateType GetType() { return Type; }
 
-public:		// Set StateType
+public:		// Set StateType NetMulticast
 	UFUNCTION(NetMulticast, Reliable)
 		void SetIdleMode();
 	void SetIdleMode_Implementation();
@@ -53,9 +53,30 @@ public:		// Set StateType
 		void SetDeadMode();
 	void SetDeadMode_Implementation();
 
+public:		// Set StateType Server
+	UFUNCTION(Reliable, Server)
+		void SetIdleMode_Server();
+	void SetIdleMode_Server_Implementation();
+
+	UFUNCTION(Reliable, Server)
+		void SetEquipMode_Server();
+	void SetEquipMode_Server_Implementation();
+
+	UFUNCTION(Reliable, Server)
+		void SetActionMode_Server();
+	void SetActionMode_Server_Implementation();
+
 	UFUNCTION(NetMulticast, Reliable)
+		void SetHittedMode_Server();
+	void SetHittedMode_Server_Implementation();
+
+	UFUNCTION(NetMulticast, Reliable)
+		void SetDeadMode_Server();
+	void SetDeadMode_Server_Implementation();
+
+	//UFUNCTION(NetMulticast, Reliable)
 		void ChangeType(EStateType InNewType);
-	void ChangeType_Implementation(EStateType InNewType);
+	//void ChangeType_Implementation(EStateType InNewType);
 
 public:
 	UPROPERTY(BlueprintAssignable)
