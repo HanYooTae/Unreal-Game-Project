@@ -69,12 +69,12 @@ void UCInteractionComponent::RefreshWidget_Implementation()
 
 void UCInteractionComponent::BeginFocus(ACPlayer* Character)
 {
-	CLog::Print("1"); //Todo.
+	//CLog::Print("1"); //Todo.
 	if (!IsActive() || !GetOwner() || !Character)
 	{
 		return;
 	}
-	CLog::Print("2"); //Todo.
+	//CLog::Print("2"); //Todo.
 
 	OnBeginFocus.Broadcast(Character);
 
