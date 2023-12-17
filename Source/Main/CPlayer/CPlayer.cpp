@@ -262,7 +262,7 @@ void ACPlayer::BeginInteract()
 {
 	if (!HasAuthority())
 	{
-		CLog::Print("Im Client");
+		//CLog::Print("Im Client");
 		SeverBeginInteract();
 	}
 
@@ -542,8 +542,8 @@ float ACPlayer::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AContr
 	//Attacker = EventInstigator->GetCharacter();
 	//Causer = DamageCauser;
 
-	//Status->DecreaseHealth(DamageValue);
-	//HealthWidget->UpdateHealth_Client();
+	Status->DecreaseHealth(DamageValue);
+	HealthWidget->UpdateHealth_Client();
 
 	// Dead
 	if (Status->IsDead())
@@ -589,8 +589,8 @@ void ACPlayer::End_Dead()
 	Action->End_Dead();
 
 	PrintLine();
-	CLog::Log("You Died");
-	CLog::Print("You Died");
+	//CLog::Log("You Died");
+	//CLog::Print("You Died");
 
 }
 

@@ -148,7 +148,7 @@ void UCGameInstance::OnCreateSessionComplete(FName InSessionName, bool InSuccess
 	if (!!MainMenu)
 		MainMenu->Detach();
 
-	CLog::Print("Host");
+	//CLog::Print("Host");
 
 	UWorld* world = GetWorld();
 	CheckNull(world);
