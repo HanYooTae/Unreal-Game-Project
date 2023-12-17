@@ -17,6 +17,7 @@ public class Main : ModuleRules
 		PublicDependencyModuleNames.Add("Paper2D");
 		PublicDependencyModuleNames.Add("UMG");
 		PublicDependencyModuleNames.Add("OnlineSubsystem");
+		PublicDependencyModuleNames.Add("OnlineSubsystemSteam");
 		PublicDependencyModuleNames.Add("GameplayCameras");
 		PublicDependencyModuleNames.Add("AIModule");
 		PublicDependencyModuleNames.Add("GameplayTasks");
