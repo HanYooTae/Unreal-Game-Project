@@ -87,6 +87,7 @@ void UCGameInstance::CreateSession()
 		{
 			sessionSettings.bIsLANMatch = false;
 			sessionSettings.bUsesPresence = true;
+			sessionSettings.bUseLobbiesIfAvailable = true;
 		}
 
 		sessionSettings.NumPublicConnections = 4;
@@ -105,7 +106,7 @@ void UCGameInstance::FindSession()
 	{
 		CLog::Log("Starting Find Session");
 
-		SearchSettings->bIsLanQuery = true;
+		SearchSettings->bIsLanQuery = false;
 		SearchSettings->MaxSearchResults = 100;
 		SearchSettings->QuerySettings.Set(SEARCH_PRESENCE, true, EOnlineComparisonOp::Equals);
 
