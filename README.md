@@ -1,10 +1,9 @@
-# Portfolio - Unreal Game Team Project
+## 프로젝트 소개
+
+### Steam OSS와 RPC를 활용한 2인 멀티플레이 게임
 
 2인 팀 포트폴리오 / Unreal Engine 4.27
 
-## 프로젝트 소개
-
-- OSS를 활용한 2인 멀티플레이 게임
 
 ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/77b436bb-7c42-4c68-97c9-2adbb651640f)
 
