@@ -92,4 +92,8 @@ public:
 public:
 	UFUNCTION(BlueprintPure, Category = "Interaction")
 		float GetInteractPercentage();
+
+private:
+	UPROPERTY(VisibleDefaultsOnly)
+		class USphereComponent* Sphere;
 };

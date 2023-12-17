@@ -542,8 +542,8 @@ float ACPlayer::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AContr
 	//Attacker = EventInstigator->GetCharacter();
 	//Causer = DamageCauser;
 
-	//Status->DecreaseHealth(DamageValue);
-	//HealthWidget->UpdateHealth_Client();
+	Status->DecreaseHealth(DamageValue);
+	HealthWidget->UpdateHealth_Client();
 
 	// Dead
 	if (Status->IsDead())
