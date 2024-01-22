@@ -262,7 +262,7 @@ void ACPlayer::BeginInteract()
 {
 	if (!HasAuthority())
 	{
-		CLog::Print("Im Client");
+		//CLog::Print("Im Client");
 		SeverBeginInteract();
 	}
 

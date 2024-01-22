@@ -131,7 +131,7 @@ void ACEnemy::Dead_Implementation()
 
 	// Destroy All(Attachment, Equipment, DoAction...)
 	Dissolve();
-	UKismetSystemLibrary::K2_SetTimer(this, "End_Dead", 8.f, false);
+	UKismetSystemLibrary::K2_SetTimer(this, "End_Dead", 5.f, false);
 }
 
 void ACEnemy::End_Dead_Implementation()
