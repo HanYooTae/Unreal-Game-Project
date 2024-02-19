@@ -80,11 +80,12 @@ void ACPickup::BeginPlay()
 	{
 		AlignWithGround();
 	}
-
-	if (Item)
+	
+	// Legacy
+	/*if (Item)
 	{
 		Item->MarkDirtyForReplication();
-	}
+	}*/
 }
 
 void ACPickup::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
