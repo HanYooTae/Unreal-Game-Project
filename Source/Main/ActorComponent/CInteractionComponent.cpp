@@ -80,8 +80,7 @@ void UCInteractionComponent::BeginFocus(ACPlayer* Character)
 
 	SetHiddenInGame(false);
 
-	// Legacy
-	/*if (!GetOwner()->HasAuthority())
+	if (!GetOwner()->HasAuthority())
 	{
 		for (auto& VisualComp : GetOwner()->GetComponentsByClass(UPrimitiveComponent::StaticClass()))
 		{
@@ -90,7 +89,7 @@ void UCInteractionComponent::BeginFocus(ACPlayer* Character)
 				prim->SetRenderCustomDepth(true);
 			}
 		}
-	}*/
+	}
 
 	RefreshWidget();
 }
@@ -101,9 +100,9 @@ void UCInteractionComponent::EndFocus(ACPlayer* Character)
 
 	SetHiddenInGame(true);
 
-	// Legacy
-	/*if (!GetOwner()->HasAuthority())
+	if (!GetOwner()->HasAuthority())
 	{
+
 		for (auto& VisualComp : GetOwner()->GetComponentsByClass(UPrimitiveComponent::StaticClass()))
 		{
 			if (UPrimitiveComponent* prim = Cast<UPrimitiveComponent>(VisualComp))
@@ -111,7 +110,7 @@ void UCInteractionComponent::EndFocus(ACPlayer* Character)
 				prim->SetRenderCustomDepth(false);
 			}
 		}
-	}*/
+	}
 }
 
 void UCInteractionComponent::BeginInteract(ACPlayer* Character)

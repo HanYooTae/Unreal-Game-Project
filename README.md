@@ -2,14 +2,15 @@
 
 ### Steam OSS와 RPC를 활용한 2인 멀티플레이 게임
 
-2인 팀 포트폴리오 / Unreal Engine 4.27
+- 2인 팀 포트폴리오 / Unreal Engine 4.27
 
+## 프로젝트 소개 영상
 
-![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/77b436bb-7c42-4c68-97c9-2adbb651640f)
+[![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/219315b8-22ca-4c86-8ea6-e220abdc1c53)](https://youtu.be/LedMGxR1QEk)
 
 
 ## 개발 기간
-- 2023/07/30 ~ 2023/12/17(예상 종료일)
+- 2023/07/30 ~ 2023/12/17
 
 
 ## 프로젝트 목차
