@@ -513,13 +513,13 @@ void ACPlayer::OnVerticalLook(float Axis)
 	AddControllerPitchInput(Axis);
 }
 
-void ACPlayer::OnSprint()
+void ACPlayer::OnSprint_Implementation()
 {
 	//GetCharacterMovement()->MaxWalkSpeed = 600.f;
 	Status->ChangeMoveSpeed(EWalkSpeedType::Run);
 }
 
-void ACPlayer::OffSprint()
+void ACPlayer::OffSprint_Implementation()
 {
 	//GetCharacterMovement()->MaxWalkSpeed = 400.f;
 	Status->ChangeMoveSpeed(EWalkSpeedType::Walk);
