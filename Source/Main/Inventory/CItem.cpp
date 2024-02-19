@@ -56,10 +56,10 @@ void UCItem::SetQuantity(const int32 NewQuantity)
 	}
 }
 
-bool UCItem::ShouldShowInInventory() const
+/*bool UCItem::ShouldShowInInventory() const
 {
 	return true;
-}
+}*/ // Legacy
 
 void UCItem::Use(ACPlayer* Character)
 {
