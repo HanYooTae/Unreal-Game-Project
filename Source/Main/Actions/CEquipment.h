@@ -14,7 +14,7 @@ class MAIN_API ACEquipment : public AActor
 	GENERATED_BODY()
 	
 public:	
-	ACEquipment();
+	
 
 protected:
 	virtual void BeginPlay() override;

@@ -54,15 +54,6 @@ public:
 	FBeginOverlapSignature OnBeginOverlap;
 	FEndOverlapSignature OnEndOverlap;
 
-private:	// Component
-	UPROPERTY(VisibleDefaultsOnly)
-		class USceneComponent* Root;
-
 private:
 	TArray<class UShapeComponent*> Collisions;
-
-	UPrimitiveComponent* OverlappedComp;
-	AActor* OtherAct;
-	UPrimitiveComponent* OtherComponent;
-	int32 OtherBodyInx;
 };

@@ -19,8 +19,8 @@ ACWeapon_Sniper::ACWeapon_Sniper()
 	GunshotParticle->bAutoActivate = false;
 
 	CHelpers::CreateSceneComponent(this, &CartridgeParticle, "CartridgeParticle", Weapon);
-	GunshotParticle->SetupAttachment(Weapon, "LeftHandGripPoint");
-	GunshotParticle->bAutoActivate = false;
+	CartridgeParticle->SetupAttachment(Weapon, "LeftHandGripPoint");
+	CartridgeParticle->bAutoActivate = false;
 
 	SetReplicates(true);
 }

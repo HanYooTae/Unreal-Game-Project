@@ -5,10 +5,7 @@
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
-ACEquipment::ACEquipment()
-{
 
-}
 
 void ACEquipment::BeginPlay()
 {
