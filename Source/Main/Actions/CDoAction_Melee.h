@@ -34,9 +34,4 @@ private:
 	bool bSucceed;
 
 	TArray<class ACharacter*> HittedCharacters;
-
-private:
-	ACharacter* Attacker;
-	AActor* Causer;
-	ACharacter* OtherCharacter;
 };

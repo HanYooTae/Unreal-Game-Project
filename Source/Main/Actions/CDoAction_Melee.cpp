@@ -19,7 +19,7 @@ void ACDoAction_Melee::DoAction_Implementation()
 		return;
 	}
 	
-	// 무기 장착안했으면 return
+	// 공격을 하는 상태가 아니라면 return
 	CheckFalse(StateComp->IsIdleMode());
 
 	StateComp->SetActionMode_Server();

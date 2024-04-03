@@ -76,7 +76,7 @@ void ACDoAction_Sniper::Begin_DoAction()
 
 	transform.SetRotation(FQuat(OwnerCharacter->GetControlRotation()));		// != OwnerCharacter->GetActorForwardVector()->Rotation()
 
-	ACBullet* bullet = GetWorld()->SpawnActorDeferred<ACBullet>
+	Bullet = GetWorld()->SpawnActorDeferred<ACBullet>
 		(
 			Datas[0].ProjectileClass,
 			transform,
@@ -106,10 +106,10 @@ void ACDoAction_Sniper::Begin_DoAction()
 	//UGameplayStatics::SpawnEmitterAttached(EjectParticle, Mesh, "ADSSocket");
 	//UGameplayStatics::PlaySoundAtLocation(GetWorld(), FireSound, muzzleLocation);
 
-	bullet->FinishSpawning(transform);
+	Bullet->FinishSpawning(transform);
 
 	// 충돌처리
-	bullet->OnBeginOverlap.AddDynamic(this, &ACDoAction_Sniper::OnBulletBeginOverlap);
+	Bullet->OnBeginOverlap.AddDynamic(this, &ACDoAction_Sniper::OnBulletBeginOverlap);
 
 }
 
@@ -139,7 +139,7 @@ void ACDoAction_Sniper::OnBulletBeginOverlap_Implementation(FHitResult hitResult
 		Datas[0].power,
 		damageEvent,
 		OwnerCharacter->GetController(),
-		this
+		Bullet
 	);
 }
 
