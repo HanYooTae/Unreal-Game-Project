@@ -50,9 +50,7 @@ void ACEnemy::BeginPlay()
 {
 	//Create Dynamic Material
 	LowerMaterial = UMaterialInstanceDynamic::Create(GetMesh()->GetMaterial(0), nullptr);
-	UpperMaterial = UMaterialInstanceDynamic::Create(GetMesh()->GetMaterial(1), nullptr);
 	GetMesh()->SetMaterial(0, LowerMaterial);
-	GetMesh()->SetMaterial(1, UpperMaterial);
 	
 	State->OnStateTypeChanged.AddDynamic(this, &ACEnemy::OnStateTypeChanged);
 	

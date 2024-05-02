@@ -70,7 +70,6 @@ private:
 		bool bVisibleNameWidget = false;
 
 private:
-	class UMaterialInstanceDynamic* UpperMaterial;
 	class UMaterialInstanceDynamic* LowerMaterial;
 
 	class ACharacter* Attacker;
