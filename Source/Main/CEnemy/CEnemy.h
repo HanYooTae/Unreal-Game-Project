@@ -39,12 +39,6 @@ private:
 		void End_Dead();
 	void End_Dead_Implementation();
 
-private:
-	UFUNCTION()
-		void OnStateTypeChanged(EStateType InPrevType, EStateType InNewType);
-
-	
-
 private: // Health Widget
 	class UWidgetComponent* HealthWidget;
 
