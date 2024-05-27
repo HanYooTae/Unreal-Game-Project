@@ -21,7 +21,7 @@ protected:
 
 public:
 	FORCEINLINE void SetData(const FEquipmentData& InData) { EquipmentData = InData; }
-	FORCEINLINE const bool* IsEquippedThis() { return &bEquippedThis; }
+	//FORCEINLINE const bool* IsEquippedThis() { return &bEquippedThis; }
 
 public:
 	// Play Draw Montage
@@ -62,6 +62,6 @@ public:
 private:
 	FEquipmentData EquipmentData;
 
-	bool bEquippedThis;		// 무기가 장착이 되어있는지 아닌지 판단하는 변수
+	//bool bEquippedThis;		// 무기가 장착이 되어있는지 아닌지 판단하는 변수
 
 };

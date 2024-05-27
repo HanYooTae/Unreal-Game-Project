@@ -77,9 +77,9 @@ void ACDoAction_Melee::OnBeginOverlap(ACharacter* InAttacker, AActor* InCauser, 
 		controller->PlayerCameraManager->StartCameraShake(shakeClass);
 	}
 	// 다단히트 방지
-	int32 hittedCharactersNum = HittedCharacters.Num();
+	//int32 hittedCharactersNum = HittedCharacters.Num();
 	HittedCharacters.AddUnique(InOtherCharacter);
-	CheckFalse(hittedCharactersNum < HittedCharacters.Num());
+	CheckFalse(0 < HittedCharacters.Num());
 
 	// Play Particles
 	UParticleSystem* effect = Datas[ComboCount].Effect;
