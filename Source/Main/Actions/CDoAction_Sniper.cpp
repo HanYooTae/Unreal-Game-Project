@@ -64,9 +64,11 @@ void ACDoAction_Sniper::Begin_DoAction()
 	// 카메라의 위치, 회전
 	FVector location;
 	FRotator rotation;
+
 	OwnerCharacter->GetController()->GetPlayerViewPoint(location, rotation);
 
 	FVector handSocketLocation = OwnerCharacter->GetMesh()->GetSocketLocation("hand_r");
+	
 	FVector cameraDirection = rotation.Vector();
 
 	location += cameraDirection * ((handSocketLocation - location) | cameraDirection);

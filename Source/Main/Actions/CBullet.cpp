@@ -33,6 +33,7 @@ void ACBullet::OnComponentBeginOverlap_Implementation(UPrimitiveComponent* Overl
 	if (!!ImpactParticle)
 	{
 		FTransform transform = ImpactTransform;
+		transform.AddToTranslation(OtherActor->GetActorLocation());
 
 		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactParticle, transform);
 	}
