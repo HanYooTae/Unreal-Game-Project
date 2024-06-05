@@ -50,11 +50,9 @@ void ACEnemy::BeginPlay()
 {
 	//Create Dynamic Material
 	LowerMaterial = UMaterialInstanceDynamic::Create(GetMesh()->GetMaterial(0), nullptr);
-	UpperMaterial = UMaterialInstanceDynamic::Create(GetMesh()->GetMaterial(1), nullptr);
 	GetMesh()->SetMaterial(0, LowerMaterial);
-	GetMesh()->SetMaterial(1, UpperMaterial);
 	
-	State->OnStateTypeChanged.AddDynamic(this, &ACEnemy::OnStateTypeChanged);
+	//State->OnStateTypeChanged.AddDynamic(this, &ACEnemy::OnStateTypeChanged);
 	
 	Super::BeginPlay();
 	
@@ -78,17 +76,18 @@ float ACEnemy::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AContro
 	// Dead
 	if (Status->IsDead())
 	{
-		State->SetDeadMode();
+		Dead_Implementation();
 		return DamageValue;
 	}
 
-	State->SetHittedMode();
+	Hitted_Implementation();
 
 	return DamageValue;
 }
 
 void ACEnemy::Hitted_Implementation()
 {
+	State->SetHittedMode();
 	// Apply Health Widget
 	UCEnemyHealthWidget* healthWidget = Cast<UCEnemyHealthWidget>(HealthWidget->GetUserWidgetObject());
 	if (!!healthWidget)
@@ -112,7 +111,7 @@ void ACEnemy::Dead_Implementation()
 	HealthWidget->SetVisibility(false);
 
 	dead = true;
-
+	State->SetDeadMode();
 	// Ragdoll
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	GetMesh()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
@@ -140,14 +139,3 @@ void ACEnemy::End_Dead_Implementation()
 
 	Destroy();
 }
-
-void ACEnemy::OnStateTypeChanged(EStateType InPrevType, EStateType InNewType)
-{
-	switch (InNewType)
-	{
-	case EStateType::Hitted:	Hitted();	 break;
-	case EStateType::Dead:		Dead();		 break;
-	}
-
-}
-

@@ -60,5 +60,5 @@ private:
 		class USkeletalMeshComponent* Mesh;
 
 private:
-	class ACWeapon_Sniper* Sniper;
+	class ACBullet* Bullet;
 };

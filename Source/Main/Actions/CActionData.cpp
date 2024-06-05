@@ -50,7 +50,7 @@ void UCActionData::BeginPlay(class ACharacter* InOwnerCharacter, UCActionData_Sp
 		// Equipment에 있는 주소가 DoAction으로 참조됨 (같은 주소를 사용함)
 		if (!!Equipment)
 		{
-			DoAction->SetEquippedThis(Equipment->IsEquippedThis());
+			//DoAction->SetEquippedThis(Equipment->IsEquippedThis());
 		}
 
 		if (!!Weapon)

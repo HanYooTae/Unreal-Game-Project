@@ -352,8 +352,6 @@ float ACPlayer::GetRemainingInteractime() const
 
 void ACPlayer::UseItem(class UCItem* Item)
 {
-	
-
 	if (!HasAuthority() && Item)
 	{
 		ServerUseItem(Item);

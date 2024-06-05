@@ -15,5 +15,5 @@ void UCAnimNotify_Hitted::Notify(USkeletalMeshComponent* MeshComp, UAnimSequence
 
 	UCStateComponent* stateComp = CHelpers::GetComponent<UCStateComponent>(MeshComp->GetOwner());
 	CheckNull(stateComp);
-	stateComp->SetHittedMode();
+	stateComp->SetIdleMode();
 }

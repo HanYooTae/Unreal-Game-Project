@@ -74,11 +74,11 @@ float ACAIController::GetSightRadius()
 
 void ACAIController::OnPerceptionUpdated(const TArray<AActor*>& UpdatedActors)
 {
-	TArray<AActor*> actros;
-	Perception->GetCurrentlyPerceivedActors(nullptr, actros);
+	TArray<AActor*> actors;
+	Perception->GetCurrentlyPerceivedActors(nullptr, actors);
 
 	ACPlayer* player = nullptr;
-	for (const auto& perceivedActor : actros)
+	for (const auto& perceivedActor : actors)
 	{
 		player = Cast<ACPlayer>(perceivedActor);
 

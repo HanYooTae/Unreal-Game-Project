@@ -64,9 +64,11 @@ void ACDoAction_Sniper::Begin_DoAction()
 	// 카메라의 위치, 회전
 	FVector location;
 	FRotator rotation;
+
 	OwnerCharacter->GetController()->GetPlayerViewPoint(location, rotation);
 
 	FVector handSocketLocation = OwnerCharacter->GetMesh()->GetSocketLocation("hand_r");
+	
 	FVector cameraDirection = rotation.Vector();
 
 	location += cameraDirection * ((handSocketLocation - location) | cameraDirection);
@@ -76,7 +78,7 @@ void ACDoAction_Sniper::Begin_DoAction()
 
 	transform.SetRotation(FQuat(OwnerCharacter->GetControlRotation()));		// != OwnerCharacter->GetActorForwardVector()->Rotation()
 
-	ACBullet* bullet = GetWorld()->SpawnActorDeferred<ACBullet>
+	Bullet = GetWorld()->SpawnActorDeferred<ACBullet>
 		(
 			Datas[0].ProjectileClass,
 			transform,
@@ -106,10 +108,10 @@ void ACDoAction_Sniper::Begin_DoAction()
 	//UGameplayStatics::SpawnEmitterAttached(EjectParticle, Mesh, "ADSSocket");
 	//UGameplayStatics::PlaySoundAtLocation(GetWorld(), FireSound, muzzleLocation);
 
-	bullet->FinishSpawning(transform);
+	Bullet->FinishSpawning(transform);
 
 	// 충돌처리
-	bullet->OnBeginOverlap.AddDynamic(this, &ACDoAction_Sniper::OnBulletBeginOverlap);
+	Bullet->OnBeginOverlap.AddDynamic(this, &ACDoAction_Sniper::OnBulletBeginOverlap);
 
 }
 
@@ -139,7 +141,7 @@ void ACDoAction_Sniper::OnBulletBeginOverlap_Implementation(FHitResult hitResult
 		Datas[0].power,
 		damageEvent,
 		OwnerCharacter->GetController(),
-		this
+		Bullet
 	);
 }
 
