@@ -23,11 +23,11 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Equipment")
 		TSubclassOf<class ACEquipment> EquipmentClass;
 
-	UPROPERTY(EditAnywhere, Category = "DoAction")
-		TSubclassOf<class ACDoAction> DoActionClass;
-
 	UPROPERTY(EditAnywhere, Category = "Equipment")
 		FEquipmentData EquipmentData;
+
+	UPROPERTY(EditAnywhere, Category = "DoAction")
+		TSubclassOf<class ACDoAction> DoActionClass;
 
 	// 콤보 공격이 있을 수 있기 때문에 TArray 사용
 	UPROPERTY(EditAnywhere, Category = "DoAction")
@@ -35,5 +35,5 @@ public:
 
 	class ACWeapon* Weapon;
 	class ACEquipment* Equipment;
-	class ACDoAction* DoAction;
+	ACDoAction* DoAction;
 };
