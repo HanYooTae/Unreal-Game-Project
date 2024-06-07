@@ -101,7 +101,7 @@ void UCActionComponent::DoAction_Implementation()
 
 void UCActionComponent::DoAim_Implementation(bool InPressed)
 {
-	CheckTrue(IsUnarmedMode());
+	CheckFalse(IsSniperMode());
 
 	if (!!GetCurrentData())
 	{
