@@ -62,10 +62,10 @@ protected:  // Action Event
     void EndInteract();
 
     UFUNCTION(Reliable, Server)
-        void OnAction_Server();
+        void DoAction_Server();
 
     UFUNCTION(NetMulticast, Reliable)
-        void OnAction();
+        void DoAction();
 
     void OnAim();
     void OffAim();
@@ -189,10 +189,6 @@ private: // Axis
     void OnHorizontalLook(float Axis);
     void OnVerticalLook(float Axis);
 
-private:
-    UFUNCTION()
-        void OnStateTypeChanged(EStateType InPrevType, EStateType InNewType);
-
 private:    // Character Component
     UPROPERTY(VisibleDefaultsOnly)
         class UCStatusComponent* Status;
@@ -244,7 +240,7 @@ public:     // Main Widget
     virtual FGenericTeamId GetGenericTeamId() const override;
 
     UFUNCTION(BlueprintCallable)
-        bool GetPlayerDead() { return playerDead; }
+        bool IsPlayerDead() { return playerDead; }
 private:
     UPROPERTY(EditDefaultsOnly)
         uint8 PlayerTeamID = 0;

@@ -114,8 +114,6 @@ void ACPlayer::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// Use CharacterComponents Delegate
-	State->OnStateTypeChanged.AddDynamic(this, &ACPlayer::OnStateTypeChanged);
 	Action->SetUnarmedMode();
 
 	//Get Material Asset
@@ -465,7 +463,7 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAction("Vaulting", EInputEvent::IE_Pressed, parkour, &UCParkourSystem::Parkour);
 	PlayerInputComponent->BindAction("Interact", EInputEvent::IE_Pressed, this, &ACPlayer::BeginInteract);
 	PlayerInputComponent->BindAction("Interact", EInputEvent::IE_Released, this, &ACPlayer::EndInteract);
-	PlayerInputComponent->BindAction("Action", EInputEvent::IE_Pressed, this, &ACPlayer::OnAction_Server);
+	PlayerInputComponent->BindAction("Action", EInputEvent::IE_Pressed, this, &ACPlayer::DoAction_Server);
 
 	// Condition Event
 	PlayerInputComponent->BindAction("Aim", EInputEvent::IE_Pressed, this, &ACPlayer::OnAim);
@@ -547,10 +545,11 @@ float ACPlayer::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AContr
 	if (Status->IsDead())
 	{
 		State->SetDeadMode_Server();
+		Dead_Implementation();
 		return DamageValue;
 	}
-
 	State->SetHittedMode_Server();
+	Hitted_Implementation();
 
 	return DamageValue;
 }
@@ -592,12 +591,12 @@ void ACPlayer::End_Dead()
 
 }
 
-void ACPlayer::OnAction_Server_Implementation()
+void ACPlayer::DoAction_Server_Implementation()
 {
-	OnAction();
+	DoAction();
 }
 
-void ACPlayer::OnAction_Implementation()
+void ACPlayer::DoAction_Implementation()
 {
 	Action->DoAction();
 }
@@ -672,15 +671,6 @@ void ACPlayer::BackQuitMenu_Back_Action()
 	BackQuitMenu->SetVisibility(ESlateVisibility::Visible);
 	GetController<APlayerController>()->bShowMouseCursor = true;
 	GetController<APlayerController>()->SetInputMode(FInputModeUIOnly());
-}
-
-void ACPlayer::OnStateTypeChanged(EStateType InPrevType, EStateType InNewType)
-{
-	switch (InNewType)
-	{
-	case EStateType::Hitted:	Hitted();	 break;
-	case EStateType::Dead:		Dead();		 break;
-	}
 }
 
 void ACPlayer::SetMainWidget()
