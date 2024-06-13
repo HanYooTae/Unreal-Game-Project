@@ -584,7 +584,7 @@ void ACPlayer::Dead_Implementation()
 void ACPlayer::End_Dead()
 {
 	Action->End_Dead();
-
+	this->Destroy();
 	PrintLine();
 	//CLog::Log("You Died");
 	//CLog::Print("You Died");
