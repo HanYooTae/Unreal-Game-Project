@@ -196,7 +196,6 @@ UCItem* UCInventoryComponent::AddItem(UCItem* Item)
 		UCItem* NewItem = NewObject<UCItem>(GetOwner(), Item->GetClass());
 		NewItem->SetQuantity(Item->GetQuantity());
 		NewItem->OwningInventory = this;
-		NewItem->AddedToInventory(this);
 		Items.Add(NewItem);
 		NewItem->MarkDirtyForReplication();
 
