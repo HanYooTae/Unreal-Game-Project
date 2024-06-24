@@ -92,7 +92,6 @@ public:
 		virtual bool ShouldShowInInventory() const;
 
 	virtual void Use(class ACPlayer* Character);
-	virtual void AddedToInventory(class UCInventoryComponent* Inventory);
 
 	//개체를 복제가 필요한 것으로 표시합니다.복제된 속성을 수정한 후에는 이를 내부적으로 호출해야 합니다.
 	void MarkDirtyForReplication();

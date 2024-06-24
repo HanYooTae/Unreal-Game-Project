@@ -69,10 +69,6 @@ void UCItem::Use(ACPlayer* Character)
 	}
 }
 
-void UCItem::AddedToInventory(UCInventoryComponent* Inventory)
-{
-}
-
 void UCItem::MarkDirtyForReplication()
 {
 	//이 개체를 복제용으로 표시
