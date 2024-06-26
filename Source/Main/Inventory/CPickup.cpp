@@ -39,10 +39,6 @@ void ACPickup::InitializePickup(const TSubclassOf<class UCItem> ItemClass, const
 	}
 }
 
-//void ACPickup::AlignWithGround()
-//{
-//}
-
 void ACPickup::OnRep_Item()
 {
 	if (Item)
