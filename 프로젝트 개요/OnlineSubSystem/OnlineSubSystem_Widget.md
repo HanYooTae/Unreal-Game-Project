@@ -1,4 +1,4 @@
-# OSS Widget
+# 위젯 구성
 - 3개의 위젯을 Menu Switcher기능을 통해 하나의 Widget으로 구현
 
 
