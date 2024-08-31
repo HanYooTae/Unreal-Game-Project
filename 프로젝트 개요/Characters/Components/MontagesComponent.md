@@ -1,4 +1,4 @@
-## 3. MontagesComponent
+## MontagesComponent
 
 #### State Component에서 정의한 상태 중, Hitted와 Dead상태를 관리하는 컴포넌트
 
