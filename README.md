@@ -49,28 +49,13 @@
 
 
 ### 아이템
-> 아이템은 월드 상에 스폰되어있는 필드 아이템과, 상호작용을 통해 장착하는 장착 아이템으로 구성되어있다.
-
+> 아이템의 종류는 Sword와 Sniper 총 2가지가 있다.
+> 월드 상에 스폰되어있는 필드 아이템과 상호작용을 통해 장착하는 장착 아이템으로 구성되어있다.
+>
 > + #### 필드 아이템 구성 (김현범)
 >   + [상세보기](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Items/Items.md)
 >     + [검 아이템](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Items/Sword.md)
 >     + [총 아이템](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Items/Sniper.md)
 > + #### 장착 아이템 구성 (한유태)
-> + 
-
-
-### 데이터 에셋
-
-> + [데이터 에셋 구성](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/DataAssets/DataAssets.md)
->    + [무기](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/DataAssets/Weapon.md)
->      + [Bullet](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/DataAssets/Bullet.md)
->      + [Aim](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/DataAssets/Aim.md)
->    + [장비 장착 몽타주](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/DataAssets/Equipment.md)
->    + [공격 모션 몽타주](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/DataAssets/DoAction.md)
-
-
-
-### 팀원 역할
-> + [한유태](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/%ED%8C%80%EC%9B%90%EC%97%AD%ED%95%A0/%ED%95%9C%EC%9C%A0%ED%83%9C.md)
-> + [김현범](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/%ED%8C%80%EC%9B%90%EC%97%AD%ED%95%A0/%EA%B9%80%ED%98%84%EB%B2%94.md)
-> + [공동 작업](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/%ED%8C%80%EC%9B%90%EC%97%AD%ED%95%A0/%EA%B3%B5%EB%8F%99%EC%9E%91%EC%97%85.md)
+>   장착 아이템은 DataAsset으로 관리하고 있으며, 해당 DataAsset은 아이템의 정보, 장착, 공격 등의 정보를 관리한다.
+>   + [상세보기](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/DataAssets/DataAssets.md)
