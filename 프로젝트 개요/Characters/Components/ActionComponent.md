@@ -1,4 +1,4 @@
-## 4. ActionComponent
+## ActionComponent
 
 ####  캐릭터가 장착한 무기를 관리하는 컴포넌트
 
@@ -16,6 +16,6 @@
 
 --------------
 
-+ [데이터 에셋](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/DataAssets/DataAssets.md)을 사용하여 무기 장착을 시키고 있음.
++ 데이터 에셋을 사용하여 무기 장착을 시키고 있음.
 
 	![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/e47c6b68-40f8-4d7f-a5a0-3441dd75ebc0)
