@@ -1,4 +1,4 @@
-## 1. StateComponent
+## StateComponent
 
 #### 캐릭터의 현재 상태를 관리하는 컴포넌트
 ```
