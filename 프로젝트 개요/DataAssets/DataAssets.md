@@ -1,10 +1,31 @@
-## Data Asset
+## 장착 아이템 구성
 
-#### [Action Component](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Characters/Components/ActionComponent.md)에서 사용할 에셋을 관리하는 구조체
+#### 아이템의 장착은 DataAsset으로 관리하고 있으며, 해당 DataAsset은 아이템의 정보, 장착, 공격 등의 정보를 관리한다.
 
-  ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/41534351/2134421f-90f1-4d02-b7d3-147b02065209)
+#### 아이템 DataAsset은 Player와 Enemy가 공용으로 사용한다.
 
+![image](https://github.com/user-attachments/assets/391c5c47-20dc-4f13-a25d-f46227955749)
+```
+Weapon
+ - 무기의 SkeletalMesh
+ - 장착되었을 때 Player or Enemy에게 붙을 Socket 정보
+```
 
-+ [Weapon](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/DataAssets/Weapon.md) : 장착할 무기
-+ [Equipment](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/DataAssets/Equipment.md) : 장착할 무기에 알맞는 무기장착 몽타주 실행 (Fist의 경우, 장착 몽타주가 없음)
-+ [DoAction](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/DataAssets/DoAction.md) : 장착한 무기에 알맞는 공격몽타주 실행 (Fist와 Sword의 경우, 콤보 기능이 있음)
+![image](https://github.com/user-attachments/assets/69f22324-b07b-4d6a-9f37-af53427499e4)
+```
+Equipment
+ - Player가 무기를 장착할 때 재생되는 몽타주
+ - 몽타주 재생 속도
+ - 움직일 수 있는지, 뒤돌아 볼 수 있는지 여부
+```
+
+![image](https://github.com/user-attachments/assets/5a48a79c-a0fc-4918-b437-ab8e1ab61a86)
+```
+DoActions
+ - Player가 무기를 장착한 후에 공격했을 때 재생되는 몽타주
+ - 몽타주 재생 속도
+ - 무기의 Damage
+ - Combo 여부
+ - 움직일 수 있는지, 뒤돌아 볼 수 있는지 여부
+ - 무기가 총기류일 경우, Spawn되는 총알
+```
