@@ -39,13 +39,18 @@
 >   + [무기 변경 위젯 상세보기](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/%EB%AC%B4%EA%B8%B0%20%EB%B3%80%EA%B2%BD%20%EC%8B%9C%EC%8A%A4%ED%85%9C/%EB%AC%B4%EA%B8%B0%20%EB%B3%80%EA%B2%BD%20%EC%8B%9C%EC%8A%A4%ED%85%9C.md)
 >
 > + #### 몬스터 (김현범)
+>   이동, 감지, 공격, 피격, 죽음의 기능을 가진 AI Controller를 소유한 개체이다.
 >    + [몬스터 구성](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Characters/Enemy/Enemy.md)
 
 
 ### 인벤토리 (김현범)
-
-> + [인벤토리 구성](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Inventory/inventory.md)
-> + [상호작용 시스템](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Inventory/Interact.md)
+> + #### 인벤토리
+>   아이템의 갯수, 무게 Text 를 표기, 현 아이템의 상태를 체크하는 함수, 새로고침, Inventory에 아이템 추가/제거 기능을 가진 Actor Component이다.
+>   + [인벤토리 구성](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Inventory/inventory.md)
+> + #### 상호작용
+>   linetrace로 작동하며 감지시작(begin focus), 감지종료(end focus), 사용시작(begin interact), 사용종료(end interact), 사용(interact) 5개의 기능을 주로 하며 
+  linetrace의 result값의 감지의 유/무에 따라 WB_InteractionCard인 위젯을 화면에 올려주고 내려줌.
+>   + [상호작용 시스템](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Inventory/Interact.md)
 
 
 ### 아이템
@@ -53,6 +58,7 @@
 > 월드 상에 스폰되어있는 필드 아이템과 상호작용을 통해 장착하는 장착 아이템으로 구성되어있다.
 >
 > + #### 필드 아이템 구성 (김현범)
+>   begin play후 월드에 지정된 장소에 생성되며 상호 작용후 플레이어의 인벤토리에 데이터를 저장할 수 있는 아이템 저장후 인벤토리에서 더블클릭후 장착아이템으로 사용됨
 >   + [상세보기](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Items/Items.md)
 >     + [검 아이템](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Items/Sword.md)
 >     + [총 아이템](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Items/Sniper.md)
