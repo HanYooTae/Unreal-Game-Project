@@ -8,3 +8,25 @@
       * UCItem을 상속받은 class. UCFoodItem은 소비 아이템이며 UCWeaponsItem은 장착 아이템으로 분류
 
    ![image](https://github.com/HanYooTae/Unreal-Game-Project1/assets/123162344/97daaef4-575c-4b91-9c18-6892c26d5f22)
+
+### Sniper
+
+#### 소개
+  - Collision이 없으며 소켓장착으로만 사용하는 class
+  - 원거리 무기이며 줌기능, 발사기능이 있다.
+
+#### 사진 자료
+
+
+![image](https://github.com/user-attachments/assets/8010b3b6-224f-45aa-88c1-bee9211eab63)
+
+### Sword
+
+#### 소개
+  - Collision이 존재하며 소켓장착하여 직접 몽타주를 재생해 타격할수 있는 class
+  - combo attack기능이 있다.
+
+#### 사진 자료
+
+
+![image](https://github.com/user-attachments/assets/187f3458-337f-43aa-9392-60ba633f2a29)
