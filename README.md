@@ -60,8 +60,7 @@
 > + #### 필드 아이템 구성 (김현범)
 >   begin play후 월드에 지정된 장소에 생성되며 상호 작용후 플레이어의 인벤토리에 데이터를 저장할 수 있는 아이템 저장후 인벤토리에서 더블클릭후 장착아이템으로 사용됨
 >   + [상세보기](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Items/Items.md)
->     + [검 아이템](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Items/Sword.md)
->     + [총 아이템](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Items/Sniper.md)
+>
 > + #### 장착 아이템 구성 (한유태)
 >   장착 아이템은 DataAsset으로 관리하고 있으며, 해당 DataAsset은 아이템의 정보, 장착, 공격 등의 정보를 관리한다.
 >   + [상세보기](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/DataAssets/DataAssets.md)
