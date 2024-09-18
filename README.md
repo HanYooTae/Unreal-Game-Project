@@ -40,7 +40,8 @@
 >
 > + #### 몬스터 (김현범)
 >   이동, 감지, 공격, 피격, 죽음의 기능을 가진 AI Controller를 소유한 개체이다.
->    + [몬스터 구성](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Characters/Enemy/Enemy.md)
+>    + [AIController](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Characters/Enemy/AIController.md)
+>    + [Material](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Characters/Enemy/Material.md)
 
 
 ### 인벤토리 (김현범)
