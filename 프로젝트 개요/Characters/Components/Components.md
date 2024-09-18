@@ -17,7 +17,7 @@
 >   + [상세보기](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Characters/Components/StateComponent.md)
 > #### Parkour System Component (김현범)
 > 플레이어의 Parkour 몽타주를 관리하는 컴포넌트
->   + [상세보기](https://github.com/HanYooTae/Unreal-Game-Project1/tree/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Characters/ParkourSystemComponent)
+>   + [상세보기](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Characters/ParkourSystemComponent/PakourSystem.md)
 
 #### Enemy 단일 사용 컴포넌트 (김현범)
 > #### Behavior Component
