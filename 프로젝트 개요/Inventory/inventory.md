@@ -8,7 +8,7 @@
 
 2. WB_Inventory Widget : item을 먹으면 item thumbnail을 올려주며 item을 관리할 수 있는 widget
 - 기능
-  + Widget을 최신화 하여 실행해주며 아이템들을 저장하고 지워주는 함
+  + Widget을 최신화 하여 실행해주며 아이템들을 저장하고 지워주는 함수
 
   + 인벤토리안에 아이템의 무게 갯수 를 표기
 
