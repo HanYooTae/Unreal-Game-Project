@@ -49,8 +49,7 @@
 >   아이템의 갯수, 무게 Text 를 표기, 현 아이템의 상태를 체크하는 함수, 새로고침, Inventory에 아이템 추가/제거 기능을 가진 Actor Component이다.
 >   + [인벤토리 구성](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Inventory/inventory.md)
 > + #### 상호작용
->   linetrace로 작동하며 5개의 기능을 주로 하며 
-  linetrace의 result값의 감지의 유/무에 따라 WB_InteractionCard인 위젯을 화면에 올려주고 내려줌.
+>   5개의 상호작용 이벤트가 있으며 Interaction Component를 가진 개체는 플레이어의 조작으로 기능을 실행할 수 있다.
 >   + [상호작용 시스템](https://github.com/HanYooTae/Unreal-Game-Project1/blob/main/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94/Inventory/Interact.md)
 
 
